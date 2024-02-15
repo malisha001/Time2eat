@@ -1,5 +1,8 @@
 const express = require('express')
 
+require('dotenv').config()
+const mongoose = require('mongoose')
+const bookingRoutes = require('./routes/booking')
 //express app
 const app = express()
 
@@ -11,6 +14,7 @@ app.use((req,res,next)=>{
     next()
 })
 
+app.use('/api/booking', bookingRoutes)
 //routers
 
 //connect db
