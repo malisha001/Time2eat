@@ -1,7 +1,9 @@
 import { useState } from "react";
-
+import { useBookingsContext } from "../hooks/useBookingsContext";
+import axios from "axios";
 
     const Bookingform = () => {
+        const { dispatch } = useBookingsContext()
         const [date, setDate] = useState('')
         const [quantity, setQuantity] = useState('')
         const [time, setTime] = useState('')
@@ -13,33 +15,33 @@ import { useState } from "react";
 
             const booking = {date, quantity, time}
 
-            const response = await fetch('/api/booking', {
-                method: 'POST',
-                body: JSON.stringify(booking),
-                headers: {
-                    'Content-Type': 'application/json'
+            try {
+                const response = await axios.post('/api/booking', booking); // Use Axios for POST request
+    
+                const json = response.data;
+    
+                if (response.status === 200) {
+                    setDate('');
+                    setQuantity('');
+                    setTime('');
+                    setError(null);
+                    console.log('New booking added', json);
+                    dispatch({ type: 'SET_BOOKING', payload: json });
+                } else {
+                    setError(json.error);
                 }
-            })
-            const json = await response.json()
-
-            if (!response.ok) {
-                setError(json.error)
+            } catch (error) {
+                console.error('Error adding booking:', error);
+                setError('An error occurred while adding the booking.');
             }
-            if (!response.ok) {
-                setDate('')
-                setQuantity('')
-                setTime('')
-                setError(null)
-                console.log('new booking added', json)
-            }
-        }
+        };
     return ( 
         <form className="create" onSubmit={handleSubmit}>
             <h3>Add a New Workout</h3>
 
             <label>Date:</label>
             <input 
-               type="text"
+               type="date"
                onChange={(e) => setDate(e.target.value)}
                value={date}/>
 
@@ -51,7 +53,7 @@ import { useState } from "react";
 
             <label>Time:</label>
             <input 
-               type="text"
+               type="time"
                onChange={(e) => setTime(e.target.value)}
                value={time}/>
 

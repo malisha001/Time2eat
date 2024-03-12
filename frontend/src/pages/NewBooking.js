@@ -1,36 +1,39 @@
-// import { useEffect, useState } from "react";
+// import { useEffect } from "react";
+// import { useBookingsContext } from "../hooks/useBookingsContext";
 
-// components
+// //components
 // import BookingDetails from '../Component/BookingDetails'
 import BookingForm from '../Component/Bookingform';
 
 const NewBooking = () => {
-    // Define state for bookings
-    // const [bookings, setBookings] = useState(null);
+   // Define state for bookings
+//    const {bookings, dispatch} = useBookingsContext();
 
-    // useEffect(() => {
-    //     const fetchNewBookings = async () => {
-    //         const response = await fetch('/api/booking');
-    //         const json = await response.json();
+//     useEffect(() => {
+//         const fetchNewBookings = async () => {
+//             const response = await fetch('/api/booking');
+//             const json = await response.json();
 
-    //         if (response.ok) {
-    //             setBookings(json);
-    //         }
-    //     };
+//             if (response.ok) {
+//                 dispatch({type: 'SET_BOOKINGS', payload: json})
+//             }
+//         };
 
-    //     fetchNewBookings();
-    // }, []);
+//         // Add condition to prevent unnecessary fetch
+//         fetchNewBookings();
+    
+//     }, [dispatch]);
 
     // Return JSX
     return ( 
         <div className="newbooking">
-            {/* <div className="bookings">
-                {/* Check if bookings is not null before mapping */}
+            <div className="bookings">
+            <BookingForm />
                 {/* {bookings && bookings.map((booking) => (
                     <BookingDetails key={booking._id} booking={booking} />
-                ))}
-            // </div> */} *
-            <BookingForm />
+                 ))}  */}
+             </div>
+            
         </div>
     );
 };

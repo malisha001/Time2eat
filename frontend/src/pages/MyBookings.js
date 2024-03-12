@@ -1,23 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useBookingsContext } from "../hooks/useBookingsContext";
+import axios from "axios";
 
 // components
+// import BookingForm from '../Component/Bookingform';
 import BookingDetails from '../Component/BookingDetails'
 const MyBookings = () => {
-    // Define state for bookings
-    const [bookings, setBookings] = useState(null);
-
+    const {bookings, dispatch} = useBookingsContext();
     useEffect(() => {
         const fetchMyBookings = async () => {
-            const response = await fetch('/api/booking');
-            const json = await response.json();
+            try {
+                const response = await axios.get('/api/booking');
+                const data = response.data;
 
-            if (response.ok) {
-                setBookings(json);
+                dispatch({ type: 'SET_BOOKINGS', payload: data });
+            } catch (error) {
+                console.error('Error fetching bookings:', error);
             }
         };
 
-        fetchMyBookings();
-    }, []);
+         // Add condition to prevent unnecessary fetch
+            fetchMyBookings();
+      
+
+    }, [dispatch]);
 
     // Return JSX
     return ( 
@@ -28,6 +34,7 @@ const MyBookings = () => {
                     <BookingDetails key={booking._id} booking={booking} />
                 ))}
             </div>
+            
         </div>
     );
 };
