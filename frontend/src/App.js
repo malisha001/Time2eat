@@ -2,7 +2,9 @@ import Navbar from "./Component/Navbar";
 import MyBookings from "./pages/MyBookings";
 import NewBooking from "./pages/NewBooking";
 import UpdateBookingDetails from "./Component/UpdateBookingDetails";
+import RestaurantStaff from "./pages/RestaurantStaff";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 
 
 function App() {
@@ -15,6 +17,7 @@ function App() {
             <Route path="/" element={<NewBooking />} />
             <Route path="/mybookings" element={<MyBookings />} />
             <Route path="/update-booking/:id" element={<UpdateBookingDetails />} />
+            <Route path="/realtime-staff" element={<RestaurantStaff />} />
           </Routes>
         </div>
       </BrowserRouter>

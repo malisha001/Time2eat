@@ -8,7 +8,7 @@ const BookingSchema = new Schema({
         required: true
     },
     quantity: {
-        type: String,
+        type: Number,
         required: true
     },
     time: {

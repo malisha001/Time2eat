@@ -49,7 +49,7 @@ const UpdateBookingDetails = () => {
                 <div>
                     <label>Quantity:</label>
                     <input 
-                        type="text"
+                        type="number"
                         value={values.quantity}
                         onChange={e => setValues({...values, quantity: e.target.value})}
                     />

@@ -3,6 +3,7 @@ const express = require('express')
 require('dotenv').config()
 const mongoose = require('mongoose')
 const bookingRoutes = require('./routes/booking')
+const RealTimebookingRoutes = require('./routes/realtimebooking')
 //express app
 const app = express()
 
@@ -15,6 +16,7 @@ app.use((req,res,next)=>{
 })
 
 app.use('/api/booking', bookingRoutes)
+app.use('/api/realtimebooking', RealTimebookingRoutes)
 //routers
 
 //connect db

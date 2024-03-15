@@ -47,7 +47,7 @@ import axios from "axios";
 
             <label>Quantity:</label>
             <input 
-               type="text"
+               type="number"
                onChange={(e) => setQuantity(e.target.value)}
                value={quantity}/>
 
