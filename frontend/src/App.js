@@ -1,9 +1,21 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom/cjs/react-router-dom.min';
 
+// pages & components
+import Home from './pages/Home';
 
 function App() {
   return (
     <div className="App">
-      <H1> bhanuka</H1>
+      <BrowserRouter>
+        <div className="pages">
+          <Routes>
+            <Route 
+              path="/"
+              element={<Home />}
+            />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }
