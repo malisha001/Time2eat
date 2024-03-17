@@ -2,19 +2,19 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const feedbackSchema = new Schema({
-    feedback_Id:{
+const restaurantSchema = new Schema({
+    Restaurant_Id:{
         type: String,
         required : true
     },
-    customer_name:{
+    Restaurant_name:{
         type:String,
         required : true
     },
-    contact_number :{
+    contact :{
         type:Number,
         required : true
     }
 },{timestamps : true })
 
-module.exports = mongoose.model('Feedback',feedbackSchema)
+module.exports = mongoose.model('Restaurant',restaurantSchema)
