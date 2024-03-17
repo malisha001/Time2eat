@@ -1,31 +1,32 @@
 const express = require('express')
+const {
+    addRestaurant,
+    getRestaurant,
+    getRestaurants,
+    deleteRestaurant,
+    updateRestaurant
+} = require('../controllers/restaurantController')
 
 const router = express.Router()
 
 //GET all Rstaurants
-router.get('/', (req,res) => {
-   res.json({mssg: 'Get all restaurants'})
-})
+router.get('/', getRestaurants)
+
 
 //GET single Restaurants
-router.get('/:id', (req, res) =>{
-    res.json({mssg: 'Get a single single restaurant'})
-})
+router.get('/:id', getRestaurant)
+
 
 //POST a new Restaurant
-router.post('/', (req, res) => {
-    res.json({mssg: 'Post a Restaurant'})
-})
+router.post('/', addRestaurant )
+  
 
 //DELETE a Restaurant
-router.delete('/:id', (req, res) => {
-    res.json({mssg: 'Delete a Restaurant'})
-})
+router.delete('/:id', deleteRestaurant)
+
 
 //Update a Restaurant
-router.patch('/:id',(req, res) =>{
-    res.json({mssg: 'Update a Restaurant'})
-})
+router.patch('/:id',updateRestaurant)
 
 
-module.exports = router
+module.exports = router;
