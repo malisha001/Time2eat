@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom/cjs/react-router-dom.min';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
 
 // pages & components
 import Home from './pages/Home';
@@ -7,14 +8,15 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <div className="pages">
-          <Routes>
-            <Route 
-              path="/"
-              element={<Home />}
-            />
-          </Routes>
-        </div>
+        <Navbar />
+          <div className="pages">
+            <Routes>
+              <Route 
+                path="/"
+                element={<Home />}
+              />
+            </Routes>
+          </div>
       </BrowserRouter>
     </div>
   );
