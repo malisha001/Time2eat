@@ -1,7 +1,10 @@
+
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config()
 const employeesal = require('./routers/employeeSalary')
+
+
 
 // express app
 const app = express();
@@ -18,6 +21,7 @@ app.use((req, res, next) => {
 // routers
 app.use('/api/employeesal',employeesal)
 // connect to db
+
 mongoose.connect(process.env.MONG_URI)
     .then(() => {
         // listen for requests
