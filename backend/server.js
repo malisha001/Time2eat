@@ -20,7 +20,7 @@ app.use((req,res,next)=>{
 app.use('/api/restaurants',restaurantRoutes)
 
 //connect db
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONG_URI)
     .then(()=> {
         //listen request
         app.listen(process.env.PORT, ()=>{
