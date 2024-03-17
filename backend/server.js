@@ -1,4 +1,9 @@
+require('dotenv').config()
+
 const express = require('express')
+const mongoose = require('mongoose')
+const restaurantRoutes = require('./routes/restaurants')
+
 
 //express app
 const app = express()
@@ -11,7 +16,8 @@ app.use((req,res,next)=>{
     next()
 })
 
-//routers
+//routes
+app.use('/api/restaurants',restaurantRoutes)
 
 //connect db
 mongoose.connect(process.env.MONG_URI)
