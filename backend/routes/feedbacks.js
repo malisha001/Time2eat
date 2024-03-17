@@ -1,5 +1,4 @@
 const express = require('express')
-const { getFeedbacks, getFeedback, addFeedback, deleteFeedback, updateFeedback } = require('../controllers/feedbackController')
 const {
     getFeedback,
     getFeedbacks,
