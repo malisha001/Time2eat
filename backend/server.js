@@ -2,9 +2,9 @@ const express = require('express')
 
 require('dotenv').config()
 const mongoose = require('mongoose')
-const bookingRoutes = require('./routes/booking')
-const RealTimebookingRoutes = require('./routes/realtimebooking')
-const CustomerHistoryRoutes = require('./routes/customerhistoryroute')
+const bookingRoutes = require('./routers/booking')
+const RealTimebookingRoutes = require('./routers/realtimebooking')
+const CustomerHistoryRoutes = require('./routers/customerhistoryroute')
 //express app
 const app = express()
 
