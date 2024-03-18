@@ -1,7 +1,7 @@
 //this is for register different routes
 //end points for the api running
 const express = require('express')
-
+const router = express.Router()
 const {
     createAdvertisement,
     getAdvertisement,
@@ -10,7 +10,7 @@ const {
     updateAdvertisement,
 } = require('../controllers/advertisementController')
 
-const router = express.Router()
+
 
 //GET all advertisements
 router.get('/', getAdvertisements)

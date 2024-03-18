@@ -1,27 +1,33 @@
-const mongoose =require('mongoose')
+const mongoose = require('mongoose');
 
-//function to create a new schema
-const Schema = mongoose.Schema
+// Define a new Mongoose schema
+const Schema = mongoose.Schema;
 
-//Schema defines the structure of the documents we saved in that collection
+// Define the schema for Advertisement
 const advertisementSchema = new Schema({
     restaurantid: {
-        
-    },
-    restaurantname:{
         type: String,
         required: true
     },
-    description:{
+    restaurantname: {
         type: String,
         required: true
     },
-    duration:{
-        type: TimeRanges,
+    description: {
+        type: String,
         required: true
+    },
+    duration: {
+        startTime: {
+            type: Date,
+            required: true
+        },
+        endTime: {
+            type: Date,
+            required: true
+        }
     }
-},{ timestamp: true })
+}, { timestamps: true }); // Add timestamps for createdAt and updatedAt
 
-//use the model to interact with the collection with that name
-
-module.exports = mongoose.model('Advertisement',advertisementSchema)
+// Export the Advertisement model
+module.exports = mongoose.model('Advertisement', advertisementSchema);
