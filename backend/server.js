@@ -3,7 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config()
 const employeesal = require('./routers/employeeSalary')
-
+const restaurants = require('./routers/restaurants')
+const feedback = require('./routers/feedbacks')
 
 
 // express app
@@ -20,6 +21,8 @@ app.use((req, res, next) => {
 
 // routers
 app.use('/api/employeesal',employeesal)
+app.use('/api/restaurants',restaurants)
+app.use('/api/feedback',feedback)
 // connect to db
 
 mongoose.connect(process.env.MONG_URI)
