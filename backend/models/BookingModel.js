@@ -6,15 +6,15 @@ const BookingSchema = new Schema({
     
     cusid: {
         type: String,
-        required: true
+        required: false
     },
     resid: {
         type: String,
-        required: true
+        required: false
     },
     name: {
         type:String,
-        required: true
+        required: false
     },
     time: {
         type: String,
@@ -34,7 +34,7 @@ const BookingSchema = new Schema({
     },
     telephoneno: {
         type: Number,
-        required: true
+        required: false
     },
     
 }, { timestamps: true })

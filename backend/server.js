@@ -1,54 +1,46 @@
-
-
-
-
-const bookingRoutes = require('./routers/booking')
-const RealTimebookingRoutes = require('./routers/realtimebooking')
-const CustomerHistoryRoutes = require('./routers/customerhistoryroute')
-
-
 const express = require('express');
 const mongoose = require('mongoose');
-require('dotenv').config()
-const employeesal = require('./routers/employeeSalary')
-const restaurants = require('./routers/restaurants')
-const feedback = require('./routers/feedbacks')
+require('dotenv').config();
 
+// Import routers
+const bookingRoutes = require('./routers/booking');
+const RealTimebookingRoutes = require('./routers/realtimebooking');
+const CustomerHistoryRoutes = require('./routers/customerhistoryroute');
+const employeesal = require('./routers/employeeSalary');
+const restaurants = require('./routers/restaurants');
+const feedback = require('./routers/feedbacks');
 
-
-// express app
+// Create an instance of Express app
 const app = express();
 
-
-app.use('/api/booking', bookingRoutes)
-app.use('/api/realtimebooking', RealTimebookingRoutes)
-app.use('/api/customerhistoryroute', CustomerHistoryRoutes)
-//routers
-
-// middleware to parse incoming JSON data
+// Middleware to parse incoming JSON data
 app.use(express.json());
 
-// middleware to log request path and method
+// Middleware to log request path and method
 app.use((req, res, next) => {
-    console.log(req.path, res.method);
+    console.log(req.path, req.method);
     next();
 });
 
-// routers
-app.use('/api/employeesal',employeesal)
-app.use('/api/restaurants',restaurants)
-app.use('/api/feedback',feedback)
-// connect to db
+// Mount routers
+app.use('/api/booking', bookingRoutes);
+app.use('/api/realtimebooking', RealTimebookingRoutes);
+app.use('/api/customerhistoryroute', CustomerHistoryRoutes);
+app.use('/api/employeesal', employeesal);
+app.use('/api/restaurants', restaurants);
+app.use('/api/feedback', feedback);
 
-
-mongoose.connect(process.env.MONG_URI)
+// Connect to MongoDB database
+const MONG_URI = process.env.MONG_URI;
+mongoose.connect(MONG_URI)
     .then(() => {
-        // listen for requests
-        app.listen(process.env.PORT, () => {
-            console.log("Listening on port", process.env.PORT);
-            console.log("DB connected successfully");
+        // Start the server after successful database connection
+        const PORT = process.env.PORT || 4000;
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+            console.log("Database connected successfully");
         });
     })
     .catch((error) => {
-        console.log(error);
+        console.error("Error connecting to the database:", error);
     });
