@@ -1,3 +1,8 @@
+
+
+const advertisementRoutes = require('./routers/advertisement')
+
+
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config()
@@ -9,6 +14,7 @@ const deliveries = require('./routers/deliveryOrderf')
 const bookingRoutes = require('./routers/booking')
 const RealTimebookingRoutes = require('./routers/realtimebooking')
 const CustomerHistoryRoutes = require('./routers/customerhistoryroute')
+
 
 // express app
 const app = express();
@@ -25,6 +31,11 @@ app.use('/api/feedback',feedback)
 app.use('/api/employeesal',employeesal)
 //delivery orders routers
 app.use('/api/deliveryorder',deliveries)
+
+
+
+//routes
+app.use('/api/advertisements',advertisementRoutes)
 
 
 
@@ -49,3 +60,4 @@ mongoose.connect(process.env.MONG_URI)
     .catch((error) => {
         console.log(error);
     });
+
