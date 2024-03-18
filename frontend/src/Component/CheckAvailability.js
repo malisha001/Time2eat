@@ -1,22 +1,21 @@
-// FilterComponent.js
+// CheckAvailability.js
 import React, { useState } from 'react';
 
-const FilterComponent = ({ onFilter }) => {
+const CheckAvailability = ({ checkDateTime }) => {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
 
-  const handleDateChange = (event) => {
+  const handleDate = (event) => {
     setDate(event.target.value);
   };
 
-  const handleTimeChange = (event) => {
+  const handleTime = (event) => {
     setTime(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Call the onFilter function passed from parent component with date and time
-    onFilter({ date, time });
+    checkDateTime({ date, time });
   };
 
   return (
@@ -28,7 +27,7 @@ const FilterComponent = ({ onFilter }) => {
           type="date"
           id="date"
           value={date}
-          onChange={handleDateChange}
+          onChange={handleDate}
           required
         />
         <label htmlFor="time">Time:</label>
@@ -36,7 +35,7 @@ const FilterComponent = ({ onFilter }) => {
           type="time"
           id="time"
           value={time}
-          onChange={handleTimeChange}
+          onChange={handleTime}
           required
         />
         <button type="submit">Check Availability</button>
@@ -45,4 +44,4 @@ const FilterComponent = ({ onFilter }) => {
   );
 };
 
-export default FilterComponent;
+export default CheckAvailability;

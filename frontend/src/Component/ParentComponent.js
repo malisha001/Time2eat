@@ -1,48 +1,43 @@
 // ParentComponent.js
-import React, { useState } from 'react';
-import FilterComponent from './FilterComponent';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const ParentComponent = () => {
-  const [bookings, setBookings] = useState([]);
-  const [totalTablesBooked, setTotalTablesBooked] = useState(0);
+const ParentComponent = ({ selectedDateTime, setAvailableTables }) => {
+    const [totalCoupleTablesBooked, setTotalCoupleTablesBooked] = useState(0);
+    const [totalGroupTablesBooked, setTotalGroupTablesBooked] = useState(0);
 
-  const handleFilter = async ({ date, time }) => {
-    try {
-      // Make a GET request to your backend API to fetch bookings for the provided date and time
-      const response = await axios.get(`/api/booking`, {
-        params: { date, time }
-      });
-      
-      // Filter bookings for the specific date and time
-      const filteredBookings = response.data.filter(booking => booking.date === date && booking.time === time);
-      
-      // Calculate total tables booked for the specific time slot
-      const totalTablesBooked = filteredBookings.reduce((acc, booking) => acc + booking.quantity, 0);
-      
-      // Update state with the fetched bookings and total tables booked
-      setBookings(filteredBookings);
-      setTotalTablesBooked(totalTablesBooked);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  
+    useEffect(() => {
+        if (selectedDateTime.date && selectedDateTime.time) {
+            fetchBookings(selectedDateTime.date, selectedDateTime.time);
+        }
+    }, [selectedDateTime]);
 
-  return (
-    <div>
-      {/* Render FilterComponent passing handleFilter function */}
-      <FilterComponent onFilter={handleFilter} />
-      {/* Display bookings */}
-      <ul>
-        {bookings.map(booking => (
-          <li key={booking._id}>{booking.customerName}: {booking.tables} tables</li>
-        ))}
-      </ul>
-      {/* Display total tables booked */}
-      <p>Total tables booked: {totalTablesBooked}</p>
-    </div>
-  );
+    const fetchBookings = async (date, time) => {
+        try {
+            const response = await axios.get(`/api/booking`, { params: { date, time } });
+            const filteredBookings = response.data.filter(booking => booking.date === date && booking.time === time);
+            const coupleTablesBooked = filteredBookings.reduce((acc, booking) => acc + booking.couplequantity, 0);
+            const groupTablesBooked = filteredBookings.reduce((acc, booking) => acc + booking.groupquantity, 0);
+            setTotalCoupleTablesBooked(coupleTablesBooked);
+            setTotalGroupTablesBooked(groupTablesBooked);
+
+            // Calculate available tables by subtracting total tables booked from maximum available tables
+            const availableCoupleTables = 10 - coupleTablesBooked; // Max available couple tables minus tables already booked
+            const availableGroupTables = 15 - groupTablesBooked; // Max available group tables minus tables already booked
+            
+            // Update the available tables state in the NewBooking component
+            setAvailableTables({ couple: availableCoupleTables, group: availableGroupTables });
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    return (
+        <div>
+            <p>Total Couple tables booked: {totalCoupleTablesBooked}</p>
+            <p>Total Group tables booked: {totalGroupTablesBooked}</p>
+        </div>
+    );
 };
 
 export default ParentComponent;

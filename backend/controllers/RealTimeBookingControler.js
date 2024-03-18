@@ -23,11 +23,11 @@ const getRealTimeBooking = async (req, res) => {
 
 // create new booking
 const createRealTimeBooking = async (req, res) => {
-    const {cusid, date, time, quantity, resid, availability} = req.body
+    const {cusid, resid, name, time, couplequantity, groupquantity, telephoneno, availability} = req.body
 
     // add doc to db
     try {
-        const RTbookings = await RealTimeBooking.create({cusid, date, time, quantity, resid, availability})
+        const RTbookings = await RealTimeBooking.create({cusid, resid, name, time, couplequantity, groupquantity, telephoneno, availability})
         res.status(200).json(RTbookings)
     } catch (error) {
         res.status(400).json({error: error.message})

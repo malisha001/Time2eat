@@ -7,20 +7,32 @@ const RealTimeSchema = new Schema({
         type: String,
         required: true
     },
-    date: {
+    resid: {
         type: String,
+        required: true
+    },
+    name: {
+        type:String,
         required: true
     },
     time: {
         type: String,
         required: true
     },
-    quantity: {
+    date: {
+        type: String,
+        required: true
+    },
+    couplequantity: {
         type: Number,
         required: true
     },
-    resid: {
-        type: String,
+    groupquantity: {
+        type: Number,
+        required: true
+    },
+    telephoneno: {
+        type: Number,
         required: true
     },
     availability: {

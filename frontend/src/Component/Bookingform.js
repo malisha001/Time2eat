@@ -1,67 +1,75 @@
-import { useState } from "react";
-import { useBookingsContext } from "../hooks/useBookingsContext";
+// BookingForm.js
+import React, { useState } from "react";
 import axios from "axios";
 
-    const Bookingform = () => {
-        const { dispatch } = useBookingsContext()
-        const [date, setDate] = useState('')
-        const [quantity, setQuantity] = useState('')
-        const [time, setTime] = useState('')
-        const [error, setError] = useState(null)
+const BookingForm = ({ availableTables, selectedDateTime }) => {
+    const [couplequantity, setCouplequantity] = useState('');
+    const [groupquantity, setGroupquantity] = useState('');
+    const [error, setError] = useState(null);
 
-    
-        const handleSubmit = async (e) => {
-            e.preventDefault()
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-            const booking = {date, quantity, time}
+        const totalCoupleTablesRequested = parseInt(couplequantity);
+        const totalGroupTablesRequested = parseInt(groupquantity);
 
-            try {
-                const response = await axios.post('/api/booking', booking); // Use Axios for POST request
-    
-                const json = response.data;
-    
-                if (response.status === 200) {
-                    setDate('');
-                    setQuantity('');
-                    setTime('');
-                    setError(null);
-                    console.log('New booking added', json);
-                    dispatch({ type: 'SET_BOOKING', payload: json });
-                } else {
-                    setError(json.error);
-                }
-            } catch (error) {
-                console.error('Error adding booking:', error);
-                setError('An error occurred while adding the booking.');
-            }
+        // Check if the requested couple tables exceed the available couple tables
+        if (totalCoupleTablesRequested > availableTables.couple) {
+            setError('The requested couple table count exceeds the available couple tables.');
+            return;
+        }
+
+        // Check if the requested group tables exceed the available group tables
+        if (totalGroupTablesRequested > availableTables.group) {
+            setError('The requested group table count exceeds the available group tables.');
+            return;
+        }
+
+        const booking = { 
+            date: selectedDateTime.date, 
+            couplequantity: couplequantity, 
+            groupquantity: groupquantity, 
+            time: selectedDateTime.time 
         };
+
+        try {
+            const response = await axios.post('/api/booking', booking);
+            const json = response.data;
+
+            if (response.status === 200) {
+                setCouplequantity('');
+                setGroupquantity('');
+                setError(null);
+                console.log('New booking added', json);
+            } else {
+                setError(json.error);
+            }
+        } catch (error) {
+            console.error('Error adding booking:', error);
+            setError('An error occurred while adding the booking.');
+        }
+    };
+
     return ( 
         <form className="create" onSubmit={handleSubmit}>
-            <h3>Add a New Workout</h3>
+            <h3>Add a New Booking</h3>
 
-            <label>Date:</label>
-            <input 
-               type="date"
-               onChange={(e) => setDate(e.target.value)}
-               value={date}/>
-
-            <label>Quantity:</label>
+            <label>Couple Tables:</label>
             <input 
                type="number"
-               onChange={(e) => setQuantity(e.target.value)}
-               value={quantity}/>
+               onChange={(e) => setCouplequantity(e.target.value)}
+               value={couplequantity}/>
 
-            <label>Time:</label>
+            <label>Group Tables:</label>
             <input 
-               type="time"
-               onChange={(e) => setTime(e.target.value)}
-               value={time}/>
+               type="number"
+               onChange={(e) => setGroupquantity(e.target.value)}
+               value={groupquantity}/>
 
-               <button>Add Booking</button>
-               {error && <div className="error">{error}</div>} {/* Render error message if error state is not null */}       
-               
+            <button>Add Booking</button>
+            {error && <div className="error">{error}</div>}
         </form>
-     )
-}
+    );
+};
  
-export default Bookingform
+export default BookingForm;

@@ -2,8 +2,7 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const BookingSchema = new Schema({
-    
+const CustomerHistorySchema = new Schema({
     cusid: {
         type: String,
         required: true
@@ -36,7 +35,10 @@ const BookingSchema = new Schema({
         type: Number,
         required: true
     },
-    
+    availability: {
+        type: Boolean,
+        required: true
+    }
 }, { timestamps: true })
 
-module.exports = mongoose.model('Booking', BookingSchema)
+module.exports = mongoose.model('Allcustomerhistory', CustomerHistorySchema)
