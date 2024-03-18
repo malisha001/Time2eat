@@ -23,11 +23,11 @@ const getCustomerHistory = async (req, res) => {
 
 // create new booking
 const createCustomerHistory = async (req, res) => {
-    const {cusid, resid, name, time, couplequantity, groupquantity, telephoneno} = req.body
+    const {cusid, resid, name, time, date, couplequantity, groupquantity, telephoneno} = req.body
 
     // add doc to db
     try {
-        const customerhistory = await CustomerHistory.create({cusid, resid, name, time, couplequantity, groupquantity, telephoneno})
+        const customerhistory = await CustomerHistory.create({cusid, resid, name, time, date, couplequantity, groupquantity, telephoneno})
         res.status(200).json(customerhistory)
     } catch (error) {
         res.status(400).json({error: error.message})

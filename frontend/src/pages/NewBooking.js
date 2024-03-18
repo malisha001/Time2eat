@@ -12,6 +12,8 @@ const NewBooking = () => {
         setSelectedDateTime(filterData);
     };
 
+    console.log(selectedDateTime); // Log selectedDateTime prop here
+
     return ( 
         <div className="newbooking">
             <p>This is a paragraph.</p>

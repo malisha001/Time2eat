@@ -6,7 +6,8 @@ const BookingForm = ({ availableTables, selectedDateTime }) => {
     const [couplequantity, setCouplequantity] = useState('');
     const [groupquantity, setGroupquantity] = useState('');
     const [error, setError] = useState(null);
-
+    
+    console.log(selectedDateTime)
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -26,10 +27,11 @@ const BookingForm = ({ availableTables, selectedDateTime }) => {
         }
 
         const booking = { 
+            time: selectedDateTime.time,
             date: selectedDateTime.date, 
             couplequantity: couplequantity, 
             groupquantity: groupquantity, 
-            time: selectedDateTime.time 
+            
         };
 
         try {

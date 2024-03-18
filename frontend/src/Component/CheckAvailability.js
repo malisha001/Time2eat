@@ -16,6 +16,8 @@ const CheckAvailability = ({ checkDateTime }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     checkDateTime({ date, time });
+
+    console.log(date, time)
   };
 
   return (
