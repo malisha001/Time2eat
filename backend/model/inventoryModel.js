@@ -29,13 +29,13 @@ const inventorySchema = new Schema({
         type: String,
         required: true
     },
-
+    
     itemImage: {
-        data: Buffer,
-        contentType: String,
-        required: false
+        data: Buffer, 
+        contentType: String 
     }
 
-}, {timestamps: true})
+
+}, {Timestamp: true})
 
 module.exports = mongoose.model('Inventory', inventorySchema )
