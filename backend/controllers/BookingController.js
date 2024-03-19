@@ -23,7 +23,10 @@ const getBooking = async (req, res) => {
 
 // create new booking
 const createBooking = async (req, res) => {
-    const {cusid, resid, name, time, date, couplequantity, groupquantity, telephoneno} = req.body
+    if (!req.body) {
+        return res.status(400).json({ error: "Request body is empty" });
+    }
+    const {cusid,resid,name,time,date,couplequantity,groupquantity,telephoneno} = req.body
 
     // add doc to db
     try {

@@ -1,13 +1,3 @@
-
-
-const inventoryRoutes = require('./routes/inventory')       // import routes folder
-
-
-
-
-const advertisementRoutes = require('./routers/advertisement')
-
-
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config()
@@ -19,10 +9,22 @@ const deliveries = require('./routers/deliveryOrderf')
 const bookingRoutes = require('./routers/booking')
 const RealTimebookingRoutes = require('./routers/realtimebooking')
 const CustomerHistoryRoutes = require('./routers/customerhistoryroute')
+const advertisementRoutes = require('./routers/advertisement')
+const inventoryRoutes = require('./routers/inventory') 
 
 
 // express app
 const app = express();
+
+
+// middleware to parse incoming JSON data
+app.use(express.json());
+
+// middleware to log request path and method
+app.use((req,res,next)=>{
+    console.log(req.path,res.methode);
+    next()
+})
 
 //booking routers
 app.use('/api/booking', bookingRoutes)
@@ -36,22 +38,10 @@ app.use('/api/feedback',feedback)
 app.use('/api/employeesal',employeesal)
 //delivery orders routers
 app.use('/api/deliveryorder',deliveries)
-
-
-
-//routes
+//adverticment routers
 app.use('/api/advertisements',advertisementRoutes)
+//inventory routers
 app.use('/api/inventory/', inventoryRoutes)
-
-
-// middleware to parse incoming JSON data
-app.use(express.json());
-
-// middleware to log request path and method
-app.use((req, res, next) => {
-    console.log(req.path, res.method);
-    next();
-});
 
 // connect to db
 mongoose.connect(process.env.MONG_URI)
