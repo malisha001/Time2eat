@@ -4,42 +4,35 @@ const Schema = mongoose.Schema
 
 const orderSchema = new Schema({
 
-    tableid:{
+    orderid:{},
 
+    tableid:{},
 
-    },
+    restaurantid:{},
 
-    restaurantid:{
-
-
-
-    },
-
-    fooditems:{
+    fooditem:{
        type: String,
        required: true
-
-
     },
 
     quantity:{
        type: Number,
        required:true
+    },
 
+    name:{
+       type: String,
+       required:true
     },
 
     price:{
         type:Number,
         required:true
-
-
     },
 
     state:{
         type:String,
         required:true
-
-
     }
 
 

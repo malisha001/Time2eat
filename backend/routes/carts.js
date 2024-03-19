@@ -1,44 +1,30 @@
 const express = require('express')
-const Order = require('../models/cartModel')
+const {
+    createCart,
+    getCarts,
+    getCart,
+    deleteCart,
+    updateCart
+} = require('../controllers/cartController')
+
 
 const router = express.Router()
 
-//get all cart
-router.get('/', (req, res) => {
-    res.json({ mssg: 'GET all cart' })
-
-})
+//get all carts
+router.get('/', getCarts)
 
 //get a single cart
-router.get('/:id', (req, res) => {
-    res.json({mssg: 'GET a single cart'})
-
-})
+router.get('/:id', getCart)
 
 //post a new cart
-router.post('/',async (req, res) => {
-    const {fooditems, quantity, price} = req.body
-
-    try {
-
-        const order = await Order.create({fooditems, quantity, price })
-        res.status(200).json(cart)
-    }catch (error){
-        res.status(400).json({error: error.message})
-
-
-    }
-})
+router.post('/', createCart)
+    
 
 //delete an order
-router.delete('/:id', (req, res) => {
-    res.json({mssg: 'DELETE an cart'})
-})
+router.delete('/:id', deleteCart)
 
 //update an order
-router.patch('/:id', (req, res) => {
-    res.json({mssg: 'UPDATE an cart'})
-})
+router.patch('/:id', updateCart)
 
 
 

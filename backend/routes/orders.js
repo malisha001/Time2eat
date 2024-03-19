@@ -1,44 +1,32 @@
 const express = require('express')
-const Order = require('../models/orderModel')
+const {
+    createOrder,
+    getOrders,
+    getOrder,
+    deleteOrder,
+    updateOrder
+} = require('../controllers/orderController')
+
 
 const router = express.Router()
 
 //get all orders
-router.get('/', (req, res) => {
-    res.json({ mssg: 'GET all orders' })
+router.get('/', getOrders)
 
-})
+
 
 //get a single order
-router.get('/:id', (req, res) => {
-    res.json({mssg: 'GET a single order'})
-
-})
+router.get('/:id', getOrder)
 
 //post a new order
-router.post('/',async (req, res) => {
-    const {fooditems, quantity, price,state } = req.body
-
-    try {
-
-        const order = await Order.create({fooditems, quantity, price, state })
-        res.status(200).json(order)
-    }catch (error){
-        res.status(400).json({error: error.message})
-
-
-    }
-})
+router.post('/', createOrder )
 
 //delete an order
-router.delete('/:id', (req, res) => {
-    res.json({mssg: 'DELETE an order'})
-})
+router.delete('/:id', deleteOrder)
+
 
 //update an order
-router.patch('/:id', (req, res) => {
-    res.json({mssg: 'UPDATE an order'})
-})
+router.patch('/:id', updateOrder)
 
 
 
