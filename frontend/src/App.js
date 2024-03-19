@@ -18,6 +18,7 @@ function App() {
 
 
 
+
       <BrowserRouter>
         <Navbar />
         <div className="pages">
@@ -31,6 +32,7 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
+
 
 
 

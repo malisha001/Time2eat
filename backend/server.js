@@ -11,6 +11,10 @@ const RealTimebookingRoutes = require('./routers/realtimebooking')
 const CustomerHistoryRoutes = require('./routers/customerhistoryroute')
 const advertisementRoutes = require('./routers/advertisement')
 const inventoryRoutes = require('./routers/inventory') 
+const orderRoutes = require('./routers/orders')
+const cartRoutes = require('./routers/carts')
+const onlineOrdersRoutes = require('./routers/onlineOrders')
+
 
 
 // express app
@@ -42,6 +46,10 @@ app.use('/api/deliveryorder',deliveries)
 app.use('/api/advertisements',advertisementRoutes)
 //inventory routers
 app.use('/api/inventory/', inventoryRoutes)
+//order system routers
+app.use('/api/orders',orderRoutes)
+app.use('/api/carts', cartRoutes)
+app.use('/api/onlineOrders', onlineOrdersRoutes)
 
 // connect to db
 mongoose.connect(process.env.MONG_URI)
@@ -56,5 +64,6 @@ mongoose.connect(process.env.MONG_URI)
         console.log(error);
 
     });
+
 
 
