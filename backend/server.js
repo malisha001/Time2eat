@@ -1,5 +1,10 @@
 
 
+const inventoryRoutes = require('./routes/inventory')       // import routes folder
+
+
+
+
 const advertisementRoutes = require('./routers/advertisement')
 
 
@@ -36,7 +41,7 @@ app.use('/api/deliveryorder',deliveries)
 
 //routes
 app.use('/api/advertisements',advertisementRoutes)
-
+app.use('/api/inventory/', inventoryRoutes)
 
 
 // middleware to parse incoming JSON data
@@ -59,5 +64,7 @@ mongoose.connect(process.env.MONG_URI)
     })
     .catch((error) => {
         console.log(error);
+
     });
+
 

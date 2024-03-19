@@ -1,3 +1,8 @@
+
+
+// pages & components
+import Home from './pages/Home';
+
 import Navbar from "./Component/Navbar";
 import MyBookings from "./pages/MyBookings";
 import NewBooking from "./pages/NewBooking";
@@ -12,6 +17,7 @@ function App() {
     <div className="App">
 
 
+
       <BrowserRouter>
         <Navbar />
         <div className="pages">
@@ -20,9 +26,12 @@ function App() {
             <Route path="/mybookings" element={<MyBookings />} />
             <Route path="/update-booking/:id" element={<UpdateBookingDetails />} />
             <Route path="/realtime-staff" element={<RestaurantStaff />} />
+             <Route path="/inventory" element={<Home />}
+              />
           </Routes>
         </div>
       </BrowserRouter>
+
 
 
     </div>
