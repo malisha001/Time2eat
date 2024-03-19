@@ -1,16 +1,14 @@
-import { useBookingsContext } from "../hooks/useBookingsContext";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const BookingDetails = ( {booking} ) => {
-    const { dispatch } = useBookingsContext()
+const BookingDetails = ({ booking, onDelete }) => {
     const handleClick = async () => {
         try {
             const response = await axios.delete(`/api/booking/${booking._id}`);
             const data = response.data;
     
             if (response.status === 200) {
-                dispatch({ type: 'DELETE_BOOKING', payload: data });
+                onDelete(data); // Inform parent component about the deletion
             }
         } catch (error) {
             console.error('Error deleting booking:', error);
@@ -26,10 +24,8 @@ const BookingDetails = ( {booking} ) => {
             <p>{booking.createAt}</p>
             <button onClick={handleClick}>delete</button>
             <Link to={`/update-booking/${booking._id}`}>Update</Link>
-
         </div>
-    )
-
+    );
 }
 
-export default BookingDetails
+export default BookingDetails;
