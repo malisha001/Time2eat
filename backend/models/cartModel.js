@@ -4,32 +4,38 @@ const Schema = mongoose.Schema
 
 const cartSchema = new Schema({
 
-    cartid:{},
-
-    customerid:{},
-
-    restaurantid:{},
-
+    orderid:{ //order id + restaurentId
+        type: String,
+        required:true
+    },
+    customerid:{
+        type: String,
+        required:true
+    },
+    cusName:{
+        type: String,
+        required:true
+    },
+    restaurantid:{
+        type: String,
+        required:true
+    },
+    restaurantname:{
+        type: String,
+        required:true
+    },
     fooditem:{
        type: String,
        required:true
-      },
-
+    },
     quantity:{
        type: Number,
        required:true
     },
-
     price:{
         type:Number,
         required:true
     },
-
-    name:{
-        type:String,
-        required:true
-    }
-
    
 }, { timestamps: true })
 

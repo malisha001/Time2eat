@@ -14,7 +14,6 @@ const router = express.Router()
 router.get('/', getOrders)
 
 
-
 //get a single order
 router.get('/:id', getOrder)
 
@@ -27,7 +26,6 @@ router.delete('/:id', deleteOrder)
 
 //update an order
 router.patch('/:id', updateOrder)
-
 
 
 module.exports = router
