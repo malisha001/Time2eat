@@ -11,8 +11,8 @@ const RealTimebookingRoutes = require('./routers/realtimebooking')
 const CustomerHistoryRoutes = require('./routers/customerhistoryroute')
 const advertisementRoutes = require('./routers/advertisement')
 const inventoryRoutes = require('./routers/inventory') 
-const orderRoutes = require('./routes/orders')
-const cartRoutes = require('./routes/carts')
+const orderRoutes = require('./routers/orders')
+const cartRoutes = require('./routers/carts')
 
 
 
@@ -46,7 +46,7 @@ app.use('/api/deliveryorder',deliveries)
 app.use('/api/advertisements',advertisementRoutes)
 //inventory routers
 app.use('/api/inventory/', inventoryRoutes)
-
+//order system routers
 app.use('/api/orders',orderRoutes)
 app.use('/api/carts', cartRoutes)
 

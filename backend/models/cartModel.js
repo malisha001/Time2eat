@@ -11,7 +11,7 @@ const cartSchema = new Schema({
     restaurantid:{},
 
     fooditem:{
-       type: Number,
+       type: String,
        required:true
       },
 
