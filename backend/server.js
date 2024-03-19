@@ -3,28 +3,27 @@
 
 
 
-const bookingRoutes = require('./routers/booking')
-const RealTimebookingRoutes = require('./routers/realtimebooking')
-const CustomerHistoryRoutes = require('./routers/customerhistoryroute')
+
 
 
 const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config()
+
 const employeesal = require('./routers/employeeSalary')
 const restaurants = require('./routers/restaurants')
 const feedback = require('./routers/feedbacks')
 const deliveries = require('./routers/deliveryOrderf')
-
+const bookingRoutes = require('./routers/booking')
+const RealTimebookingRoutes = require('./routers/realtimebooking')
+const CustomerHistoryRoutes = require('./routers/customerhistoryroute')
 
 
 // express app
 const app = express();
 
 
-app.use('/api/booking', bookingRoutes)
-app.use('/api/realtimebooking', RealTimebookingRoutes)
-app.use('/api/customerhistoryroute', CustomerHistoryRoutes)
+
 //routers
 
 // middleware to parse incoming JSON data
@@ -41,7 +40,9 @@ app.use('/api/employeesal',employeesal)
 app.use('/api/restaurants',restaurants)
 app.use('/api/feedback',feedback)
 app.use('/api/deliveryorder',deliveries)
-
+app.use('/api/booking', bookingRoutes)
+app.use('/api/realtimebooking', RealTimebookingRoutes)
+app.use('/api/customerhistoryroute', CustomerHistoryRoutes)
 
 // connect to db
 
