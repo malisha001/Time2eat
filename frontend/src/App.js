@@ -9,6 +9,8 @@ import NewBooking from "./pages/NewBooking";
 import UpdateBookingDetails from "./Component/UpdateBookingDetails";
 import RestaurantStaff from "./pages/RestaurantStaff";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Menu from './pages/Menu';
+import AddfooditemsForm from './Component/AddfooditemsForm';
 
 
 
@@ -27,8 +29,9 @@ function App() {
             <Route path="/mybookings" element={<MyBookings />} />
             <Route path="/update-booking/:id" element={<UpdateBookingDetails />} />
             <Route path="/realtime-staff" element={<RestaurantStaff />} />
-             <Route path="/inventory" element={<Home />}
-              />
+             <Route path="/inventory" element={<Home />} />
+            <Route path="/fooditems" element = {<Menu />} />
+            <Route path="/add-food-item" element = {<AddfooditemsForm />} />
           </Routes>
         </div>
       </BrowserRouter>
