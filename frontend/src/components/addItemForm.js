@@ -1,0 +1,80 @@
+import React,{ useState } from "react"
+
+const itemForm = () => {
+
+    const [itemId, setitemId] = useState('')
+    const [itemName, setItemName] = useState('')
+    const [itemQuantity, setItemQuantity] = useState('')
+    const [itemPrice, setItemPrice] = useState('')
+    const [itemCategory, setItemCategory] = useState('')
+    const [error, setError] = useState(null)
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+
+        const inventoryItem = {itemId, itemName, itemQuantity, itemPrice, itemCategory}
+        const response = await fetch('/api/inventory/', {
+            method: 'POST',
+            body: JSON.stringify(inventoryItem),
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        })
+        const json = await response.json()
+
+        if(!response.ok){
+            setError(json.error)
+        }
+        if(response.ok){
+            setitemId('')
+            setItemName('')
+            setItemQuantity('')
+            setItemPrice('')
+            setItemCategory('')
+            setError(null)
+            console.log('new workout added', json)
+        }
+
+    }
+
+    return(
+        <form className="create" onSubmit={handleSubmit}>
+            <h3>Add a new food item</h3>
+
+            <label>Item ID :</label>
+            <input 
+            type="Number" onChange={(e) => setitemId(e.target.value)} value={itemId}
+            />
+            
+            <label>Item Name :</label>
+            <input 
+            type="text" onChange={(e) => setItemName(e.target.value)} value={itemName}
+            />
+
+            <label>Item Quantity : </label>
+            <input 
+            type="Number" onChange={(e) => setItemQuantity(e.target.value)} value={itemQuantity}
+            />
+
+            <label>Item Price : </label>
+            <input
+            type="Number" onChange={(e) => setItemPrice(e.target.value)} value={itemPrice}
+            />
+
+            <label>Item Category : </label>
+            <input 
+            type="text" onChange={(e) => setItemCategory(e.target.value)} value={itemCategory}
+            />
+
+            <button>Add Item</button>
+            {error && <div className="error">{error}</div>}
+
+        </form>
+    )
+
+}
+
+
+export default itemForm;

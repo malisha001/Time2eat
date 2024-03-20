@@ -11,3 +11,81 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.container h1{
+  color: black;
+}
+
+.container a{
+  text-decoration: none;
+}
+
+/* item display */
+.itemsDetails{
+  background-color: silver;
+  margin:0px 700px 0px 100px;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+.itemsDetails h4{
+  background-color: rgb(1, 135, 90);
+  padding: 30px;
+  font-size: 20px;
+}
+
+.itemsDetails p{
+  background-color: antiquewhite;
+  padding: 10px;
+}
+
+/* form */
+.create {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.create h3 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.create label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.create input[type="text"],
+.create input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.create button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.create button:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+  text-align: center;
+}
+

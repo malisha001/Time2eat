@@ -24,8 +24,6 @@ const inventorySchema = new Schema({
         type: String,
         required: true
     },
-
-    
     itemImage: {
         data: Buffer, 
         contentType: String 
