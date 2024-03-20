@@ -7,7 +7,7 @@ const getRestaurants = async (req , res) =>{
     res.status(200).json(restaurants)
 }
 
-// get a single restaurant
+// get a single restaurant 
 const getRestaurant = async(req , res) =>{
     const {id} = req.params
 

@@ -4,6 +4,7 @@ require('dotenv').config()
 //import routers
 const employeesal = require('./routers/employeeSalary')
 const restaurants = require('./routers/restaurants')
+const fooditems = require('./routers/fooditems')
 const feedback = require('./routers/feedbacks')
 const deliveries = require('./routers/deliveryOrderf')
 const bookingRoutes = require('./routers/booking')
@@ -36,6 +37,8 @@ app.use('/api/realtimebooking', RealTimebookingRoutes)
 app.use('/api/customerhistoryroute', CustomerHistoryRoutes)
 //restaurent routers
 app.use('/api/restaurants',restaurants)
+//fooditems
+app.use('/api/fooditems',fooditems)
 //feedback and customer service routers
 app.use('/api/feedback',feedback)
 //employee salary
@@ -52,7 +55,7 @@ app.use('/api/carts', cartRoutes)
 app.use('/api/onlineOrders', onlineOrdersRoutes)
 
 // connect to db
-mongoose.connect(process.env.MONG_URI)
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         // listen for requests
         app.listen(process.env.PORT, () => {
