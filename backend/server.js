@@ -13,7 +13,7 @@ const advertisementRoutes = require('./routers/advertisement')
 const inventoryRoutes = require('./routers/inventory') 
 const orderRoutes = require('./routers/orders')
 const cartRoutes = require('./routers/carts')
-
+const onlineOrdersRoutes = require('./routers/onlineOrders')
 
 // express app
 const app = express();
@@ -47,6 +47,7 @@ app.use('/api/inventory/', inventoryRoutes)
 //order system routers
 app.use('/api/orders',orderRoutes)
 app.use('/api/carts', cartRoutes)
+app.use('/api/onlineOrders', onlineOrdersRoutes)
 
 
 // connect to db

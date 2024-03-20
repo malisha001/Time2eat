@@ -13,12 +13,11 @@ const router = express.Router()
 //get all carts
 router.get('/', getCarts)
 
-//get a single cart
+//get spesific customer's orders with different restaurent
 router.get('/:id', getCart)
 
 //post a new cart
 router.post('/', createCart)
-    
 
 //delete an order
 router.delete('/:id', deleteCart)
