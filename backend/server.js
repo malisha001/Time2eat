@@ -1,31 +1,70 @@
-require('dotenv').config()
-const express = require('express');
-const mongoose = require('mongoose')
+
+
 const inventoryRoutes = require('./routes/inventory')       // import routes folder
 
-//invoke express app
-const app = express()
 
-//middleware
-app.use(express.json()); // Add this line to parse JSON bodies
+
+
+const advertisementRoutes = require('./routers/advertisement')
+
+
+const express = require('express');
+const mongoose = require('mongoose');
+require('dotenv').config()
+//import routers
+const employeesal = require('./routers/employeeSalary')
+const restaurants = require('./routers/restaurants')
+const feedback = require('./routers/feedbacks')
+const deliveries = require('./routers/deliveryOrderf')
+const bookingRoutes = require('./routers/booking')
+const RealTimebookingRoutes = require('./routers/realtimebooking')
+const CustomerHistoryRoutes = require('./routers/customerhistoryroute')
+
+
+// express app
+const app = express();
+
+//booking routers
+app.use('/api/booking', bookingRoutes)
+app.use('/api/realtimebooking', RealTimebookingRoutes)
+app.use('/api/customerhistoryroute', CustomerHistoryRoutes)
+//restaurent routers
+app.use('/api/restaurants',restaurants)
+//feedback and customer service routers
+app.use('/api/feedback',feedback)
+//employee salary
+app.use('/api/employeesal',employeesal)
+//delivery orders routers
+app.use('/api/deliveryorder',deliveries)
+
+
+
+//routes
+app.use('/api/advertisements',advertisementRoutes)
+app.use('/api/inventory/', inventoryRoutes)
+
+
+// middleware to parse incoming JSON data
+app.use(express.json());
+
+// middleware to log request path and method
 app.use((req, res, next) => {
-    console.log(req.path, req.method);
+    console.log(req.path, res.method);
     next();
 });
 
-//connect to DB
-mongoose.connect(process.env.MONGO_URI)
+// connect to db
+mongoose.connect(process.env.MONG_URI)
     .then(() => {
-        // listen to requests
+        // listen for requests
         app.listen(process.env.PORT, () => {
-            console.log("Connected to DB & Listening to the port ", process.env.PORT)
-        })
-
-    }).catch((error) => {
-        console.log(error)
+            console.log("Listening on port", process.env.PORT);
+            console.log("DB connected successfully");
+        });
     })
+    .catch((error) => {
+        console.log(error);
 
-//routes
-app.use('/api/inventory/', inventoryRoutes)
+    });
 
 
