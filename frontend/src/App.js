@@ -1,7 +1,7 @@
 
 
 // pages & components
-import Home from './pages/Home';
+import Inventory from '../src/pages/Inventory'
 
 import Navbar from "./Component/Navbar";
 import MyBookings from "./pages/MyBookings";
@@ -27,7 +27,7 @@ function App() {
             <Route path="/mybookings" element={<MyBookings />} />
             <Route path="/update-booking/:id" element={<UpdateBookingDetails />} />
             <Route path="/realtime-staff" element={<RestaurantStaff />} />
-             <Route path="/inventory" element={<Home />}
+             <Route path="/inventory" element={<Inventory />}
 
               />
           </Routes>

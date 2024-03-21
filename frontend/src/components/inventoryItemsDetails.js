@@ -10,6 +10,6 @@ const inventoryItemsDetails = ({item}) => {
             
         </div>
     )
-}
+} 
 
 export default inventoryItemsDetails
