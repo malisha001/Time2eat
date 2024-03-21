@@ -1,6 +1,6 @@
 
 
-const advertisementRoutes = require('./routers/advertisement')
+
 
 
 const express = require('express');
@@ -14,7 +14,7 @@ const deliveries = require('./routers/deliveryOrderf')
 const bookingRoutes = require('./routers/booking')
 const RealTimebookingRoutes = require('./routers/realtimebooking')
 const CustomerHistoryRoutes = require('./routers/customerhistoryroute')
-
+const advertisementRoutes = require('./routers/advertisement')
 
 // express app
 const app = express();
@@ -31,11 +31,8 @@ app.use('/api/feedback',feedback)
 app.use('/api/employeesal',employeesal)
 //delivery orders routers
 app.use('/api/deliveryorder',deliveries)
-
-
-
-//routes
-app.use('/api/advertisements',advertisementRoutes)
+//advertisement routers
+app.use('/api/advertisement',advertisementRoutes)
 
 
 
