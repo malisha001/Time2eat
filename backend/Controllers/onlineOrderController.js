@@ -1,12 +1,23 @@
 const Onlineorder = require('../models/onlineOrderModel')
 const mongoose = require('mongoose')
 
-//show all orders to kitchen manager
+//show all orders to kitchen manager for each restaurent
 const getOnlineOrders = async (req, res) => {
-    const onlineOrders = await Onlineorder.find({}).sort({createdAt: -1})
+    const { id } = req.params;
 
-    res.status(200).json(onlineOrders)
-}
+    try {
+        const resOrder = await Onlineorder.find({ restaurantid: id });
+
+        if (!resOrder) {
+            return res.status(404).json({ error: 'No online orders' });
+        }
+        res.status(200).json(resOrder);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
 //show only delivery orders to riders
 const getdeliveryOrders = async(req,res) =>{
 
@@ -37,7 +48,7 @@ const addOnlineOrders = async (req, res) => {
     }
 }
 
-//delete automatically when rider accept order
+//delete automatically when rider accept order(not work)
 const deleteOnlineOrders = async (req, res) => {
     const {id} = req.params
 
