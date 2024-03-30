@@ -1,41 +1,32 @@
-
-
 // pages & components
 import Home from './pages/Home';
 
-import Navbar from "./Component/Navbar";
+import Navbar from "./component/Navbar";
 import MyBookings from "./pages/MyBookings";
 import NewBooking from "./pages/NewBooking";
-import UpdateBookingDetails from "./Component/UpdateBookingDetails";
+import UpdateBookingDetails from "./component/UpdateBookingDetails";
 import RestaurantStaff from "./pages/RestaurantStaff";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import EmployeeSal from './pages/EmployeeSal';
 
 
 
 function App() {
   return (
     <div className="App">
-
-
-
-
       <BrowserRouter>
-        <Navbar />
         <div className="pages">
           <Routes>
             <Route path="/" element={<NewBooking />} />
             <Route path="/mybookings" element={<MyBookings />} />
             <Route path="/update-booking/:id" element={<UpdateBookingDetails />} />
             <Route path="/realtime-staff" element={<RestaurantStaff />} />
-             <Route path="/inventory" element={<Home />}
-              />
+            <Route path="/inventory" element={<Home />} />
+            <Route path="/employeesal" element={<EmployeeSal />}>
+            </Route>
           </Routes>
         </div>
       </BrowserRouter>
-
-
-
-
     </div>
   );
 }

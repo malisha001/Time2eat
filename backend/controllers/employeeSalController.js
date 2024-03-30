@@ -25,10 +25,10 @@ const getEmployeeSal = async(req,res) =>{
 }
 //create employee salary
 const createEmployeesSal = async(req,res) => {
-    const{empId,resId,basicEmpSalary,bonusRate,empCatagory,taxRate,ETFrate,Fsalary} = req.body
+    const{empId,resId,basicEmpSalary,empCatagory,bonusRate,taxRate,ETFrate,Fsalary} = req.body
 
     try{
-        const employeesal = await EmployeeSal.create({empId,resId,basicEmpSalary,bonusRate,empCatagory,taxRate,ETFrate,Fsalary})
+        const employeesal = await EmployeeSal.create({empId,resId,basicEmpSalary,empCatagory,bonusRate,taxRate,ETFrate,Fsalary})
         res.status(200).json(employeesal)
     }catch(error){
         res.status(400).json({error: error.message})

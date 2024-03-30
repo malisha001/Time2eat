@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const employeeLeaves = new Schema({
+const leavesSchema = new Schema({
     empId:{
         type: String,
         require: true
@@ -30,4 +30,6 @@ const employeeLeaves = new Schema({
         type: String,
         require: true
     },
-})
+},{timestamps: true})
+
+module.exports = mongoose.model('Employeleaves',leavesSchema)
