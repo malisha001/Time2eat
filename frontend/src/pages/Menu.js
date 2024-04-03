@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import FooditemDetails from '../Component/FooditemsDetails';
-//import AddfooditemsForm from "../Component/AddfooditemsForm";
+import AddfooditemsForm from "../Component/AddfooditemsForm";
 
 const Menu = () => {
   const [foodItems, setFoodItems] = useState(null);
