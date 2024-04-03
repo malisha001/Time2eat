@@ -8,6 +8,7 @@ import UpdateBookingDetails from "./component/UpdateBookingDetails";
 import RestaurantStaff from "./pages/RestaurantStaff";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import EmployeeSal from './pages/EmployeeSal';
+import EmpPayrun from './pages/EmpPayrun';
 
 
 
@@ -22,8 +23,8 @@ function App() {
             <Route path="/update-booking/:id" element={<UpdateBookingDetails />} />
             <Route path="/realtime-staff" element={<RestaurantStaff />} />
             <Route path="/inventory" element={<Home />} />
-            <Route path="/employeesal" element={<EmployeeSal />}>
-            </Route>
+            <Route path="/employeesal" element={<EmployeeSal />} />
+            <Route path="/payrun" element={<EmpPayrun />} /> 
           </Routes>
         </div>
       </BrowserRouter>

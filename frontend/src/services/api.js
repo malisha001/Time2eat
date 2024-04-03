@@ -27,6 +27,7 @@ export async function addEmployeeSalaryData(employeeSalaryData) {
         throw error;
     }
 }
+
 //get all employee details
 export async function getAllEmployeeData() {
     try {
@@ -35,6 +36,36 @@ export async function getAllEmployeeData() {
         return data;
     } catch (error) {
         console.error('Error fetching employee data:', error);
+        throw error;
+    }
+}
+
+// Function to get all payrun data
+export async function getPayrunData() {
+    try {
+        const response = await fetch('/api/emppayrun');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching employee payrun data:', error);
+        throw error;
+    }
+}
+
+// Function to update employee payrun data
+export async function updateEmpPayrunData(empPayrunData) {
+    try {
+        const response = await fetch('/api/emppayrun', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(empPayrunData),
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error updating employee payrun data:', error);
         throw error;
     }
 }
