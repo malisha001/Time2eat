@@ -1,0 +1,11 @@
+.input-mybooking{
+    margin-left: 100px;
+    width: 100px;
+    height: 10px;
+    margin-top: 10px;
+}
+.input-mybooking-label{
+    margin-left: 0px;
+    width: 10px;
+    background-color: antiquewhite;
+}

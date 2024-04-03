@@ -1,43 +1,50 @@
-import { useEffect } from "react";
-import { useBookingsContext } from "../hooks/useBookingsContext";
+import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 import axios from "axios";
 
-// components
-// import BookingForm from '../Component/Bookingform';
-import BookingDetails from '../Component/BookingDetails'
 const MyBookings = () => {
-    const {bookings, dispatch} = useBookingsContext();
+    const [bookings, setBookings] = useState(null);
+
     useEffect(() => {
         const fetchMyBookings = async () => {
             try {
                 const response = await axios.get('/api/booking');
                 const data = response.data;
-
-                dispatch({ type: 'SET_BOOKINGS', payload: data });
+                setBookings(data);
             } catch (error) {
                 console.error('Error fetching bookings:', error);
             }
         };
 
-         // Add condition to prevent unnecessary fetch
-            fetchMyBookings();
-      
+        fetchMyBookings();
+    }, []);
 
-    }, [dispatch]);
+    const handleDeleteBooking = async (bookingId) => {
+        try {
+            await axios.delete(`/api/booking/${bookingId}`);
+            setBookings(bookings.filter(booking => booking._id !== bookingId));
+        } catch (error) {
+            console.error('Error deleting booking:', error);
+        }
+    };
 
-    // Return JSX
     return ( 
         <div className="myBookings">
             <div className="bookings">
-                {/* Check if bookings is not null before mapping */}
                 {bookings && bookings.map((booking) => (
-                    <BookingDetails key={booking._id} booking={booking} />
+                    <div className="booking-details" key={booking._id}>
+                        <h4>{booking.date}</h4>
+                        <p><strong>Couple Tables : </strong>{booking.couplequantity}</p>
+                        <p><strong>Group Tables : </strong>{booking.groupquantity}</p>
+                        <p><strong>Time : </strong>{booking.time}</p>
+                        <p>{booking.createAt}</p>
+                        <button onClick={() => handleDeleteBooking(booking._id)}>Delete</button>
+                        <Link to={`/update-pre-booking/${booking._id}`}>Update</Link>
+                    </div>
                 ))}
             </div>
-            
         </div>
     );
 };
  
 export default MyBookings;
-// need to make changes of this newBooking.js o mybooking.js
