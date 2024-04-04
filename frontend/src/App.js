@@ -9,8 +9,9 @@ import NewBooking from "./pages/NewBooking";
 import UpdateBookingDetails from "./Component/UpdateBookingDetails";
 import RestaurantStaff from "./pages/RestaurantStaff";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
-
+import Feedback from './pages/Feedback';
+import AddfeedbackForm from './Component/AddfeedbackForm';
+import UpdateFeedback from './Component/Updatefeedback';
 
 function App() {
   return (
@@ -27,8 +28,13 @@ function App() {
             <Route path="/mybookings" element={<MyBookings />} />
             <Route path="/update-booking/:id" element={<UpdateBookingDetails />} />
             <Route path="/realtime-staff" element={<RestaurantStaff />} />
-             <Route path="/inventory" element={<Home />}
-              />
+             <Route path="/inventory" element={<Home />}/>
+             <Route path="/feedback" element={<Feedback />}/>
+             <Route path="/add-feedback" element={<AddfeedbackForm />}/>
+             <Route path="/update-feedback/:id/" element={<UpdateFeedback />}/>
+             
+             
+              
           </Routes>
         </div>
       </BrowserRouter>

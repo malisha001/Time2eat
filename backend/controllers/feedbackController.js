@@ -24,10 +24,10 @@ const getFeedback = async(req , res) =>{
 
 //add new feedback
 const addFeedback = async(req , res) => {
-    const{feedback_Id, customer_name, contact_number} = req.body
+    const{feedback_Id, customer_name, contact_number,comment} = req.body
     try{
        const feedback = await Feedback.create({
-        feedback_Id, customer_name, contact_number
+        feedback_Id, customer_name, contact_number,comment
        })
        res.status(200).json(feedback)
     }catch(error){

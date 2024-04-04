@@ -1,9 +1,10 @@
+
 const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const feedbackSchema = new Schema({
-    feedback_Id:{
+const InquirySchema = new Schema({
+    inquiry_Id:{
         type: String,
         required : true
     },
@@ -11,14 +12,22 @@ const feedbackSchema = new Schema({
         type:String,
         required : true
     },
-    contact_number :{
+    contact :{
         type:Number,
         required : true
     },
-    comment :{
+    email :{
+        type:String,
+        required : true
+    },
+    topic :{
+        type:String,
+        required : true
+    },
+    message :{
         type:String,
         required : true
     }
 },{timestamps : true })
 
-module.exports = mongoose.model('Feedback',feedbackSchema)
+module.exports = mongoose.model('Inquiry',InquirySchema)
