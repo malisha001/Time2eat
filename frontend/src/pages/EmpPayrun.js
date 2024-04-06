@@ -2,6 +2,7 @@ import { Grid, Stack,InputAdornment, TextField,MenuItem,Select,InputLabel,FormCo
 import React, { useState,useEffect } from 'react';
 import { updateEmpPayrunData,getPayrunData } from '../services/api';
 import { Box, color, containerClasses, padding } from '@mui/system';
+import Payrunbtn from '../component/Payrunbtn';
 
 
 function EmpPayrun() {
@@ -11,12 +12,15 @@ function EmpPayrun() {
         // Fetch employee payrun data when component mounts
         const fetchEmpPayrun = async () => {
             try {
-                const payrunData = await getPayrunData();
+                const pData = await getPayrunData();
+                setPayrunData(pData);
+                console.log(pData);
             } catch (error) {
                 console.error('Error fetching employee payrun data:', error);
             }
         }
-    })
+        fetchEmpPayrun();
+    },[])
 
     const [value, setValue] = useState('');
 
@@ -29,58 +33,31 @@ function EmpPayrun() {
             <h1>Employee Payrun Page</h1>
             <div>
                 <Paper sx={{padding:'32px',bgcolor: '#F0F8FF', margin: '20px'}} >
-                    <Grid container spacing={3}>
-                        <Grid item md ={4}>
-                            bonus
-                            <Box bgcolor='#fff' p={2}>
-                                item 1
-                            </Box>
-                        </Grid>
-                        <Grid item md ={4}>
-                            time period
-                            <Box bgcolor='#fff' p={2}>
-                                item 2
-                            </Box>
-                        </Grid>
-                        <Grid item md ={4}>
-                            <br/>
-                            <Button  variant='contained'>Submit</Button>
-                        </Grid>
-                        <Grid item md ={4}>
-                            tax
-                            <Box bgcolor='#fff' p={2}>
-                                item 1
-                            </Box>
-                        </Grid>
-                        <Grid item md ={4}>
-                            <br/>
-                            <Box bgcolor='#fff' p={2}>
-                                item 2
-                            </Box>
-                        </Grid>
-                        <Grid item md ={4}>
-                            <br/>
-                            <Button  variant='contained'>Submit</Button>
-                        </Grid>
-                        <Grid item md ={4}>
-                            ETF/EPF
-                            <Box bgcolor='#fff' p={2}>
-                                item 1
-                            </Box>
-                        </Grid>
-                        <Grid item md ={4}>
-                            <br/>
-                            <Box bgcolor='#fff' p={2}>
-                                item 2
-                            </Box>
-                        </Grid>
-                        <Grid item md ={4}>
-                            <br/>
-                            <Button  variant='contained'>Submit</Button>
-                        </Grid>
+                
+                    <Grid container spacing={3} >
+                        {payrunData.map((item) => (
+                            <Grid item md ={4} padding={3} key={item._id} >
+                                <Grid container>
+                                    <Grid item ={6}>
+                                        {item.category}
+                                        <Box bgcolor='#fff' p={2} >
+                                            {item.rate}    
+                                        </Box>
+                                    </Grid>
+                                    <Grid item ={6} spacing={2}>
+                                        <br/>
+                                        <Payrunbtn id={item._id}/>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        ))}         
                     </Grid>
-                    
+                    <h3>last update:</h3>
+                    <h3>Days to the next salary day:</h3>
                 </Paper>
+                <Button variant='contained' color='primary'>
+                    pay salary
+                </Button>
             </div>
         </div>
     );

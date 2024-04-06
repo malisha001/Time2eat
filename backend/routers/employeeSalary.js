@@ -4,7 +4,7 @@ const {
     getEmployeeSal,
     getEmployeesSal,
     createEmployeesSal,
-    deleteEmployeeSal
+    deleteEmployeeSal,
 } = require('../Controllers/employeeSalController')
 
 //get salary employee

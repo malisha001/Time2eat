@@ -1,3 +1,4 @@
+import axios from 'axios';
 // Function to get all employee salary data
 export async function getAllEmployeeSalaryData() {
     try {
@@ -66,6 +67,24 @@ export async function updateEmpPayrunData(empPayrunData) {
         return data;
     } catch (error) {
         console.error('Error updating employee payrun data:', error);
+        throw error;
+    }
+}
+
+// Function to update payrun data
+export async function updatePayrunData(id,payrunData) {
+    try {
+        const response = await fetch(`/api/emppayrun/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payrunData),
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error updating payrun data:', error);
         throw error;
     }
 }
