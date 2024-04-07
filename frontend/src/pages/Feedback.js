@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import FeedbackDetails from "../Component/FeedbackDetails";
@@ -32,8 +33,11 @@ const Feedback = () => {
         ))}
       </div>
       <Link to="/add-feedback"><button>Add Feedback</button></Link>
+
     </div>
   );
 };
 
+
 export default Feedback;
+
