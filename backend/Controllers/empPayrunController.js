@@ -43,10 +43,12 @@ const updateEmpPayrun = async (req, res) => {
 };
 //monthly salary process
 const monthlySalProcess = async(req,res) => {
-    // const currentDate = new Date();
-    // const currentMonth = currentDate.getMonth()
-    // const currentYear = currentDate.getFullYear()
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1; // Adding 1 to match JavaScript's zero-based month indexing
     // const currentDay = currentDate.getDate()
+
+    const { id } = req.params; // Assuming the restaurant ID is passed in the URL parameters
 
     try {
         //fetch all payrun data
@@ -70,24 +72,38 @@ const monthlySalProcess = async(req,res) => {
         }
 
         //fetch all employee salaries
-        const employeeSalaries = await EmployeeSal.find({})
-        res.status(200).json(employeeSalaries)
+        const employeeSalaries = await EmployeeSal.find({resId: id})
 
         //iterate through all employeee salaries
-        let oneSalary, empId, resId, basicEmpSalary;
+        let oneSalary, empId, resId, basicEmpSalary,leavecount;
         for(const sal of employeeSalaries){
             oneSalary = sal.basicEmpSalary
             empId = sal.empId
             resId = sal.resId
             basicEmpSalary = sal.basicEmpSalary
+
+            // Count the number of entries for the current month
+            const leaves = await EmpLeave.find({
+                empId: empId,
+                createdAt: {
+                    $gte: new Date(currentYear, currentMonth - 1, 1), // Start of the current month
+                    $lt: new Date(currentYear, currentMonth, 1) // Start of the next month
+                }
+            });
+            for(const count of leaves){
+                let leave = count.leaveDays
+                leavecount = leavecount + leave
+            }
+            res.status(201).json(leaves)
+            console.log('count leaves of:',empId,':', leavecount)
             
             try {
-                const ttax = tax/100*oneSalary
-                const etf = ETF/100*oneSalary
-                const Fsalary = bonus+oneSalary-ttax-etf;
-                console.log('salary:', Fsalary)
-                // const Fsalary = oneSalary+tax
-                // const empmonthlySal = await EmpmonthlySal.create({empId,resId,basicEmpSalary,taxRate,Fsalary})    
+                const taxRate = tax/100*oneSalary
+                const ETFrate = ETF/100*oneSalary
+                const Fsalary = bonus+oneSalary-taxRate-ETFrate;
+
+                const empmonthlySal = await EmpmonthlySal.create({empId,resId,basicEmpSalary,bonus,taxRate,ETFrate,Fsalary})
+ 
             } catch (error) {
                 console.error('Error processing payruns:', error);
             }

@@ -17,6 +17,7 @@ const onlineOrdersRoutes = require('./routers/onlineOrders')
 const employeeLeaveRoutes = require('./routers/employeeLeaves')
 const employees = require('./routers/employees')
 const payrun = require('./routers/empPayrun')
+const leaves = require('./routers/leaves')
 
 
 
@@ -45,6 +46,7 @@ app.use('/api/feedback',feedback)
 app.use('/api/employees',employees)
 //employee salary and leaves
 app.use('/api/emppayrun',payrun)
+app.use('/api/leaves',leaves)
 app.use('/api/employeesal',employeesal)
 app.use('/api/employeeleaves',employeeLeaveRoutes)
 //delivery orders routers

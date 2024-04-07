@@ -28,7 +28,7 @@ const updateLeaves = async(req,res) => {
         return res.status(404).send('No such directory')
     }
 
-    const updatedLeaves = await Leaves.findByIdAndUpdate(_id,{...leaves,_id},{new:true})
+    const updatedLeaves = await Leaves.findByIdAndUpdate(_id,{...leaves,_id})
 
     res.json(updatedLeaves)
 }

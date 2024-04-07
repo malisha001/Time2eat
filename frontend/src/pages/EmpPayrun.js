@@ -1,6 +1,6 @@
 import { Grid, Stack,InputAdornment, TextField,MenuItem,Select,InputLabel,FormControl,Button, Paper } from '@mui/material';
 import React, { useState,useEffect } from 'react';
-import { updateEmpPayrunData,getPayrunData } from '../services/api';
+import { updateEmpPayrunData,getPayrunData,paySalary } from '../services/api';
 import { Box, color, containerClasses, padding } from '@mui/system';
 import Payrunbtn from '../component/Payrunbtn';
 
@@ -20,7 +20,19 @@ function EmpPayrun() {
             }
         }
         fetchEmpPayrun();
+
     },[])
+
+    const handlesubmit = async () => {
+        try {
+            await paySalary(); // Call the backend function to pay the salary
+            console.log('Salary paid successfully.');
+            // You can also update the state or display a message indicating successful payment
+        } catch (error) {
+            console.error('Error paying salary:', error);
+            // Handle error
+        }
+    };
 
     const [value, setValue] = useState('');
 
@@ -55,7 +67,7 @@ function EmpPayrun() {
                     <h3>last update:</h3>
                     <h3>Days to the next salary day:</h3>
                 </Paper>
-                <Button variant='contained' color='primary'>
+                <Button variant='contained' color='primary' onClick={handlesubmit}>
                     pay salary
                 </Button>
             </div>

@@ -13,7 +13,7 @@ const empmonthShema = new Schema({
         type: Number,
         require: true
     },
-    bonusRate: {
+    bonus: {
         type: Number,
     },
     leavePanalty: {

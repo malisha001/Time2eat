@@ -14,7 +14,7 @@ router.get('/', getEmpPayrun)
 router.post('/', createEmpPayrun)
 
 //create paysheet for monthlhy
-router.get('/paysalary', monthlySalProcess)
+router.get('/:id', monthlySalProcess)
 
 // Update employee salary
 router.patch('/:id', updateEmpPayrun)

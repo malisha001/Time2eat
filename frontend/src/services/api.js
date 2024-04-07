@@ -88,3 +88,14 @@ export async function updatePayrunData(id,payrunData) {
         throw error;
     }
 }
+//function paysalary
+export async function paySalary() {
+    try {
+        const response = await fetch('/api/emppayrun/paysalary');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error paying salary:', error);
+        throw error;
+    }
+}

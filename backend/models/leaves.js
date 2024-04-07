@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const LeaveSchema = new Schema({
     monthlyLeaves: {
-        type: String,
+        type: Number,
         require: true
     },
     resId:{
@@ -11,8 +11,8 @@ const LeaveSchema = new Schema({
         require: true
     },
     panaltyFee: {
-        type: String,
+        type: Number,
         require: true
     }
 },{timestamps: true})
-module.exports = mongoose.model('EmpLeaves',LeaveSchema)
+module.exports = mongoose.model('Leaves',LeaveSchema)
