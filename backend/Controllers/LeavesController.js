@@ -1,4 +1,4 @@
-const Leaves = require('../models/leaves')
+const Leaves = require('../models/leavesModel')
 const mongoose = require('mongoose')
 
 //get leaves for each restuarents

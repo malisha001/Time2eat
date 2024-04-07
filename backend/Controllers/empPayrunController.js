@@ -2,6 +2,7 @@ const EmpPayrun = require('../models/empPayrunModel')
 const EmployeeSal = require('../models/employeeSalaryModel')
 const EmpLeave = require('../models/empLeaves')
 const EmpmonthlySal = require('../models/empMonthlySal')
+const Leaves = require('../models/leavesModel')
 const mongoose = require('mongoose')
 
 //get all employee payrun
@@ -52,7 +53,8 @@ const monthlySalProcess = async(req,res) => {
 
     try {
         //fetch all payrun data
-        const allpayrun = await EmpPayrun.find({});
+        const allpayrun = await EmpPayrun.find({});   //this should be include restuarent id
+        const leaverun = await Leaves.find({})  ////this should be include restuarent id
 
         //assign value for tax, bonus, ETF
         let tax, bonus, ETF;
@@ -70,6 +72,11 @@ const monthlySalProcess = async(req,res) => {
                 console.log('No such category');
             }
         }
+        //assign leave penalty
+        let mleaves = leaverun[0].monthlyLeaves;
+        let pFee = leaverun[0].panaltyFee;
+        console.log('leave penalty:', mleaves)
+        console.log('leave penalty fee:', pFee)
 
         //fetch all employee salaries
         const employeeSalaries = await EmployeeSal.find({resId: id})
@@ -81,6 +88,7 @@ const monthlySalProcess = async(req,res) => {
             empId = sal.empId
             resId = sal.resId
             basicEmpSalary = sal.basicEmpSalary
+            leavecount = 0;
 
             // Count the number of entries for the current month
             const leaves = await EmpLeave.find({
@@ -90,17 +98,23 @@ const monthlySalProcess = async(req,res) => {
                     $lt: new Date(currentYear, currentMonth, 1) // Start of the next month
                 }
             });
+            
             for(const count of leaves){
                 let leave = count.leaveDays
                 leavecount = leavecount + leave
             }
-            res.status(201).json(leaves)
+            
+            
             console.log('count leaves of:',empId,':', leavecount)
             
             try {
                 const taxRate = tax/100*oneSalary
                 const ETFrate = ETF/100*oneSalary
-                const Fsalary = bonus+oneSalary-taxRate-ETFrate;
+                if(leavecount > mleaves){
+                    const penaltyFee = (leavecount-penalty)*pFee
+                    console.log('penalty for:',empId)
+                }
+                const Fsalary = bonus+oneSalary-taxRate-ETFrate-penaltyFee;
 
                 const empmonthlySal = await EmpmonthlySal.create({empId,resId,basicEmpSalary,bonus,taxRate,ETFrate,Fsalary})
  
@@ -108,6 +122,8 @@ const monthlySalProcess = async(req,res) => {
                 console.error('Error processing payruns:', error);
             }
         }
+        res.status(201).json(leaves)
+        
     }
     catch (error) {
         console.error('Error processing payruns:', error);
