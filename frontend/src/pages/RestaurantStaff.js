@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RealTimeOperation from "../Component/RealTimeOperation";
+import DineCustomerRegForm from "../pages/DineCustomerRegForm";
 import RealTimeIndicator from "../Component/RealTimeIndicator";
 
 const RestaurantStaff = () => {
@@ -9,7 +9,7 @@ const RestaurantStaff = () => {
     return ( 
         <div className="newbooking">
             <div className="bookings">
-                <RealTimeOperation setUpdateIndicator={setUpdateIndicator} />
+                <DineCustomerRegForm setUpdateIndicator={setUpdateIndicator} />
                 <RealTimeIndicator updateIndicator={updateIndicator} />
             </div>
         </div>

@@ -41,6 +41,7 @@ function DineCustomerRegForm() {
             console.error('Error adding booking:', error);
             setError('An error occurred while adding the booking.');
         }
+        
     }
 
     return (

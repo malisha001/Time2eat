@@ -14,7 +14,7 @@ const BookingSchema = new Schema({
     },
     name: {
         type:String,
-        required: false
+        required: true
     },
     time: {
         type: String,
@@ -34,7 +34,7 @@ const BookingSchema = new Schema({
     },
     telephoneno: {
         type: Number,
-        required: false
+        required: true
     },
     
 }, { timestamps: true })
