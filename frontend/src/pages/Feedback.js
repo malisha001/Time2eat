@@ -10,7 +10,7 @@ const Feedback = () => {
 
   useEffect(() => {
     const fetchFeedbacks = async () => {
-      const response = await fetch('/api/feedback');
+      const response = await fetch('/api/feedback/');
       const json = await response.json();
 
       if (response.ok) {

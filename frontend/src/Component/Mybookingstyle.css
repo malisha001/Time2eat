@@ -1,0 +1,39 @@
+.input-container {
+  display: flex;
+  align-items: center; /* Align items vertically */
+  margin-bottom: 10px; /* Add margin bottom for spacing */
+}
+
+.input-mybooking-label {
+  width: 100px; /* Set a fixed width for labels */
+  /* border: 1px solid #000; */
+  padding: 5px;
+  margin-left: 20px;
+}
+
+.input-mybooking {
+  /* flex: 1; Take remaining space */
+  margin-left: 20px; /* Add margin between label and input */
+  padding: 5px;
+  border: 1px solid #000;
+  width: 53%;
+  border-style: none;
+}
+.input{
+    
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+
+.mybookings-delete{
+  margin-left: 30px;
+  margin-bottom: 10px;
+}
+.mybookings-update{
+  margin-left: 587px;
+  margin-bottom: 10px;
+}
+.mybookings-tables-count{
+  margin-top: 50px;
+  margin-left: 32px;
+}

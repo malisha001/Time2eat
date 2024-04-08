@@ -1,6 +1,8 @@
 import { useState } from "react";
-import RealTimeOperation from "../component/RealTimeOperation";
+
 import RealTimeIndicator from "../component/RealTimeIndicator";
+import DineCustomerRegForm from "../pages/DineCustomerRegForm";
+
 
 const RestaurantStaff = () => {
     // State to trigger re-fetching of data in RealTimeIndicator
@@ -9,7 +11,7 @@ const RestaurantStaff = () => {
     return ( 
         <div className="newbooking">
             <div className="bookings">
-                <RealTimeOperation setUpdateIndicator={setUpdateIndicator} />
+                <DineCustomerRegForm setUpdateIndicator={setUpdateIndicator} />
                 <RealTimeIndicator updateIndicator={updateIndicator} />
             </div>
         </div>
