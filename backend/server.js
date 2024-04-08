@@ -14,6 +14,10 @@ const inventoryRoutes = require('./routers/inventory')
 const orderRoutes = require('./routers/orders')
 const cartRoutes = require('./routers/carts')
 const onlineOrdersRoutes = require('./routers/onlineOrders')
+const employeeLeaveRoutes = require('./routers/employeeLeaves')
+const employees = require('./routers/employees')
+const payrun = require('./routers/empPayrun')
+const leaves = require('./routers/leaves')
 
 // express app
 const app = express();
@@ -36,8 +40,13 @@ app.use('/api/customerhistoryroute', CustomerHistoryRoutes)
 app.use('/api/restaurants',restaurants)
 //feedback and customer service routers
 app.use('/api/feedback',feedback)
-//employee salary
+//employee details
+app.use('/api/employees',employees)
+//employee salary and leaves
+app.use('/api/emppayrun',payrun)
+app.use('/api/leaves',leaves)
 app.use('/api/employeesal',employeesal)
+app.use('/api/employeeleaves',employeeLeaveRoutes)
 //delivery orders routers
 app.use('/api/deliveryorder',deliveries)
 //adverticment routers
@@ -51,7 +60,7 @@ app.use('/api/onlineOrders', onlineOrdersRoutes)
 
 
 // connect to db
-mongoose.connect(process.env.MONG_URI)
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         // listen for requests
         app.listen(process.env.PORT, () => {

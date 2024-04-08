@@ -5,21 +5,18 @@ const {
     addFeedback,
     deleteFeedback,
     updateFeedback
-} = require('../controllers/feedbackController')
+} = require('../Controllers/feedbackController')
 
 const router = express.Router()
 
 //GET all Feedbacks
 router.get('/', getFeedbacks)
 
-
-//GET single Feedback
-router.get('/:id', getFeedback)
-
-
 //POST a new Feedbacks
 router.post('/', addFeedback )
-  
+
+//GET single Feedback
+router.get('/:id', getFeedback)  
 
 //DELETE a Feedbacks
 router.delete('/:id', deleteFeedback)
