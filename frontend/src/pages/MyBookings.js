@@ -4,7 +4,7 @@ import axios from "axios";
 
 // components
 // import BookingForm from '../Component/Bookingform';
-import BookingDetails from '../component/BookingDetails'
+import BookingDetails from '../Component/BookingDetails'
 const MyBookings = () => {
     const {bookings, dispatch} = useBookingsContext();
     useEffect(() => {
