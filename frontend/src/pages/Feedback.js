@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-import FeedbackDetails from "../component/FeedbackDetails";
+import FeedbackDetails from "../Component/FeedbackDetails";
 
 
 
@@ -10,7 +10,7 @@ const Feedback = () => {
 
   useEffect(() => {
     const fetchFeedbacks = async () => {
-      const response = await fetch('/api/feedback');
+      const response = await fetch('/api/feedback/');
       const json = await response.json();
 
       if (response.ok) {
