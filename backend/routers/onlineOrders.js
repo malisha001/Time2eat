@@ -7,8 +7,8 @@ const {
     deleteOnlineOrders
 } = require('../controllers/onlineOrderController')
 
-//get all orders for kitchen manager for each restaurent
-router.get('/:id', getOnlineOrders)
+//get all orders for kitchen manager
+router.get('/', getOnlineOrders)
 
 //get delivery orders for riders
 router.get('/rider', getdeliveryOrders)

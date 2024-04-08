@@ -1,24 +1,30 @@
 const express = require('express')
 const {
     createCart,
+    getCarts,
     getCart,
     deleteCart,
     updateCart
 } = require('../controllers/cartController')
 
+
 const router = express.Router()
+
+//get all carts
+router.get('/', getCarts)
 
 //get spesific customer's orders with different restaurent
 router.get('/:id', getCart)
 
-//insert new food item to cart
+//post a new cart
 router.post('/', createCart)
 
-//delete a food item in cart
+//delete an order
 router.delete('/:id', deleteCart)
 
-//update quentity each food item
+//update an order
 router.patch('/:id', updateCart)
+
 
 
 module.exports = router

@@ -14,14 +14,7 @@ const feedbackSchema = new Schema({
     contact_number :{
         type:Number,
         required : true
-    },
-
-    comment :{
-        type:String,
-        required : true
-
     }
-
 },{timestamps : true })
 
 module.exports = mongoose.model('Feedback',feedbackSchema)
