@@ -35,10 +35,6 @@ const CustomerHistorySchema = new Schema({
         type: Number,
         required: true
     },
-    availability: {
-        type: Boolean,
-        required: true
-    }
 }, { timestamps: true })
 
 module.exports = mongoose.model('Allcustomerhistory', CustomerHistorySchema)
