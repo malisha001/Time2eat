@@ -1,6 +1,6 @@
 import { useState } from "react";
-import RealTimeOperation from "../component/RealTimeOperation";
-import RealTimeIndicator from "../component/RealTimeIndicator";
+import RealTimeOperation from "../Component/RealTimeOperation";
+import RealTimeIndicator from "../Component/RealTimeIndicator";
 
 const RestaurantStaff = () => {
     // State to trigger re-fetching of data in RealTimeIndicator

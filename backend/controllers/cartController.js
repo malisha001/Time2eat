@@ -1,12 +1,19 @@
 const Cart = require('../models/cartModel')
 const mongoose = require('mongoose')
 
-//get spesific customer's orders with different restaurent (order id change for each restaurent)
+//get all carts
+const getCarts = async (req, res) => {
+    const carts = await Cart.find({}).sort({createdAt: -1})
+
+    res.status(200).json(carts)
+}
+
+//get spesific customer's orders with different restaurent
 const getCart = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const carts = await Cart.find({ customerid: id });
+        const carts = await Cart.find({ orderid: id });
 
         if (!carts) {
             return res.status(404).json({ error: 'No order found for the specified restaurant' });
@@ -70,8 +77,14 @@ const updateCart = async (req, res) => {
     }
 
     res.status(200).json(cart)
+
+
 }
+
+
+
 module.exports = {
+    getCarts,
     getCart,
     createCart,
     deleteCart,

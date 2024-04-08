@@ -1,8 +1,8 @@
 // NewBooking.js
 import React, { useState } from 'react';
-import BookingForm from '../component/Bookingform';
-import ParentComponent from '../component/ParentComponent';
-import CheckAvailability from '../component/CheckAvailability';
+import BookingForm from '..//Component/Bookingform';
+import ParentComponent from '../Component/ParentComponent';
+import CheckAvailability from '../Component/CheckAvailability';
 
 const NewBooking = () => {
     const [selectedDateTime, setSelectedDateTime] = useState({ date: '', time: '' });
