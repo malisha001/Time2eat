@@ -1,13 +1,15 @@
 const express = require('express')
 const router = express.Router()
+const Employeesal = require('../models/employeeSalaryModel')
+const { model } = require('mongoose')
 const {
     getEmployeeSal,
     getEmployeesSal,
     createEmployeesSal,
-    deleteEmployeeSal,
-} = require('../Controllers/employeeSalController')
+    deleteEmployeeSal
+} = require('../controllers/employeeSalController')
 
-//get salary employee
+//add salary employee
 router.get('/',getEmployeesSal)
 
 //get single employee details
