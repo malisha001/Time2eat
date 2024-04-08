@@ -1,16 +1,20 @@
 // pages & components
 import Home from './pages/Home';
-
-import Navbar from "./Component/Navbar";
+import Navbar from "./component/Navbar";
 import MyBookings from "./pages/MyBookings";
 import NewBooking from "./pages/NewBooking";
-import UpdateBookingDetails from "./Component/UpdateBookingDetails";
 import RestaurantStaff from "./pages/RestaurantStaff";
 import Feedback from './pages/Feedback';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Feedback from './pages/Feedback';
-import AddfeedbackForm from './Component/AddfeedbackForm';
-import UpdateFeedback from './Component/Updatefeedback';
+import AddfeedbackForm from './component/AddfeedbackForm';
+import UpdateFeedback from './component/Updatefeedback';
+import UpdatePreBookings from './pages/UpdatePreBookings'
+import UpdateDineIn from './pages/UpdateDineInBookings'
+import DineCustomerRegForm from './pages/DineCustomerRegForm';
+import DineInBookings from './pages/DineInBookings';
+import Newbookingsstyle from './pages/Newbookingsstyle';
+import RealTimeIndicator from './component/RealTimeIndicator';
+import AllCustomerDineInHistory from './pages/AllCustomerDineInHistory';
 
 function App() {
   return (

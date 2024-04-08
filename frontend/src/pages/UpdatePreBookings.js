@@ -4,7 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, Grid,Box,Paper } from '@mui/material';
-import PreStyles from '../Component/NewStyle.css'
+import PreStyles from '../component/NewStyle.css'
 import exampleImage from '../Assests/example.jpg'; // Adjust the path as per your directory structure
 import grouptableimage from '../Assests/grouptable.jpg'; // Adjust the path as per your directory structure
 import coupletableimage from '../Assests/coupletable.jpg'; // Adjust the path as per your directory structure

@@ -15,14 +15,6 @@ const orderRoutes = require('./routers/orders')
 const cartRoutes = require('./routers/carts')
 const onlineOrdersRoutes = require('./routers/onlineOrders')
 
-// Import routers
-const bookingRoutes = require('./routers/booking');
-const RealTimebookingRoutes = require('./routers/realtimebooking');
-const CustomerHistoryRoutes = require('./routers/customerhistoryroute');
-const employeesal = require('./routers/employeeSalary');
-const restaurants = require('./routers/restaurants');
-const feedback = require('./routers/feedbacks');
-
 // Create an instance of Express app
 const app = express();
 

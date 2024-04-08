@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import RealTimeOperation from "../component/RealTimeOperation";
 import RealTimeIndicator from "../component/RealTimeIndicator";
+import DineCustomerRegForm from "../pages/DineCustomerRegForm";
 
 
 const RestaurantStaff = () => {
