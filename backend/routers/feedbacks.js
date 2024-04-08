@@ -18,7 +18,7 @@ router.get('/:id', getFeedback)
 
 
 //POST a new Feedbacks
-router.post('/add', feedbackController.addFeedback )
+router.post('/add',addFeedback )
   
 
 //DELETE a Feedbacks
