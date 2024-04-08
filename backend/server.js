@@ -15,11 +15,16 @@ const orderRoutes = require('./routers/orders')
 const cartRoutes = require('./routers/carts')
 const onlineOrdersRoutes = require('./routers/onlineOrders')
 
+// Import routers
+const bookingRoutes = require('./routers/booking');
+const RealTimebookingRoutes = require('./routers/realtimebooking');
+const CustomerHistoryRoutes = require('./routers/customerhistoryroute');
+const employeesal = require('./routers/employeeSalary');
+const restaurants = require('./routers/restaurants');
+const feedback = require('./routers/feedbacks');
 
-
-// express app
+// Create an instance of Express app
 const app = express();
-
 
 // middleware to parse incoming JSON data
 app.use(express.json());
@@ -54,10 +59,11 @@ app.use('/api/onlineOrders', onlineOrdersRoutes)
 // connect to db
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
-        // listen for requests
-        app.listen(process.env.PORT, () => {
-            console.log("Listening on port", process.env.PORT);
-            console.log("DB connected successfully");
+        // Start the server after successful database connection
+        const PORT = process.env.PORT || 4000;
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+            console.log("Database connected successfully");
         });
     })
     .catch((error) => {
