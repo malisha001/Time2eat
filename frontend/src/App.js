@@ -42,7 +42,7 @@ function App() {
             <Route path="/realtimeindecator" element={<RealTimeIndicator />} />
             <Route path="/All-dine-in-booking-History" element={<AllCustomerDineInHistory />} />
 
-            <Route path="/inventory" element={<Home />}/>
+            <Route path="/home" element={<Home />}/>
 
             <Route path="/feedback" element={<Feedback />}/>
             <Route path="/add-feedback" element={<AddfeedbackForm />}/>
