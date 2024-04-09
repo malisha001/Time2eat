@@ -1,15 +1,8 @@
-
-
 // pages & components
 import Inventory from '../src/pages/Inventory'
-
-import Navbar from "./Component/Navbar";
-import MyBookings from "./pages/MyBookings";
-import NewBooking from "./pages/NewBooking";
-import UpdateBookingDetails from "./Component/UpdateBookingDetails";
-import RestaurantStaff from "./pages/RestaurantStaff";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
+import UpdateUser from './pages/UpdateUser';
+import ItemForm from './pages/addItemForm';
 
 
 function App() {
@@ -19,17 +12,14 @@ function App() {
 
 
       <BrowserRouter>
-        <Navbar />
+   
 
         <div className="pages">
           <Routes>
-            <Route path="/" element={<NewBooking />} />
-            <Route path="/mybookings" element={<MyBookings />} />
-            <Route path="/update-booking/:id" element={<UpdateBookingDetails />} />
-            <Route path="/realtime-staff" element={<RestaurantStaff />} />
-             <Route path="/inventory" element={<Inventory />}
+             <Route path="/inventory" element={<Inventory />} />
+             <Route path="/inventory/addItems" element={<ItemForm />} />
+             <Route path="/inventory/update/:id" element={<UpdateUser />} />
 
-              />
           </Routes>
         </div>
       </BrowserRouter>

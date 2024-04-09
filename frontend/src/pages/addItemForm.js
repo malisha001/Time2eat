@@ -1,6 +1,7 @@
-import React,{ useState } from "react"
+import React,{ useState } from "react";
+import {useNavigate} from "react-router-dom";
 
-const itemForm = () => {
+const ItemForm = () => {
 
     const [itemId, setitemId] = useState('')
     const [itemName, setItemName] = useState('')
@@ -9,6 +10,7 @@ const itemForm = () => {
     const [itemCategory, setItemCategory] = useState('')
     const [error, setError] = useState(null)
 
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -35,7 +37,11 @@ const itemForm = () => {
             setItemCategory('')
             setError(null)
             console.log('new workout added', json)
+            navigate('/inventory/')
         }
+
+        window.location.reload()
+        
 
     }
 
@@ -77,4 +83,4 @@ const itemForm = () => {
 }
 
 
-export default itemForm;
+export default ItemForm;

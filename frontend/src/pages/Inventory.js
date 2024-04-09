@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 
 // import components
-import InventoryItemsDetails from "../components/inventoryItemsDetails"
-import ItemForm from "../components/addItemForm"
+import InventoryItemsDetails from "./inventoryItemsDetails"
+
 
 const Home = () => {
 
@@ -32,7 +33,7 @@ const Home = () => {
                     <InventoryItemsDetails key={items._id} item={item} />
                 ))}
             </div>
-            <ItemForm />
+            <Link to ={"/inventory/addItems/"}>Add Items</Link>
         </div>
     )
 }

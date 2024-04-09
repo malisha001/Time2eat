@@ -41,7 +41,7 @@ app.use('/api/deliveryorder',deliveries)
 
 //routes
 app.use('/api/advertisements',advertisementRoutes)
-app.use('/api/inventory/', inventoryRoutes)
+
 
 
 // middleware to parse incoming JSON data
@@ -52,6 +52,8 @@ app.use((req, res, next) => {
     console.log(req.path, res.method);
     next();
 });
+
+app.use('/api/inventory/', inventoryRoutes)
 
 // connect to db
 mongoose.connect(process.env.MONG_URI)

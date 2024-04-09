@@ -23,10 +23,6 @@ const inventorySchema = new Schema({
     itemCategory: {
         type: String,
         required: true
-    },
-    itemImage: {
-        data: Buffer, 
-        contentType: String 
     }
 }, { Timestamp: true });
 

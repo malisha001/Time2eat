@@ -36,11 +36,11 @@ const getInventoryItem = async (req, res) => {
 
 // create a new inventory item
 const createInvenotyItem =  async (req, res) => {
-    const { itemId, itemName, itemQuantity, itemPrice, itemCategory, itemImage } = req.body;
+    const { itemId, itemName, itemQuantity, itemPrice, itemCategory } = req.body;
 
     //add doc to db
     try {
-        const inventory = await Inventory.create({ itemId, itemName, itemQuantity, itemPrice, itemCategory, itemImage });
+        const inventory = await Inventory.create({ itemId, itemName, itemQuantity, itemPrice, itemCategory });
         res.status(200).json(inventory);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -91,3 +91,4 @@ module.exports = {
     deleteInventoryItem,
     updateInventoryItem
 }
+
