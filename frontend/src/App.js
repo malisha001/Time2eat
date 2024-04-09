@@ -15,6 +15,8 @@ import DineInBookings from './pages/DineInBookings';
 import Newbookingsstyle from './pages/Newbookingsstyle';
 import RealTimeIndicator from './component/RealTimeIndicator';
 import AllCustomerDineInHistory from './pages/AllCustomerDineInHistory';
+import EmployeeSal from './pages/EmployeeSal';
+import EmpPayrun from './pages/EmpPayrun';
 
 function App() {
   return (
@@ -40,13 +42,14 @@ function App() {
             <Route path="/realtimeindecator" element={<RealTimeIndicator />} />
             <Route path="/All-dine-in-booking-History" element={<AllCustomerDineInHistory />} />
 
-             <Route path="/inventory" element={<Home />}/>
+            <Route path="/inventory" element={<Home />}/>
 
-             <Route path="/feedback" element={<Feedback />}/>
-             <Route path="/add-feedback" element={<AddfeedbackForm />}/>
-             <Route path="/update-feedback/:id/" element={<UpdateFeedback />}/>
+            <Route path="/feedback" element={<Feedback />}/>
+            <Route path="/add-feedback" element={<AddfeedbackForm />}/>
+            <Route path="/update-feedback/:id/" element={<UpdateFeedback />}/>
              
-             
+            <Route path='/employeesal' element={<EmployeeSal />}/>
+            <Route path='/payrun' element={<EmpPayrun />}/>
               
 
 
