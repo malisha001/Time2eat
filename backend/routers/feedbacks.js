@@ -5,7 +5,7 @@ const {
     addFeedback,
     deleteFeedback,
     updateFeedback
-} = require('../controllers/feedbackController')
+} = require('../Controllers/feedbackController')
 
 const router = express.Router()
 
@@ -18,7 +18,7 @@ router.get('/:id', getFeedback)
 
 
 //POST a new Feedbacks
-router.post('/', addFeedback )
+router.post('/add', feedbackController.addFeedback )
   
 
 //DELETE a Feedbacks
