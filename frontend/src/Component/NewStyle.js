@@ -220,3 +220,17 @@
 
 // export default NewStyle
 
+
+
+import QRCode from 'react-qr-code';
+
+function NewStyle(){
+    return (
+        <div className='App'>
+            <h1>QR</h1>
+            <QRCode value='chala.com'/>
+        </div>
+    )
+}
+
+export default NewStyle

@@ -86,6 +86,7 @@ const UpdateBookingPage = () => {
     const handleSubmitCheckAvailability = (event) => {
         event.preventDefault();
         setSelectedDateTime({ date, time });
+        
     };
 
     const handleSubmitUpdateBooking = async (e) => {
@@ -300,7 +301,7 @@ const UpdateBookingPage = () => {
               <Box className='availability-status-top'>
               Booked</Box>
               <Box className='availability-status-bottom'>
-                 item 2</Box>
+                 {totalGroupTablesBooked}</Box>
               </Grid>
               <Grid item md={4}>            
               <Box className='availability-status-top'>Available </Box>
@@ -319,7 +320,7 @@ const UpdateBookingPage = () => {
               </Card>
               </Grid>
               <Grid item md={4}>            
-              <Box className='availability-status'>item 2</Box>
+              <Box className='availability-status'>{totalCoupleTablesBooked}</Box>
               </Grid>
               <Grid item md={4}>            
               <Box className='availability-status'>{availableTables.couple}</Box>
