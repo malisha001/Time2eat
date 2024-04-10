@@ -13,7 +13,7 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 import exampleImage from '../Assests/example.jpg';
 import grouptableimage from '../Assests/grouptable.jpg'; // Adjust the path as per your directory structure
 import coupletableimage from '../Assests/coupletable.jpg'; // Adjust the path as per your directory structure
-import '../Component/Bookingformstyle.css';
+import '../component/Bookingformstyle.css';
 
 function Bookingformstyle() {
     const theme = useTheme();

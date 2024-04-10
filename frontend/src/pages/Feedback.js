@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-import FeedbackDetails from "../Component/FeedbackDetails";
+import FeedbackDetails from "../component/FeedbackDetails";
 
 
 

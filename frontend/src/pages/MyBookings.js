@@ -12,8 +12,13 @@ import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import exampleImage from '../Assests/example.jpg';
-import '../Component/Mybookingstyle.css';
+import '../component/Mybookingstyle.css';
 import axios from "axios";
+
+
+// components
+// import BookingForm from '../Component/Bookingform';
+// import BookingDetails from '../component/BookingDetails'
 
 const MyBookings = () => {
     const [bookings, setBookings] = useState(null);

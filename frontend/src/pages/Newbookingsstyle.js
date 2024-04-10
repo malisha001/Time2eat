@@ -1,6 +1,6 @@
-import NewStyle from "../Component/NewStyle";
-import MyBookingStyle from "../Component/Mybookingstyle"
-import Bookingformstyle from "../Component/Bookingformstyle";
+// import NewStyle from "../Component/NewStyle";
+import MyBookingStyle from "../component/Mybookingstyle"
+import Bookingformstyle from "../component/Bookingformstyle";
 
 
 const Newbookingsstyle = () => {

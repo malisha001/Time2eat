@@ -1,22 +1,22 @@
-
 // pages & components
 import Home from './pages/Home';
-import Navbar from "./Component/Navbar";
+import Navbar from "./component/Navbar";
 import MyBookings from "./pages/MyBookings";
 import NewBooking from "./pages/NewBooking";
 import RestaurantStaff from "./pages/RestaurantStaff";
-import DineCustomerRegForm from "./pages/DineCustomerRegForm"
-import DineInBookings from './pages/DineInBookings'
+import Feedback from './pages/Feedback';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AddfeedbackForm from './component/AddfeedbackForm';
+import UpdateFeedback from './component/Updatefeedback';
 import UpdatePreBookings from './pages/UpdatePreBookings'
 import UpdateDineIn from './pages/UpdateDineInBookings'
-import Newbookingsstyle from './pages/Newbookingsstyle'
-import RealTimeIndicator from "./Component/RealTimeIndicator";
-import AllCustomerDineInHistory from "./pages/AllCustomerDineInHistory";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Feedback from './pages/Feedback';
-import AddfeedbackForm from './Component/AddfeedbackForm';
-import UpdateFeedback from './Component/Updatefeedback';
-
+import DineCustomerRegForm from './pages/DineCustomerRegForm';
+import DineInBookings from './pages/DineInBookings';
+import Newbookingsstyle from './pages/Newbookingsstyle';
+import RealTimeIndicator from './component/RealTimeIndicator';
+import AllCustomerDineInHistory from './pages/AllCustomerDineInHistory';
+import EmployeeSal from './pages/EmployeeSal';
+import EmpPayrun from './pages/EmpPayrun';
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
 
 
       <BrowserRouter>
-        {/* <Navbar /> */}
+        <Navbar />
         <div className="pages">
           <Routes>
             <Route path="/" element={<NewBooking />} />
@@ -42,13 +42,14 @@ function App() {
             <Route path="/realtimeindecator" element={<RealTimeIndicator />} />
             <Route path="/All-dine-in-booking-History" element={<AllCustomerDineInHistory />} />
 
-             <Route path="/inventory" element={<Home />}/>
+            <Route path="/home" element={<Home />}/>
 
-             <Route path="/feedback" element={<Feedback />}/>
-             <Route path="/add-feedback" element={<AddfeedbackForm />}/>
-             <Route path="/update-feedback/:id/" element={<UpdateFeedback />}/>
+            <Route path="/feedback" element={<Feedback />}/>
+            <Route path="/add-feedback" element={<AddfeedbackForm />}/>
+            <Route path="/update-feedback/:id/" element={<UpdateFeedback />}/>
              
-             
+            <Route path='/employeesal' element={<EmployeeSal />}/>
+            <Route path='/payrun' element={<EmpPayrun />}/>
               
 
 
