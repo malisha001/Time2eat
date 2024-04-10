@@ -46,6 +46,9 @@ const restaurantSchema = new Schema({
     Group_table:{
         type:Number,
         required : true
+    },
+    status:{
+        type:String,
     }
 },{timestamps : true })
 

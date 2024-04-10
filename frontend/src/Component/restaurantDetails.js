@@ -29,6 +29,9 @@ const RestaurantDetails = ({ res, onDelete }) => {
             <p><strong>Address :</strong>{res.Address}</p>
             <p><strong>Couple Table :</strong>{res.Couple_table}</p>
             <p><strong>Group Table :</strong>{res.Group_table}</p>
+            <p><strong>Status :</strong>{res.status}</p>
+
+
             
             <button className="delete-button" onClick={handleClick}>Delete</button>
             <Link to={`/update-restaurant/${res._id}`}>

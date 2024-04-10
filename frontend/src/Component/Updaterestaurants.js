@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 const Updaterestaurants = () => {
-    const { id } = useParams(); // Get the food item id from URL params
+    const { id } = useParams(); // Get the restaurant id from URL params
     const navigate = useNavigate();
 
     const [values, setValues] = useState({
@@ -17,8 +17,7 @@ const Updaterestaurants = () => {
         Address: '',
         Couple_table: '',
         Group_table: '',
-
-
+        status: ''
     });
 
     useEffect(() => {
@@ -30,10 +29,10 @@ const Updaterestaurants = () => {
                     const data = await response.json();
                     setValues(data);
                 } else {
-                    console.error("Failed to fetch food item");
+                    console.error("Failed to fetch restaurant");
                 }
             } catch (error) {
-                console.error("Error fetching food item:", error);
+                console.error("Error fetching restaurant:", error);
             }
         };
         fetchrestaurant();
@@ -42,7 +41,6 @@ const Updaterestaurants = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            
             const response = await fetch(`/api/restaurants/${id}`, {
                 method: 'PATCH',
                 headers: {
@@ -53,17 +51,23 @@ const Updaterestaurants = () => {
             if (response.ok) {
                 navigate('/restaurants'); 
             } else {
-                console.error("Failed to update restaurants");
+                console.error("Failed to update restaurant");
             }
         } catch (error) {
-            console.error("Error updating restaurants:", error);
+            console.error("Error updating restaurant:", error);
         }
-    }
+    };
+
+    const handleStatusChange = (e) => {
+        const statusValue = e.target.value;
+        setValues({ ...values, status: statusValue });
+    };
 
     return ( 
         <div>
             <form onSubmit={handleSubmit}>
                 <h3>Update Restaurant Details</h3>
+                
                 <div>
                     <label>Restaurant Id :</label>
                     <input 
@@ -136,7 +140,7 @@ const Updaterestaurants = () => {
                         onChange={e => setValues({...values, Address: e.target.value})}
                     />
                 </div>
-                 <div>
+                <div>
                     <label>Couple Table :</label>
                     <input 
                         type="text"
@@ -152,6 +156,30 @@ const Updaterestaurants = () => {
                         onChange={e => setValues({...values, Group_table: e.target.value})}
                     />
                 </div>
+                <div>
+                    <label>Status:</label>
+                    <div>
+                        <label>
+                            <input 
+                                type="radio" 
+                                value="true" 
+                                checked={values.status === "true"} 
+                                onChange={handleStatusChange} 
+                            />
+                            Accepted
+                        </label>
+                        <label>
+                            <input 
+                                type="radio" 
+                                value="false" 
+                                checked={values.status === "false"} 
+                                onChange={handleStatusChange} 
+                            />
+                            Pending
+                        </label>
+                    </div>
+                </div>
+                
                 <button type="submit">Update</button>
             </form>
         </div>

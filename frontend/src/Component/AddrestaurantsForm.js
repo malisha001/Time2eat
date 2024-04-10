@@ -15,12 +15,13 @@ const AddrestaurantsForm = () =>{
     const [Address, setAddress] =useState('');
     const [Couple_table, setCouple_table] =useState('')
     const [Group_table, setGroup_table] =useState('')
+    const [status, setStatus] =useState(false)
     const [error,setError] = useState(null)
 
    const handleSubmit = async (e) => {
      e.preventDefault()
       
-     const restaurant = {Restaurant_Id,Restaurant_licensenumber,Restaurant_name,Restaurant_Managersname,Email_address,contact,Password,Confirm_paasword,Address,Couple_table,Group_table}
+     const restaurant = {Restaurant_Id,Restaurant_licensenumber,Restaurant_name,Restaurant_Managersname,Email_address,contact,Password,Confirm_paasword,Address,Couple_table,Group_table,status}
     console.log(Restaurant_Id)
      const response = await fetch('/api/restaurants', {
         method : 'POST',
@@ -47,6 +48,7 @@ const AddrestaurantsForm = () =>{
         setAddress('')
         setCouple_table('')
         setGroup_table('')
+        setStatus('')
 
         setError(null)
         console.log('New rsetaurant added',json)

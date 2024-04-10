@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import RestaurantDetails from "../Component/restaurantDetails";
 
 
-const Restaurant = () => {
+const Restaurant = () => { 
   const [restaurants, setRestaurants] = useState(null);
 
   useEffect(() => {
