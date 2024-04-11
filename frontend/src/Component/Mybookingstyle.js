@@ -1,76 +1,123 @@
-// import React from 'react';
-// import { useTheme } from '@mui/material/styles';
+// import React from 'react'
+// // import {Table, TableBody, TableHead, TableRow, TableCell,TableContainer,Paper,Button} from '@mui/material';
+// import {Grid, Paper} from '@mui/material';
+// import TextField from '@mui/material/TextField';
 // import Box from '@mui/material/Box';
 // import Card from '@mui/material/Card';
+// import CardActions from '@mui/material/CardActions';
 // import CardContent from '@mui/material/CardContent';
-// import CardMedia from '@mui/material/CardMedia';
-// import {Grid, Paper} from '@mui/material';
-// import IconButton from '@mui/material/IconButton';
+// import Button from '@mui/material/Button';
 // import Typography from '@mui/material/Typography';
-// import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-// import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-// import SkipNextIcon from '@mui/icons-material/SkipNext';
-// import exampleImage from '../Assests/example.jpg';
-// import '../Component/Mybookingstyle.css';
+// import groupImage from '../Assests/grouptable.jpg';
+
 
 // function Mybookingstyle() {
-//     const theme = useTheme();
-//     return (
-//         <div>
-//             <Paper sx={{width: '1000px',pt:'10px', mt: '100px', ml: '40px', mr: '40px', bgcolor:'#ffffff'}}>
-//                 <Grid container spacing={2}>
-//                     <Grid sx={{pr: '16px'}} item md={5}>
-//                         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-//                             <CardContent sx={{ width:'400px', flex: '1 0 auto' }}>
-//                                 <div className="input-container">
-//                                     <label className='input-mybooking-label'>Name</label>
-//                                     <label className='input-mybooking'>{booking.name}</label>
-                                    
-//                                 </div>
-//                                 <div className="input-container">
-//                                     <label className='input-mybooking-label'>Telephone No</label>
-//                                     <label className='input-mybooking'>{booking.telephoneno}</label>
-//                                 </div>
-//                                 <div className="input-container">
-//                                     <label className='input-mybooking-label'>Date</label>
-//                                     <label className='input-mybooking'>{booking.date}</label>
-//                                 </div>
-//                                 <div className="input-container">
-//                                     <label className='input-mybooking-label'>Time</label>
-//                                     <label className='input-mybooking'>{booking.time}</label>
-//                                 </div>
-//                             </CardContent>
-//                         </Box>
-//                     </Grid>
+//   return (
+//     <div>
+//       <Paper sx={{bgcolor: 'white'}}>
+//       <Box sx={{ marginLeft: '60px', marginRight: '60px', marginTop: '40px', marginBottom:'40px', padding: '20px' }}>
+//               <h2>Payment Details</h2>
+//               <Grid container spacing={4}>
 
-//                     <Grid item md={7}>
-//                         <Grid container spacing={2}>
-//                             <Grid item md={3}>
-//                                 <h7>Group Table</h7>
-//                                 <Box className='mybookings-tables-count'>{booking.groupquantity}</Box>
-//                             </Grid>
-//                             <Grid item md={3}>
-//                                 <h7>Couple Table</h7>
-//                                 <Box className='mybookings-tables-count'>{booking.couplequantity}</Box>
-//                             </Grid>
-//                             <Grid item md={6}>
-//                                 <CardMedia
-//                                     component="img"
-//                                     sx={{ ml: '50px', pt:'10px', pb:'10px', height: 200, width: 200, }}
-//                                     image={exampleImage}
-//                                     alt="Live from space album cover"
-//                                 />
-//                             </Grid>
-//                         </Grid>
-//                     </Grid>
-
+//                 <Grid item xs={6}>
+//                   <TextField
+//                     required
+//                     id="outlined-required"
+//                     label="CusID"
+//                     type="text"
+//                     onChange={(e) => setcusID(e.target.value)}
+//                     value={cusid}
+//                     sx={{ width: '100%' }}
+//                   />
+//                 </Grid>
+//                 <Grid item xs={6}>
+//                   <TextField
+//                     required
+//                     id="outlined-required"
+//                     label="ResID"
+//                     type="text"
+//                     onChange={(e) => setresID(e.target.value)}
+//                     value={resid}
+//                     sx={{ width: '100%' }}
+//                   />
+//                 </Grid>
+                
+//                 <Grid item xs={6}>
+//                   <TextField
+//                     required
+//                     id="outlined-required"
+//                     label="Name"
+//                     type="text"
+//                     onChange={(e) => setName(e.target.value)}
+//                     value={name}
+//                     sx={{ width: '100%' }}
+//                   />
+//                 </Grid>
+//                 <Grid item xs={6}>
+//                   <TextField
+//                     required
+//                     id="outlined-required"
+//                     label="Time"
+//                     type="time"
+//                     onChange={(e) => setTime(e.target.value)}
+//                     value={time}
+//                     sx={{ width: '100%' }}
+//                   />
+//                 </Grid>
+                
+//                 <Grid item xs={6}>
+//                   <TextField
+//                     required
+//                     id="outlined-required"
+//                     label="Date"
+//                     type="date"
+//                     onChange={(e) => setDate(e.target.value)}
+//                     value={date}
+//                     sx={{ width: '100%' }}
+//                   />
+//                 </Grid>
+//                 <Grid item xs={6}>
+//                   <TextField
+//                     required
+//                     id="outlined-required"
+//                     label="CoupleQuantity"
+//                     type="number"
+//                     onChange={(e) => setCouplequantity(e.target.value)}
+//                     value={couplequantity}
+//                     sx={{ width: '100%' }}
+//                   />
 //                 </Grid>
 
-//                 <button className='mybookings-delete'>Delete</button>
-//                 <button className='mybookings-update'>Update</button>
-//             </Paper>
-//         </div>
-//     )
+//                 <Grid item xs={6}>
+//                   <TextField
+//                     required
+//                     id="outlined-required"
+//                     label="Groupquantity"
+//                     type="number"
+//                     onChange={(e) => setGroupquantity(e.target.value)}
+//                     value={groupquantity}
+//                     sx={{ width: '100%' }}
+//                   />
+//                 </Grid>
+//                 <Grid item xs={6}>
+//                   <TextField
+//                     required
+//                     id="outlined-required"
+//                     label="Telephone No"
+//                     type="text"
+//                     onChange={(e) => setTelephone(e.target.value)}
+//                     value={telephoneno}
+//                     sx={{ width: '100%' }}
+//                   />
+//                 </Grid>
+//               </Grid>
+//             </Box>
+//       </Paper>
+        
+//     </div>
+
+//   )
 // }
 
-// export default Mybookingstyle;
+// export default Mybookingstyle
+
