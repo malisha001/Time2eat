@@ -1,11 +1,8 @@
-
-
-
-
+require('dotenv').config()
 
 const express = require('express');
 const mongoose = require('mongoose');
-require('dotenv').config()
+
 //import routers
 const employeesal = require('./routers/employeeSalary')
 const restaurants = require('./routers/restaurants')
@@ -15,6 +12,7 @@ const bookingRoutes = require('./routers/booking')
 const RealTimebookingRoutes = require('./routers/realtimebooking')
 const CustomerHistoryRoutes = require('./routers/customerhistoryroute')
 const advertisementRoutes = require('./routers/advertisement')
+const userRoutes = require('./routes/user')
 
 // express app
 const app = express();
@@ -33,8 +31,8 @@ app.use('/api/employeesal',employeesal)
 app.use('/api/deliveryorder',deliveries)
 //advertisement routers
 app.use('/api/advertisement',advertisementRoutes)
-
-
+// user routers
+app.use('/api/user', userRoutes)
 
 // middleware to parse incoming JSON data
 app.use(express.json());
