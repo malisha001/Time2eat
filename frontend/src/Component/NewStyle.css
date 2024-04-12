@@ -1,0 +1,115 @@
+.prebooking-bar ul {
+    list-style-type: none;
+    width: 800px;
+    height: 60px;
+    margin-left: 20px;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    border-radius: 30px;
+  }
+  
+  .prebooking-bar li {
+    float: left;
+  }
+  
+  .prebooking-bar li a:hover {
+    background-color: #111;
+  }
+
+  /* .PreDate{
+    padding-left: 100px;
+    text-align: center;
+    justify-content: center;
+  } */
+
+  .prebooking-bar li.PreDate{
+    padding: 18px;
+    padding-left: 50px;
+  }
+
+  .PreDate {
+    padding: 10px;
+    text-align: center; /* Center the text */
+  }
+  
+  .PreDateInput {
+    padding: 10px;
+    text-align: center; /* Center the input field */
+  }
+  
+  .prebooking-bar input {
+    padding: 10px;
+    width: 100%; /* Make the input field width 100% */
+    box-sizing: border-box; /* Ensure padding is included in width */
+    border-radius: 20px;
+  }
+
+  .prebooking-bar Button{
+    padding: 14px;
+    /* Make the input field width 100% */
+    box-sizing: border-box; /* Ensure padding is included in width */
+    border-radius: 20px;
+    margin-left: 186px;
+    margin-top: 7px;
+  }
+
+  /* .image-prebooking{
+    margin-top: 100px;
+  } */
+
+  .imgprebooking{
+    margin: 20px;
+    margin-top: 40px;
+    margin-right: 0px;
+  }
+  
+  .vertical-line {
+    border-left: 10px solid black; /* Adjust color and thickness as needed */
+    height: 440px; /* Set the height of the line */
+    margin-left: 950px;
+    margin-top: -463px;
+  }
+  .booking{
+    display: grid;
+    grid-template-columns: auto auto;
+    background-color: #2196F3;
+  }
+  .gridi{
+    background-color: rgba(234, 126, 126, 0.8);
+  }
+  .current-availability-side{
+    color: #2196F3;
+    margin-top: 100px;
+    margin-left: 166px;
+  }
+  .availability-status{
+    margin-top: 100px;
+    margin-left: 8px;
+  }
+  .availability-status-table-image{
+    margin-top: 60px;
+  }
+
+  /* .prebooking-bar{
+    margin-left: 100px;
+  } */
+
+  .available-booked-text{
+    margin-top: 100px;
+  }
+  .availability-status-bottom{
+    margin-top: 50px;
+    margin-left: 8px;
+  }
+  .availability-status-top{
+    margin-top: 30px;
+  }
+  .my-reservation-button{
+    margin-top: 40px;
+    margin-bottom: 20px;
+    margin-left: 166px;
+  }
+  .pre-booking-heading{
+    margin-left: 28px;
+  }

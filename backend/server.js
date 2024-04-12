@@ -11,9 +11,13 @@ const RealTimebookingRoutes = require('./routers/realtimebooking')
 const CustomerHistoryRoutes = require('./routers/customerhistoryroute')
 const advertisementRoutes = require('./routers/advertisement')
 const inventoryRoutes = require('./routers/inventory') 
-const orderRoutes = require('./routes/orders')
-const cartRoutes = require('./routes/carts')
-
+const orderRoutes = require('./routers/orders')
+const cartRoutes = require('./routers/carts')
+const onlineOrdersRoutes = require('./routers/onlineOrders')
+const employeeLeaveRoutes = require('./routers/employeeLeaves')
+const employees = require('./routers/employees')
+const payrun = require('./routers/empPayrun')
+const leaves = require('./routers/leaves')
 
 
 
@@ -38,20 +42,26 @@ app.use('/api/customerhistoryroute', CustomerHistoryRoutes)
 app.use('/api/restaurants',restaurants)
 //feedback and customer service routers
 app.use('/api/feedback',feedback)
-//employee salary
+//employee details
+app.use('/api/employees',employees)
+//employee salary and leaves
+app.use('/api/emppayrun',payrun)
+app.use('/api/leaves',leaves)
 app.use('/api/employeesal',employeesal)
+app.use('/api/employeeleaves',employeeLeaveRoutes)
 //delivery orders routers
 app.use('/api/deliveryorder',deliveries)
 //adverticment routers
 app.use('/api/advertisements',advertisementRoutes)
 //inventory routers
 app.use('/api/inventory/', inventoryRoutes)
-
+//order system routers
 app.use('/api/orders',orderRoutes)
 app.use('/api/carts', cartRoutes)
+app.use('/api/onlineOrders', onlineOrdersRoutes)
 
 // connect to db
-mongoose.connect(process.env.MONG_URI)
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         // listen for requests
         app.listen(process.env.PORT, () => {
@@ -63,6 +73,3 @@ mongoose.connect(process.env.MONG_URI)
         console.log(error);
 
     });
-
-
-

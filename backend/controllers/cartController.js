@@ -1,39 +1,32 @@
 const Cart = require('../models/cartModel')
 const mongoose = require('mongoose')
 
-//get all carts
-const getCarts = async (req, res) => {
-    const carts = await Cart.find({}).sort({createdAt: -1})
-
-    res.status(200).json(carts)
-}
-
-//get a single cart
+//get spesific customer's orders with different restaurent (order id change for each restaurent)
 const getCart = async (req, res) => {
-    const {id} = req.params
+    const { id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such cart'})
+    try {
+        const carts = await Cart.find({ customerid: id });
+
+        if (!carts) {
+            return res.status(404).json({ error: 'No order found for the specified restaurant' });
+        }
+        
+        res.status(200).json(carts);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
     }
-
-    const cart = await Cart.findById(id)
-
-    if (!cart) {
-        return res.status(404).json({error: 'No such cart'})
-    }
-
-    res.status(200).json(cart)
-}
-
+};
 
 //create new cart
 const createCart = async (req, res) => {
-    const {fooditem, quantity, price , name } = req.body
+    const {orderid,customerid,cusName,restaurantid, restaurantname, fooditem , quantity,price } = req.body
 
     //add doc to database
     try {
 
-        const cart = await Cart.create({fooditem, quantity, price, name })
+        const cart = await Cart.create({orderid,customerid,cusName,restaurantid, restaurantname, fooditem , quantity,price })
         res.status(200).json(cart)
     }catch (error){
         res.status(400).json({error: error.message})
@@ -41,7 +34,6 @@ const createCart = async (req, res) => {
 
     }
 }
-
 
 //delete an cart
 const deleteCart = async (req, res) => {
@@ -58,7 +50,6 @@ const deleteCart = async (req, res) => {
     }
 
     res.status(200).json(cart)
-
 }
 
 
@@ -79,14 +70,8 @@ const updateCart = async (req, res) => {
     }
 
     res.status(200).json(cart)
-
-
 }
-
-
-
 module.exports = {
-    getCarts,
     getCart,
     createCart,
     deleteCart,
