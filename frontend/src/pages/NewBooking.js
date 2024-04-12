@@ -12,7 +12,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { Grid, Paper, CardActionArea } from '@mui/material';
 import Button from '@mui/material/Button';
-import QRCode from 'react-qr-code'; // Import the QRCode component
 import axios from 'axios';
 import exampleImage from '../Assests/example.jpg';
 
@@ -325,15 +324,6 @@ const NewBooking = () => {
                     </Grid>
                 </Paper>
             </form>
-            {/* Display QR Code with booking details */}
-            <QRCode value={JSON.stringify({
-                time: selectedDateTime.time,
-                date: selectedDateTime.date,
-                couplequantity: couplequantity,
-                groupquantity: groupquantity,
-                name: name,
-                telephoneno: telephoneno
-            })} />
         </div>
     );
 };
