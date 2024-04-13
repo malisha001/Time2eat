@@ -1,108 +1,198 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Grid, Paper, TextField, Button, Box } from "@mui/material";
 import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
 
-const UpdateDineInBookings = () => {
-    const { id } = useParams(); // Get the booking id from URL params
+const UpdateDineInBooking = () => {
+  const { id } = useParams();
+  const [selectedDateTime, setSelectedDateTime] = useState({ date: '', time: '' });
+  const [couplequantity, setCouplequantity] = useState('');
+  const [groupquantity, setGroupquantity] = useState('');
+  const [name, setName] = useState('');
+  const [telephoneno, setTelephoneNo] = useState('');
+  const [availableTables, setAvailableTables] = useState({ couple: 0, group: 0 });
+  const [error, setError] = useState(null);
 
-    const [values, setValues] = useState({
-        cusid: '',
-        resid: '',
-        name: '',
-        time: '',
-        date: '',
-        couplequantity: '',
-        groupquantity: '',
-        telephoneno: ''
+  useEffect(() => {
+    const fetchBookingData = async () => {
+      try {
+        const response = await axios.get(`/api/realtimebooking/${id}`);
+        const { name, date, time, couplequantity, groupquantity, telephoneno } = response.data;
+        setName(name);
+        setSelectedDateTime({ date, time });
+        setCouplequantity(couplequantity);
+        setGroupquantity(groupquantity);
+        setTelephoneNo(telephoneno);
+      } catch (error) {
+        console.error("Error fetching data: ", error);
+      }
+    };
 
-    });
+    fetchBookingData();
+  }, [id]);
 
-    useEffect(() => {
-        axios.get(`/api/realtimebooking/${id}`)
-        .then(res => {
-            setValues({
-                ...values,
-                cusid: res.data.cusid,
-                resid: res.data.resid,
-                name: res.data.name,
-                time: res.data.time,
-                date: res.data.date,
-                couplequantity: res.data.couplequantity,
-                groupquantity: res.data.groupquantity,
-                telephoneno: res.data.telephoneno
+  useEffect(() => {
+    fetchAvailableTables();
+  }, [couplequantity, groupquantity]);
 
-            });
-        })
-        .catch(err => console.log(err));
-    }, [id]); // Add id as a dependency to trigger effect when id changes
+  const fetchAvailableTables = async () => {
+    try {
+      const response = await axios.get("/api/realtimebooking");
+      const bookings = response.data;
 
-    const navigate = useNavigate()
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        axios.patch(`/api/realtimebooking/${id}`, values) // Fix the syntax error here
-        .then(res => {
-            navigate('/');
-        })
-        .catch(err => console.log(err)); // Fix the formatting here
+      const coupleTablesBooked = bookings.reduce(
+        (acc, booking) => acc + booking.couplequantity,
+        0
+      );
+      const groupTablesBooked = bookings.reduce(
+        (acc, booking) => acc + booking.groupquantity,
+        0
+      );
+
+      const availableCoupleTables = (10 - coupleTablesBooked) + couplequantity; // Max available couple tables minus tables already booked and those requested
+      const availableGroupTables = (15 - groupTablesBooked) + groupquantity; // Max available group tables minus tables already booked and those requested
+
+      setAvailableTables({ couple: availableCoupleTables, group: availableGroupTables });
+    } catch (error) {
+      console.error(error);
+      setError("An error occurred while fetching table availability.");
     }
-    
-    return ( 
-        <div>
-             <form className="create" onSubmit={handleSubmit}>
-            <h3>Add a New Booking</h3>
-           
-            <label>CusID:</label>
-            <input 
-               type="text"
-               value={values.cusid}
-               onChange={e => setValues({...values, cusid: e.target.value})}/>
+  };
 
-            <label>ResID:</label>
-            <input 
-               type="text"
-               value={values.resid}
-               onChange={e => setValues({...values, resid: e.target.value})}/>
+  const navigate = useNavigate();
 
-            <label>Name:</label>
-            <input 
-               type="text"
-               value={values.name}
-               onChange={e => setValues({...values, name: e.target.value})}/>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-            <label>Time:</label>
-            <input 
-               type="time"
-               value={values.time}
-               onChange={e => setValues({...values, time: e.target.value})}/>       
+    const totalCoupleTablesRequested = parseInt(couplequantity);
+    const totalGroupTablesRequested = parseInt(groupquantity);
 
-            <label>Date:</label>
-            <input 
-               type="date"
-               value={values.date}
-               onChange={e => setValues({...values, date: e.target.value})}/>
+    if (totalCoupleTablesRequested > availableTables.couple) {
+      setError("The requested couple table count exceeds the available couple tables.");
+      return;
+    }
 
-            <label>CoupleQuantity:</label>
-            <input 
-               type="number"
-               value={values.couplequantity}
-               onChange={e => setValues({...values, couplequantity: e.target.value})}/>
+    if (totalGroupTablesRequested > availableTables.group) {
+      setError("The requested group table count exceeds the available group tables.");
+      return;
+    }
 
-            <label>Groupquantity:</label>
-            <input 
-               type="number"
-               value={values.groupquantity}
-               onChange={e => setValues({...values, groupquantity: e.target.value})}/>
+    const booking = {
+      id,
+      name,
+      date: selectedDateTime.date,
+      couplequantity,
+      groupquantity,
+      time: selectedDateTime.time,
+      telephoneno
+    };
 
-            <label>Telephone No:</label>
-            <input 
-               type="text"
-               value={values.telephoneno}
-               onChange={e => setValues({...values, telephoneno: e.target.value})}/>
+    try {
+      const response = await axios.patch(`/api/realtimebooking/${id}`, booking);
+      const json = response.data;
 
-            <button>Add Booking</button>
-        </form>
-        </div>
-    );
+      if (response.status === 200) {
+        setCouplequantity('');
+        setGroupquantity('');
+        setError(null);
+        console.log('Booking updated', json);
+      } else {
+        setError(json.error);
+      }
+    } catch (error) {
+      console.error('Error updating booking:', error);
+      setError('An error occurred while updating the booking.');
+    }
+
+    navigate("/");
+  };
+
+  return (
+    <form className="update" onSubmit={handleSubmit}>
+      <h3>Update Booking</h3>
+
+      <Paper sx={{ bgcolor: "white" }}>
+        <Box sx={{ marginLeft: "60px", marginRight: "60px", marginTop: "40px", marginBottom: "40px", padding: "20px" }}>
+          <h2>Payment Details</h2>
+          <Grid container spacing={4}>
+            <Grid item xs={6}>
+              <TextField
+                required
+                id="name"
+                label="Name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                sx={{ width: "100%" }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                required
+                id="time"
+                label="Time"
+                type="time"
+                value={selectedDateTime.time}
+                onChange={(e) => setSelectedDateTime({ ...selectedDateTime, time: e.target.value })}
+                sx={{ width: "100%" }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                required
+                id="date"
+                label="Date"
+                type="date"
+                value={selectedDateTime.date}
+                onChange={(e) => setSelectedDateTime({ ...selectedDateTime, date: e.target.value })}
+                sx={{ width: "100%" }}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                required
+                id="couplequantity"
+                label="Couple Quantity"
+                type="number"
+                value={couplequantity}
+                onChange={(e) => setCouplequantity(e.target.value)}
+                sx={{ width: "100%" }}
+                title={`Available couple tables: ${availableTables.couple}`}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                required
+                id="groupquantity"
+                label="Group Quantity"
+                type="number"
+                value={groupquantity}
+                onChange={(e) => setGroupquantity(e.target.value)}
+                sx={{ width: "100%" }}
+                title={`Available group tables: ${availableTables.group}`}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                required
+                id="telephoneno"
+                label="Telephone No"
+                type="text"
+                value={telephoneno}
+                onChange={(e) => setTelephoneNo(e.target.value)}
+                sx={{ width: "100%" }}
+              />
+            </Grid>
+          </Grid>
+        </Box>
+      </Paper>
+
+      <Button variant="contained" color="primary" type="submit">
+        Update Booking
+      </Button>
+      {error && <div className="error">{error}</div>}
+    </form>
+  );
 };
 
-export default UpdateDineInBookings;
+export default UpdateDineInBooking;
