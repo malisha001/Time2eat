@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Paper, Grid,Button,Dialog,DialogTitle,DialogContent,DialogActions,TextField,FormControl,FormLabel,RadioGroup,Radio,FormControlLabel } from '@mui/material';
-import { getCartData,showRider } from '../services/api';
-import { Navigate } from 'react-router-dom';
+import { getCartData,checkRider } from '../services/api';
+import {useNavigate,Route,Routes} from 'react-router-dom';
 import { placeorder } from '../services/api';
+import Payment from './Payment';
 
 function Cart() {
+    //navigate another page
+    const navigate = useNavigate()
+    //state
     const [location, setLocation] = useState('');
     const [radiovalue, setRadioValue] = useState('');
     const [cartData, setCartData] = useState([]);
     const[isDataSent,setDataSent] = useState(false);
     const[message,setMessage] = useState('');
+    const[countdown,setCountdown] = useState(120);
 
     //get radio button value
     const handleChange = (event) => {
@@ -25,15 +30,28 @@ function Cart() {
         setMessage('your delivery guy is finding')
 
         try {
-            const find = await showRider(orderid);
-            setMessage('your delivery guy is found')
+            const find = await checkRider(orderid);
+            console.log('find:',find);
+            if (find.length > 0) {
+                setMessage('Your delivery guy is found');
+                navigate('/payment')
+            }
+
         } catch (error) {
             console.error('Error finding rider:', error);
         }
     }
+
     //confirm order
     const handleClickConfirm = async(order,resname) => {
-        handleDelivery(order.orderid);
+        handleDelivery(order);
+        //if delivery is selected
+
+        //start countdown
+        const countdownId = setInterval(() => {
+            setCountdown(countdown => countdown - 1);
+        }, 1000);
+
         //if delivery is selected
         if(radiovalue === 'delivery'){
             const data = {
@@ -56,6 +74,19 @@ function Cart() {
             } catch (error) {
                 console.error('Error placing order:', error);
             }
+
+            // Trigger handleDelivery every 9 seconds
+            const intervalId = setInterval(() => {
+                handleDelivery(order); // Pass orderid or any other data you need
+            }, 9000);
+
+            // Stop triggering after 2 minutes
+            setTimeout(() => {
+                clearInterval(intervalId);
+                clearInterval(countdownId); // Stop the countdown
+                setMessage('No delivery guy found try again or choose pickup option')
+                setDataSent(false)
+            }, 120000); // 2 minutes in milliseconds
 
         }
         else{
@@ -99,14 +130,6 @@ function Cart() {
                 console.error('Error fetching cart data:', error);
             }
         }
-        const fetchriderdetails = async () => {
-            try {
-                const response = await showRider();
-                console.log('rider details:', response);
-            } catch (error) {
-                console.error('Error fetching rider details:', error);
-            }
-        }
         fetchCartData();
 
     }, []);
@@ -116,6 +139,7 @@ function Cart() {
             <h1>Cart Page</h1>
             <div>
                 <p>{message}</p>
+                <p>{countdown} seconds remaining</p>
             </div>
             <div>
                 {cartData.map((order) => (

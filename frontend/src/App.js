@@ -17,6 +17,10 @@ import RealTimeIndicator from './component/RealTimeIndicator';
 import AllCustomerDineInHistory from './pages/AllCustomerDineInHistory';
 import EmployeeSal from './pages/EmployeeSal';
 import EmpPayrun from './pages/EmpPayrun';
+import RiderDashboard from './pages/RiderDashbord';
+import OngoingOrder from './pages/OngoingOrder';
+import Cart from './pages/Cart';
+import Payment from './pages/Payment';
 
 function App() {
   return (
@@ -50,6 +54,12 @@ function App() {
              
             <Route path='/employeesal' element={<EmployeeSal />}/>
             <Route path='/payrun' element={<EmpPayrun />}/>
+
+            <Route path='/riderdashborad/*' element={<RiderDashboard />}/>
+            <Route path='/riderdashborad/ongoingorder' element={<OngoingOrder/>} />
+            <Route path='/cart' element={<Cart/>} />
+            <Route path='/payment' element={<Payment/>} />
+
               
 
 

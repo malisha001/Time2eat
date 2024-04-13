@@ -9,27 +9,31 @@ const deliverySchema = new Schema({
     },
     riderId:{
         type:String,
-        require: true
+
     },
     riderName:{
         type:String,
-        require: true
+
     },
     cusName: {
         type: String,
         require:true
     },
-    restName: {
+    customerLocation:{
+        type:String
+    },
+    restaurantname: {
         type: String,
         require:true
+    },
+    reslocation:{
+        type:String
     },
     totPrice:{
         type:Number,
         require: true
     },
-    location:{
-        type:String
-    },
+    
     distance:{
         type:Number
     },

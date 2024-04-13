@@ -99,3 +99,105 @@ export async function paySalary() {
         throw error;
     }
 }
+//delivery function
+//customer place order by selecting delivery option
+export async function placeorder(order) {
+    try {
+        const response = await fetch('/api/onlineOrders', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(order),
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error adding employee salary data:', error);
+        throw error;
+    }
+
+}
+//if delivery guy accept order, update riderSelected to true
+export async function showRider(id,order) {
+    try {
+        const response = await fetch(`/api/onlineOrders/rider/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(order),
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error adding employee salary data:', error);
+        throw error;
+    }
+
+}
+//check delivry guy accept order or not
+export async function checkRider(id) {
+    try {
+        const response = await fetch(`/api/onlineOrders/customer/${id}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error adding employee salary data:', error);
+        throw error;
+    }
+
+}
+//get delivery orders for riders
+export async function getDeliveryOrders() {
+    try {
+        const response = await fetch('/api/onlineOrders/rider');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching delivery orders:', error);
+        throw error;
+    }
+}
+//get ongoing order for rider
+export async function getOngoingOrder() {
+    try {
+        const response = await fetch('/api/deliveryorder');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching ongoing order:', error);
+        throw error;
+    }
+}
+
+//when rider accept order that order goes to rider table
+export async function acceptOrder(order) {
+    console.log("api orderId:",order)
+    try {
+        const response = await fetch('/api/deliveryorder', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(order),
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error adding employee salary data:', error);
+        throw error;
+    }
+}
+
+//get cart details for customer
+export async function getCartData() {
+    try {
+        const response = await fetch('/api/carts');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching cart data:', error);
+        throw error;
+    }
+}
