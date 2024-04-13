@@ -299,9 +299,9 @@ const UpdateBookingPage = () => {
               </Grid>
               <Grid item md={4}>            
               <Box className='availability-status-top'>
-              Booked</Box>
+              Total</Box>
               <Box className='availability-status-bottom'>
-                 {totalGroupTablesBooked}</Box>
+                 15</Box>
               </Grid>
               <Grid item md={4}>            
               <Box className='availability-status-top'>Available </Box>
@@ -320,7 +320,7 @@ const UpdateBookingPage = () => {
               </Card>
               </Grid>
               <Grid item md={4}>            
-              <Box className='availability-status'>{totalCoupleTablesBooked}</Box>
+              <Box className='availability-status'>10</Box>
               </Grid>
               <Grid item md={4}>            
               <Box className='availability-status'>{availableTables.couple}</Box>

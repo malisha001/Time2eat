@@ -1,107 +1,102 @@
-// import React from 'react'
-// import MenuIcon from '@mui/icons-material/Menu';
-// import Card from '@mui/material/Card';
-// import CardMedia from '@mui/material/CardMedia';
-// import { CardActionArea, Grid,Box,Paper } from '@mui/material';
-// import exampleImage from '../Assests/example.jpg'; // Adjust the path as per your directory structure
-// import Button from '@mui/material/Button';
+import React, { useState } from 'react';
 
+const FormValidationExample = () => {
 
-// const Home = () => {
-//     return(
-//         <div className="home">
-//             <h2>Home</h2>
+  const [formData, setFormData] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  })
 
-//             <div>
-//           <Box sx={{mt: '150px', ml: '250px', mr: '40px', bgcolor:'#ffffff', width:'1200px'}}>
-//           <Grid  container spacing={12}>
-//           <Grid  container spacing={2}>
-//            <Grid sx={{bgcolor:'green', width:'1000', ml:21.5, mr:5, pt:0}} item md={12}>
-//             <MenuIcon/>
-//             <Button sx={{ml:115, mb:2}} variant="contained">Contained</Button>
-                
-//             </Grid>
+  const [errors, setErrors] = useState({})
 
-//            <Grid sx={{bgcolor:'yellow', width:'1000', ml:17}} item md={12}>
-//             <CardMedia
-//                 component="img"
-//                 sx={{ ml: '20px', pb:'10px', height: 500, width: 1100, }}
-//                 image={exampleImage}
-//                 alt="Live from space album cover"
-//              />
-//             </Grid>
-//             </Grid>
-            
-          
-            
-//             <Grid sx={{bgcolor:'blue', ml:15}} item md={12}>
-//                 <Grid container spacing={2}>
-//                     <Grid sx={{bgcolor:'purple', ml:0, mr:10}} item md={12}>
-//                         <h2>Offers</h2>
-//                     </Grid>
-//                     <Grid sx={{bgcolor:'green', ml:0, mr:10, height:150, pt:30}} item md={12}>
-//                     <Card sx={{ maxWidth: 200, borderRadius: 7 }}>
-//                         <CardActionArea>
-//                             <CardMedia
-//                             component="img"
-//                             height="100"
-//                             image={exampleImage}
-//                             />
-                            
-//                         </CardActionArea>
-//                     </Card>
-//                     </Grid>
-                    
-//                 </Grid>
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    let validationErrors = {...errors};
 
-//                 <Grid container spacing={2}>
-//                     <Grid sx={{bgcolor:'yellow', ml:0, mr:10}} item md={12}>
-//                         <h2>Offers</h2>
-//                     </Grid>
-//                     <Grid sx={{bgcolor:'brown', ml:0, mr:10, height:150}} item md={12}>
-//                     <Card sx={{ maxWidth: 100, borderRadius: 50 }}>
-//                         <CardActionArea>
-//                             <CardMedia
-//                             component="img"
-//                             height="100"
-//                             image={exampleImage}
-//                             />
-                            
-//                         </CardActionArea>
-//                     </Card>
-//                     </Grid>
-                    
-//                 </Grid>
-//                 <Grid container spacing={2}>
-//                 <Grid sx={{bgcolor:'orange', ml:0, mr:10}} item md={12}>
-//                     <h2>hello</h2>
-//                 </Grid>
-//                 <Grid sx={{bgcolor:'green', ml:0, mr:10, mb:1}} item md={12}>
-//                 <Card sx={{ maxWidth: 200,mb:2 }}>
-//                         <CardActionArea>
-//                             <CardMedia
-//                             component="img"
-//                             height="200"
-//                             image={exampleImage}
-//                             margin-bottom="10px"
-//                             />
-                            
-//                         </CardActionArea>
-//                     </Card>
-//                 </Grid>
-//                 </Grid>
-                
-                
-//             </Grid>
+    switch(name) {
+      case 'username':
+        validationErrors.username = value.trim() ? '' : 'username is required';
+        break;
+      case 'email':
+        validationErrors.email = value.trim() ? (/^\S+@\S+\.\S+$/.test(value) ? '' : 'email is not valid') : 'email is required';
+        break;
+      case 'password':
+        validationErrors.password = value.length >= 6 ? '' : 'password should be at least 6 char';
+        validationErrors.confirmPassword = formData.confirmPassword === value ? '' : 'password not matched';
+        break;
+      case 'confirmPassword':
+        validationErrors.confirmPassword = formData.password === value ? '' : 'password not matched';
+        break;
+      default:
+        break;
+    }
 
+    setErrors(validationErrors);
+    setFormData({
+        ...formData,
+        [name]: value
+    });
+  }
 
-//         </Grid>
-//         </Box>
-//         </div>
+  const handleSubmit = (e) => {
+    e.preventDefault()
 
+    if(Object.values(errors).every(error => !error)) {
+        alert("Form Submitted successfully");
+    } else {
+        alert("Please fix the errors in the form before submitting");
+    }
+  }
 
-//         </div>
-//     )
-// }
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Username:</label>
+        <input
+          type="text"
+          name="username"
+          placeholder='username'  
+          autoComplete='off'  
+          onChange={handleChange}   
+        />
+        {errors.username && <span>{errors.username}</span>}  
+      </div>
+      <div>
+        <label>Email:</label>
+        <input
+          type="email"
+          name="email"
+          placeholder='example@gmail.com'
+          autoComplete='off'
+          onChange={handleChange} 
+        />
+        {errors.email && <span>{errors.email}</span>}  
+      </div>
+      <div>
+        <label>Password:</label>
+        <input
+          type="password"
+          name="password"
+          placeholder='******'
+          onChange={handleChange} 
+        />
+        {errors.password && <span>{errors.password}</span>}  
+      </div>
+      <div>
+        <label>Confirm Password:</label>
+        <input
+          type="password"
+          name="confirmPassword"
+          placeholder='******'
+          onChange={handleChange} 
+        />
+        {errors.confirmPassword && <span>{errors.confirmPassword}</span>}  
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
 
-// export default Home
+export default FormValidationExample;
