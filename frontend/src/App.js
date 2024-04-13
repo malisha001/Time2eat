@@ -1,15 +1,12 @@
 // pages & components
 import Home from './pages/Home/HomePage';
 import Navbar from "./component/Navbar";
-
 import MyBookings from "./pages/MyBookings";
 import NewBooking from "./pages/NewBooking";
 import RestaurantStaff from "./pages/RestaurantStaff";
 import Feedback from './pages/Feedback';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
+import { BrowserRouter, Routes, Route,Navigate } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext'
-
 import AddfeedbackForm from './component/AddfeedbackForm';
 import UpdateFeedback from './component/Updatefeedback';
 import UpdatePreBookings from './pages/UpdatePreBookings'
@@ -22,8 +19,8 @@ import AllCustomerDineInHistory from './pages/AllCustomerDineInHistory';
 import EmployeeSal from './pages/EmployeeSal';
 import EmpPayrun from './pages/EmpPayrun';
 import BookingPayment from './pages/BookingPayment';
-
-
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 function App() {
   const {user} = useAuthContext()
@@ -41,6 +38,7 @@ function App() {
           <Route
               path ="/"
               element ={user ? <Home />: <Navigate to="/login" />}
+
           />
     
           <Route
