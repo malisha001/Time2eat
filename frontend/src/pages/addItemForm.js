@@ -24,6 +24,9 @@ const ItemForm = () => {
                 'Content-Type' : 'application/json'
             }
         })
+
+        
+
         const json = await response.json()
 
         if(!response.ok){
@@ -36,12 +39,10 @@ const ItemForm = () => {
             setItemPrice('')
             setItemCategory('')
             setError(null)
-            console.log('new workout added', json)
-            navigate('/inventory/')
-        }
+            console.log('new item added', json)
+            navigate("/inventory/");
 
-        window.location.reload()
-        
+        }
 
     }
 

@@ -1,6 +1,7 @@
 
 
 const inventoryRoutes = require('./routes/inventory')       // import routes folder
+const usageRoute = require('./routes/usageItem')
 
 
 
@@ -53,7 +54,9 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/api/inventory/', inventoryRoutes)
+// Inventory routes
+app.use('/api/inventory', inventoryRoutes)
+app.use('/api/usage', usageRoute)
 
 // connect to db
 mongoose.connect(process.env.MONG_URI)

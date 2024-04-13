@@ -21,23 +21,43 @@ code {
 }
 
 /* item display */
-.itemsDetails{
-  background-color: silver;
-  margin:0px 700px 0px 100px;
+.itemsDetails {
+  border: 1px solid #ccc;
+  border-radius: 5px;
   padding: 10px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
 }
 
-.itemsDetails h4{
-  background-color: rgb(1, 135, 90);
-  padding: 30px;
-  font-size: 20px;
+.itemsDetails h4 {
+  margin-top: 0;
+  color: red;
 }
 
-.itemsDetails p{
-  background-color: antiquewhite;
-  padding: 10px;
+.itemsDetails p {
+  display: inline;
+  margin: 5px 10px 5px 0; /* Adjust margins as needed */
 }
+
+.itemsDetails button
+{
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: #2a3848;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+
+.itemsDetails button:hover{
+  background-color: #0056b3;
+}
+
 
 /* form */
 .create {
@@ -89,3 +109,21 @@ code {
   text-align: center;
 }
 
+/* usage item */
+.usage-home ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 20px;
+}
+
+.usage-home li {
+  display: inline-block;
+  margin-left: 20px; /* Adjust margin as needed */
+
+}
+
+.usage-items h4 {
+  display: inline;
+  padding-left:25px ;
+
+}

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 // import components
-import InventoryItemsDetails from "./inventoryItemsDetails"
+import InventoryItemsDetails from "../components/inventoryItemsDetails"
 
 
 const Home = () => {
@@ -33,7 +33,8 @@ const Home = () => {
                     <InventoryItemsDetails key={items._id} item={item} />
                 ))}
             </div>
-            <Link to ={"/inventory/addItems/"}>Add Items</Link>
+            <Link to ={"/inventory/addItems/"}>Add Items</Link><br />
+            <Link to={"/inventory/usage/"}>Usage Form</Link>
         </div>
     )
 }
