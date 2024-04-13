@@ -8,19 +8,19 @@ const getDeliveryOrders = async(req,res) =>{
     res.status(200).json(deleveries)
 }
 
-//create delivery orders
+//when rider accept order that order add this table
 const createDeliveryOrders = async(req,res) =>{
-    const{userId,deliveryPersonId,ordersId,foodId,foodName,totPrice,deliveryFee,orderStatus} = req.body
+    const{orderId,riderId,riderName,cusName,restName,totPrice,location,distance,deliveryFee,orderStatus,paymentState,estimateTime} = req.body
 
     try {
-        const orderDetails = await Deliveryorder.create({userId,deliveryPersonId,ordersId,foodId,foodName,totPrice,deliveryFee,orderStatus})
+        const orderDetails = await Deliveryorder.create({orderId,riderId,riderName,cusName,restName,totPrice,location,distance,deliveryFee,orderStatus,paymentState,estimateTime})
         res.status(200).json(orderDetails)
     } catch (error) {
         res.status(400).json({error: error.message})
     }
 }
 
-//assign riders(update)
+//update kitchen manager when order ready, update estimate time by rider
 const assignRider = async(req , res) =>{
     const {id} = req.params
 

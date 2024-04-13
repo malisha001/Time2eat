@@ -23,11 +23,11 @@ const getRealTimeBooking = async (req, res) => {
 
 // create new booking
 const createRealTimeBooking = async (req, res) => {
-    const {cusid, resid, name, time, date, couplequantity, groupquantity, telephoneno, availability} = req.body
+    const {cusid, resid, name, time, date, couplequantity, groupquantity, telephoneno} = req.body
 
     // add doc to db
     try {
-        const RTbookings = await RealTimeBooking.create({cusid, resid, name, time, date, couplequantity, groupquantity, telephoneno, availability})
+        const RTbookings = await RealTimeBooking.create({cusid, resid, name, time, date, couplequantity, groupquantity, telephoneno})
         res.status(200).json(RTbookings)
     } catch (error) {
         res.status(400).json({error: error.message})
@@ -42,33 +42,43 @@ const deleteRealTimeBookings = async (req, res) => {
         return res.status(404).json({error: 'No such a Booking'})
     }
 
-    const RTbookings = await RTbookings.findByIdAndDelete({_id: id})
+    try {
+        const deletedBooking = await RealTimeBooking.findByIdAndDelete(id)
 
-    if (!RTbookings) {
-        return res.status(404).json({error: 'No such a Booking'})
+        if (!deletedBooking) {
+            return res.status(404).json({error: 'No such a Booking'})
+        }
+
+        res.status(200).json(deletedBooking)
+    } catch (error) {
+        console.error('Error deleting booking:', error)
+        res.status(500).json({error: 'Internal server error'})
     }
-
-    res.status(200).json(RTbookings)
 }
+
 
 //update a booking
 const updateRealTimeBookings = async (req, res) => {
-    const { id } = req.params
+    const { id } = req.params;
 
-    if(!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such a Booking'})
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such a Booking' });
     }
 
-    const RTbookings = await RTbookings.findByIdAndUpdate({_id: id}, {
-        ...req.body
-    })
+    try {
+        const updatedBooking = await RealTimeBooking.findByIdAndUpdate(id, req.body, { new: true });
 
-    if (!RTbookings) {
-        return res.status(404).json({error: 'No such a Booking'})
+        if (!updatedBooking) {
+            return res.status(404).json({ error: 'No such a Booking' });
+        }
+
+        res.status(200).json(updatedBooking);
+    } catch (error) {
+        console.error('Error updating booking:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
+};
 
-    res.status(200).json(RTbookings)
-}
 
 module.exports = {
     getRealTimeBookings,
