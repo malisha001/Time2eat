@@ -61,7 +61,7 @@ app.use('/api/carts', cartRoutes)
 app.use('/api/onlineOrders', onlineOrdersRoutes)
 
 // connect to db
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONG_URI)
     .then(() => {
         // listen for requests
         app.listen(process.env.PORT, () => {

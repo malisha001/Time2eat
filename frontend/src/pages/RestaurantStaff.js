@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import RealTimeIndicator from "../component/RealTimeIndicator";
+import RealTimeIndicator from '../component/RealTimeIndicator.js';
 import DineCustomerRegForm from "../pages/DineCustomerRegForm";
 
 
