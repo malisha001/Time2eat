@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 
-const RestaurantDetails = ({ res, onDelete }) => {
+const RestaurantprofileDetails = ({ res, onDelete }) => {
 
     const handleClick = async () => {
         const response = await fetch('/api/restaurants/' + res._id, {
@@ -29,16 +29,17 @@ const RestaurantDetails = ({ res, onDelete }) => {
             <p><strong>Address :</strong>{res.Address}</p>
             <p><strong>Couple Table :</strong>{res.Couple_table}</p>
             <p><strong>Group Table :</strong>{res.Group_table}</p>
-            <p><strong>Status :</strong>{res.status}</p>
+            
 
 
             
             <button className="delete-button" onClick={handleClick}>Delete</button>
-            <Link to={`/update-restaurant/${res._id}`}>
+            <Link to={`/update-restaurantprofile/${res._id}`}>
                 <button className="update-button">Update</button>
             </Link>
         </div>
     );
 };
 
-export default RestaurantDetails;
+export default RestaurantprofileDetails;
+

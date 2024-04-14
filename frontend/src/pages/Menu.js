@@ -1,38 +1,38 @@
-import { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useParams, Link } from "react-router-dom";
 import FooditemDetails from '../Component/FooditemsDetails';
-import AddfooditemsForm from "../Component/AddfooditemsForm";
 
-const Menu = () => {
-  const [foodItems, setFoodItems] = useState(null);
+const FooditemProfile = () => {
+  const [foodItem, setFoodItem] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
-    const fetchFoodItems = async () => {
-      const response = await fetch('/api/fooditems/');
-      const json = await response.json();
-
-      if (response.ok) {
-        setFoodItems(json);
+    const fetchFoodItem = async () => {
+      try {
+        const response = await fetch(`/api/fooditems/${id}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch food item");
+        }
+        const data = await response.json();
+        setFoodItem(data);
+      } catch (error) {
+        console.error(error);
       }
     };
-    fetchFoodItems();
-  }, []);
+
+    fetchFoodItem();
+  }, [id]);
 
   const handleDelete = async (itemId) => {
     console.log("Deleting food item with ID:", itemId);
   };
 
-
   return (
-    <div className="fooditems">
-      <div className="menu">
-        {foodItems && foodItems.map((foodItem) => (
-          <FooditemDetails key={foodItem._id} fooditem={foodItem} onDelete={handleDelete}/>
-        ))}
-      </div>
+    <div className="fooditem-profile">
+      {foodItem && <FooditemDetails fooditem={foodItem} onDelete={handleDelete} />}
       <Link to="/add-food-item"><button>Add Menu</button></Link>
     </div>
   );
 };
 
-export default Menu;
+export default FooditemProfile;

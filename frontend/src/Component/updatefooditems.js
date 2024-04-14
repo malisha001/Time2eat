@@ -43,7 +43,7 @@ const UpdateFoodItems = () => {
                 body: JSON.stringify(values)
             });
             if (response.ok) {
-                navigate('/fooditems'); // Redirect to menu after successful update
+                navigate('/allfooditems'); // Redirect to menu after successful update
             } else {
                 console.error("Failed to update food item");
             }

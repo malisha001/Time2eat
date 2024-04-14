@@ -6,17 +6,7 @@ const Updaterestaurants = () => {
     const navigate = useNavigate();
 
     const [values, setValues] = useState({
-        Restaurant_Id: '',
-        Restaurant_licensenumber: '',
-        Restaurant_name: '',
-        Restaurant_Managersname: '',
-        Email_address: '',
-        contact: '',
-        Password: '',
-        Confirm_paasword: '',
-        Address: '',
-        Couple_table: '',
-        Group_table: '',
+       
         status: ''
     });
 
@@ -66,96 +56,6 @@ const Updaterestaurants = () => {
     return ( 
         <div>
             <form onSubmit={handleSubmit}>
-                <h3>Update Restaurant Details</h3>
-                
-                <div>
-                    <label>Restaurant Id :</label>
-                    <input 
-                        type="text"
-                        value={values.Restaurant_Id}
-                        onChange={e => setValues({...values, Restaurant_Id: e.target.value})}
-                    />
-                </div>
-                <div>
-                    <label>Restaurant License Number:</label>
-                    <input 
-                        type="text"
-                        value={values.Restaurant_licensenumber}
-                        onChange={e => setValues({...values, Restaurant_licensenumber: e.target.value})}
-                    />
-                </div>
-                <div>
-                    <label>Restaurant Name:</label>
-                    <input 
-                        type="text"
-                        value={values.Restaurant_name}
-                        onChange={e => setValues({...values, Restaurant_name: e.target.value})}
-                    />
-                </div>
-                <div>
-                    <label>Restaurant Manager's Name:</label>
-                    <input 
-                        type="text"
-                        value={values.Restaurant_Managersname}
-                        onChange={e => setValues({...values, Restaurant_Managersname: e.target.value})}
-                    />
-                </div>
-                <div>
-                    <label>Email Address :</label>
-                    <input 
-                        type="text"
-                        value={values.Email_address}
-                        onChange={e => setValues({...values, Email_address: e.target.value})}
-                    />
-                </div>
-                <div>
-                    <label>Contact :</label>
-                    <input 
-                        type="text"
-                        value={values.contact}
-                        onChange={e => setValues({...values, contact: e.target.value})}
-                    />
-                </div>
-                <div>
-                    <label>Password :</label>
-                    <input 
-                        type="text"
-                        value={values.Password}
-                        onChange={e => setValues({...values, Password: e.target.value})}
-                    />
-                </div>
-                <div>
-                    <label>Confirm Password :</label>
-                    <input 
-                        type="text"
-                        value={values.Confirm_paasword}
-                        onChange={e => setValues({...values, Confirm_paasword: e.target.value})}
-                    />
-                </div>
-                <div>
-                    <label>Address :</label>
-                    <input 
-                        type="text"
-                        value={values.Address}
-                        onChange={e => setValues({...values, Address: e.target.value})}
-                    />
-                </div>
-                <div>
-                    <label>Couple Table :</label>
-                    <input 
-                        type="text"
-                        value={values.Couple_table}
-                        onChange={e => setValues({...values, Couple_table: e.target.value})}
-                    />
-                </div>
-                <div>
-                    <label>Group Table :</label>
-                    <input 
-                        type="text"
-                        value={values.Group_table}
-                        onChange={e => setValues({...values, Group_table: e.target.value})}
-                    />
-                </div>
                 <div>
                     <label>Status:</label>
                     <div>

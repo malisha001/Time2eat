@@ -15,6 +15,9 @@ import Restaurant from './pages/restaurant';
 import AddrestaurantsForm from './Component/AddrestaurantsForm';
 import UpdateFoodItems from './Component/updatefooditems';
 import Updaterestaurants from './Component/Updaterestaurants';
+import RestaurantProfile from './pages/Restaurantprofile';
+import UpdateRestaurantProfile from './Component/UpdateRestaurantProfile'
+import AllfoodItems from './pages/AllfodItems';
 
 function App() {
   return (
@@ -32,12 +35,15 @@ function App() {
             <Route path="/update-booking/:id" element={<UpdateBookingDetails />} />
             <Route path="/realtime-staff" element={<RestaurantStaff />} />
              <Route path="/inventory" element={<Home />} />
-            <Route path="/fooditems" element = {<Menu />} />
+            <Route path="/fooditems/:id/" element = {<Menu />} />
+            <Route path="/allfooditems" element = {<AllfoodItems />} />
             <Route path="/add-food-item" element = {<AddfooditemsForm />} />
             <Route path="/update-food-item/:id/" element = {<UpdateFoodItems/>} />
             <Route path="/restaurants" element = {<Restaurant />} />
             <Route path="/addrestaurants" element = {<AddrestaurantsForm />} />
             <Route path="/update-restaurant/:id/" element = {<Updaterestaurants/>} />
+            <Route path="/restaurants/:id/" element = {<RestaurantProfile />} />
+            <Route path="/update-restaurantprofile/:id/" element = {<UpdateRestaurantProfile/>} />
 
 
           </Routes>

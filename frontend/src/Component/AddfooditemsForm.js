@@ -38,7 +38,7 @@ const AddfooditemsForm = () => {
                 console.log('New food item added', json);
 
                 // Navigate to the desired page
-                navigate('/fooditems');
+                navigate('/allfooditems');
             }
         } catch (error) {
             setError(error.message);
