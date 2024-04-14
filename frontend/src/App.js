@@ -5,7 +5,7 @@ import MyBookings from "./pages/MyBookings";
 import NewBooking from "./pages/NewBooking";
 import RestaurantStaff from "./pages/RestaurantStaff";
 import Feedback from './pages/Feedback';
-import { BrowserRouter, Routes, Route,Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route,Navigate,useLocation } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext'
 import AddfeedbackForm from './component/AddfeedbackForm';
 import UpdateFeedback from './component/Updatefeedback';
@@ -25,23 +25,27 @@ import Signup from './pages/Signup';
 function App() {
   const {user} = useAuthContext()
   return (
-    <div className="App">
+    <div>
 
 
 
 
       <BrowserRouter>
-        <Navbar />
+      
         <div className="pages">
           <Routes>
-             
-            {/* <Route path ="/" element ={user ? <Home />: <Navigate to="/login" />}/> */}
+            <Route path="/" element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<Signup />} />
+            
+            <Route path ="/" element ={user ? <Home />: <Navigate to="/login" />}/>
       
             <Route path ="/login" element ={!user ? <Login />: <Navigate to="/" />}/>
           
             <Route path ="/signup" element ={!user ? <Signup/>: <Navigate to="/" />}/>
 
-            <Route path="/" element={<NewBooking />} />
+            
+            <Route path="/newbooking" element={<NewBooking />} />
             <Route path="/mybookings" element={<MyBookings />} />
             {/* <Route path="/update-booking/:id" element={<UpdateBookingDetails />} /> */}
             <Route path="/update-pre-booking/:id" element={<UpdatePreBookings />} />

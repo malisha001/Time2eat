@@ -18,6 +18,7 @@ import exampleImage from '../Assests/example.jpg';
 import grouptableimage from '../Assests/grouptable.jpg'; // Adjust the path as per your directory structure
 import coupletableimage from '../Assests/coupletable.jpg'; // Adjust the path as per your directory structure
 import '../component/Bookingformstyle.css';
+import Navbar from '../component/Navbar';
 // import Card from '@mui/material/Card';
 // import CardContent from '@mui/material/CardContent';
 // import CardMedia from '@mui/material/CardMedia';
@@ -125,6 +126,7 @@ const NewBooking = () => {
 
     return (
         <div>
+        <Navbar />
             <div>
                 <Paper sx={{ mt: '100px', ml: '40px', mr: '40px', bgcolor: '#ffffff' }}>
                     <h1 className='pre-booking-heading'>Reserve Table</h1>

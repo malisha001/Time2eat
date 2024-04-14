@@ -10,6 +10,7 @@ import exampleImage from '../Assests/example.jpg';
 import QRCode from 'react-qr-code'; // Import the QRCode component
 import '../component/Mybookingstyle.css';
 import axios from "axios";
+import Navbar from "../component/Navbar";
 
 const MyBookings = () => {
     const [bookings, setBookings] = useState(null);
@@ -39,6 +40,7 @@ const MyBookings = () => {
 
     return (
         <div className="myBookings">
+            <Navbar />
             <div className="bookings">
                 {bookings && bookings.map((booking) => (
                     <div className="booking-details" key={booking._id}>

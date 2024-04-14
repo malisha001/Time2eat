@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 
 // return a token 
 const createToken = ( _id ) => { // user is gonna logged in for 3 days
-    return jwt.sign({_id}, process.env.SECRET, {expiresIn: '3d'})
+    return jwt.sign({_id}, process.env.SECRET, {expiresIn: '1d'})
 
 }
 

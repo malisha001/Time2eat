@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom"
 import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText, Grid, Box,Paper, Card, CardActionArea, CardContent, CardMedia, CardActions } from '@mui/material';
 import { Menu as MenuIcon, Inbox as InboxIcon, Mail as MailIcon, Margin } from '@mui/icons-material';
-import classes from './homePage.module.css'
+// import classes from './HomePage.module.css'
 import exampleImage from '../../Assests/example.jpg';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import {useLogout} from '../../hooks/useLogout'
 
 export default function TemporaryDrawer() {
+  const {logout} = useLogout()
+  const {user} = useAuthContext()
+
     const [open, setOpen] = React.useState(false);
+
+    const handleClick = () =>{
+      logout()
+    }
   
     const toggleDrawer = (newOpen) => () => {
       setOpen(newOpen);
@@ -43,7 +53,6 @@ export default function TemporaryDrawer() {
 
     return (
         <div className="home">
-            <h2>Home</h2>
             <Box sx={{ width: '100%' }}>
                 <AppBar position="static">
                     <Toolbar>
@@ -60,7 +69,9 @@ export default function TemporaryDrawer() {
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                             News
                         </Typography>
-                        <Button color="inherit">Login</Button>
+                        {user && <Button color="inherit" onClick={handleClick}>Logout</Button>}
+                        {!user && <Button color="inherit" component={Link} to='/login'>Login</Button>}
+                        {!user && <Button color="inherit" component={Link} to='/signup'>sign in</Button>}
                     </Toolbar>
                 </AppBar>
                 <img src={exampleImage} alt="Example" style={{ width: '100%'}} />

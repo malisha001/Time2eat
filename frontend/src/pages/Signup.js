@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useSignup } from "../hooks/useSignup"
+import styles from './Login.module.css';
 
 const Signup = () => {
     const[fullName, setFullName] = useState('')
@@ -17,7 +18,7 @@ const Signup = () => {
     }
 
     return (
-        <form className= "signup" onSubmit={handleSubmit}>
+        <form className= {styles.signup} onSubmit={handleSubmit}>
             <h3>Sign up</h3>
 
             <label>Full Name</label>
@@ -63,7 +64,7 @@ const Signup = () => {
             />
 
              <button disabled= { isLoading }>Sign-up</button>
-             {error && <div className = "error">{error}</div>}
+             {error && <div className = {styles.error}>{error}</div>}
         
         </form>
     )
