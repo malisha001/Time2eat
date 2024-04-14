@@ -18,7 +18,38 @@ const NewBooking = () => {
     const [telephoneno, setTelephoneNo] = useState('');
     const [error, setError] = useState(null);
     const [showForm, setShowForm] = useState(false);
+    const [showAvailability, setAvailability] = useState(false);
+    const [tableCount, setTableCount] = useState({ couple: 0, group: 0 });
 
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('/api/realtimebooking');
+            
+            // Calculate total tables for both couple and group
+            const totalCoupleTables = response.data.reduce((total, table) => total + table.couplequantity, 0);
+            const totalGroupTables = response.data.reduce((total, table) => total + table.groupquantity, 0);
+
+            // Update table count state
+            setTableCount({ couple: totalCoupleTables, group: totalGroupTables });
+        } catch (error) {
+            console.log('Error fetching table data:', error);
+        }
+    };
+
+    useEffect(() => {
+        // Fetch data initially
+        fetchData();
+
+        // Set interval to fetch data every second
+        const interval = setInterval(() => {
+            fetchData();
+        }, 1000);
+
+        // Clear interval on component unmount
+        return () => clearInterval(interval);
+    }, []);
+
+    ///////////////////////////////////////////////////////////
 
     useEffect(() => {
         if (selectedDateTime.date && selectedDateTime.time) {
@@ -119,7 +150,10 @@ const NewBooking = () => {
                                             onChange={(e) => setSelectedDateTime({ ...selectedDateTime, time: e.target.value })}
                                             required
                                         /></li>
-                                        <Button onClick={() => setShowForm(!showForm)}> Check Now</Button>
+                                        <Button onClick={() => {
+                                                    setShowForm(!showForm);
+                                                    setAvailability(!showAvailability);
+                                                }}> Check Now</Button>
                                     </ul>
                                 </nav>
                             </form>
@@ -242,10 +276,12 @@ const NewBooking = () => {
                             )}
                         </Grid>
                         <Grid item md={4}>
+                            
                             <Box className='current-availability-side'>
                                 Current Availability
                             </Box>
-                            <Grid container spacing={2}>
+                            {showAvailability ? (
+                              <Grid container spacing={2}>
                                 <Grid item md={4}>
                                     <Card className='availability-status-table-image' variant="elevation=0" sx={{ maxWidth: 100 }}>
                                         <CardActionArea>
@@ -260,7 +296,7 @@ const NewBooking = () => {
                                 </Grid>
                                 <Grid item md={4}>
                                     <Box className='availability-status-top'>
-                                        Booked
+                                        Total
                                     </Box>
                                     <Box className='availability-status-bottom'>
                                         15
@@ -289,6 +325,52 @@ const NewBooking = () => {
                                     <Box className='availability-status'>{availableTables.couple}</Box>
                                 </Grid>
                             </Grid>
+                            ) : (
+                             <Grid container spacing={2}>
+                                <Grid item md={4}>
+                                    <Card className='availability-status-table-image' variant="elevation=0" sx={{ maxWidth: 100 }}>
+                                        <CardActionArea>
+                                            <CardMedia
+                                                component="img"
+                                                height="100"
+                                                image={grouptableimage}
+                                                alt="green iguana"
+                                            />
+                                        </CardActionArea>
+                                    </Card>
+                                </Grid>
+                                <Grid item md={4}>
+                                    <Box className='availability-status-top'>
+                                        Total
+                                    </Box>
+                                    <Box className='availability-status-bottom'>
+                                        15
+                                    </Box>
+                                </Grid>
+                                <Grid item md={4}>
+                                    <Box className='availability-status-top'>In Restaurant</Box>
+                                    <Box className='availability-status-bottom'>{tableCount.group}</Box>
+                                </Grid>
+                                <Grid item md={4}>
+                                    <Card className='availability-status-table-image' variant="elevation=0" sx={{ maxWidth: 100 }}>
+                                        <CardActionArea>
+                                            <CardMedia
+                                                component="img"
+                                                height="100"
+                                                image={coupletableimage}
+                                                alt="green iguana"
+                                            />
+                                        </CardActionArea>
+                                    </Card>
+                                </Grid>
+                                <Grid item md={4}>
+                                    <Box className='availability-status'>10</Box>
+                                </Grid>
+                                <Grid item md={4}>
+                                    <Box className='availability-status'>{tableCount.couple}</Box>
+                                </Grid>
+                            </Grid>
+                            )}
                             <Button className='my-reservation-button'>
                                 Current Availability
                             </Button>

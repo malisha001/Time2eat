@@ -6,7 +6,7 @@ import Bookingformstyle from "../component/Bookingformstyle";
 const Newbookingsstyle = () => {
     return ( 
         <div>
-            <NewStyle />
+            {/* <NewStyle /> */}
             {/* <MyBookingStyle /> */}
             {/* <Bookingformstyle /> */}
         </div>

@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
+import { Table, TableBody, TableHead, TableRow, TableCell, TableContainer, Paper, Button } from '@mui/material';
 import axios from "axios";
 
 const AllCustomerDineInHistory = () => {
@@ -33,20 +35,40 @@ const AllCustomerDineInHistory = () => {
 
     return ( 
         <div>
-            {dineBookings && dineBookings.map((dineBooking) => (
-                
-                <div key={dineBooking._id}>
-                    <p><strong>Customer ID : </strong>{dineBooking.cusid}</p>
-                    <p><strong>Res ID : </strong>{dineBooking.resid}</p>
-                    <p><strong>Name : </strong>{dineBooking.name}</p>
-                    <p><strong>Time : </strong>{dineBooking.time}</p>
-                    <p><strong>Date : </strong>{dineBooking.date}</p>
-                    <p><strong>Couple Tables : </strong>{dineBooking.couplequantity}</p>
-                    <p><strong>Group Tables : </strong>{dineBooking.groupquantity}</p>
-                    <p><strong>Telephone No : </strong>{dineBooking.telephoneno}</p>
-                    <button onClick={() => handleClick(dineBooking._id)}>delete</button>
-                </div>
-            ))}
+            <TableContainer component={Paper} style={{ marginBottom: '20px' }}>
+                <Table aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Customer ID</TableCell>
+                            <TableCell>Res ID</TableCell>
+                            <TableCell>Name</TableCell>
+                            <TableCell>Time</TableCell>
+                            <TableCell>Date</TableCell>
+                            <TableCell>Couple Tables</TableCell>
+                            <TableCell>Group Tables</TableCell>
+                            <TableCell>Telephone No</TableCell>
+                            <TableCell></TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {dineBookings && dineBookings.map((dineBooking) => (
+                            <TableRow key={dineBooking._id}>
+                                <TableCell>{dineBooking.cusid}</TableCell>
+                                <TableCell>{dineBooking.resid}</TableCell>
+                                <TableCell>{dineBooking.name}</TableCell>
+                                <TableCell>{dineBooking.time}</TableCell>
+                                <TableCell>{dineBooking.date}</TableCell>
+                                <TableCell>{dineBooking.couplequantity}</TableCell>
+                                <TableCell>{dineBooking.groupquantity}</TableCell>
+                                <TableCell>{dineBooking.telephoneno}</TableCell>
+                                <TableCell>
+                                    <Button onClick={() => handleClick(dineBooking._id)} variant='contained'>Delete</Button>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </div>
      );
 }
