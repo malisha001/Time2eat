@@ -1,18 +1,27 @@
 import { useState } from "react"
 import { useLogin } from "../hooks/useLogin"
 import style from './Login.module.css';
-
+import { Navigate } from "react-router-dom"
 
 const Login = () => {
     const[email, setEmail] = useState('')
     const[password, setPassword] = useState('')
-    const {login , error ,isLoading}  = useLogin()
+    const {loginrole,login , error ,isLoading}  = useLogin()
 
     const handleSubmit =async (e) => {
         e.preventDefault()
-
+        //calling login custom hook
         await login(email, password)
     }
+    if(loginrole === 'customer'){
+        return <Navigate to ="/"/>
+    }
+    // else if(loginrole === 'rider'){
+    //     return <Navigate to ="/riderdashbord"/>
+    // }
+    // else if(loginrole === 'admin'){
+    //     return <Navigate to ="/admin"/>
+    // }
 
     return (
         <form className= {style.login} onSubmit={handleSubmit}>

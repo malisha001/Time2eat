@@ -1,10 +1,14 @@
 import { useState } from "react"
 import { useAuthContext } from './useAuthContext'
+import { Navigate } from "react-router-dom"
 
 export const useLogin = () =>{
     const [error, setError] = useState(null)
     const[isLoading, setIsLoading] = useState(null)
+    const [loginrole, setloginrole] = useState(false) // New state
     const { dispatch } = useAuthContext()
+
+
 
     const login = async (email,password) => {
         setIsLoading(true)
@@ -27,10 +31,13 @@ export const useLogin = () =>{
        
             //update the auth context
             dispatch({type: 'LOGIN', payload: json})
-
             setIsLoading(false)
+            if(json.role === 'customer'){
+                setloginrole("customer")
+            }
+
         }
     }
 
-    return {login, isLoading, error }
+    return {loginrole,login, isLoading, error }
 }
