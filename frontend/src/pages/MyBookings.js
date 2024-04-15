@@ -42,7 +42,7 @@ const MyBookings = () => {
             <div className="bookings">
                 {bookings && bookings.map((booking) => (
                     <div className="booking-details" key={booking._id}>
-                        <Paper sx={{ width: '1000px', pt: '10px', mt: '100px', ml: '40px', mr: '40px', bgcolor: '#ffffff' }}>
+                        <Paper sx={{ width: '1100px', pt: '10px', mt: '100px', ml: '40px', mr: '40px', bgcolor: 'lightgrey' }}>
                             <Grid container spacing={2}>
                                 <Grid sx={{ pr: '16px' }} item md={5}>
                                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -78,7 +78,7 @@ const MyBookings = () => {
                                             <Box className='mybookings-tables-count'>{booking.couplequantity}</Box>
                                         </Grid>
                                         <Grid item md={6}>
-                                            <Box sx={{ ml: '50px', pt: '10px', pb: '10px', height: 200, width: 200, }}>
+                                            <Box sx={{ ml: '30px', pt: '10px', pb: '10px', height: 200, width: 200, }}>
                                                 <QRCode value={JSON.stringify({
                                                     time: booking.time,
                                                     date: booking.date,

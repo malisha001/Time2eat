@@ -31,9 +31,9 @@ const DineInBookings = () => {
 
     return (
         <div>
-            <TableContainer component={Paper} style={{ marginBottom: '20px' }}>
+            <TableContainer component={Paper} style={{ marginBottom: '20px', backgroundColor: 'lightgrey', marginTop: '40px'  }}>
                 <Table aria-label="simple table">
-                    <TableHead>
+                    <TableHead sx={{bgcolor: 'lightblue'}}>
                         <TableRow>
                             <TableCell>Customer ID</TableCell>
                             <TableCell>Res ID</TableCell>
