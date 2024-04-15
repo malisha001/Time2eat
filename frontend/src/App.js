@@ -19,6 +19,8 @@ import EmployeeSal from './pages/EmployeeSal';
 import EmpPayrun from './pages/EmpPayrun';
 import BookingPayment from './pages/BookingPayment';
 import ResPage from './pages/ResPage/ResPage.js';
+import FoodPage from './pages/Food/FoodPage.js';
+import CartPage from './pages/Cart/CartPage.js';
 
 function App() {
   return (
@@ -54,7 +56,12 @@ function App() {
             <Route path='/employeesal' element={<EmployeeSal />}/>
             <Route path='/payrun' element={<EmpPayrun />}/>
               
-            <Route path="/respage" element={<ResPage />} /> 
+            <Route path="/respage" element={<ResPage />} />
+            <Route path="/search/:searchTerm" element={<ResPage />} />
+            <Route path="/tag/:tag" element={<ResPage />} /> 
+            <Route path="/food/:id" element={<FoodPage />} />
+            <Route path="/cart" element={<CartPage/>} /> 
+
 
           </Routes>
         </div>

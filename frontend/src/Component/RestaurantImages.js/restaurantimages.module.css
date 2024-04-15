@@ -64,8 +64,8 @@
 
   .locations {
     flex: 9;
-    display: flex; /* Display locations inline */
-  align-items: center; /* Align locations vertically */
+    display: flex;                                    /* Display locations inline */
+  align-items: center;                                /* Align locations vertically */
 }
   
   
