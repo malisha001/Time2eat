@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useSignup } from "../hooks/useSignup"
+import { NavLink } from 'react-router-dom';
 
 const Signup = () => {
     const[fullName, setFullName] = useState('')
@@ -18,7 +19,7 @@ const Signup = () => {
 
     return (
         <form className= "signup" onSubmit={handleSubmit}>
-            <h3>Sign up</h3>
+            <h3>Create an account</h3>
 
             <label>Full Name</label>
             <input
@@ -61,9 +62,12 @@ const Signup = () => {
                 onChange={(e)  => setConfirmPassword(e.target.value)}
                 value ={confirmPassword}
             />
-
-             <button disabled= { isLoading }>Sign-up</button>
-             {error && <div className = "error">{error}</div>}
+                    
+                <button disabled= { isLoading }>Sign-up</button>
+            
+            <p>Already have an account  click here<NavLink to="/login">  Log in </NavLink> </p>
+             
+                {error && <div className = "error">{error}</div>}
         
         </form>
     )

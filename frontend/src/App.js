@@ -1,11 +1,14 @@
 // pages & components
 import Home from './pages/Home/HomePage';
 import Navbar from "./component/Navbar";
+import Signup from './pages/Signup'
+import Login from './pages/Login'
 
 import MyBookings from "./pages/MyBookings";
 import NewBooking from "./pages/NewBooking";
 import RestaurantStaff from "./pages/RestaurantStaff";
 import Feedback from './pages/Feedback';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { useAuthContext } from './hooks/useAuthContext'
@@ -22,8 +25,9 @@ import AllCustomerDineInHistory from './pages/AllCustomerDineInHistory';
 import EmployeeSal from './pages/EmployeeSal';
 import EmpPayrun from './pages/EmpPayrun';
 import BookingPayment from './pages/BookingPayment';
-
-
+import AdvertisementForm from './components/AdvertisementForm';
+import UpdateAdvertisementForm from './components/UpdateAdvertisementForm'; // Import your update form component
+import AdvertisementPage  from './pages/AdvertisementPage'
 
 function App() {
   const {user} = useAuthContext()
@@ -76,8 +80,10 @@ function App() {
             <Route path='/employeesal' element={<EmployeeSal />}/>
             <Route path='/payrun' element={<EmpPayrun />}/>
               
-
-
+            <Route path ="/advertisement" element ={user ? <AdvertisementPage />: <Navigate to="/login" />}/>
+            <Route path="/update-advertisement/:id" element={!user ?<UpdateAdvertisementForm />: <Navigate to="/" />} />
+            <Route path="/create-advertisement" element={!user ?<AdvertisementForm />: <Navigate to="/" />} />
+      
           </Routes>
         </div>
       </BrowserRouter>

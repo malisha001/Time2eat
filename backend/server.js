@@ -10,7 +10,7 @@ const deliveries = require('./routers/deliveryOrderf')
 const bookingRoutes = require('./routers/booking')
 const RealTimebookingRoutes = require('./routers/realtimebooking')
 const CustomerHistoryRoutes = require('./routers/customerhistoryroute')
-const advertisementRoutes = require('./routers/advertisement')
+const advertisementsRoutes = require('./routers/advertisements')
 const userRoutes = require('./routes/user')
 const inventoryRoutes = require('./routers/inventory') 
 const orderRoutes = require('./routers/orders')
@@ -54,7 +54,7 @@ app.use('/api/deliveryorder',deliveries)
 // user routers
 app.use('/api/user', userRoutes)
 //adverticment routers
-app.use('/api/advertisements',advertisementRoutes)
+app.use('/api/advertisements',advertisementsRoutes)
 //inventory routers
 app.use('/api/inventory/', inventoryRoutes)
 //order system routers
