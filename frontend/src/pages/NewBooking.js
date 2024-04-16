@@ -159,12 +159,12 @@ const NewBooking = () => {
                             </form>
                             {showForm ? (
                                 <form className="create" onSubmit={handleAddBooking}>
-                                <Paper sx={{ width: '850px', height: '400px', pt: '10px', mt: '100px', ml: '40px', mr: '40px', bgcolor: '#ffffff' }}>
+                                <Paper sx={{ width: '850px', height: '360px', pt: '10px', mt: '40px', ml: '20px', mr: '40px', bgcolor: 'lightgrey', mb: '30px' }}>
                                     <Grid container spacing={2}>
-                                        <Grid sx={{ pr: '16px', ml: '30px', mr: '15px', mt: '20px' }} item md={12}>
+                                        <Grid sx={{ pr: '16px', ml: '30px', mr: '15px', mt: '0px' }} item md={12}>
                                             <h2 className='form-header-pre-booking'>Book Your Table</h2>
                                         </Grid>
-                                        <Grid sx={{ ml: '0px', mt: '10px', ml: '30px', mr: '15px' }} container spacing={2}>
+                                        <Grid sx={{ ml: '0px', mt: '0px', ml: '30px', mr: '15px' }} container spacing={2}>
                                             <Grid item md={6}>
                                                 <Grid container spacing={2}>
                                                     <Grid item md={12}>
@@ -222,7 +222,7 @@ const NewBooking = () => {
                                                 </Grid>
                                             </Grid>
                                         </Grid>
-                                        <Grid sx={{ ml: '30px', mt: '10px', mr: '15px' }} container spacing={2}>
+                                        <Grid sx={{ ml: '30px', mt: '0px', mr: '15px' }} container spacing={2}>
                                             <Grid item md={6}>
                                                 <Grid container spacing={2}>
                                                     <Grid item md={12}>
@@ -245,8 +245,8 @@ const NewBooking = () => {
                                                     <Grid sx={{ pt: '45' }} item md={12}>
                                                         <Box sx={{ height: '80px' }} className='form-card-subtitles-bottom-box'>
                                                             <div className="input-container">
-                                                                <label className='input-mybooking-label'>Date</label>
-                                                                <label className='input-mybooking-label'>{selectedDateTime.date}</label>
+                                                                <label className='input-mybooking-label-date'>Date</label>
+                                                                <label className='input-mybooking-label-time'>{selectedDateTime.date}</label>
                                                             </div>
                                                             <div className="input-container">
                                                                 <label className='input-mybooking-label'>Time</label>
@@ -263,11 +263,11 @@ const NewBooking = () => {
                                 </Paper>
                             </form>
                             ) : (
-                                <Card className='imgprebooking' sx={{ maxWidth: 800 }}>
+                                <Card className='imgprebooking' sx={{ maxWidth: 850 }}>
                                     <CardActionArea>
                                         <CardMedia
                                             component="img"
-                                            height="345"
+                                            height="380"
                                             image={exampleImage}
                                             alt="green iguana"
                                         />
