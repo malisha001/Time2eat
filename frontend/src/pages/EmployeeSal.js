@@ -83,8 +83,7 @@ const EmployeeSal = () => {
       <p>oopz</p>
       <Button
         variant="contained"
-        onClick={() => setOpenPopup(true)}
-      >
+        onClick={() => setOpenPopup(true)}>
         <AddIcon /> Add
       </Button>
 

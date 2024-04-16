@@ -18,9 +18,16 @@ import RealTimeIndicator from './component/RealTimeIndicator';
 import AllCustomerDineInHistory from './pages/AllCustomerDineInHistory';
 import EmployeeSal from './pages/EmployeeSal';
 import EmpPayrun from './pages/EmpPayrun';
+
+import RiderDashboard from './pages/RiderDashbord';
+import OngoingOrder from './pages/OngoingOrder';
+import Cart from './pages/Cart';
+import Payment from './pages/Payment';
+
 import BookingPayment from './pages/BookingPayment';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+
 
 function App() {
   const {user} = useAuthContext()
@@ -67,6 +74,12 @@ function App() {
              
             <Route path='/employeesal' element={<EmployeeSal />}/>
             <Route path='/payrun' element={<EmpPayrun />}/>
+
+            <Route path='/riderdashborad/*' element={<RiderDashboard />}/>
+            <Route path='/riderdashborad/ongoingorder' element={<OngoingOrder/>} />
+            <Route path='/cart' element={<Cart/>} />
+            <Route path='/payment' element={<Payment/>} />
+
               
 
 

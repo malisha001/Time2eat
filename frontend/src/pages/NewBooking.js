@@ -1,4 +1,8 @@
 
+import React, { useState,useEffect } from 'react';
+import {Grid, Paper, CardActionArea,Box,Card,CardMedia} from '@mui/material';
+
+
 // NewBooking.js
 
 import React, { useState,useEffect } from 'react';
@@ -6,24 +10,27 @@ import React, { useState,useEffect } from 'react';
 // import ParentComponent from '../component/ParentComponent';
 // import CheckAvailability from '../component/CheckAvailability';
 import { useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
+
+
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import { Grid, Paper, CardActionArea } from '@mui/material';
+
+
 import Button from '@mui/material/Button';
 import axios from 'axios';
+
 import exampleImage from '../Assests/example.jpg';
 
 import grouptableimage from '../Assests/grouptable.jpg'; // Adjust the path as per your directory structure
 import coupletableimage from '../Assests/coupletable.jpg'; // Adjust the path as per your directory structure
 import '../component/Bookingformstyle.css';
+
 import Navbar from '../component/Navbar';
 // import Card from '@mui/material/Card';
 // import CardContent from '@mui/material/CardContent';
 // import CardMedia from '@mui/material/CardMedia';
 // import Typography from '@mui/material/Typography';
 // import { CardActionArea, Grid,Box,Paper } from '@mui/material';
+
 import PreStyles from '../component/NewStyle.css'
 // import exampleImage from '../Assests/example.jpg'; // Adjust the path as per your directory structure
 // import grouptableimage from '../Assests/grouptable.jpg'; // Adjust the path as per your directory structure

@@ -4,9 +4,12 @@ import './index.css';
 import App from './App';
 
 
+
+
 import { AuthContextProvider } from './context/AuthContext';
 
 // import { BookingContextProvider } from './context/BookingContext'
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
