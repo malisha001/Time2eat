@@ -5,6 +5,7 @@ import App from './App';
 // import { BookingContextProvider } from './context/BookingContext';
 import CartProvider from './hooks/useCart.js';
 //import { BrowserRouter } from 'react-router-dom';
+import './axiosConfig';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

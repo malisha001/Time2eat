@@ -1,6 +1,8 @@
 const express = require('express');
+
 const mongoose = require('mongoose');
 require('dotenv').config()
+
 //import routers
 const employeesal = require('./routers/employeeSalary')
 const restaurants = require('./routers/restaurants')
@@ -11,8 +13,8 @@ const RealTimebookingRoutes = require('./routers/realtimebooking')
 const CustomerHistoryRoutes = require('./routers/customerhistoryroute')
 const advertisementRoutes = require('./routers/advertisement')
 const inventoryRoutes = require('./routers/inventory') 
-const orderRoutes = require('./routers/orders')
-const cartRoutes = require('./routers/carts')
+//const orderRoutes = require('./routers/orders')
+const fooditemrouter = require('./routers/fooditemrouter')
 const onlineOrdersRoutes = require('./routers/onlineOrders')
 const employeeLeaveRoutes = require('./routers/employeeLeaves')
 const employees = require('./routers/employees')
@@ -56,12 +58,12 @@ app.use('/api/advertisements',advertisementRoutes)
 //inventory routers
 app.use('/api/inventory/', inventoryRoutes)
 //order system routers
-app.use('/api/orders',orderRoutes)
-app.use('/api/carts', cartRoutes)
+//app.use('/api/orders',orderRoutes)
+app.use('/api/foods', fooditemrouter)
 app.use('/api/onlineOrders', onlineOrdersRoutes)
 
 // connect to db
-mongoose.connect(process.env.MONG_URI)
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         // listen for requests
         app.listen(process.env.PORT, () => {

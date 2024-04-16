@@ -1,4 +1,4 @@
-export const sample_Rimages = [
+ const sample_Rimages = [
     {
        id: '1',
        name: ' Delicious',
@@ -9,8 +9,11 @@ export const sample_Rimages = [
      
     }
 ];
+module.exports = {
+  sample_Rimages
+};
 
-export const sample_foods =  [
+const sample_foods =  [
     {
       id: '1',
       name: 'Pizza Pepperoni',
@@ -79,7 +82,11 @@ export const sample_foods =  [
     },
   ];
 
-  export const sample_tags = [
+  module.exports = {
+    sample_foods
+  };
+
+   const sample_tags = [
     { name: 'All', count: 6 },
   { name: 'FastFood', count: 4 },
   { name: 'Pizza', count: 2 },
@@ -90,6 +97,10 @@ export const sample_foods =  [
   { name: 'Rice', count: 1 },
   
 ];
+
+module.exports = {
+  sample_tags
+};
   
 
 

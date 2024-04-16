@@ -1,41 +1,47 @@
 const mongoose = require('mongoose')
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
-const orderSchema = new Schema({
+const { OrderStatus } = require('../constants/orderStatus.js');
+const { FoodItemModel } = require('./foodItemModel.js');
 
-    orderid:{},
 
-    tableid:{},
+const OrderItemSchema = new Schema(
+    {
 
-    restaurantid:{},
-
-    fooditem:{
-       type: String,
-       required: true
+        food: { type: FoodItemModel.schema, required: true},
+        price: {type: Number, required: true},
+        quantity: { type:Number, required: true},
     },
-
-    quantity:{
-       type: Number,
-       required:true
-    },
-
-    name:{
-       type: String,
-       required:true
-    },
-
-    price:{
-        type:Number,
-        required:true
-    },
-
-    state:{
-        type:String,
-        required:true
+    {
+        _id: false,
     }
+);
+
+OrderItemSchema.pre('validate', function (next) {
+    this.price = this.food.price * this.quantity;
+    next();
+});
+
+const orderSchema = new Schema(
+    {
+
+    name: { type: String, required: true },
+    address: { type: String, required: true },
+    /*addressLatLng: { type: LatLngSchema, required: true }, */
+    paymentId: { type: String },
+    totalPrice: { type: Number, required: true },
+    items: { type: [OrderItemSchema], required: true },
+    status: { type: String, default: OrderStatus.NEW },
+    user: { type: Schema.Types.ObjectId, required: true },
+  },
+  {
+    timestamps: true,
+    
+  }
+);
+
+    
 
 
-}, { timestamps: true })
-
-module.exports = mongoose.model('Order', orderSchema)
+module.exports = mongoose.model('order', orderSchema);

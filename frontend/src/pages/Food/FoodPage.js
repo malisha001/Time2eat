@@ -5,7 +5,7 @@ import Price from '../../component/Price/Price';
 import StarRating from '../../component/StarRating/StarRating';
 import Tags from '../../component/Tags/Tags';
 import { useCart } from '../../hooks/useCart';
-import { getById } from '../../services/foodService';
+import { getById } from '../../services/fooditemService';
 import NotFound from '../../component/NotFound/NotFound';
 import classes from './foodPage.module.css';
 export default function FoodPage() {
@@ -31,7 +31,7 @@ export default function FoodPage() {
         <div className={classes.container}>
           <img
             className={classes.image}
-            src={`/foods/${food.imageUrl}`}
+            src={`${food.imageUrl}`}
             alt={food.name}
           />
 

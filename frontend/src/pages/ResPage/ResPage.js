@@ -4,7 +4,7 @@ import {
   getAllByTag,
   getAllTags,
   search,
- } from '../../services/foodService';
+ } from '../../services/fooditemService';
 import { getAllRimages } from '../../services/RestaurantService';
 import Thumbnails from '../../component/Thumbnails/Thumbnails';
 import RestaurantImages from '../../component/RestaurantImages.js/RestaurantImages';
