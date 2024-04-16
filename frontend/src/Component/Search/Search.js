@@ -17,6 +17,7 @@ export default function Search() {
 
   return (
      <div className={classes.container}>
+      
      <input 
        type="text"
        placeholder='Search Food Items!'
@@ -28,9 +29,10 @@ export default function Search() {
 
        <button onClick={search}>Search</button>
      
-     
+       
      
      </div>
+     
   )
   
 }

@@ -48,21 +48,22 @@ export default function ResPage() {
   }, [searchTerm, tag]);
 
   useEffect(() => {
-    if (!searchTerm) { // Only fetch Rimages if it's not a search page
+    
       getAllRimages().then((RimagesData) => {
         dispatch({ type: 'RIMAGES_LOADED', payload: RimagesData });
       });
-    }
+    
   }, [searchTerm]);
  
   
   return (
 
     <>
-                                                    
-    <RestaurantImages Rimages = {Rimages} />             {/* Render Restaurant Images */}
-    <Search />
-    <Tags tags = {tags} />
+                                                
+    <RestaurantImages Rimages = {Rimages} />                     
+     
+    <Search Rimages = {Rimages} />
+    <Tags tags = {tags}  Rimages={Rimages} />
     {foods.length === 0 && <NotFound linkText="Reset Search" />}
     <Thumbnails foods = {foods} />                         {/* Render Thumbnails for foods */}
     

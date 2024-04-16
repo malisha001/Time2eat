@@ -64,7 +64,7 @@ export const sample_foods =  [
       origins: ['india', 'asia'],
       stars: 3.5,
       imageUrl: 'food-5.jpg',
-      tags: ['SlowFood', 'Soup'],
+      tags: ['SlowFood', 'Rice'],
     },
     {
       id: '6',
@@ -87,7 +87,7 @@ export const sample_foods =  [
   { name: 'SlowFood', count: 2 },
   { name: 'Hamburger', count: 1 },
   { name: 'Fry', count: 1 },
-  { name: 'Soup', count: 1 },
+  { name: 'Rice', count: 1 },
   
 ];
   

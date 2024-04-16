@@ -40,6 +40,16 @@
 
 .list li div{
     padding: 1rem;
+    font-size: 20px;
+    font: black;
+    
+    
+}
+
+.list li div a {
+
+    text-decoration: none;
+    color:black;
 }
 
 .list li div:not(:first-child){  /*it will not include the first div which is image div*/
@@ -112,7 +122,7 @@
     color: white;
     background: #e72929;
     display: block;
-    width: 99%;
+    width: 90%;
     border-radius: 1rem;
     text-align: center;
     justify-self: center;

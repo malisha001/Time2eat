@@ -21,4 +21,4 @@ router.delete('/:id', deleteCart)
 router.patch('/:id', updateCart)
 
 
-module.exports = router
+module.exports = router;
