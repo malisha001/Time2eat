@@ -2,19 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper,Button } from '@mui/material';
 import { getDeliveryOrders,acceptOrder,showRider } from '../services/api';
 import {useNavigate,Route,Routes} from 'react-router-dom';
+import { useAuthContext } from '../hooks/useAuthContext';
 //nested router
 import OngoingOrder from '../pages/OngoingOrder';
 
 function RiderDashboard() {
-
+    const {user} = useAuthContext()
     const navigate = useNavigate()
     const [uniqueOrders, setUniqueOrders] = useState([]);
+
+    console.log("rider",user)
 
     const handleOnclick = async(order)=>{
         console.log("orderId:",order)
         try {
             const orderres = await acceptOrder({
                 orderId: order.orderid,
+                riderId: user.email,
                 cusName: order.cusName,
                 customerLocation: order.customerLocation,
                 restaurantname: order.restaurantname,

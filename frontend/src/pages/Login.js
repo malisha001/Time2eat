@@ -13,12 +13,13 @@ const Login = () => {
         //calling login custom hook
         await login(email, password)
     }
+    console.log("login role",loginrole)
     if(loginrole === 'customer'){
         return <Navigate to ="/"/>
     }
-    // else if(loginrole === 'rider'){
-    //     return <Navigate to ="/riderdashbord"/>
-    // }
+    else if(loginrole === 'rider'){
+        return <Navigate to ="/riderdashborad"/>
+    }
     // else if(loginrole === 'admin'){
     //     return <Navigate to ="/admin"/>
     // }

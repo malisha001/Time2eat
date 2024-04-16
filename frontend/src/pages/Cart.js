@@ -4,8 +4,10 @@ import { getCartData,checkRider } from '../services/api';
 import {useNavigate,Route,Routes} from 'react-router-dom';
 import { placeorder } from '../services/api';
 import Payment from './Payment';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 function Cart() {
+    const {user} = useAuthContext() //get user details
     //navigate another page
     const navigate = useNavigate()
     //state
@@ -56,6 +58,7 @@ function Cart() {
         if(radiovalue === 'delivery'){
             const data = {
                 orderid: order,
+                cusName: user.email,
                 customerLocation: location,
                 restaurantname: resname,
                 deliveryOpt: radiovalue,

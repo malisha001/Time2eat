@@ -35,6 +35,9 @@ export const useLogin = () =>{
             if(json.role === 'customer'){
                 setloginrole("customer")
             }
+            else if(json.role === 'rider'){
+                setloginrole("rider")
+            }
 
         }
     }

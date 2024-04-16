@@ -7,6 +7,7 @@ import exampleImage from '../../Assests/example.jpg';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import {useLogout} from '../../hooks/useLogout'
 import { getAllRestaurents } from '../../services/restaurentsApi';
+import Footer from '../../component/footer/Footer';
 
 export default function TemporaryDrawer() {
   const {logout} = useLogout()
@@ -264,10 +265,13 @@ export default function TemporaryDrawer() {
                   </Grid>
                 </Box>
               </Paper>
+              
             <Drawer open={open} onClose={toggleDrawer(false)}>
                 {DrawerList}
             </Drawer>
-            </Box>                
+             
+            </Box>
+            {/* <Footer/> */}
         </div>
     );
 }

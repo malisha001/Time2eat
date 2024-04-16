@@ -10,10 +10,10 @@ const getDeliveryOrders = async(req,res) =>{
 
 //when rider accept order that order add this table
 const createDeliveryOrders = async(req,res) =>{
-    const{orderId,cusName,customerLocation,restaurantname,reslocation} = req.body
+    const{orderId,riderId,customerLocation,restaurantname,reslocation} = req.body
 
     try {
-        const orderDetails = await Deliveryorder.create({orderId,cusName,customerLocation,restaurantname,reslocation})
+        const orderDetails = await Deliveryorder.create({orderId,riderId,customerLocation,restaurantname,reslocation})
         res.status(201).json(orderDetails)
         console.log(orderDetails)
     } catch (error) {
