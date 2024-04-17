@@ -1,0 +1,22 @@
+.sidebar {
+    width: 200px; /* Adjust width as needed */
+    height: 100vh; /* Make sidebar full height of the viewport */
+    background-color: #333; /* Background color for the sidebar */
+    color: white; /* Text color */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Arrange items vertically */
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.sidebar ul li:hover {
+    background-color: #555; /* Change background color on hover */
+}

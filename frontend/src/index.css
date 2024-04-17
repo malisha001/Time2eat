@@ -127,3 +127,10 @@ code {
   padding-left:25px ;
 
 }
+
+/* appjs container */
+.app-container {
+  display: flex; /* Use flexbox */
+  height: 100vh; /* Make the container full height of the viewport */
+}
+

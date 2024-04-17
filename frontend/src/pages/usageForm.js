@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import UsageItemDetails from '../components/usageItemDetails';
 
 const Usage = () => {
     const [Uitems, setUItems] = useState(null);
     const [usageItemName, setUsageItemName] = useState('');
-    const [initialQuantity, setInitialQuantity] = useState('');
-    const [newQuantity, setNewQuantity] = useState('');
+    const [initialQuantities, setInitialQuantities] = useState({});
+    const [newQuantities, setNewQuantities] = useState({});
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -20,30 +19,65 @@ const Usage = () => {
         fetchAllItems();
     }, []);
 
+    const handleItemSelect = (itemName) => {
+        setUsageItemName(itemName);
+    };
+
+    const handleInitialQuantityChange = (itemId, value) => {
+        setInitialQuantities(prevState => ({
+            ...prevState,
+            [itemId]: value
+        }));
+    };
+
+    const handleNewQuantityChange = (itemId, value) => {
+        setNewQuantities(prevState => ({
+            ...prevState,
+            [itemId]: value
+        }));
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const usageItem = { usageItemName, initialQuantity, newQuantity };
-        const response = await fetch('/api/usage/', {
-            method: 'POST',
-            body: JSON.stringify(usageItem),
-            headers: {
-                'Content-Type': 'application/json'
+    
+        // Check if there are any items selected
+        if (Object.keys(initialQuantities).length === 0) {
+            setError("Please select at least one item.");
+            return;
+        }
+    
+        // Iterate over the selected items and send them to the database separately
+        for (const itemId in initialQuantities) {
+            const initialQuantity = initialQuantities[itemId];
+            const newQuantity = newQuantities[itemId];
+            
+            // Get the item name based on the item ID
+            const selectedItem = Uitems.find(item => item._id === itemId);
+            const itemName = selectedItem.itemName;
+            
+            const usageItem = { usageItemName: itemName, initialQuantity, newQuantity };
+            const response = await fetch('/api/usage/', {
+                method: 'POST',
+                body: JSON.stringify(usageItem),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            const json = await response.json();
+    
+            if(!response.ok) {
+                setError(json.error);
+                return; // Exit the function if an error occurs
             }
-        });
-
-        const json = await response.json();
-
-        if(!response.ok) {
-            setError(json.error);
         }
-        if(response.ok) {
-            setUsageItemName('');
-            setInitialQuantity('');
-            setNewQuantity('');
-            setError(null);
-        }
+    
+        // Clear the state after successful submission
+        setInitialQuantities({});
+        setNewQuantities({});
+        setError(null);
     };
+    
 
     return (
         <div className="usage-home">
@@ -57,16 +91,14 @@ const Usage = () => {
                 </ul>
                 <div className="U-items">
                     {Uitems && Uitems.map((item) => (
-                        <UsageItemDetails
-                            key={item._id}
-                            item={item}
-                            setUsageItemName={setUsageItemName}
-                            setNewQuantity={setNewQuantity}
-                            setInitialQuantity={setInitialQuantity}
-                        />     
+                        <div key={item._id}>
+                            <p onClick={() => handleItemSelect(item.itemName)}>{item.itemName}</p>
+                            <input type="Number" onChange={(e) => handleInitialQuantityChange(item._id, e.target.value)} value={initialQuantities[item._id] || ''}/>
+                            <input type="Number" onChange={(e) => handleNewQuantityChange(item._id, e.target.value)} value={newQuantities[item._id] || ''} />
+                        </div>
                     ))}
                 </div>
-                <button type="submit">Submit</button>
+                <button type="submit" >Submit</button>
                 {error && <div className="error">{error}</div>}
             </form>
         </div>
