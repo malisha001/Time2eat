@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/userModel')
 
+
 const requireAuth = async (req, res, next) => {
 
     //verify authentication
@@ -9,7 +10,6 @@ const requireAuth = async (req, res, next) => {
     if(!authorization){
         return res.status(401).json({error : 'Authorization token required'})
     }
-
 
      //spliting to only taking the token part
      const token = authorization.split(' ')[1]
@@ -24,7 +24,6 @@ const requireAuth = async (req, res, next) => {
         console.log(error)
         res.status(401).json({error: 'Request is not authorized'})
     }
-
 }
 
 module.exports = requireAuth

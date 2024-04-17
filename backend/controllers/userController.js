@@ -42,31 +42,31 @@ const signupUser = async (req, res) => {
         res.status(400).json({error: error.message})
     }
 }
-//not working
-// // get a single user
-// const getUserProfile = async (req, res) => {
-//     const { id } = req.params
-//         //check if the id added is valid
-//     if (!mongoose.Types.ObjectId.isValid(id)) {
-//         return res.status(404).json({error: 'Invalid user ID'})
-//     }
-//     try {
-//         // Find the user by id
-//         const user = await User.findById(id)
 
-//         // Check if the user exists
-//         if (!user) {
-//             return res.status(404).json({error: 'user not found'})
-//         }
+// get a single user
+const getUserProfile = async (req, res) => {
+    const { id } = req.params
+        //check if the id added is valid
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'Invalid user ID'})
+    }
+    try {
+        // Find the user by id
+        const user = await User.findById(id)
 
-//         // If user exists, return the user profile data
-//         res.status(200).json(user)
-//     } catch (error) {   
-//          // Handle errors
-//         console.error('Error fetching user profile:', error);
-//         res.status(500).json({ error: 'Internal server error' });
-//     }
-// }
+        // Check if the user exists
+        if (!user) {
+            return res.status(404).json({error: 'user not found'})
+        }
+
+        // If user exists, return the user profile data
+        res.status(200).json(user)
+    } catch (error) {   
+         // Handle errors
+        console.error('Error fetching user profile:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
 
 // //USER update profile
 // const updateUserProfile = async(req,res) =>{
@@ -110,108 +110,173 @@ const signupUser = async (req, res) => {
 // }
 
 // //email config
-const trasporter = nodemailer.createTransport({
-    service:"gmail",
-    auth:{
-        user:"uwasarad@gmail.com",
-        pass:"1234567"
-    }
-})
+// const trasporter = nodemailer.createTransport({
+//     service:"gmail",
+//     auth:{
+//         user:"uwasarad@gmail.com",
+//         pass:"1234567"
+//     }
+// })
 
-//send reset password
-const resetPwLink = async (req, res) => {
-    console.log(req.body);
+// //send reset password
+// const resetPwLink = async (req, res) => {
+//     console.log(req.body);
 
+//     const {email} = req.body;
+
+//     if(!email){
+//         res.status(401).json({status:401,message:"Enter Your Email"})
+//     }
+
+//     try{
+//         const user = await User.findOne({email:email});
+
+//         //token generate for reset password
+//         const token =  jwt.sign({ _id:user._id }, process.env.SECRET, {
+//             expiresIn: '120s'
+//         });
+
+//         const setusertoken = await User.findByIdAndUpdate({_id:user._id,},{verifytoken:token},{new:true}); 
+         
+//         if(setusertoken) {
+//             const mailOptions = {
+//                 from:"uwasarad@gmail.com",
+//                 to:email,
+//                 subject:"Sending email for password reset",
+//                 text:`Thos Link Valid for 2 MINITUES http://localhost:3000/forgotpassword/${user.id}/${setusertoken.verifytoken}`
+//             }
+
+//             trasporter.sendMail(mailOptions,(error,info) =>{
+//                 if(error){
+//                     console.log("error",error);
+//                     res.status(401).json({status:401,message:"email not send"})
+//                 }else{
+//                     console.log("Email sent", info.response);
+//                     res.status(201).json({status:201,message:"Email sent successfully"})
+//                 }
+//             })
+//         }
+
+//     }catch(error){
+//             res.status(401).json({status:401,message:"invalid user"})
+//     }
+
+// };
+
+// //verify user for forgot password time
+// const forgotPwTime =async (req,res) => {
+
+//         const {id,token} =req.params;
+
+//        try {
+//         const validUser = await User.findOne({_id:id,verifytoken:token});
+        
+//         const verifyToken = jwt.verify(token,process.env.SECRET);
+
+//         console.log(verifyToken)
+
+//         if(validUser && verifyToken._id){
+//             res.status(201).json({status:201,validUser})
+//         }else{
+//             res.status(401).json({status:401,message:"user not exist"})
+//         }
+
+//     } catch (error) {
+//         res.status(401).json({status:401,error})
+//     }
+// };
+
+// //change password
+// const changePw = async (req,res) => {
+
+//     const {id,token} =req.param;
+//     const {password} =req.body;
+
+//     try{
+//         const validUser = await User.findOne({_id:id, verifytoken:token});
+        
+//         const verifyToken = jwt.verify(token, process.env.SECRET);
+
+//         if(validUser && verifyToken._id){
+                
+//                 const newpassword = await hashPassword(password)
+
+//                 const setNewUserPass = await User.findByIdAndUpdate({_id:id},{password:newpassword});
+
+//                 setNewUserPass.save();
+//                 res.status(201).json({status:201,setNewUserPass})
+//         }else{
+//             res.status(401).json({status:401,message:"user not exist"})
+//         }
+//     }catch (error){
+//         console.log(error);
+//         res.status(401).json({status:401,error})
+//     }
+// }
+
+//
+const resetPw = async (req,res) => {
     const {email} = req.body;
 
-    if(!email){
-        res.status(401).json({status:401,message:"Enter Your Email"})
+    const user = await User.findOne({ email });
+
+    if (!user) {
+        return res.status(404).json({ message:"User not found" });
+    }
+    const token = Math.random().toString(36).slice(-8);
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = Date.now() + 3600000;    //1hour
+
+    await user.save();
+
+    const transporter =  nodemailer.createTransport({
+        service:"gmail",
+        auth:{
+            user:"uwasarad@gmail.com",
+            pass:"esof qlib yiqd cudv"
+        },
+    })
+
+    const message ={
+        from:"uwasarad@gmail.com",
+        to: user.email,
+        subject:"Password reset request",
+        text:`You are receiving this email because you (or someone else) has requested a password reset for your account. \n\n Please use the following token to reset your password: ${token}\n\n If you did not request a password reset please ignore this email.`
     }
 
-    try{
-        const user = await User.findOne({email:email});
-
-        //token generate for reset password
-        const token =  jwt.sign({ _id:user._id }, process.env.SECRET, {
-            expiresIn: '120s'
-        });
-
-        const setusertoken = await User.findByIdAndUpdate({_id:user._id,},{verifytoken:token},{new:true}); 
-         
-        if(setusertoken) {
-            const mailOptions = {
-                from:"uwasarad@gmail.com",
-                to:email,
-                subject:"Sending email for password reset",
-                text:`Thos Link Valid for 2 MINITUES http://localhost:3000/forgotpassword/${user.id}/${setusertoken.verifytoken}`
-            }
-
-            trasporter.sendMail(mailOptions,(error,info) =>{
-                if(error){
-                    console.log("error",error);
-                    res.status(401).json({status:401,message:"email not send"})
-                }else{
-                    console.log("Email sent", info.response);
-                    res.status(201).json({status:201,message:"Email sent successfully"})
-                }
-            })
+    transporter.sendMail(message,(err,info) =>{
+        if(err){
+            res.status(404).json({message:"Something went wrong, try again!"});      
         }
+            res.status(200).json({message:"Password ResetEmail Sent" + info.response});
+    });
 
-    }catch(error){
-            res.status(401).json({status:401,message:"invalid user"})
-    }
+}  
 
-};
-
-//verify user for forgot password time
-const forgotPwTime =async (req,res) => {
-
-        const {id,token} =req.params;
-
-       try {
-        const validUser = await User.findOne({_id:id,verifytoken:token});
-        
-        const verifyToken = jwt.verify(token,process.env.SECRET);
-
-        console.log(verifyToken)
-
-        if(validUser && verifyToken._id){
-            res.status(201).json({status:201,validUser})
-        }else{
-            res.status(401).json({status:401,message:"user not exist"})
-        }
-
-    } catch (error) {
-        res.status(401).json({status:401,error})
-    }
-};
-
-//change password
-const changePw = async (req,res) => {
-
-    const {id,token} =req.param;
+const resetPwToken =async (req,res) => {
+    const {token} =req.params;
     const {password} =req.body;
 
-    try{
-        const validUser = await User.findOne({_id:id, verifytoken:token});
-        
-        const verifyToken = jwt.verify(token, process.env.SECRET);
+    const user = await User.findOne({
+        resetPasswordToken: token,
+        resetPasswordExpires: {$gt:Date.now() },
+    });
 
-        if(validUser && verifyToken._id){
-                
-                const newpassword = await hashPassword(password)
+    if (!user) {
+        return res.status(404).json({ message: "Invalid Token" });
+    }   
+        const hashPassword = await bcrypt.hash(password, 10);
+        user.password = hashPassword;
+        user.resetPasswordToken = null;
+        user.resetPasswordExpires = null;
 
-                const setNewUserPass = await User.findByIdAndUpdate({_id:id},{password:newpassword});
+        await user.save();
 
-                setNewUserPass.save();
-                res.status(201).json({status:201,setNewUserPass})
-        }else{
-            res.status(401).json({status:401,message:"user not exist"})
-        }
-    }catch (error){
-        console.log(error);
-        res.status(401).json({status:401,error})
-    }
+        res.json({message: "Password rest successfull"});
+
+
+
+
 }
 
 
@@ -220,7 +285,9 @@ module.exports = {
     loginUser,
    // getUserProfile,
     //updateUserProfile,
-    resetPwLink,
-    forgotPwTime,
-    changePw
+    // resetPwLink,
+    // forgotPwTime,
+    // changePw,
+    resetPw,
+    resetPwToken
     }

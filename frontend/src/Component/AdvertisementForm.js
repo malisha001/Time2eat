@@ -2,6 +2,18 @@ import { useState } from 'react'
 import { useAdvertisementsContext } from '../hooks/useAdvertisementsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 import axios from 'axios';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
+
+const FormContainer = styled('form')({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1rem',
+  maxWidth: '400px',
+  margin: 'auto',
+});
 
 const AdvertisementForm = () => {
   //invoke hook
@@ -64,51 +76,66 @@ const AdvertisementForm = () => {
   }
 
   return (
-    <form className="createAd" onSubmit={handleSubmit}> 
-      <h3>Add New Advertisement</h3>
 
-      <input 
-        type="text" 
+     <FormContainer className="createAd" onSubmit={handleSubmit}>
+       <Typography variant="h5">Add New Advertisement</Typography>
+      
+      <TextField
+        label="Advertisement Title"
+        type="text"
         placeholder="Advertisement Title"
-        onChange={(e) => setAdTitle(e.target.value)} 
+        onChange={(e) => setAdTitle(e.target.value)}
         value={adTitle}
-        className={emptyFields?.includes('adTitle')? 'error' : ''}
+        error={emptyFields?.includes('adTitle')}
       />
 
-      <input 
-        type="text" 
+      <TextField
+        label="Description"
+        type="text"
         placeholder="Description"
-        onChange={(e) => setDescription(e.target.value)} 
+        onChange={(e) => setDescription(e.target.value)}
         value={description}
-        className={emptyFields?.includes('description')? 'error' : ''}
+        error={emptyFields?.includes('description')}
       />
 
-      <input 
-        type="date" 
-        onChange={(e) => setStartDate(e.target.value)} 
+      <TextField
+        label="Start Date"
+        type="date"
+        onChange={(e) => setStartDate(e.target.value)}
         value={startDate}
-        className={emptyFields?.includes('startDate')? 'error' : ''} 
+        error={emptyFields?.includes('startDate')}
+        InputLabelProps={{
+          shrink: true,
+        }}
       />
       
-      <input 
-        type="date" 
-        onChange={(e) => setEndDate(e.target.value)} 
+      <TextField
+        label="End Date"
+        type="date"
+        onChange={(e) => setEndDate(e.target.value)}
         value={endDate}
-        className={emptyFields?.includes('endDate')? 'error' : ''} 
+        error={emptyFields?.includes('endDate')}
+        InputLabelProps={{
+          shrink: true,
+        }}
       />
      
-      <input 
-        type="text" 
+      <TextField
+        label="Offer Type"
+        type="text"
         placeholder="Offer Type"
-        onChange={(e) => setOfferType(e.target.value)} 
+        onChange={(e) => setOfferType(e.target.value)}
         value={offerType}
-        className={emptyFields?.includes('offerType')? 'error' : ''} 
+        error={emptyFields?.includes('offerType')}
       />
 
-      <button>Add Advertisement</button>
-      {error && <div className="error">{error}</div>}
-    </form>
-  )
-}
+      <Button variant="contained" color="primary" type="submit">
+        Add Advertisement
+      </Button>
+      
+      {error && <Typography variant="body1" color="error">{error}</Typography>}
+    </FormContainer>
+  );
+};
 
-export default AdvertisementForm
+export default AdvertisementForm;

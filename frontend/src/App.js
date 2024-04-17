@@ -80,9 +80,9 @@ function App() {
             <Route path='/employeesal' element={<EmployeeSal />}/>
             <Route path='/payrun' element={<EmpPayrun />}/>
               
-            <Route path ="/advertisement" element ={user ? <AdvertisementPage />: <Navigate to="/login" />}/>
-            <Route path="/update-advertisement/:id" element={!user ?<UpdateAdvertisementForm />: <Navigate to="/" />} />
-            <Route path="/create-advertisement" element={!user ?<AdvertisementForm />: <Navigate to="/" />} />
+            <Route path ="/advertisement" element ={<AdvertisementPage />}/>
+            <Route path="/update-advertisement/:id" element={<UpdateAdvertisementForm />} />
+            <Route path="/create-advertisement" element={<AdvertisementForm />} />
       
           </Routes>
         </div>

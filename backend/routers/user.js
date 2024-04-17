@@ -7,9 +7,11 @@ const { signupUser ,
         loginUser,
        // getUserProfile,
         //updateUserProfile,
-        resetPwLink,
-        forgotPwTime,
-        changePw
+      //   resetPwLink,
+      //   forgotPwTime,
+      //   changePw
+         resetPw,
+         resetPwToken
      } = require('../controllers/userController')
 
 const router = express.Router()
@@ -26,13 +28,16 @@ router.post("/signup", signupUser)
 // updateProfile
 //router.put("/update-profile",updateUserProfile )
 
-// send email link for reser password
-router.post("/sendpasswordlink",resetPwLink)
+// // send email link for reser password
+// router.post("/sendpasswordlink",resetPwLink)
+// // verify user for forgot password time
+// router.get("/forgotpassword/:id/:token",forgotPwTime )
+// //change password
+// router.post("/:id/:token",changePw)
 
-// verify user for forgot password time
-router.get("/forgotpassword/:id/:token",forgotPwTime )
+router.post("/reset-password",resetPw);
 
-//change password
-router.post("/:id/:token",changePw)
+router.post("/reset-password/:token",resetPwToken);
+
 
 module.exports = router

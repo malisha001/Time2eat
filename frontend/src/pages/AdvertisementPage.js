@@ -2,10 +2,12 @@ import React, {useState,useEffect } from "react"
 import { useAdvertisementsContext } from "../hooks/useAdvertisementsContext"
 import {useAuthContext } from "../hooks/useAuthContext"
 import { Link } from 'react-router-dom';
-// components
-import AdvertisementDetails from "../components/AdvertisementDetails"
+import { format } from 'date-fns';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, Button } from '@mui/material';
 
-const AdvertisementPage = () => {
+
+const AdvertisementPage = ({ advertisement }) => {
   const { advertisements, dispatch } = useAdvertisementsContext()
   const {user } = useAuthContext()
   const [searchTerm, setSearchTerm] = useState('');
@@ -32,6 +34,15 @@ const AdvertisementPage = () => {
     }
   }, [dispatch, user]);
 
+  const column = [
+    "Advertisement Title",
+    "Description",
+    "Start Date",
+    "End Date",
+    "Offer Type",
+    "Action",
+  ];
+
   //Function to filter advertisement by title
     const filteredAdvertisements = (advertisements, term)=> {
       return advertisements.filter(
@@ -41,9 +52,33 @@ const AdvertisementPage = () => {
       );
     };
 
-   
+    // Function to handle advertisement deletion
+  const handleDelete = async (advertisement) => {
+
+    if(!user){ return}
+
+    const response = await fetch('/api/advertisements/' + advertisement._id, {
+      method: 'DELETE',
+      headers: {
+        'Authorization' : `Bearer ${user.token}`
+      }
+    });
+
+    const json = await response.json()
+
+    if(response.ok){
+        dispatch({type: 'DELETE_AD',payload: json})
+    }
+  };
+
+   //Function to format date using date-fns
+  const formatDate = (dateString) => {
+    return format(new Date(dateString), 'MMM dd, yyyy');
+  };
+
   return (
     <div className="advertisementPage">
+
       {/* Search bar */}
       <input
         type="text"
@@ -51,27 +86,62 @@ const AdvertisementPage = () => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value.toLowerCase())} // Ensure search query is converted to lowercase
       />
-        <div> 
-          <Link to={`/create-advertisement`}> 
-          <button>Add Advertisement</button> </Link>
-        </div>
+      
+      {/* Add advertisement button */}
+      <div>
+        <Link to={`/create-advertisement`}>
+          <Button sx={{marginBottom: '10px'}} variant="contained" color="primary">Add Advertisement</Button>
+        </Link>
+      </div>
 
       <div className="advertisements">
-        {advertisements && 
-          (searchTerm ?
-            filteredAdvertisements(advertisements,searchTerm).map((advertisement) => (
-              <AdvertisementDetails 
-                advertisement={advertisement} 
-                key={advertisement._id} />
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                {["Advertisement Title", "Description", "Start Date", "End Date", "Offer Type", "Action"].map((column, index) => (
+                  <TableCell key={index}>{column}</TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {advertisements && (searchTerm ?
+                filteredAdvertisements(advertisements, searchTerm).map((advertisement) => (
+                  <TableRow key={advertisement._id}>
+                    <TableCell>{advertisement.adTitle}</TableCell>
+                    <TableCell>{advertisement.description}</TableCell>
+                    <TableCell>{formatDate(advertisement.startDate)}</TableCell>
+                    <TableCell>{formatDate(advertisement.endDate)}</TableCell>
+                    <TableCell>{advertisement.offerType}</TableCell>
+                    <TableCell>
+                      <Link to={`/update-advertisement/${advertisement._id}`}>
+                        <Button variant="contained" color="primary">Update</Button>
+                      </Link>
+                      <Button variant="contained" color="secondary" onClick={() => handleDelete(advertisement)}>Delete</Button>
+                    </TableCell>
+                  </TableRow>
             )) :
-            advertisements && advertisements.map((advertisement) => (
-              <AdvertisementDetails 
-                advertisement={advertisement} 
-                key={advertisement._id} />
-            ))
-          )}
-        </div>
+              advertisements && advertisements.map((advertisement) => (
+                  <TableRow key={advertisement._id}>
+                    <TableCell>{advertisement.adTitle}</TableCell>
+                    <TableCell>{advertisement.description}</TableCell>
+                    <TableCell>{formatDate(advertisement.startDate)}</TableCell>
+                    <TableCell>{formatDate(advertisement.endDate)}</TableCell>
+                    <TableCell>{advertisement.offerType}</TableCell>
+                    <TableCell>
+                      <Link to={`/update-advertisement/${advertisement._id}`}>
+                        <Button variant="contained" color="primary">Update</Button>
+                      </Link>
+                      <Button variant="contained" color="secondary" onClick={() => handleDelete(advertisement)}>Delete</Button>
+                    </TableCell>
+                  </TableRow>
+                )))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
+    </div>
+     
   );
 };
 

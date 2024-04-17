@@ -12,8 +12,9 @@ const Signup = () => {
     const{signup, error , isLoading} = useSignup()
 
     const handleSubmit =async (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
+         // Call signup function if all validations pass
         await signup(fullName,email,address,contactNo, password, confirmPassword)
     }
 
@@ -34,6 +35,7 @@ const Signup = () => {
                 onChange={(e)  => setEmail(e.target.value)}
                 value ={email}
             />
+              {/* {emailError && <div className="error">{emailError}</div>} */}
 
             <label>Address</label>
             <input
@@ -48,6 +50,7 @@ const Signup = () => {
                 onChange={(e)  => setContactNo(e.target.value)}
                 value ={contactNo}
             />
+            {/* {contactNoError && <div className="error">{contactNoError}</div>} */}
 
             <label>Password</label>
             <input
