@@ -97,7 +97,7 @@ function UpdateUser() {
                     onChange={(e) => setCategory(e.target.value)}
                 />
                 <br />
-                <button>Update Item</button>
+                <button className="updateButton">Update Item</button>
             </form>
         </div>
     );

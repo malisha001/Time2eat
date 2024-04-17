@@ -62,11 +62,11 @@ ul li svg {
 }
 
 /* Button */
-ul button svg {
+.navButton svg {
     margin: 0px 25px 0px 0px;
 }
 
-ul button{
+.navButton{
     margin-top: 50px;
     margin-left: 15px;
     background-color: #8B0000;
@@ -78,7 +78,7 @@ ul button{
     font-weight: 600;
 }
 
-ul button a {
+.navButton a {
     text-decoration: none;
     color: inherit;
 }

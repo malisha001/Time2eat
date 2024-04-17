@@ -57,7 +57,7 @@ const Home = () => {
                                         <td>{item.itemPrice}</td>
                                         <td>{item.itemCategory}</td>
                                         <td>
-                                            <button onClick={() => handleDelete(item._id)}>Delete</button>
+                                            <button onClick={() => handleDelete(item._id)} className="invDeleteButton">Delete</button>
                                             <Link to={`/inventory/update/${item._id}`}><button className="update-button">Update</button></Link>
                                         </td>
                                     </tr>

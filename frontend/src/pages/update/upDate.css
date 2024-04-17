@@ -37,7 +37,7 @@
     font-size: 16px;
 }
 
-.formUpdate button {
+.updateButton {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     background-color: #1B6E06;
     color: #fff;
@@ -52,7 +52,7 @@
 
 }
 
-.formUpdate button:hover {
+.updateButton:hover {
     background-color: #4fa553;
     color: black;
 }

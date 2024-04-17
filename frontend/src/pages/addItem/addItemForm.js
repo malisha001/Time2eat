@@ -92,8 +92,8 @@ const ItemForm = () => {
 
             
             <br />
-            <button>Save Item</button>
-            {error && <div className="error">{error}</div>}
+            <button className="addButton">Save Item</button>
+            {error && <div className="addError">{error}</div>}
 
         </form>
 

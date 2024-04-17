@@ -63,7 +63,7 @@
 
 
 
-button[type="submit"] {
+.usageButton  {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     background-color: #1B6E06;
     color: #fff;
@@ -78,11 +78,11 @@ button[type="submit"] {
    
 }
 
-button:hover {
+.usageButton:hover {
     background-color: #45a049;
 }
 
-.error {
+.UsageError {
     color: red;
     margin-top: 10px;
 }

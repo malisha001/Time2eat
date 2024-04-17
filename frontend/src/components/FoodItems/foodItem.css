@@ -11,13 +11,13 @@
 }
 
 /* Table style */
-table {
+.items table {
     width: 106%;
     border-collapse: collapse;
 }
 
 /* Table header style */
-th {
+.items table thead th {
     background-color: #D1CCCC;
     padding: 23px;
     text-align: center;
@@ -27,7 +27,7 @@ th {
 }
 
 /* Table body style */
-td {
+.items table tbody td {
     padding: 15px;
     border-bottom: 1.5px solid #84b0b4;
     text-align: center;
@@ -36,12 +36,12 @@ td {
 }
 
 /* Alternate row color */
-tbody  {
+.items table tbody  {
     background-color: #d7f3f2;
 }
 
 /* Button style */
-button {
+.invDeleteButton {
     background-color: #8e1010;
     color: white;
     border: none;
@@ -58,7 +58,7 @@ button {
 }
 
 /* Button hover style */
-button:hover {
+.invDeleteButton:hover {
     background-color: #ffa9a9;
     color: black;
     cursor: pointer;

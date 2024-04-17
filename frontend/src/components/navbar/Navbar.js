@@ -18,7 +18,7 @@ const Navbar = () => {
                 <li><Link to ={"/inventory/addItems"}><FontAwesomeIcon icon={faBowlFood} />Add Food Item</Link></li>
                 <li><Link to={"/inventory/items/"}><FontAwesomeIcon icon={faNoteSticky} />Food Items</Link></li>
                 <li><Link to={"/inventory/usage/"}><FontAwesomeIcon icon={faComments} />Daily Usage</Link></li>
-                <button><Link><FontAwesomeIcon icon={faRightFromBracket}/>Logout</Link></button>
+                <button className="navButton"><Link><FontAwesomeIcon icon={faRightFromBracket}/>Logout</Link></button>
             </ul>
         </nav>
     )

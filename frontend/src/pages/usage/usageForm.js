@@ -106,8 +106,8 @@ const Usage = () => {
                             </table>
                 </div> 
 
-                <button type="submit" >Submit</button>
-                {error && <div className="error">{error}</div>}           
+                <button className="usageButton" type="submit" >Submit</button>
+                {error && <div className="UsageError">{error}</div>}           
             </form>
         </div>
     );

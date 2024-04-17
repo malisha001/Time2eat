@@ -58,7 +58,7 @@
 }
 
 /* Button */
-.addFood form button {
+.addButton {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     background-color: #1B6E06;
     color: #fff;
@@ -73,12 +73,12 @@
     margin-top: -10px;
 }
 
-.addFood form button:hover {
+.addButton:hover {
     background-color: #6fce74;
     color: black;
 }
 
-.addFood .error {
+.addError{
     color: red;
     font-size: 16px;
     margin-top: 10px;
