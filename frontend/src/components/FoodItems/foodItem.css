@@ -35,12 +35,12 @@
     font-size: 16px;
 }
 
-/* Alternate row color */
+/*  row color */
 .items table tbody  {
     background-color: #d7f3f2;
 }
 
-/* Button style */
+/* Button  */
 .invDeleteButton {
     background-color: #8e1010;
     color: white;
@@ -57,7 +57,7 @@
     font-weight: 1000;
 }
 
-/* Button hover style */
+/* Button hover  */
 .invDeleteButton:hover {
     background-color: #ffa9a9;
     color: black;
@@ -84,9 +84,6 @@
 }
 
 
-
-
-
 /* Style for Topic and h4 */
 .home h1 {
     font-size: 45px;
@@ -109,4 +106,35 @@
     color: #000000;
     font-weight: 400;
     margin-top: 15px;
+    margin-bottom: 45px;
 }
+
+/* Search container */
+.foodItemSearch {
+    position: relative;
+    margin-left: 0px;
+}
+
+/* Search bar */
+.Fsearch-bar {
+    border: 1px solid #000000;
+    border-radius: 20px;
+    padding: 10px 40px 10px 35px; /* Adjust left padding to make room for the icon */
+    font-size: 16px;
+    width: 300px;
+    margin-left: 20px;
+}
+
+/* Search icon */
+.foodSearchIcon {
+    position: absolute;
+    top: 50%;
+    left: 120px; /* Adjust the left position to place the icon inside the input field */
+    transform: translateY(-50%);
+    color: #999;
+    cursor: pointer;
+    
+}
+
+
+

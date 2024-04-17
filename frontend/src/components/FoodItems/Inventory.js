@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import './foodItem.css'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faSearch} from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
-    const [items, setItems] = useState(null)
+    const [items, setItems] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         const fetchInventoryItems = async () => {
@@ -28,47 +31,61 @@ const Home = () => {
         }
     };
 
-    return (
+    const handleSearch = (e) => {
+        setSearchQuery(e.target.value);
+    };
 
-          
-   
-            <div className="home"> 
-                <h1>Welcome to TIME<strong>2eat</strong> Food Item Lists</h1>
-                <hr />
-                <h4>Given below are the food items,</h4>
-                    <div className="items">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Item ID</th>
-                                    <th>Item Name</th>
-                                    <th>Item Quantity</th>
-                                    <th>Item Price</th>
-                                    <th>Item Category</th>
-                                    <th>Action</th> 
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {items && items.map((item) => (
-                                    <tr key={item._id}>
-                                        <td>{item.itemId}</td>
-                                        <td>{item.itemName}</td>
-                                        <td>{item.itemQuantity}</td>
-                                        <td>{item.itemPrice}</td>
-                                        <td>{item.itemCategory}</td>
-                                        <td>
-                                            <button onClick={() => handleDelete(item._id)} className="invDeleteButton">Delete</button>
-                                            <Link to={`/inventory/update/${item._id}`}><button className="update-button">Update</button></Link>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                    <br /><br /><br />
-               
+    // Filter items based on search query
+    const filteredItems = items ? items.filter(item => item.itemName.toLowerCase().startsWith(searchQuery.toLowerCase())) : [];
+
+    return (
+        <div className="home">
+            <h1>Welcome to TIME<strong>2eat</strong> Food Item Lists</h1>
+            <hr />
+            <h4>Given below are the food items,</h4>
+            <div className="foodItemSearch">
+                    <FontAwesomeIcon icon={faSearch} className="foodSeacrhIcon" />
+                    <input 
+                    type="text" 
+                    placeholder="Search any item here" 
+                    value={searchQuery} 
+                    onChange={handleSearch} 
+                    className="Fsearch-bar"
+                />
+                
+              
             </div>
-  
+            <div className="items">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item ID</th>
+                            <th>Item Name</th>
+                            <th>Item Quantity</th>
+                            <th>Item Price</th>
+                            <th>Item Category</th>
+                            <th>Action</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {filteredItems.map((item) => (
+                            <tr key={item._id}>
+                                <td>{item.itemId}</td>
+                                <td>{item.itemName}</td>
+                                <td>{item.itemQuantity}</td>
+                                <td>{item.itemPrice}</td>
+                                <td>{item.itemCategory}</td>
+                                <td>
+                                    <button onClick={() => handleDelete(item._id)} className="invDeleteButton">Delete</button>
+                                    <Link to={`/inventory/update/${item._id}`}><button className="update-button">Update</button></Link>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+            <br /><br /><br />
+        </div>
     )
 }
 
