@@ -1,6 +1,6 @@
 // pages & components
 
-import Inventory from './Component/FoodItems/Inventory'
+import Inventory from './component/FoodItems/Inventory'
 import UpdateUser from './pages/update/UpdateUser';
 import ItemForm from './pages/addItem/addItemForm';
 import Usage from './pages/usage/usageForm';
