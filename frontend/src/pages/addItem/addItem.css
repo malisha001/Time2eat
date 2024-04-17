@@ -1,0 +1,114 @@
+.addFood {
+    width: 1200px;
+    max-width: 800px;
+    padding: 0px;
+    margin: 20px 0px 0px 40px;
+
+}
+/* Form part */
+.create{
+    height: 460px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #E7E7E7;
+    padding: 60px 0px 60px 50px;
+    margin: 0px -160px 0px 0px;
+    line-height: 40px;
+}
+
+.addFood h1 {
+    font-size: 45px;
+    font-weight:400;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    word-spacing: 1px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.addFood hr {
+    border: none;
+    height: 2px;
+    background-color: #ccc;
+    margin: -10px -157px 0px 0px ;
+}
+
+.addFood h4 {
+    font-size: 20px;
+    color: #000000;
+    font-weight: 400;
+    margin-top: 15px;
+}
+
+.addFood form label {
+    font-size: 20px;
+    display: block;
+    margin-bottom: 5px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 500;
+}
+
+.addFood form input {
+    width: 380px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Button */
+.addButton {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: #1B6E06;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 8px 60px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0px 0px 0px 300px ;
+    margin-top: -10px;
+}
+
+.addButton:hover {
+    background-color: #6fce74;
+    color: black;
+}
+
+.addError{
+    color: red;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* last two inputs */
+.inputTwo{
+    display: flex;
+    margin-top: 10px;
+}
+
+.inputTwo .input-container{
+    margin: 0px 70px -10px 0px;
+}
+
+/* image */
+.input-image{
+    display: flex;
+}
+
+.input-image img{
+    width: 320px;
+    margin: -20px 0px 0px 100px;
+    height: 300px;
+    border-radius: 10px;
+}
+
+/* first 3 inputs */
+.firstIn{
+    margin-top: -25px;
+}
+
+

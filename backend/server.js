@@ -1,4 +1,13 @@
-require('dotenv').config()
+
+
+const inventoryRoutes = require('./routes/inventory')       // import routes folder
+
+
+
+
+const advertisementRoutes = require('./routers/advertisement')
+
+
 const express = require('express');
 const mongoose = require('mongoose');
 
@@ -55,13 +64,17 @@ app.use('/api/deliveryorder',deliveries)
 app.use('/api/user', userRoutes)
 //adverticment routers
 app.use('/api/advertisements',advertisementRoutes)
-//inventory routers
 app.use('/api/inventory/', inventoryRoutes)
-//order system routers
-app.use('/api/orders',orderRoutes)
-app.use('/api/carts', cartRoutes)
-app.use('/api/onlineOrders', onlineOrdersRoutes)
 
+
+// middleware to parse incoming JSON data
+app.use(express.json());
+
+// middleware to log request path and method
+app.use((req, res, next) => {
+    console.log(req.path, res.method);
+    next();
+});
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI)
