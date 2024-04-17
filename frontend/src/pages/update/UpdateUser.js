@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios"
+import axios from "axios";
+import './upDate.css';
+
 
 function UpdateUser() {
     const { id } = useParams();
@@ -47,53 +49,57 @@ function UpdateUser() {
                 itemCategory: category
             });
             console.log(response.data);
-            navigate('/inventory/');
+            navigate('/inventory/items');
         } catch (error) {
             console.error('Failed to update item:', error);
         }
     }
 
     return (
-        <form className="create" onSubmit={handleUpdate}>
-            <h3>Update Food Item</h3>
+        <div className="formUpdate">
+            <h1>Update your Item details here,</h1>
+            <hr />
+            <form className="Formcreate" onSubmit={handleUpdate}>
+              
 
-            <label>Item ID:</label>
-            <input
-                type="Number"
-                value={itemid}
-                onChange={(e) => setItemId(e.target.value)}
-            />
+                <label>Item ID :</label>
+                <input
+                    type="Number"
+                    value={itemid}
+                    onChange={(e) => setItemId(e.target.value)}
+                />
 
-            <label>Item Name:</label>
-            <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-            />
+                <label>Item Name :</label>
+                <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
 
-            <label>Item Quantity:</label>
-            <input
-                type="Number"
-                value={quantity}
-                onChange={(e) => setQuantity(e.target.value)}
-            />
+                <label>Item Quantity :</label>
+                <input
+                    type="Number"
+                    value={quantity}
+                    onChange={(e) => setQuantity(e.target.value)}
+                />
 
-            <label>Item Price:</label>
-            <input
-                type="Number"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-            />
+                <label>Item Price :</label>
+                <input
+                    type="Number"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                />
 
-            <label>Item Category:</label>
-            <input
-                type="text"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-            />
-
-            <button>Update Item</button>
-        </form>
+                <label>Item Category :</label>
+                <input
+                    type="text"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
+                />
+                <br />
+                <button>Update Item</button>
+            </form>
+        </div>
     );
 }
 
