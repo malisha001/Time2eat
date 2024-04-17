@@ -74,15 +74,15 @@ label, input {
   display: block;
 }
 input {
-  padding: 10px;
+  /* padding: 10px;
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 20px; */
   width: 100%;
   border: 1px solid #ddd;
   border-radius: 4px;
   box-sizing: border-box;
 }
-form button {
+/* form button {
   background: var(--primary);
   border: 0;
   color: #fff;
@@ -90,7 +90,7 @@ form button {
   font-family: "Poppins";
   border-radius: 4px;
   cursor: pointer;
-}
+} */
 div.error {
   padding: 10px;
   background: #ffefef;

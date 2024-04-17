@@ -196,7 +196,7 @@ const NewBooking = () => {
                                         </li> */}
 
                                         {/* 24 hour format  */}
-
+                                        <li className='PreDate'>Time</li>
                                         <li className='PreDateInput'>
                                             <select
                                                 id="time"
@@ -213,7 +213,7 @@ const NewBooking = () => {
                                         </li>
 
 
-                                        <Button onClick={() => {
+                                        <Button sx={{marginTop: '0px'}} variant="contained" onClick={() => {
                                                     setShowForm(!showForm);
                                                     setAvailability(!showAvailability);
                                                 }}> Check Now</Button>
@@ -318,7 +318,7 @@ const NewBooking = () => {
                                                         </Box>
                                                     </Grid>
                                                 </Grid>
-                                                <button className='pre-booking-form-btn-bottom'>proceed</button>
+                                                <button variant="contained" className='pre-booking-form-btn-bottom'>proceed</button>
                                                 {error && <div className="error">{error}</div>}
                                             </Grid>
                                         </Grid>
@@ -340,10 +340,12 @@ const NewBooking = () => {
                         </Grid>
                         <Grid item md={4}>
                             
-                            <Box className='current-availability-side'>
+                            
+                            {showAvailability ? (
+                                <>
+                                <Box className='current-availability-side'>
                                 Current Availability
                             </Box>
-                            {showAvailability ? (
                               <Grid container spacing={2}>
                                 <Grid item md={4}>
                                     <Card className='availability-status-table-image' variant="elevation=0" sx={{ maxWidth: 100 }}>
@@ -388,7 +390,12 @@ const NewBooking = () => {
                                     <Box className='availability-status'>{availableTables.couple}</Box>
                                 </Grid>
                             </Grid>
+                            </>
                             ) : (
+                                <>
+                                <Box className='current-availability-side'>
+                                Real time Availability
+                            </Box>
                              <Grid container spacing={2}>
                                 <Grid item md={4}>
                                     <Card className='availability-status-table-image' variant="elevation=0" sx={{ maxWidth: 100 }}>
@@ -433,10 +440,11 @@ const NewBooking = () => {
                                     <Box className='availability-status'>{tableCount.couple}</Box>
                                 </Grid>
                             </Grid>
+                            </>
                             )}
                             
                             <Link to="/mybookings">
-                                <button>My Reservations</button>
+                                <Button variant="contained" sx={{marginLeft: '160px'}}>My Reservations</Button>
                             </Link>
                         </Grid>
                     </Grid>
