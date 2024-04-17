@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import './foodItem.css'
+import ResNavbar from "../restauretNavbar/ResNavbar"
 const Home = () => {
     const [items, setItems] = useState(null)
 
@@ -30,12 +31,15 @@ const Home = () => {
     return (
 
           
-   
+        <div> 
+        <ResNavbar />
             <div className="home"> 
+            
                 <h1>Welcome to TIME<strong>2eat</strong> Food Item Lists</h1>
                 <hr />
                 <h4>Given below are the food items,</h4>
                     <div className="items">
+                    
                         <table>
                             <thead>
                                 <tr>
@@ -67,7 +71,7 @@ const Home = () => {
                     <br /><br /><br />
                
             </div>
-  
+        </div>
     )
 }
 

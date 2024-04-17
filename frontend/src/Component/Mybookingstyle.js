@@ -1,5 +1,6 @@
 import { Box, CardActionArea, CardMedia, Card, Paper, Grid, CardContent, Typography, Button } from '@mui/material'
 import React from 'react'
+import { useParams } from 'react-router-dom';
 import exampleImage from '../Assests/example.jpg';
 import image1 from '../Assests/image1.jpg'
 import image2 from '../Assests/image2.jpg'
@@ -7,7 +8,17 @@ import image3 from '../Assests/image3.jpg'
 import image4 from '../Assests/image4.jpg'
 import image5 from '../Assests/image5.jpg'
 import image6 from '../Assests/image6.jpg'
+import { useNavigate } from 'react-router-dom';
+
 function Mybookingstyle() {
+    const { id } = useParams();
+    const navigate = useNavigate();
+
+    const submitButton = () => { 
+        // Navigate to the newBooking page with the restaurant ID in the URL
+        navigate(`/newbooking/${id}`);
+    }
+
   return (
     <div>
         <Paper>
@@ -24,7 +35,7 @@ function Mybookingstyle() {
         </Card>
        </Box>
 
-       <Button sx={{marginLeft: '1350px', marginTop: '20px'}} variant="contained">Contained</Button>
+       <Button sx={{marginLeft: '1350px', marginTop: '20px'}} variant="contained" onClick={submitButton}>Contained</Button>
 
 
        <Paper  sx={{marginTop: '80px', marginLeft: '20px', marginRight: '20px'}}>
@@ -145,4 +156,4 @@ function Mybookingstyle() {
   )
 }
 
-export default Mybookingstyle
+export default Mybookingstyle

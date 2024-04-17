@@ -4,7 +4,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faHome, faUser, faList, faBowlFood, faNoteSticky, faComments, faRightFromBracket} from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
 
-const Navbar = () => {
+const ResNavbar = () => {
 
     return(
         <nav className="sidebar">
@@ -24,4 +24,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar;
+export default ResNavbar;

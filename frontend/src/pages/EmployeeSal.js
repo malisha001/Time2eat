@@ -52,6 +52,10 @@ const EmployeeSal = () => {
     });
   };
 
+  //delete button function
+  const deletebutton = async (id) => {
+    
+  }
   const handleSubmit = async() => {
 
     try {
@@ -80,7 +84,6 @@ const EmployeeSal = () => {
       <div>
       <h1>Employee Salary Page</h1>
       <EmployeeNav />
-      <p>oopz</p>
       <Button
         variant="contained"
         onClick={() => setOpenPopup(true)}>
@@ -148,7 +151,7 @@ const EmployeeSal = () => {
                   <TableCell>{salaryData.empCatagory}</TableCell>
                   <TableCell>{salaryData.bonusRate}</TableCell>
                   <TableCell>{salaryData.taxRate}</TableCell>
-                  <TableCell>delete</TableCell>
+                  <TableCell><Button onChange={deletebutton} variant='contained'>delete</Button></TableCell>
                 </TableRow>
               ))}
             </TableBody>
