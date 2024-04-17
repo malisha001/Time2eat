@@ -1,17 +1,10 @@
-
-
-const inventoryRoutes = require('./routes/inventory')       // import routes folder
-
-
-
-
-const advertisementRoutes = require('./routers/advertisement')
-
-
 const express = require('express');
 const mongoose = require('mongoose');
+require('dotenv').config()
 
 //import routers
+const inventoryRoutes = require('./routers/inventory') 
+const advertisementRoutes = require('./routers/advertisement')
 const employeesal = require('./routers/employeeSalary')
 const restaurants = require('./routers/restaurants')
 const feedback = require('./routers/feedbacks')
@@ -19,9 +12,7 @@ const deliveries = require('./routers/deliveryOrderf')
 const bookingRoutes = require('./routers/booking')
 const RealTimebookingRoutes = require('./routers/realtimebooking')
 const CustomerHistoryRoutes = require('./routers/customerhistoryroute')
-const advertisementRoutes = require('./routers/advertisement')
 const userRoutes = require('./routers/user')
-const inventoryRoutes = require('./routers/inventory') 
 const orderRoutes = require('./routers/orders')
 const cartRoutes = require('./routers/carts')
 const onlineOrdersRoutes = require('./routers/onlineOrders')
