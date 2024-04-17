@@ -4,8 +4,6 @@ import {Grid, Paper, CardActionArea,Box,Card,CardMedia} from '@mui/material';
 
 
 // NewBooking.js
-
-import React, { useState,useEffect } from 'react';
 // import BookingForm from '../component/Bookingform';
 // import ParentComponent from '../component/ParentComponent';
 // import CheckAvailability from '../component/CheckAvailability';
