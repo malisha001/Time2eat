@@ -11,10 +11,7 @@ const getRestaurants = async (req , res) =>{
 const getRestaurant = async(req , res) =>{
     const {id} = req.params
 
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: 'No such Restaurant'})
-    }
-    const restaurant = await Restaurant.findById(id)
+    const restaurant = await Restaurant.findOne({Restaurant_Id:id})
 
     if(!restaurant){
         return res.status(404).json({error : 'No such Restauran'})

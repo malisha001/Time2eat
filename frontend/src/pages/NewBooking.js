@@ -2,7 +2,7 @@
 import axios from 'axios';
 import QRCode from 'react-qr-code';
 
-
+import { useParams } from 'react-router-dom';
 import React, { useState,useEffect } from 'react';
 import {Grid, Paper, CardActionArea,Box,Card,CardMedia} from '@mui/material';
 
@@ -49,6 +49,7 @@ import PreStyles from '../component/NewStyle.css'
 
 
 const NewBooking = () => {
+    const { id } = useParams();
     const [selectedDateTime, setSelectedDateTime] = useState({ date: '', time: '' });
     const [availableTables, setAvailableTables] = useState({ couple: 10, group: 15 });
     const [totalCoupleTablesBooked, setTotalCoupleTablesBooked] = useState(0);
@@ -62,6 +63,10 @@ const NewBooking = () => {
     const [showAvailability, setAvailability] = useState(false);
     const [tableCount, setTableCount] = useState({ couple: 0, group: 0 });
 
+    const[ctable,setCtable] = useState(0);
+    const[gtable,setGtable] = useState(0);
+    console.log("couple",ctable);
+    console.log("group",gtable);
     const fetchData = async () => {
         try {
             const response = await axios.get('/api/realtimebooking');
@@ -78,6 +83,8 @@ const NewBooking = () => {
     };
 
     useEffect(() => {
+
+
         // Fetch data initially
         fetchData();
 
@@ -88,14 +95,29 @@ const NewBooking = () => {
 
         // Clear interval on component unmount
         return () => clearInterval(interval);
+
     }, []);
 
     ///////////////////////////////////////////////////////////
 
     useEffect(() => {
+        //get tables from related restaurent
+        const fetchtabledata = async () => {
+            try {
+                const tabledata = await axios.get(`/api/restaurants/${id}`);
+                console.log("table",tabledata.data);
+                setCtable(tabledata.data.Couple_table);
+                setGtable(tabledata.data.Group_table);
+            } catch (error) {
+                console.error('Error fetching table data:', error);
+            }
+        }
+
+
         if (selectedDateTime.date && selectedDateTime.time) {
             fetchBookings(selectedDateTime.date, selectedDateTime.time);
         }
+        fetchtabledata();
     }, [selectedDateTime]);
 
     const handleCheckAvailability = async (e) => {
@@ -156,13 +178,15 @@ const NewBooking = () => {
             setTotalCoupleTablesBooked(coupleTablesBooked);
             setTotalGroupTablesBooked(groupTablesBooked);
 
-            const availableCoupleTables = 10 - coupleTablesBooked;
-            const availableGroupTables = 15 - groupTablesBooked;
+            const availableCoupleTables = ctable - coupleTablesBooked;
+            const availableGroupTables = gtable - groupTablesBooked;
 
             setAvailableTables({ couple: availableCoupleTables, group: availableGroupTables });
         } catch (error) {
             console.error(error);
         }
+
+        
     };
 
     return (
@@ -362,7 +386,7 @@ const NewBooking = () => {
                                         Total
                                     </Box>
                                     <Box className='availability-status-bottom'>
-                                        15
+                                        {ctable}
                                     </Box>
                                 </Grid>
                                 <Grid item md={4}>
@@ -382,7 +406,7 @@ const NewBooking = () => {
                                     </Card>
                                 </Grid>
                                 <Grid item md={4}>
-                                    <Box className='availability-status'>10</Box>
+                                    <Box className='availability-status'>{gtable}</Box>
                                 </Grid>
                                 <Grid item md={4}>
                                     <Box className='availability-status'>{availableTables.couple}</Box>
@@ -407,7 +431,7 @@ const NewBooking = () => {
                                         Total
                                     </Box>
                                     <Box className='availability-status-bottom'>
-                                        15
+                                        {ctable}
                                     </Box>
                                 </Grid>
                                 <Grid item md={4}>

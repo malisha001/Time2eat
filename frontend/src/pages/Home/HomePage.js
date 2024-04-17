@@ -245,7 +245,7 @@ export default function TemporaryDrawer() {
                     {restuarents.map((restuarent) => (
                       <Grid item md={4} key={restuarent._id}>
                           <Card sx={{ maxWidth: 250 }}>
-                            <CardActionArea component={Link} to ={`/restaurant/${restuarent._id}`}>
+                            <CardActionArea component={Link} to ={`/restaurant/${restuarent.Restaurant_Id}`}>
                               <CardMedia
                                 component="img"
                                 alt="green iguana"
