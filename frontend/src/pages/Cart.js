@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Paper, Grid,Button,Dialog,DialogTitle,DialogContent,DialogActions,TextField,FormControl,FormLabel,RadioGroup,Radio,FormControlLabel } from '@mui/material';
+import React from 'react';
+import { Paper,Button,TextField,FormControl,FormLabel,RadioGroup,Radio,FormControlLabel } from '@mui/material';
 import { getCartData,checkRider } from '../services/api';
 import {useNavigate,Route,Routes} from 'react-router-dom';
 import { placeorder } from '../services/api';
@@ -14,7 +14,7 @@ function Cart() {
     const [cartData, setCartData] = useState([]);
     const[isDataSent,setDataSent] = useState(false);
     const[message,setMessage] = useState('');
-    const[countdown,setCountdown] = useState(120);
+    const[countdown,setCountdown] = useState(10);
 
     //get radio button value
     const handleChange = (event) => {
@@ -27,13 +27,13 @@ function Cart() {
     //delivery handle function
     const handleDelivery = async(orderid) => {
         setDataSent(true)
-        setMessage('your delivery guy is finding')
+        setMessage('Looking for your rider!')
 
         try {
             const find = await checkRider(orderid);
             console.log('find:',find);
             if (find.length > 0) {
-                setMessage('Your delivery guy is found');
+                setMessage('Rider found! Order placed Successfully');
                 navigate('/payment')
             }
 
@@ -80,13 +80,13 @@ function Cart() {
                 handleDelivery(order); // Pass orderid or any other data you need
             }, 9000);
 
-            // Stop triggering after 2 minutes
+            // Stop triggering after 10 secs
             setTimeout(() => {
                 clearInterval(intervalId);
                 clearInterval(countdownId); // Stop the countdown
-                setMessage('No delivery guy found try again or choose pickup option')
+                setMessage('No riders available! Try Pickup')
                 setDataSent(false)
-            }, 120000); // 2 minutes in milliseconds
+            }, 100000); 
 
         }
         else{
@@ -137,10 +137,14 @@ function Cart() {
     return (
         <div>
             <h1>Cart Page</h1>
+
+            {radiovalue === 'delivery' && (
             <div>
                 <p>{message}</p>
-                <p>{countdown} seconds remaining</p>
+                <p>Wait {countdown} secs to find your Delivery Hero!</p>
             </div>
+            )}
+
             <div>
                 {cartData.map((order) => (
                     <Paper key={order.orderid} sx={{ padding: '32px', bgcolor: '#F0F8FF', margin: '20px' }}>
