@@ -1,0 +1,74 @@
+.form-header-pre-booking{
+    margin-left: 310px;
+    margin-top: 10px;
+    margin-bottom: 17px;
+}
+.booking-form-img-descrption{
+    margin-left: -8px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.pre-booking-form-table-input{
+    margin-top: 4px;
+    margin-left: 7px;
+    width: 140px;
+}
+/* .pre-booking-form-table-input-name{
+    width: 100px;
+    height: 10px;
+} */
+.pre-booking-form-table-lable-name{
+    width: 100px;
+    height: 10px;
+}
+.input-container {
+    display: flex;
+    align-items: center; /* Align items vertically */
+    margin-bottom: 10px; /* Add margin bottom for spacing */
+  }
+  
+  .input-mybooking-label {
+    width: 100px; /* Set a fixed width for labels */
+    /* border: 1px solid #000; */
+    padding: 5px;
+  }
+  
+  .input-mybooking {
+    /* flex: 1; Take remaining space */
+    margin-left: 20px; /* Add margin between label and input */
+    padding: 5px;
+    border: 1px solid #000;
+    width: 53%;
+  }
+  .input{
+      
+      box-sizing: border-box;
+      border-radius: 20px;
+  }
+  .form-card-subtitles{
+    margin-left: 70px;
+    margin-bottom: 35px;
+    margin-top: 4px;
+  }
+  .form-card-subtitles-bottom{
+    margin-left: 70px;
+    margin-bottom: 20px;
+    margin-top: 4px;
+  }
+  .pre-booking-form-btn-bottom{
+    margin-left: 260px;
+    margin-bottom: 30px;
+    margin-top: 8px;
+  }
+  .input-mybooking-label-date {
+    width: 100px; /* Set a fixed width for labels */
+    /* border: 1px solid #000; */
+    padding: 5px;
+    margin-left: 20px;
+    margin-top: 40px;
+  }
+  .input-mybooking-label-tiime {
+    width: 100px; /* Set a fixed width for labels */
+    /* border: 1px solid #000; */
+    padding: 5px;
+  }

@@ -4,7 +4,7 @@ const {
     getDeliveryOrders,
     createDeliveryOrders,
     assignRider
-} = require('../controllers/deliveryOrderController')
+} = require('../Controllers/deliveryOrderController')
 
 //get delivery orders
 router.get('/',getDeliveryOrders)

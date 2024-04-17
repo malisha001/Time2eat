@@ -3,34 +3,51 @@ const Schema = mongoose.Schema
 
 //delivery packages
 const deliverySchema = new Schema({
-    userId: {
+    orderId:{
+        type:String,
+        require: true
+    },
+    riderId:{
+        type:String,
+
+    },
+    riderName:{
+        type:String,
+
+    },
+    cusName: {
         type: String,
         require:true
     },
-    deliveryPersonId:{
-        type: String
+    customerLocation:{
+        type:String
     },
-    ordersId:{
-        type:String,
-        require: true
+    restaurantname: {
+        type: String,
+        require:true
     },
-    foodId:{
-        type:String,
-        require: true
-    },
-    foodName:{
-        type:String,
-        require: true
+    reslocation:{
+        type:String
     },
     totPrice:{
         type:Number,
         require: true
     },
+    
+    distance:{
+        type:Number
+    },
     deliveryFee:{
-        type:Number,
+        type:Number
     },
     orderStatus:{
-        type:String,
+        type:String
+    },
+    paymentState:{
+        type:Boolean
+    },
+    estimateTime:{
+        type:String
     }
 })
 
