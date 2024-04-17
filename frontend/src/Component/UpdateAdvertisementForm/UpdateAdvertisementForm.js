@@ -1,8 +1,22 @@
-import { useAuthContext } from '../hooks/useAuthContext'
+import { useAuthContext } from '../../hooks/useAuthContext'
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { useAdvertisementsContext } from '../hooks/useAdvertisementsContext'
+import { useAdvertisementsContext } from '../../hooks/useAdvertisementsContext'
 import axios from 'axios';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { Link } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import "./UpdateAdvertisementForm.css";
+
+const FormContainer = styled('form')({
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem',
+    maxWidth: '400px',
+    margin: 'auto',
+  });
+
 
 const UpdateAdvertisementForm = () => {
   // Invoke hooks
@@ -21,7 +35,7 @@ const UpdateAdvertisementForm = () => {
     offerType:''
   });
   
-  useEffect(() => {
+useEffect(() => {
     // Fetch advertisement details based on id
     const fetchAdvertisements = async () => {
         try {
@@ -50,7 +64,7 @@ const UpdateAdvertisementForm = () => {
 
   
 
-    const UpdateAdvertisement = async (e) => {
+const UpdateAdvertisement = async (e) => {
         e.preventDefault()
 
         if (!user) {
@@ -82,51 +96,56 @@ const UpdateAdvertisementForm = () => {
     }
 
     return (
-        <form className="updateAd" onSubmit={UpdateAdvertisement}>
-        <h3>Update Advertisement Details</h3>
-
-            <input 
-                type="text" 
-                placeholder="Advertisement Title"
-                onChange={(e) => setValues({...values,adTitle:e.target.value})} 
-                value={values.adTitle}
-                className={emptyFields.includes('adTitle')? 'error' : ''}
-            />
-
-            <input 
-                type="text" 
-                placeholder="Description"
-                onChange={(e) => setValues({...values,description:e.target.value})} 
-                value={values.description}
-                className={emptyFields.includes('description')? 'error' : ''}
-            />
-
-            <input 
-                type="date" 
-                onChange={(e) => setValues({...values,startDate:e.target.value})}
-                value={values.startDate}
-                className={emptyFields.includes('startDate')? 'error' : ''} 
-            />
-      
-            <input 
-                type="date" 
-                onChange={(e) => setValues({...values,endDate:e.target.value})}
-                value={values.endDate}
-                className={emptyFields.includes('endDate')? 'error' : ''} 
-            />
-      
+         <form className="updateAd" onSubmit={UpdateAdvertisement}>
+        
+          <h3>Update Advertisement Details</h3>
+          <TextField
+            type="text"
+            label="Advertisement Title"
+            variant="outlined"
+            onChange={(e) => setValues({ ...values, adTitle: e.target.value })}
+            value={values.adTitle}
+            error={emptyFields.includes('adTitle')}
+          />
+          <TextField
+            type="text"
+            label="Description"
+            variant="outlined"
+            onChange={(e) => setValues({ ...values, description: e.target.value })}
+            value={values.description}
+            error={emptyFields.includes('description')}
+          />
+          <TextField
+            type="date"
+            label="Start Date"
+            variant="outlined"
+            onChange={(e) => setValues({ ...values, startDate: e.target.value })}
+            value={values.startDate}
+            error={emptyFields.includes('startDate')}
+          />
+          <TextField
+            type="date"
+            label="End Date"
+            variant="outlined"
+            onChange={(e) => setValues({ ...values, endDate: e.target.value })}
+            value={values.endDate}
+            error={emptyFields.includes('endDate')}
+          />
+          <TextField
+            type="text"
+            label="Offer Type"
+            variant="outlined"
+            onChange={(e) => setValues({ ...values, offerType: e.target.value })}
+            value={values.offerType}
+            error={emptyFields.includes('offerType')}
+          />
+          <Button type="submit" variant="contained" color="primary">
+            Update Advertisement
+          </Button>
+          {error && <div className="error">{error}</div>}
+       
+      </form>
      
-            <input 
-                type="text" 
-                placeholder="Offer Type"
-                onChange={(e) => setValues({...values,offerType:e.target.value})}
-                value={values.offerType}
-                className={emptyFields.includes('offerType')? 'error' : ''} 
-            />
-
-            <button type ="submit">Update Advertisement</button>
-            {error && <div className="error">{error}</div>}
-        </form>
     )
 };
 
