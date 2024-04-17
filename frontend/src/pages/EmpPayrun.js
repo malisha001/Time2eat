@@ -3,7 +3,7 @@ import React, { useState,useEffect } from 'react';
 import { updateEmpPayrunData,getPayrunData,paySalary } from '../services/api';
 import { Box, color, containerClasses, padding } from '@mui/system';
 import Payrunbtn from '../component/Payrunbtn';
-
+import ResNavbar from '../component/restauretNavbar/ResNavbar';
 
 function EmpPayrun() {
     const [payrunData, setPayrunData] = useState([]);

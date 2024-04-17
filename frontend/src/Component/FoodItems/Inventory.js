@@ -32,7 +32,7 @@ const Home = () => {
 
           
         <div> 
-        <ResNavbar />  
+        <ResNavbar />
             <div className="home"> 
             
                 <h1>Welcome to TIME<strong>2eat</strong> Food Item Lists</h1>
