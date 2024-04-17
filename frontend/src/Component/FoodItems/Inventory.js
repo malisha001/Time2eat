@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import './foodItem.css'
-
 const Home = () => {
     const [items, setItems] = useState(null)
 
@@ -12,7 +11,7 @@ const Home = () => {
             console.log("inventory", json)
 
             if (response.ok) {
-                setItems(json)
+                setItems(json)  
             }
         }
         fetchInventoryItems()

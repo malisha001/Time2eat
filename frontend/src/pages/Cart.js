@@ -116,6 +116,7 @@ function Cart() {
         const fetchCartData = async () => {
             try {
                 const fetchCartData = await getCartData();
+                console.log("fetch data:",fetchCartData)
                 // Group items by order ID
                 const ordersMap = new Map();
                 fetchCartData.forEach(item => {

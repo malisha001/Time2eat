@@ -1,13 +1,40 @@
 import React, { useState,useEffect } from 'react';
 import { Link } from "react-router-dom"
 import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText, Grid, Box,Paper, Card, CardActionArea, CardContent, CardMedia, CardActions } from '@mui/material';
-import { Menu as MenuIcon, Inbox as InboxIcon, Mail as MailIcon, Margin } from '@mui/icons-material';
+import { Menu as MenuIcon ,Person2 as Person2Icon, ShoppingCart, FormatListBulleted, TableBar, Favorite, RateReview } from '@mui/icons-material';
+import {createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+
 // import classes from './HomePage.module.css'
 import exampleImage from '../../Assests/example.jpg';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import {useLogout} from '../../hooks/useLogout'
 import { getAllRestaurents } from '../../services/restaurentsApi';
 import Footer from '../../component/footer/Footer';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#C02942', // primary color
+    },
+    secondary: {
+      main: '#F8983C', // secondary color
+    },
+    accent: {
+      main: '#FCE94F', // accent color
+    },
+    background: {
+      main: '#FFFFFF', // background color
+    },
+    text: {
+      main: '#000000', // text color
+    },
+    element: {
+      main: '#EDEDED', // element color
+    }
+  }
+});
+
 
 export default function TemporaryDrawer() {
   const {logout} = useLogout()
@@ -23,6 +50,7 @@ export default function TemporaryDrawer() {
     const toggleDrawer = (newOpen) => () => {
       setOpen(newOpen);
     };
+
     useEffect(() => {
       const fetchrestuarents = async () => {
         try {
@@ -37,14 +65,17 @@ export default function TemporaryDrawer() {
       fetchrestuarents()
     }, []);
   
+  
+    const icons = [Person2Icon, ShoppingCart, FormatListBulleted, TableBar, Favorite, RateReview]; // Array of imported Material icons
+
     const DrawerList = (
       <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          {['Profile', 'Cart', 'My Orders', 'My Bookings', 'Wishlist', 'Feedback'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {React.createElement(icons[index])}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
@@ -52,22 +83,18 @@ export default function TemporaryDrawer() {
           ))}
         </List>
         <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+        <p> </p>
+
+        <Divider />
+        <Typography gutterBottom variant='subtitle2'>Register your restaurant</Typography>
+        <Typography gutterBottom variant='subtitle2'>Join as a delivery rider</Typography>
+
+        
       </Box>
     );
 
     return (
+      <ThemeProvider theme={theme}>
         <div className="home">
             <Box sx={{ width: '100%' }}>
                 <AppBar position="static">
@@ -83,7 +110,7 @@ export default function TemporaryDrawer() {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            News
+                            TIME2eat
                         </Typography>
                         {user && <Button color="inherit" onClick={handleClick}>Logout</Button>}
                         {!user && <Button color="inherit" component={Link} to='/login'>Login</Button>}
@@ -273,6 +300,8 @@ export default function TemporaryDrawer() {
             </Box>
             {/* <Footer/> */}
         </div>
+        </ThemeProvider>
     );
+   
 }
 
