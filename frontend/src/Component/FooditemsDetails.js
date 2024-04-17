@@ -1,20 +1,21 @@
-import { Link } from "react-router-dom";
+
+import { Link } from 'react-router-dom';
+
 
 const FooditemDetails = ({ fooditem, onDelete }) => {
     
-
     const handleClick = async () => {
-    const response = await fetch('/api/fooditems/' + fooditem._id,{
-     method: 'DELETE'
-    })
+        const response = await fetch('/api/fooditems/' + fooditem._id,{
+            method: 'DELETE'
+        });
 
-     if(response.ok){
-        onDelete(fooditem._id)
-        window.location.reload();
-     }
-   }
+        if(response.ok){
+            onDelete(fooditem._id);
+            window.location.reload();
+        }
+    };
 
-    return(
+    return (
         <div className="fooditemdetails">
             <h4>{fooditem.title}</h4>
             <p><strong>Item_id :</strong>{fooditem.Item_id}</p>
@@ -27,8 +28,9 @@ const FooditemDetails = ({ fooditem, onDelete }) => {
             <Link to={`/update-food-item/${fooditem._id}`}>
                 <button className="update-button">Update</button>
             </Link>
-            
         </div>
     );
 };
+
+
 export default FooditemDetails;

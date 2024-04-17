@@ -3,7 +3,7 @@
 // pages & components
 import Home from './pages/Home';
 
-import Navbar from "./Component/Navbar";
+
 import MyBookings from "./pages/MyBookings";
 import NewBooking from "./pages/NewBooking";
 import UpdateBookingDetails from "./Component/UpdateBookingDetails";
@@ -17,7 +17,6 @@ import UpdateFoodItems from './Component/updatefooditems';
 import Updaterestaurants from './Component/Updaterestaurants';
 import RestaurantProfile from './pages/Restaurantprofile';
 import UpdateRestaurantProfile from './Component/UpdateRestaurantProfile'
-import AllfoodItems from './pages/AllfodItems';
 
 function App() {
   return (
@@ -27,7 +26,7 @@ function App() {
 
 
       <BrowserRouter>
-        <Navbar />
+        
         <div className="pages">
           <Routes>
             <Route path="/" element={<NewBooking />} />
@@ -35,8 +34,7 @@ function App() {
             <Route path="/update-booking/:id" element={<UpdateBookingDetails />} />
             <Route path="/realtime-staff" element={<RestaurantStaff />} />
              <Route path="/inventory" element={<Home />} />
-            <Route path="/fooditems/:id/" element = {<Menu />} />
-            <Route path="/allfooditems" element = {<AllfoodItems />} />
+            <Route path="/fooditems" element = {<Menu />} />
             <Route path="/add-food-item" element = {<AddfooditemsForm />} />
             <Route path="/update-food-item/:id/" element = {<UpdateFoodItems/>} />
             <Route path="/restaurants" element = {<Restaurant />} />

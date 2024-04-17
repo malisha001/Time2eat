@@ -1,16 +1,27 @@
-import { Link } from 'react-router-dom'
+import React from "react";
+import './navbar.css'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faHome, faUser, faList, faBowlFood, faNoteSticky, faComments, faRightFromBracket} from '@fortawesome/free-solid-svg-icons'
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
 
     return(
-        <header>
-            <div className="container">
-                <Link to="/">
-                    <h1>Workout Buddy</h1>
-                </Link>
-            </div>
-        </header>
+        <nav className="sidebar">
+
+            <p><img src="/Time2eat.jpeg" alt="logo" /><h1>TIME<strong>2eat</strong></h1></p>
+
+            <ul>
+                <li><Link><FontAwesomeIcon icon={faHome} />Dashboard</Link></li>
+                <li><Link><FontAwesomeIcon icon={faUser} />Profile</Link></li>
+                <li><Link><FontAwesomeIcon icon={faList} />Manage Orders</Link></li>
+                <li><Link to ={"/inventory/addItems"}><FontAwesomeIcon icon={faBowlFood} />Add Food Item</Link></li>
+                <li><Link><FontAwesomeIcon icon={faNoteSticky} />Food Items</Link></li>
+                <li><Link><FontAwesomeIcon icon={faComments} />Daily Usage</Link></li>
+                <button><Link><FontAwesomeIcon icon={faRightFromBracket}/>Logout</Link></button>
+            </ul>
+        </nav>
     )
 }
 
-export default Navbar
+export default Navbar;
