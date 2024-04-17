@@ -1,15 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import { Link } from "react-router-dom"
 import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText, Grid, Box,Paper, Card, CardActionArea, CardContent, CardMedia, CardActions } from '@mui/material';
 import { Menu as MenuIcon, Inbox as InboxIcon, Mail as MailIcon, Margin } from '@mui/icons-material';
-import classes from './homePage.module.css'
+// import classes from './HomePage.module.css'
 import exampleImage from '../../Assests/example.jpg';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import {useLogout} from '../../hooks/useLogout'
+import { getAllRestaurents } from '../../services/restaurentsApi';
+import Footer from '../../component/footer/Footer';
 
 export default function TemporaryDrawer() {
+  const {logout} = useLogout()
+  const {user} = useAuthContext()
+
     const [open, setOpen] = React.useState(false);
+    const [restuarents, setRestuarents] = useState([]);
+
+    const handleClick = () =>{
+      logout()
+    }
   
     const toggleDrawer = (newOpen) => () => {
       setOpen(newOpen);
     };
+    useEffect(() => {
+      const fetchrestuarents = async () => {
+        try {
+          const resData = await getAllRestaurents(); // Call your API function to fetch restaurant data
+          console.log("restauent data",resData)
+          setRestuarents(resData); // Update state with the fetched employee IDs
+          
+        } catch (error) {
+          console.error('Error fetching employee IDs:', error);
+        }
+      }
+      fetchrestuarents()
+    }, []);
   
     const DrawerList = (
       <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
@@ -43,7 +69,6 @@ export default function TemporaryDrawer() {
 
     return (
         <div className="home">
-            <h2>Home</h2>
             <Box sx={{ width: '100%' }}>
                 <AppBar position="static">
                     <Toolbar>
@@ -60,7 +85,9 @@ export default function TemporaryDrawer() {
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                             News
                         </Typography>
-                        <Button color="inherit">Login</Button>
+                        {user && <Button color="inherit" onClick={handleClick}>Logout</Button>}
+                        {!user && <Button color="inherit" component={Link} to='/login'>Login</Button>}
+                        {!user && <Button color="inherit" component={Link} to='/signup'>sign in</Button>}
                     </Toolbar>
                 </AppBar>
                 <img src={exampleImage} alt="Example" style={{ width: '100%'}} />
@@ -210,81 +237,42 @@ export default function TemporaryDrawer() {
                     </Grid>
                 </Grid>
               </Box>
-              <h2>Search by Category</h2>   
+              {/* show restuarents */}
+              <h2>restuarents</h2> 
               
                 <Box sx={{marginLeft: '100px', marginRight: '100px'}}>
                   <Grid container sx={{ bgcolor: 'red'}} spacing={2}>
-                    <Grid item md={4} >
-                      <Box sx={{bgcolor:'#FFF', borderRadius: '50%', width:'100px', height:'100px'}}>
-                      <Card sx={{marginBottom:'10px', borderRadius: '50%' }}>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="100"
-                            width="100"
-                            image={exampleImage}
-                            alt="green iguana"
-                          />
-                        </CardActionArea>
-                      </Card>
-                      </Box>
-                    </Grid>
-                    <Grid item md={4} >
-                      <Box sx={{bgcolor:'#FFF', borderRadius: '50%', width:'100px', height:'100px'}}>
-                      <Card sx={{marginBottom:'10px', borderRadius: '50%' }}>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="100"
-                            width="100"
-                            image={exampleImage}
-                            alt="green iguana"
-                          />
-                        </CardActionArea>
-                      </Card>
-                      </Box>
-                    </Grid>
-                    <Grid item md={4} >
-                    <Card sx={{ maxWidth: 250 }}>
-      <CardMedia
-        component="img"
-        alt="green iguana"
-        height="250"
-        image={exampleImage}
-        sx={{borderRadius:'30px'}}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          <Box>Butter</Box>
-          <Box sx={{marginLeft:"182px", marginTop:"-32px"}}>hi</Box>
-        </Typography>
-      </CardContent>
-    </Card>
-                    </Grid>
-                    
-                </Grid>
-              </Box>
+                    {restuarents.map((restuarent) => (
+                      <Grid item md={4} key={restuarent._id}>
+                          <Card sx={{ maxWidth: 250 }}>
+                            <CardActionArea component={Link} to ={`/restaurant/${restuarent._id}`}>
+                              <CardMedia
+                                component="img"
+                                alt="green iguana"
+                                height="250"
+                                image={exampleImage}
+                              />
+                              <CardContent>
+                                <Typography gutterBottom variant="h5" component="div">
+                                  <Box>{restuarent.Restaurant_name}</Box>
+                                  <Box sx={{marginLeft:"182px", marginTop:"-32px"}}>hi</Box>
+                                </Typography>
+                              </CardContent>
+                            </CardActionArea>
+                          </Card>
+                      </Grid>  
+                    ))} 
+                  </Grid>
+                </Box>
+              </Paper>
               
-                </Paper>
             <Drawer open={open} onClose={toggleDrawer(false)}>
                 {DrawerList}
             </Drawer>
+             
             </Box>
-                            
-                        
+            {/* <Footer/> */}
         </div>
     );
 }
 
-
-// <Grid container spacing={2}>
-// <Grid item md={4} sx={{bgcolor:'blue'}}>
-//   <Box>xs</Box>
-// </Grid>
-// <Grid item md={4} sx={{bgcolor:'red'}}>
-//   <Box>xs=6</Box>
-// </Grid>
-// <Grid item md={4} sx={{bgcolor:'green'}}>
-//   <Box>xs</Box>
-// </Grid>
-// </Grid>

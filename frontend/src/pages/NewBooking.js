@@ -1,12 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import { Paper, Grid, Button, Card, CardActionArea, CardMedia, Box } from '@mui/material';
+
 import axios from 'axios';
 import QRCode from 'react-qr-code';
+
+
+import React, { useState,useEffect } from 'react';
+import {Grid, Paper, CardActionArea,Box,Card,CardMedia} from '@mui/material';
+
+
+// NewBooking.js
+
+// import BookingForm from '../component/Bookingform';
+// import ParentComponent from '../component/ParentComponent';
+// import CheckAvailability from '../component/CheckAvailability';
+import { useTheme } from '@mui/material/styles';
+
+
+import CardContent from '@mui/material/CardContent';
+
+
+import Button from '@mui/material/Button';
 import exampleImage from '../Assests/example.jpg';
 import grouptableimage from '../Assests/grouptable.jpg';
 import coupletableimage from '../Assests/coupletable.jpg';
 import { Link } from 'react-router-dom';
 import '../component/Bookingformstyle.css';
+
+
+import Navbar from '../component/Navbar';
+// import Card from '@mui/material/Card';
+// import CardContent from '@mui/material/CardContent';
+// import CardMedia from '@mui/material/CardMedia';
+// import Typography from '@mui/material/Typography';
+// import { CardActionArea, Grid,Box,Paper } from '@mui/material';
+
+import PreStyles from '../component/NewStyle.css'
+// import exampleImage from '../Assests/example.jpg'; // Adjust the path as per your directory structure
+// import grouptableimage from '../Assests/grouptable.jpg'; // Adjust the path as per your directory structure
+// import coupletableimage from '../Assests/coupletable.jpg'; // Adjust the path as per your directory structure
+
+
+// material ui 
+
+// import Card from '@mui/material/Card';
+// import CardContent from '@mui/material/CardContent';
+// import CardMedia from '@mui/material/CardMedia';
+// import Typography from '@mui/material/Typography';
+// import { CardActionArea } from '@mui/material';
+
 
 const NewBooking = () => {
     const [selectedDateTime, setSelectedDateTime] = useState({ date: '', time: '' });
@@ -127,6 +167,7 @@ const NewBooking = () => {
 
     return (
         <div>
+        <Navbar />
             <div>
                 <Paper sx={{ mt: '100px', ml: '40px', mr: '40px', bgcolor: '#ffffff' }}>
                     <h1 className='pre-booking-heading'>Reserve Table</h1>
