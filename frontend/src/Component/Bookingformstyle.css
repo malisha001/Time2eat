@@ -1,5 +1,5 @@
 .form-header-pre-booking{
-    margin-left: 375px;
+    margin-left: 310px;
     margin-top: 10px;
     margin-bottom: 17px;
 }
@@ -60,4 +60,15 @@
     margin-bottom: 30px;
     margin-top: 8px;
   }
-
+  .input-mybooking-label-date {
+    width: 100px; /* Set a fixed width for labels */
+    /* border: 1px solid #000; */
+    padding: 5px;
+    margin-left: 20px;
+    margin-top: 40px;
+  }
+  .input-mybooking-label-tiime {
+    width: 100px; /* Set a fixed width for labels */
+    /* border: 1px solid #000; */
+    padding: 5px;
+  }

@@ -48,6 +48,7 @@ const Navbar = () => {
         </Box>
       );
     return ( 
+
         <div>
             <AppBar position="static">
                     <Toolbar>
@@ -73,6 +74,7 @@ const Navbar = () => {
                 {DrawerList}
             </Drawer>
         </div>
+
 
      );
 }

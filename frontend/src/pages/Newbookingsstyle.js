@@ -1,4 +1,4 @@
-// import NewStyle from "../Component/NewStyle";
+import NewStyle from "../component/NewStyle";
 import MyBookingStyle from "../component/Mybookingstyle"
 import Bookingformstyle from "../component/Bookingformstyle";
 
@@ -6,7 +6,7 @@ import Bookingformstyle from "../component/Bookingformstyle";
 const Newbookingsstyle = () => {
     return ( 
         <div>
-            {/* <NewStyle /> */}
+            <NewStyle />
             {/* <MyBookingStyle /> */}
             {/* <Bookingformstyle /> */}
         </div>

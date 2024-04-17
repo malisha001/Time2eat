@@ -3,7 +3,7 @@ import Home from './pages/Home/HomePage';
 import Navbar from "./component/Navbar";
 import MyBookings from "./pages/MyBookings";
 import NewBooking from "./pages/NewBooking";
-import RestaurantStaff from "./pages/RestaurantStaff";
+// import RestaurantStaff from "./pages/RestaurantStaff";
 import Feedback from './pages/Feedback';
 import { BrowserRouter, Routes, Route,Navigate,useLocation } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext'
@@ -14,7 +14,7 @@ import UpdateDineIn from './pages/UpdateDineInBookings'
 import DineCustomerRegForm from './pages/DineCustomerRegForm';
 import DineInBookings from './pages/DineInBookings';
 import Newbookingsstyle from './pages/Newbookingsstyle';
-import RealTimeIndicator from './component/RealTimeIndicator';
+// import RealTimeIndicator from './component/RealTimeIndicator';
 import AllCustomerDineInHistory from './pages/AllCustomerDineInHistory';
 import EmployeeSal from './pages/EmployeeSal';
 import EmpPayrun from './pages/EmpPayrun';
@@ -58,12 +58,12 @@ function App() {
             <Route path="/update-pre-booking/:id" element={<UpdatePreBookings />} />
             <Route path="/update-dine-in-booking/:id" element={<UpdateDineIn />} />
             <Route path="/bookingpayment" element={<BookingPayment />} />
-            <Route path="/realtime-staff" element={<RestaurantStaff />} />
+            {/* <Route path="/realtime-staff" element={<RestaurantStaff />} /> */}
 
             <Route path="/dine-in-form" element={<DineCustomerRegForm />} />
             <Route path="/dine-in-bookings" element={<DineInBookings />} />
             <Route path="/stylepage" element={<Newbookingsstyle />} />
-            <Route path="/realtimeindecator" element={<RealTimeIndicator />} />
+            {/* <Route path="/realtimeindecator" element={<RealTimeIndicator />} /> */}
             <Route path="/All-dine-in-booking-History" element={<AllCustomerDineInHistory />} />
 
             <Route path="/home" element={<Home />}/>

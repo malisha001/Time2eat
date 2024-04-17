@@ -152,10 +152,26 @@ const UpdateBookingPage = () => {
                           onChange={handleDate}
                           required/></li>
                       <li className='PreDate'>Time</li>
-                      <li className='PreDateInput'><input type='time' id="time"
+                      {/* <li className='PreDateInput'><input type='time' id="time"
                             value={time}
                             onChange={handleTime}
-                            required/></li>
+                            required/></li> */}
+
+                        <li className='PreDateInput'>
+                            <select
+                                id="time"
+                                value={time}
+                                onChange={handleTime}
+                                required
+                            >
+                                {Array.from({ length: 24 }, (_, i) => i).map((hour) => (
+                                    <option key={hour} value={hour.toString().padStart(2, '0') + ':00'}>
+                                        {hour.toString().padStart(2, '0') + ':00'}
+                                    </option>
+                                ))}
+                            </select>
+                        </li>
+
                       <Button type="submit" onClick={handleSubmitCheckAvailability}> Check Now</Button>
                 
                   </ul>
@@ -299,9 +315,9 @@ const UpdateBookingPage = () => {
               </Grid>
               <Grid item md={4}>            
               <Box className='availability-status-top'>
-              Booked</Box>
+              Total</Box>
               <Box className='availability-status-bottom'>
-                 {totalGroupTablesBooked}</Box>
+                 15</Box>
               </Grid>
               <Grid item md={4}>            
               <Box className='availability-status-top'>Available </Box>
@@ -320,7 +336,7 @@ const UpdateBookingPage = () => {
               </Card>
               </Grid>
               <Grid item md={4}>            
-              <Box className='availability-status'>{totalCoupleTablesBooked}</Box>
+              <Box className='availability-status'>10</Box>
               </Grid>
               <Grid item md={4}>            
               <Box className='availability-status'>{availableTables.couple}</Box>
