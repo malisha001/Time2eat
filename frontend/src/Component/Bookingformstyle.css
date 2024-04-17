@@ -40,11 +40,7 @@
     border: 1px solid #000;
     width: 53%;
   }
-  .input{
-      
-      box-sizing: border-box;
-      border-radius: 20px;
-  }
+  
   .form-card-subtitles{
     margin-left: 70px;
     margin-bottom: 35px;

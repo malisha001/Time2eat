@@ -32,6 +32,7 @@
 
   .PreDate {
     padding: 10px;
+    margin-top: 8px;
     text-align: center; /* Center the text */
   }
   
@@ -39,12 +40,19 @@
     padding: 10px;
     text-align: center; /* Center the input field */
   }
+
+  .PreDateInput select {
+    padding: 10px;
+    text-align: center;
+    border-radius: 20px;
+  }
   
   .prebooking-bar input {
     padding: 10px;
     width: 100%; /* Make the input field width 100% */
     box-sizing: border-box; /* Ensure padding is included in width */
     border-radius: 20px;
+    margin-top: 1px;
   }
 
   .prebooking-bar Button{
@@ -53,7 +61,7 @@
     box-sizing: border-box; /* Ensure padding is included in width */
     border-radius: 20px;
     margin-left: 186px;
-    margin-top: 7px;
+    margin-top: 4px;
   }
 
   /* .image-prebooking{

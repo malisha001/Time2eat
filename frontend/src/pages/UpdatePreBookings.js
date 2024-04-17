@@ -172,7 +172,7 @@ const UpdateBookingPage = () => {
                             </select>
                         </li>
 
-                      <Button type="submit" onClick={handleSubmitCheckAvailability}> Check Now</Button>
+                      <Button type="submit" variant="contained" onClick={handleSubmitCheckAvailability}> Check Now</Button>
                 
                   </ul>
               </nav>
@@ -343,11 +343,6 @@ const UpdateBookingPage = () => {
               </Grid>
 
             </Grid>
-          
-            <Button className='my-reservation-button'>
-            Current Availability
-            </Button>
-
           </Grid>
 
         </Grid>
