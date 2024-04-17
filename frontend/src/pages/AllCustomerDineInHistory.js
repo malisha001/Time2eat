@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
-import { Table, TableBody, TableHead, TableRow, TableCell, TableContainer, Paper, Button } from '@mui/material';
+import { Table, TableBody, TableHead, TableRow, TableCell, TableContainer, Paper, Button, TextField } from '@mui/material';
 import axios from "axios";
 
 const AllCustomerDineInHistory = () => {
     const [dineBookings, setDineBookings] = useState(null);
+    const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
         const fetchDineInBookings = async () => {
             try {
                 const response = await axios.get('/api/customerhistoryroute');
                 const data = response.data;
-                console.log()
                 setDineBookings(data);
             } catch (error) {
                 console.error('Error fetching Dine In Bookings:', error);
@@ -23,18 +22,31 @@ const AllCustomerDineInHistory = () => {
 
     const handleClick = async (deleteDineBookings) => {
         try {
-            console.log(deleteDineBookings)
             await axios.delete(`/api/customerhistoryroute/${deleteDineBookings}`);
-            
             setDineBookings(prevBookings => prevBookings.filter(dineBooking => dineBooking._id !== deleteDineBookings));
         } catch (error) {
             console.error('Error deleting booking:', error);
         }
     }
-    
+
+    const filteredBookings = dineBookings ? dineBookings.filter(dineBooking => {
+        return (
+            dineBooking.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            dineBooking.time.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            dineBooking.date.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    }) : [];
 
     return ( 
         <div>
+            <TextField 
+                label="Search"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+            />
             <TableContainer component={Paper} style={{ marginBottom: '20px', backgroundColor: 'lightgrey', marginTop: '40px' }}>
                 <Table aria-label="simple table">
                     <TableHead sx={{bgcolor: 'lightblue'}}>
@@ -51,7 +63,7 @@ const AllCustomerDineInHistory = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {dineBookings && dineBookings.map((dineBooking) => (
+                        {filteredBookings.map((dineBooking) => (
                             <TableRow key={dineBooking._id}>
                                 <TableCell>{dineBooking.cusid}</TableCell>
                                 <TableCell>{dineBooking.resid}</TableCell>
@@ -70,7 +82,7 @@ const AllCustomerDineInHistory = () => {
                 </Table>
             </TableContainer>
         </div>
-     );
+    );
 }
- 
+
 export default AllCustomerDineInHistory;

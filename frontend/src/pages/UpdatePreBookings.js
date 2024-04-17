@@ -152,10 +152,26 @@ const UpdateBookingPage = () => {
                           onChange={handleDate}
                           required/></li>
                       <li className='PreDate'>Time</li>
-                      <li className='PreDateInput'><input type='time' id="time"
+                      {/* <li className='PreDateInput'><input type='time' id="time"
                             value={time}
                             onChange={handleTime}
-                            required/></li>
+                            required/></li> */}
+
+                        <li className='PreDateInput'>
+                            <select
+                                id="time"
+                                value={time}
+                                onChange={handleTime}
+                                required
+                            >
+                                {Array.from({ length: 24 }, (_, i) => i).map((hour) => (
+                                    <option key={hour} value={hour.toString().padStart(2, '0') + ':00'}>
+                                        {hour.toString().padStart(2, '0') + ':00'}
+                                    </option>
+                                ))}
+                            </select>
+                        </li>
+
                       <Button type="submit" onClick={handleSubmitCheckAvailability}> Check Now</Button>
                 
                   </ul>

@@ -5,6 +5,7 @@ import QRCode from 'react-qr-code';
 import exampleImage from '../Assests/example.jpg';
 import grouptableimage from '../Assests/grouptable.jpg';
 import coupletableimage from '../Assests/coupletable.jpg';
+import { Link } from 'react-router-dom';
 import '../component/Bookingformstyle.css';
 
 const NewBooking = () => {
@@ -142,14 +143,35 @@ const NewBooking = () => {
                                             onChange={(e) => setSelectedDateTime({ ...selectedDateTime, date: e.target.value })}
                                             required
                                         /></li>
-                                        <li className='PreDate'>Time</li>
-                                        <li className='PreDateInput'><input
-                                            type="time"
-                                            id="time"
-                                            value={selectedDateTime.time}
-                                            onChange={(e) => setSelectedDateTime({ ...selectedDateTime, time: e.target.value })}
-                                            required
-                                        /></li>
+                                        {/* <li className='PreDateInput'>
+                                            <input
+                                                type="time"
+                                                id="time"
+                                                value={selectedDateTime.time}
+                                                onChange={(e) => setSelectedDateTime({ ...selectedDateTime, time: e.target.value })}
+                                                step="3600"
+                                                required
+                                            />
+                                        </li> */}
+
+                                        {/* 24 hour format  */}
+
+                                        <li className='PreDateInput'>
+                                            <select
+                                                id="time"
+                                                value={selectedDateTime.time}
+                                                onChange={(e) => setSelectedDateTime({ ...selectedDateTime, time: e.target.value })}
+                                                required
+                                            >
+                                                {Array.from({ length: 24 }, (_, i) => i).map((hour) => (
+                                                    <option key={hour} value={hour.toString().padStart(2, '0') + ':00'}>
+                                                        {hour.toString().padStart(2, '0') + ':00'}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </li>
+
+
                                         <Button onClick={() => {
                                                     setShowForm(!showForm);
                                                     setAvailability(!showAvailability);
@@ -371,9 +393,10 @@ const NewBooking = () => {
                                 </Grid>
                             </Grid>
                             )}
-                            <Button className='my-reservation-button'>
-                                Current Availability
-                            </Button>
+                            
+                            <Link to="/mybookings">
+                                <button>My Reservations</button>
+                            </Link>
                         </Grid>
                     </Grid>
                 </Paper>
