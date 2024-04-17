@@ -56,6 +56,10 @@ app.use('/api/user', userRoutes)
 //adverticment routers
 app.use('/api/advertisements',advertisementRoutes)
 app.use('/api/inventory/', inventoryRoutes)
+//online orders
+app.use('/api/onlineOrders', onlineOrdersRoutes)
+app.use('/api/orders', orderRoutes)
+app.use('/api/carts', cartRoutes)
 
 
 // middleware to parse incoming JSON data

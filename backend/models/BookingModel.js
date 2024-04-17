@@ -10,7 +10,7 @@ const BookingSchema = new Schema({
     },
     resid: {
         type: String,
-        required: false
+
     },
     name: {
         type:String,

@@ -35,7 +35,7 @@ import BookingPayment from './pages/BookingPayment';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 
-
+import Mybookingstyle from './component/Mybookingstyle';
 
 function App() {
   const {user} = useAuthContext()
@@ -88,11 +88,11 @@ function App() {
             <Route path='/payment' element={<Payment/>} />
 
             <Route path="/inventory/items" element={<Inventory />} />
-             <Route path="/inventory/addItems" element={<ItemForm />} />
-             <Route path="/inventory/update/:id" element={<UpdateUser />} />
-             <Route path="/inventory/usage" element={<Usage />} /> 
+            <Route path="/inventory/addItems" element={<ItemForm />} />
+            <Route path="/inventory/update/:id" element={<UpdateUser />} />
+            <Route path="/inventory/usage" element={<Usage />} /> 
 
-
+            <Route path="/restaurant/:id" element={<Mybookingstyle />} />
 
           </Routes>
         </div>  
