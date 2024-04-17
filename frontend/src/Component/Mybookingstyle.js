@@ -33,13 +33,19 @@ function Mybookingstyle() {
         />
         </CardActionArea>
         </Card>
+        <Button
+                    variant="contained"
+                    onClick={submitButton}
+                    style={{ position: 'absolute', top: 220, right: 30 }}
+                >
+                    book table
+                </Button>
        </Box>
 
-       <Button sx={{marginLeft: '1350px', marginTop: '20px'}} variant="contained" onClick={submitButton}>Contained</Button>
-
-
        <Paper  sx={{marginTop: '80px', marginLeft: '20px', marginRight: '20px'}}>
+       
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        
             <Grid item xs={4}>
             <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
                     <CardMedia
