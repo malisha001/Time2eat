@@ -63,10 +63,10 @@ const NewBooking = () => {
     const [showAvailability, setAvailability] = useState(false);
     const [tableCount, setTableCount] = useState({ couple: 0, group: 0 });
 
-    const[ctable,setCtable] = useState(0);
-    const[gtable,setGtable] = useState(0);
-    console.log("couple",ctable);
-    console.log("group",gtable);
+    // const[ctable,setCtable] = useState(0);
+    // const[gtable,setGtable] = useState(0);
+    // console.log("couple",ctable);
+    // console.log("group",gtable);
     const fetchData = async () => {
         try {
             const response = await axios.get('/api/realtimebooking');
@@ -102,22 +102,22 @@ const NewBooking = () => {
 
     useEffect(() => {
         //get tables from related restaurent
-        const fetchtabledata = async () => {
-            try {
-                const tabledata = await axios.get(`/api/restaurants/${id}`);
-                console.log("table",tabledata.data);
-                setCtable(tabledata.data.Couple_table);
-                setGtable(tabledata.data.Group_table);
-            } catch (error) {
-                console.error('Error fetching table data:', error);
-            }
-        }
+        // const fetchtabledata = async () => {
+        //     try {
+        //         const tabledata = await axios.get(`/api/restaurants/${id}`);
+        //         console.log("table",tabledata.data);
+        //         setCtable(tabledata.data.Couple_table);
+        //         setGtable(tabledata.data.Group_table);
+        //     } catch (error) {
+        //         console.error('Error fetching table data:', error);
+        //     }
+        // }
 
 
         if (selectedDateTime.date && selectedDateTime.time) {
             fetchBookings(selectedDateTime.date, selectedDateTime.time);
         }
-        fetchtabledata();
+        // fetchtabledata();
     }, [selectedDateTime]);
 
     const handleCheckAvailability = async (e) => {
@@ -178,8 +178,8 @@ const NewBooking = () => {
             setTotalCoupleTablesBooked(coupleTablesBooked);
             setTotalGroupTablesBooked(groupTablesBooked);
 
-            const availableCoupleTables = ctable - coupleTablesBooked;
-            const availableGroupTables = gtable - groupTablesBooked;
+            const availableCoupleTables = 10 - coupleTablesBooked;
+            const availableGroupTables = 15 - groupTablesBooked;
 
             setAvailableTables({ couple: availableCoupleTables, group: availableGroupTables });
         } catch (error) {
@@ -388,7 +388,7 @@ const NewBooking = () => {
                                         Total
                                     </Box>
                                     <Box className='availability-status-bottom'>
-                                        {ctable}
+                                        15
                                     </Box>
                                 </Grid>
                                 <Grid item md={4}>
@@ -408,7 +408,7 @@ const NewBooking = () => {
                                     </Card>
                                 </Grid>
                                 <Grid item md={4}>
-                                    <Box className='availability-status'>{gtable}</Box>
+                                    <Box className='availability-status'>10</Box>
                                 </Grid>
                                 <Grid item md={4}>
                                     <Box className='availability-status'>{availableTables.couple}</Box>
@@ -438,7 +438,7 @@ const NewBooking = () => {
                                         Total
                                     </Box>
                                     <Box className='availability-status-bottom'>
-                                        {ctable}
+                                        15
                                     </Box>
                                 </Grid>
                                 <Grid item md={4}>

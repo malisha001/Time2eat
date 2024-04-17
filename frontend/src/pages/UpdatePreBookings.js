@@ -132,7 +132,7 @@ const UpdateBookingPage = () => {
             setError('An error occurred while updating the booking.');
         }
 
-        navigate("/");
+        navigate("/mybookings");
     };
 
     return (
@@ -172,13 +172,13 @@ const UpdateBookingPage = () => {
                             </select>
                         </li>
 
-                      <Button type="submit" variant="contained" onClick={handleSubmitCheckAvailability}> Check Now</Button>
+                      <Button variant="contained" onClick={handleSubmitCheckAvailability}> Check Now</Button>
                 
                   </ul>
               </nav>
 
               <Card className='imgprebooking'  sx={{ maxWidth: 800 }}>
-              <Grid container spacing={2}>
+              <Grid container spacing={2} sx={{backgroundColor: 'lightgray'}}>
                     <Grid sx={{pr: '16px', ml: '30px', mr: '15px', mt: '20px'}} item md={12}>
                         <h2 className='form-header-pre-booking'>Book Your Table</h2>
                     </Grid>
