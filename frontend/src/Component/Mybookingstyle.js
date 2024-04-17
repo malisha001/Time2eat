@@ -75,7 +75,7 @@ function Mybookingstyle() {
                     />
                     <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        
+                        Mix Grill
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                         Rs.3000
