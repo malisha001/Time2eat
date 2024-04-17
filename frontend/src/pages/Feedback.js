@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
-import FeedbackDetails from "../component/FeedbackDetails";
+import FeedbackDetails from "../component/feedbackD/FeedbackDetails";
 
 const Feedback = () => {
   const [feedbacks, setFeedbacks] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const fetchFeedbacks = async () => {
@@ -15,26 +16,36 @@ const Feedback = () => {
       }
     };
     fetchFeedbacks();
-  }, []);
+  }, [searchQuery]); // Include searchQuery as a dependency
 
   const handleDelete = async (itemId) => {
     console.log("Deleting feedback with ID:", itemId);
   };
 
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  // Filtering feedbacks based on search query
+  const filteredFeedbacks = feedbacks && feedbacks.filter((feedback) =>
+    feedback.customer_name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   const buttonStyle = {
-    backgroundColor: 'orange',
-    color: 'white',
-    borderRadius: '8px',
-    padding: '10px 20px',
-    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-    transition: 'transform 0.2s',
-    cursor: 'pointer',
-    outline: 'none',
-    fontSize: '16px',
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+      backgroundColor: 'orange',
+      color: 'white',
+      borderRadius: '8px',
+      border: 'none',
+      padding: '10px 20px',
+      transition: 'transform 0.2s',
+      cursor: 'pointer',
+      outline: 'none',
+      fontSize: '16px',
+      position: 'absolute',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      marginTop: '20px',
+      marginBottom: '20px'
   };
 
   const handleHover = (e) => {
@@ -47,8 +58,15 @@ const Feedback = () => {
 
   return (
     <div className="feedback" style={{ position: 'relative', height: '100vh' }}>
+      <input
+        type="text"
+        placeholder="Search by name"
+        value={searchQuery}
+        onChange={handleSearchInputChange}
+        style={{ margin: '20px', padding: '10px' }}
+      />
       <div className="fed">
-        {feedbacks && feedbacks.map((feedback) => (
+        {filteredFeedbacks && filteredFeedbacks.map((feedback) => (
           <FeedbackDetails key={feedback._id} fed={feedback} onDelete={handleDelete} />
         ))}
       </div>
