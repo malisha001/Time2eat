@@ -1,6 +1,7 @@
+require('dotenv').config()
 const express = require('express');
 const mongoose = require('mongoose');
-require('dotenv').config()
+
 //import routers
 const employeesal = require('./routers/employeeSalary')
 const restaurants = require('./routers/restaurants')
@@ -10,6 +11,7 @@ const bookingRoutes = require('./routers/booking')
 const RealTimebookingRoutes = require('./routers/realtimebooking')
 const CustomerHistoryRoutes = require('./routers/customerhistoryroute')
 const advertisementRoutes = require('./routers/advertisement')
+const userRoutes = require('./routers/user')
 const inventoryRoutes = require('./routers/inventory') 
 const orderRoutes = require('./routers/orders')
 const cartRoutes = require('./routers/carts')
@@ -18,8 +20,6 @@ const employeeLeaveRoutes = require('./routers/employeeLeaves')
 const employees = require('./routers/employees')
 const payrun = require('./routers/empPayrun')
 const leaves = require('./routers/leaves')
-
-
 
 // express app
 const app = express();
@@ -51,6 +51,8 @@ app.use('/api/employeesal',employeesal)
 app.use('/api/employeeleaves',employeeLeaveRoutes)
 //delivery orders routers
 app.use('/api/deliveryorder',deliveries)
+// user routers
+app.use('/api/user', userRoutes)
 //adverticment routers
 app.use('/api/advertisements',advertisementRoutes)
 //inventory routers
@@ -59,6 +61,7 @@ app.use('/api/inventory/', inventoryRoutes)
 app.use('/api/orders',orderRoutes)
 app.use('/api/carts', cartRoutes)
 app.use('/api/onlineOrders', onlineOrdersRoutes)
+
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI)
