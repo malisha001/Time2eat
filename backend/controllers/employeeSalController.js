@@ -26,8 +26,11 @@ const getEmployeeSal = async(req,res) =>{
 //create employee salary
 const createEmployeesSal = async(req,res) => {
     const{empId,resId,basicEmpSalary,bonusRate,empCatagory,taxRate,ETFrate,Fsalary} = req.body
+    console.log(empCatagory)
 
     try{
+        
+
         const employeesal = await EmployeeSal.create({empId,resId,basicEmpSalary,bonusRate,empCatagory,taxRate,ETFrate,Fsalary})
         res.status(200).json(employeesal)
     }catch(error){
@@ -48,7 +51,7 @@ const deleteEmployeeSal = async(req,res) =>{
     if(!employeesal){
         return res.status(404).json({error: 'no entries'})
     }
-    res.status(200).json(workout)
+    res.status(200).json(employeesal)
 }
 module.exports = {
     getEmployeesSal,

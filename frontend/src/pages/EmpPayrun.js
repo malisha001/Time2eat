@@ -65,8 +65,8 @@ function EmpPayrun() {
                             </Grid>
                         ))}         
                     </Grid>
-                    <h3>last update:</h3>
-                    <h3>Days to the next salary day:</h3>
+                    {/* <h3>last update:</h3>
+                    <h3>Days to the next salary day:</h3> */}
                 </Paper>
                 <Button variant='contained' color='primary' onClick={handlesubmit}>
                     pay salary

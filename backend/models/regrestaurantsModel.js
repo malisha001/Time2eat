@@ -31,7 +31,7 @@ const restaurantSchema = new Schema({
         type:String,
         required : true
     },
-     Confirm_paasword:{
+    Confirm_paasword:{
         type:String,
         required : true
     },

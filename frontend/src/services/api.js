@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 // Function to get all employee salary data
 export async function getAllEmployeeSalaryData() {
     try {
@@ -10,7 +11,20 @@ export async function getAllEmployeeSalaryData() {
         throw error;
     }
 }
+//delete employee salary data
+export async function deleteEmployeeSalaryData(id) {
+    try {
+        const response = await fetch(`/api/employeesal/${id}`, {
+            method: 'DELETE',
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error deleting employee salary data:', error);
+        throw error;
+    }
 
+}
 // Function to add employee salary data
 export async function addEmployeeSalaryData(employeeSalaryData) {
     try {
