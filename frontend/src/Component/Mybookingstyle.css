@@ -19,11 +19,6 @@
   width: 53%;
   border-style: none;
 }
-.input{
-    
-    box-sizing: border-box;
-    border-radius: 20px;
-}
 
 .mybookings-delete{
   margin-left: 30px;

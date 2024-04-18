@@ -59,7 +59,7 @@ function App() {
             <Route path ="/signup" element ={!user ? <Signup/>: <Navigate to="/" />}/>
 
             
-            <Route path="/newbooking" element={<NewBooking />} />
+            <Route path="/newbooking/:id" element={<NewBooking />} />
             <Route path="/mybookings" element={<MyBookings />} />
             {/* <Route path="/update-booking/:id" element={<UpdateBookingDetails />} /> */}
             <Route path="/update-pre-booking/:id" element={<UpdatePreBookings />} />

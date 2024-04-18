@@ -1,5 +1,6 @@
 import { Box, CardActionArea, CardMedia, Card, Paper, Grid, CardContent, Typography, Button } from '@mui/material'
 import React from 'react'
+import { useParams } from 'react-router-dom';
 import exampleImage from '../Assests/example.jpg';
 import image1 from '../Assests/image1.jpg'
 import image2 from '../Assests/image2.jpg'
@@ -7,7 +8,17 @@ import image3 from '../Assests/image3.jpg'
 import image4 from '../Assests/image4.jpg'
 import image5 from '../Assests/image5.jpg'
 import image6 from '../Assests/image6.jpg'
+import { useNavigate } from 'react-router-dom';
+
 function Mybookingstyle() {
+    const { id } = useParams();
+    const navigate = useNavigate();
+
+    const submitButton = () => { 
+        // Navigate to the newBooking page with the restaurant ID in the URL
+        navigate(`/newbooking/${id}`);
+    }
+
   return (
     <div>
         <Paper>
@@ -22,13 +33,19 @@ function Mybookingstyle() {
         />
         </CardActionArea>
         </Card>
+        <Button
+                    variant="contained"
+                    onClick={submitButton}
+                    style={{ position: 'absolute', top: 220, right: 30 }}
+                >
+                    book table
+                </Button>
        </Box>
 
-       <Button sx={{marginLeft: '1350px', marginTop: '20px'}} variant="contained">Contained</Button>
-
-
        <Paper  sx={{marginTop: '80px', marginLeft: '20px', marginRight: '20px'}}>
+       
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        
             <Grid item xs={4}>
             <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
                     <CardMedia
@@ -75,7 +92,7 @@ function Mybookingstyle() {
                     />
                     <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
-                        
+                        Mix Grill
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                         Rs.3000
@@ -145,4 +162,4 @@ function Mybookingstyle() {
   )
 }
 
-export default Mybookingstyle
+export default Mybookingstyle
