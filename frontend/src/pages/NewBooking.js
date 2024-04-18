@@ -1,52 +1,19 @@
 
 import axios from 'axios';
 import QRCode from 'react-qr-code';
-
 import { useParams } from 'react-router-dom';
 import React, { useState,useEffect } from 'react';
-import {Grid, Paper, CardActionArea,Box,Card,CardMedia} from '@mui/material';
-
-
-// NewBooking.js
-
-// import BookingForm from '../component/Bookingform';
-// import ParentComponent from '../component/ParentComponent';
-// import CheckAvailability from '../component/CheckAvailability';
+import {Grid, Paper, CardActionArea,Box,Card,CardMedia, Typography} from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-
-
 import CardContent from '@mui/material/CardContent';
-
-
 import Button from '@mui/material/Button';
 import exampleImage from '../Assests/example.jpg';
 import grouptableimage from '../Assests/grouptable.jpg';
 import coupletableimage from '../Assests/coupletable.jpg';
 import { Link } from 'react-router-dom';
 import '../component/Bookingformstyle.css';
-
-
 import Navbar from '../component/Navbar';
-// import Card from '@mui/material/Card';
-// import CardContent from '@mui/material/CardContent';
-// import CardMedia from '@mui/material/CardMedia';
-// import Typography from '@mui/material/Typography';
-// import { CardActionArea, Grid,Box,Paper } from '@mui/material';
-
 import PreStyles from '../component/NewStyle.css'
-// import exampleImage from '../Assests/example.jpg'; // Adjust the path as per your directory structure
-// import grouptableimage from '../Assests/grouptable.jpg'; // Adjust the path as per your directory structure
-// import coupletableimage from '../Assests/coupletable.jpg'; // Adjust the path as per your directory structure
-
-
-// material ui 
-
-// import Card from '@mui/material/Card';
-// import CardContent from '@mui/material/CardContent';
-// import CardMedia from '@mui/material/CardMedia';
-// import Typography from '@mui/material/Typography';
-// import { CardActionArea } from '@mui/material';
-
 
 const NewBooking = () => {
     const { id } = useParams();
@@ -61,12 +28,10 @@ const NewBooking = () => {
     const [error, setError] = useState(null);
     const [showForm, setShowForm] = useState(false);
     const [showAvailability, setAvailability] = useState(false);
+    const [nameError, setNameError] = useState(null);
+    const [telError, setTelError] = useState(null);
     const [tableCount, setTableCount] = useState({ couple: 0, group: 0 });
 
-    // const[ctable,setCtable] = useState(0);
-    // const[gtable,setGtable] = useState(0);
-    // console.log("couple",ctable);
-    // console.log("group",gtable);
     const fetchData = async () => {
         try {
             const response = await axios.get('/api/realtimebooking');
@@ -83,7 +48,6 @@ const NewBooking = () => {
     };
 
     useEffect(() => {
-
 
         // Fetch data initially
         fetchData();
@@ -149,6 +113,7 @@ const NewBooking = () => {
             telephoneno: telephoneno
         };
 
+        if(!nameError && !telError){
         try {
             const response = await axios.post('/api/booking', booking);
             const json = response.data;
@@ -166,6 +131,9 @@ const NewBooking = () => {
         } catch (error) {
             console.error('Error adding booking:', error);
             setError('An error occurred while adding the booking.');
+        }}
+        else{
+            setError("Please enter valid details");
         }
     };
 
@@ -207,6 +175,7 @@ const NewBooking = () => {
                                             value={selectedDateTime.date}
                                             onChange={(e) => setSelectedDateTime({ ...selectedDateTime, date: e.target.value })}
                                             required
+                                            min={new Date().toISOString().split('T')[0]}  // aditional
                                         /></li>
                                         {/* <li className='PreDateInput'>
                                             <input
@@ -237,7 +206,7 @@ const NewBooking = () => {
                                         </li>
 
 
-                                        <Button sx={{marginTop: '0px'}} variant="contained" onClick={() => {
+                                        <Button sx={{marginTop: '12px', marginLeft: '288px', borderRadius: '20PX'}} variant="contained" onClick={() => {
                                                     setShowForm(!showForm);
                                                     setAvailability(!showAvailability);
                                                 }}> Check Now</Button>
@@ -246,10 +215,11 @@ const NewBooking = () => {
                             </form>
                             {showForm ? (
                                 <form className="create" onSubmit={handleAddBooking}>
-                                <Paper sx={{ width: '850px', height: '360px', pt: '10px', mt: '40px', ml: '20px', mr: '40px', bgcolor: 'lightgrey', mb: '30px' }}>
+                                <Paper sx={{ width: '850px', pt: '10px', mt: '40px', ml: '20px', mr: '40px', bgcolor: 'lightgrey', mb: '30px' }}>
                                     <Grid container spacing={2}>
                                         <Grid sx={{ pr: '16px', ml: '30px', mr: '15px', mt: '0px' }} item md={12}>
                                             <h2 className='form-header-pre-booking'>Book Your Table</h2>
+                                            {error && <div className="error">{error}</div>}
                                         </Grid>
                                         <Grid sx={{ ml: '0px', mt: '0px', ml: '30px', mr: '15px' }} container spacing={2}>
                                             <Grid item md={6}>
@@ -276,7 +246,7 @@ const NewBooking = () => {
                                                     </Grid>
                                                     <Grid item md={6}>
                                                         <input className='pre-booking-form-table-input' type='Number' onChange={(e) => setGroupquantity(e.target.value)}
-                                                            value={groupquantity}></input>
+                                                            value={groupquantity} min={0} />
                                                     </Grid>
                                                 </Grid>
                                             </Grid>
@@ -304,7 +274,7 @@ const NewBooking = () => {
                                                     </Grid>
                                                     <Grid item md={6}>
                                                         <input className='pre-booking-form-table-input' type='Number' onChange={(e) => setCouplequantity(e.target.value)}
-                                                            value={couplequantity}></input>
+                                                            value={couplequantity} min={0}/>
                                                     </Grid>
                                                 </Grid>
                                             </Grid>
@@ -316,15 +286,52 @@ const NewBooking = () => {
                                                         <h3 className='form-card-subtitles-bottom'>Enter Booking Details</h3>
                                                     </Grid>
                                                 </Grid>
-                                                <div className="input-container">
-                                                    <label className='input-mybooking-label'>Name</label>
-                                                    <input className='input-mybooking' type='text' onChange={(e) => setName(e.target.value)}
-                                                        value={name} ></input>
+                                                <div>
+                                                    <div className="input-container">
+                                                        <label className='input-mybooking-label'>Name</label>
+                                                        <input className='input-mybooking' type='text' onChange={(e) => {
+                                                            const value = e.target.value;
+                                                            if (!/^[a-zA-Z ]*$/.test(value)) {
+                                                            setNameError('Please enter a valid name (letters spaces only)');
+                                                            } else {
+                                                            setNameError('');
+                                                            }
+                                                            setName(value);
+                                                        }}
+                                                        value={name}
+                                                        sx={{ width: "100%" }} />
+                                                        
+                                                    </div>
+                                                    <div style={{margin:'-10px 0px 10px 20px'}}>
+                                                        {nameError && (
+                                                            <Typography variant="body2" color="error">
+                                                            {nameError}
+                                                            </Typography>
+                                                        )}
+                                                    </div>
                                                 </div>
-                                                <div className="input-container">
-                                                    <label className='input-mybooking-label'>Telephone</label>
-                                                    <input className='input-mybooking' type='text' onChange={(e) => setTelephoneNo(e.target.value)}
-                                                        value={telephoneno}></input>
+                                                <div>
+                                                    <div className="input-container">
+                                                        <label className='input-mybooking-label'>Telephone</label>
+                                                        <input className='input-mybooking' type='text' onChange={(e) => {
+                                                        const value = e.target.value;
+                                                        if (!/^\d{10}$/.test(value)) {
+                                                            setTelError('Please enter a valid telephone number (10 digits)');
+                                                        } else {
+                                                            setTelError('');
+                                                        }
+                                                        setTelephoneNo(value);
+                                                        }}
+                                                        value={telephoneno}
+                                                        sx={{ width: "100%" }} />
+                                                    </div>
+                                                    <div style={{margin:'-10px 0px 10px 20px'}}>
+                                                        {telError && (
+                                                            <Typography variant="body2" color="error">
+                                                                {telError}
+                                                            </Typography>
+                                                        )}
+                                                    </div>
                                                 </div>
                                             </Grid>
                                             <Grid item md={6}>
@@ -343,7 +350,7 @@ const NewBooking = () => {
                                                     </Grid>
                                                 </Grid>
                                                 <button variant="contained" className='pre-booking-form-btn-bottom'>proceed</button>
-                                                {error && <div className="error">{error}</div>}
+                                                
                                             </Grid>
                                         </Grid>
                                     </Grid>

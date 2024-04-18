@@ -54,7 +54,10 @@
   .pre-booking-form-btn-bottom{
     margin-left: 260px;
     margin-bottom: 30px;
-    margin-top: 8px;
+    margin-top: 2px;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #1976d2;
   }
   .input-mybooking-label-date {
     width: 100px; /* Set a fixed width for labels */

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { Grid, Paper } from '@mui/material';
+import { Button, Grid, Paper } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import exampleImage from '../Assests/example.jpg';
@@ -97,9 +97,9 @@ const MyBookings = () => {
                             </Grid>
 
                             <p>{booking.createAt}</p>
-                            <button className='mybookings-delete' onClick={() => handleDeleteBooking(booking._id)}>Delete</button>
+                            <Button variant="contained" sx={{bgcolor: 'red', marginLeft: '10px', marginBottom: '10px'}} onClick={() => handleDeleteBooking(booking._id)}>Delete</Button>
 
-                            <button className='mybookings-update'><Link to={`/update-pre-booking/${booking._id}`}>Update</Link></button>
+                            <Button variant="contained" style={{ textDecoration: 'none' }} sx={{marginLeft: '550px', marginBottom: '10px'}} ><Link style={{ textDecoration: 'none' }} to={`/update-pre-booking/${booking._id}`}>Update</Link></Button>
                         </Paper>
 
                     </div>
