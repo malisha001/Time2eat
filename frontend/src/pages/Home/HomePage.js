@@ -306,7 +306,7 @@ export default function TemporaryDrawer() {
               
                 <Box sx={{marginLeft: '100px', marginRight: '100px'}}>
 
-                  <Grid container sx={{ bgcolor: 'red'}} spacing={2}>
+                  <Grid container spacing={2}>
 
                     {restuarents.map((restuarent) => (
 
@@ -320,7 +320,7 @@ export default function TemporaryDrawer() {
                                 component="img"
                                 alt="green iguana"
                                 height="250"
-                                image={exampleImage}
+                                image={res1}
                               />
                               <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">
@@ -330,7 +330,7 @@ export default function TemporaryDrawer() {
                               </CardContent>
                             </CardActionArea>
                           </Card>
-                      </Grid>  
+                      </Grid>
                     ))} 
                   </Grid>
                 </Box>

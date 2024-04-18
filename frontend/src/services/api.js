@@ -215,3 +215,17 @@ export async function getCartData() {
         throw error;
     }
 }
+//delete cart data dilvery guy not accept order
+export async function deleteCartData(id) {
+    try {
+        const response = await fetch(`/api/carts/${id}`, {
+            method: 'DELETE',
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error deleting cart data:', error);
+        throw error;
+    }
+
+}

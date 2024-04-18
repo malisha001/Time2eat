@@ -1,39 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { Paper, Grid,Button,Dialog,DialogTitle,DialogContent,DialogActions,TextField,FormControl,FormLabel,RadioGroup,Radio,FormControlLabel } from '@mui/material';
-import { getCartData,checkRider } from '../services/api';
-import {useNavigate,Route,Routes} from 'react-router-dom';
+import { Paper, Grid, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, FormControl, FormLabel, RadioGroup, Radio, FormControlLabel } from '@mui/material';
+import { getCartData, checkRider } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 import { placeorder } from '../services/api';
-import Payment from './Payment';
 import { useAuthContext } from '../hooks/useAuthContext';
 
 function Cart() {
-    const {user} = useAuthContext() //get user details
+    const { user } = useAuthContext(); //get user details
     //navigate another page
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     //state
     const [location, setLocation] = useState('');
     const [radiovalue, setRadioValue] = useState('');
     const [cartData, setCartData] = useState([]);
-    const[isDataSent,setDataSent] = useState(false);
-    const[message,setMessage] = useState('');
-    const[countdown,setCountdown] = useState(10);
+    const [isDataSent, setDataSent] = useState(false);
+    const [message, setMessage] = useState('');
+    const [countdown, setCountdown] = useState(10);
+    const [error, setError] = useState('');
 
     //get radio button value
     const handleChange = (event) => {
-        setRadioValue(event.target.value);     
+        setRadioValue(event.target.value);
     }
-    //get textfield value
-    const testfieldhandle = (event) => {
-        setLocation(event.target.value)
-    }
+
     //delivery handle function
-    const handleDelivery = async(orderid) => {
+    const handleDelivery = async (orderid) => {
         setDataSent(true)
         setMessage('Looking for a rider!')
 
         try {
             const find = await checkRider(orderid);
-            console.log('find:',find);
+            console.log('find:', find);
             if (find.length > 0) {
                 setMessage('Rider Found! Order placed successfully');
                 navigate('/payment')
@@ -45,7 +42,7 @@ function Cart() {
     }
 
     //confirm order
-    const handleClickConfirm = async(order,resname) => {
+    const handleClickConfirm = async (order, resname) => {
         handleDelivery(order);
         //if delivery is selected
 
@@ -55,7 +52,7 @@ function Cart() {
         }, 1000);
 
         //if delivery is selected
-        if(radiovalue === 'delivery'){
+        if (radiovalue === 'delivery') {
             const data = {
                 orderid: order,
                 cusName: user.email,
@@ -73,7 +70,7 @@ function Cart() {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 //if response is ok call handleDelivery function
-                
+
             } catch (error) {
                 console.error('Error placing order:', error);
             }
@@ -92,7 +89,7 @@ function Cart() {
             }, 10000); // 10 secs in milliseconds for now
 
         }
-        else{
+        else {
             const data = {
                 orderid: order,
                 restaurantname: resname,
@@ -103,7 +100,7 @@ function Cart() {
 
             try {
                 const response = await placeorder(data);
-                console.log('data:',data);
+                console.log('data:', data);
             } catch (error) {
                 console.error('Error placing order:', error);
             }
@@ -116,7 +113,7 @@ function Cart() {
         const fetchCartData = async () => {
             try {
                 const fetchCartData = await getCartData();
-                console.log("fetch data:",fetchCartData)
+                console.log("fetch data:", fetchCartData)
                 // Group items by order ID
                 const ordersMap = new Map();
                 fetchCartData.forEach(item => {
@@ -141,11 +138,11 @@ function Cart() {
     return (
         <div>
             <h1>Cart Page</h1>
-            {radiovalue === 'delivery' && ( 
-            <div>
-                <p>{message}</p>
-                <p>Wait {countdown} seconds to find a rider!</p>
-            </div>
+            {radiovalue === 'delivery' && (
+                <div>
+                    <p>{message}</p>
+                    <p>Wait {countdown} seconds to find a rider!</p>
+                </div>
             )}
 
             <div>
@@ -159,9 +156,16 @@ function Cart() {
                                 <li key={index}>{foodItem}</li>
                             ))}
                         </ul>
-                        <TextField name="resId"  variant = "outlined" label = "location" value={location} onChange={testfieldhandle}
-                            style={{ display: radiovalue === 'delivery' ? 'block' : 'none' }} // Show only if delivery is selected
-                        /><br/>
+                        <TextField
+                            name="resId"
+                            variant="outlined"
+                            label="Location"
+                            // value={location}
+                            // onChange={testfieldhandle}
+                            // error={Boolean(error)}
+                            // helperText={error}
+                            style={{ display: radiovalue === 'delivery' ? 'block' : 'none' }}
+                        /><br />
                         <FormControl variant="outlined">
                             <FormLabel id="demo-radio-buttons-group-label">Options</FormLabel>
                             <RadioGroup
@@ -174,13 +178,35 @@ function Cart() {
                                 <FormControlLabel value="pickup" control={<Radio />} label="pickup" />
                                 <FormControlLabel value="delivery" control={<Radio />} label="delivery" />
                             </RadioGroup>
-                        </FormControl><br/>
-                        <Button variant='contained' onClick={()=>handleClickConfirm(order.orderid,order.restaurantname)} disabled ={isDataSent}> confirm</Button>
-                        
+                        </FormControl><br />
+                        <Button variant='contained' onClick={() => handleClickConfirm(order.orderid, order.restaurantname)} disabled={isDataSent}> confirm</Button>
+
                     </Paper>
                 ))}
             </div>
         </div>
+
+                    //get textfield value
+    // const testfieldhandle = (event) => {
+    //     const value = event.target.value;
+    //     setLocation(value);
+    //     // Validate the input
+    //     if (!isValidLocation(value)) {
+    //         // If input is invalid, set an error message
+    //         setError('Enter valid Location');
+    //     } else {
+    //         // If input is valid, clear the error message
+    //         setError('');
+    //     }
+    // }
+
+    // const isValidLocation = (value) => {
+    //     // allow only letters, numbers, and /
+    //     const regex = /^[a-zA-Z0-9/]+$/;
+    //     return regex.test(value);
+    // };
+
+
     );
 }
 

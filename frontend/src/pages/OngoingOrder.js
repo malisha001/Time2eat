@@ -1,5 +1,5 @@
 import React, { useEffect,useState } from 'react';
-import { Paper, Grid,Button,TableContainer,TableHead,Table,TableRow,TableCell,TableBody } from '@mui/material';
+import { TextField,Paper, Grid,Button,TableContainer,TableHead,Table,TableRow,TableCell,TableBody } from '@mui/material';
 import { getOngoingOrder } from '../services/api';
 
 function OngoingOrder() {
@@ -29,6 +29,7 @@ function OngoingOrder() {
                 <p><h4>restuarent location:</h4>{item.reslocation}</p>
                 <p><h4>order status:</h4></p>
                 <p><h4></h4>estimated time:</p>
+                <TextField id="outlined-basic" label="Enter estimated time" variant="outlined" /><br/>
                 <Button variant='contained'> update</Button>
             </Paper>
         ))}

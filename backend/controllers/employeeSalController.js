@@ -29,7 +29,23 @@ const createEmployeesSal = async(req,res) => {
     console.log(empCatagory)
 
     try{
+                // Validate required fields
+                if (!empId || !resId || !empCatagory || !basicEmpSalary ) {
+                    return res.status(400).json({ message: 'All fields are required' });
+                    // throw new Error('All fields are required');
+                }
         
+                // Validate basicSalary is a number
+                else if (!validator.isNumeric(basicEmpSalary)) {
+                    return res.status(400).json({ message: 'Basic salary must be a number' });
+                    // throw new Error('Basic salary must be a number');
+                }
+        
+                // Validate position contains only letters
+                else if (!validator.isAlpha(empCatagory)) {
+                    return res.status(400).json({ message: 'Position must contain only letters' });
+                    // throw new Error('Position must contain only letters');
+                }
 
         const employeesal = await EmployeeSal.create({empId,resId,basicEmpSalary,bonusRate,empCatagory,taxRate,ETFrate,Fsalary})
         res.status(200).json(employeesal)

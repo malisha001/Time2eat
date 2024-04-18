@@ -89,11 +89,7 @@ const addOnlineOrders = async (req, res) => {
 const deleteOnlineOrders = async (req, res) => {
     const {id} = req.params
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such cart'})
-    }
-
-    const onlineOrders = await Onlineorder.findOneAndDelete({_id: id})
+    const onlineOrders = await Onlineorder.findOneAndDelete({orderid: id})
 
     if (!onlineOrders) {
         return res.status(404).json({error: 'No such cart'})
