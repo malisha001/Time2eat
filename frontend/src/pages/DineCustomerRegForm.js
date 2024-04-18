@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Paper } from "@mui/material";
+import { Button, Grid, Paper, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import axios from "axios";
@@ -14,6 +14,8 @@ function DineCustomerRegForm() {
   const [groupquantity, setGroupquantity] = useState("");
   const [telephoneno, setTelephone] = useState("");
   const [error, setError] = useState(null);
+  const [nameError, setNameError] = useState(null);
+  const [telError, setTelError] = useState(null);
   const [availableTables, setAvailableTables] = useState({
     couple: 10,
     group: 15,
@@ -70,13 +72,18 @@ function DineCustomerRegForm() {
     // Proceed with booking if everything is valid
     const DineCustomerRegForm = { cusid, resid, name, time, date, couplequantity, groupquantity, telephoneno };
 
-    try {
-      await axios.post("/api/realtimebooking", DineCustomerRegForm);
-      await axios.post("/api/customerhistoryroute", DineCustomerRegForm);
-      clearFormFields();
-    } catch (error) {
-      console.error("Error adding booking:", error);
-      setError("An error occurred while adding the booking.");
+    if(!nameError && !telError){ 
+      try {
+        await axios.post("/api/realtimebooking", DineCustomerRegForm);
+        await axios.post("/api/customerhistoryroute", DineCustomerRegForm);
+        clearFormFields();
+      } catch (error) {
+        console.error("Error adding booking:", error);
+        setError("An error occurred while adding the booking.");
+      }
+    }
+    else{
+      setError("Please enter valid details");
     }
   };
 
@@ -90,51 +97,44 @@ function DineCustomerRegForm() {
     setGroupquantity("");
     setTelephone("");
     setError(null);
+    setNameError(null);
   };
 
   return (
     <form className="create" onSubmit={handleSubmit}>
       <h3>Add a New Booking</h3>
 
-      <Paper sx={{ bgcolor: "white" }}>
+      <Paper sx={{ bgcolor: "white", height: '400px', marginLeft: '20px', marginRight: '20px', backgroundColor: 'lightgray' }}>
         <Box sx={{ marginLeft: "60px", marginRight: "60px", marginTop: "40px", marginBottom: "40px", padding: "20px" }}>
           <h2>Payment Details</h2>
           <Grid container spacing={4}>
+
             <Grid item xs={6}>
-              <TextField
-                required
-                id="outlined-required"
-                label="CusID"
-                type="text"
-                onChange={(e) => setcusID(e.target.value)}
-                value={cusid}
-                sx={{ width: "100%" }}
-              />
+              
+            <TextField
+              required
+              id="outlined-required"
+              label="Name"
+              type="text"
+              onChange={(e) => {
+                const value = e.target.value;
+                if (!/^[a-zA-Z]*$/.test(value)) {
+                  setNameError('Please enter a valid name (letters only)');
+                } else {
+                  setNameError('');
+                }
+                setName(value);
+              }}
+              value={name}
+              sx={{ width: "100%" }}
+            />{nameError && (
+                <Typography variant="body2" color="error">
+                  {nameError}
+                </Typography>
+              )}
             </Grid>
             <Grid item xs={6}>
-              <TextField
-                required
-                id="outlined-required"
-                label="ResID"
-                type="text"
-                onChange={(e) => setresID(e.target.value)}
-                value={resid}
-                sx={{ width: "100%" }}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                required
-                id="outlined-required"
-                label="Name"
-                type="text"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-                sx={{ width: "100%" }}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
+          <TextField
                 required
                 id="outlined-required"
                 label="Time"
@@ -180,22 +180,39 @@ function DineCustomerRegForm() {
               />
             </Grid>
             <Grid item xs={6}>
+            <Grid item xs={6}>
               <TextField
                 required
                 id="outlined-required"
                 label="Telephone No"
-                type="text"
-                onChange={(e) => setTelephone(e.target.value)}
+                type="tel"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (!/^\d{10}$/.test(value)) {
+                    setTelError('Please enter a valid telephone number (10 digits)');
+                  } else {
+                    setTelError('');
+                  }
+                  setTelephone(value);
+                }}
                 value={telephoneno}
                 sx={{ width: "100%" }}
               />
+              {telError && (
+                <Typography variant="body2" color="error">
+                  {telError}
+                </Typography>
+              )}
+            </Grid>
+
             </Grid>
           </Grid>
+          <Button type="submit" contained sx={{marginTop: '20px', backgroundColor: 'lightblue'}}>Add Booking</Button>
+          {error && <div className="error">{error}</div>}
         </Box>
       </Paper>
 
-      <button>Add Booking</button>
-      {error && <div className="error">{error}</div>}
+      
     </form>
   );
 }

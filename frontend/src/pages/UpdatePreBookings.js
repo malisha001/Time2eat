@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import Card from '@mui/material/Card';
+import {Card, Button} from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, Grid,Box,Paper } from '@mui/material';
 import PreStyles from '../component/NewStyle.css'
 import exampleImage from '../Assests/example.jpg'; // Adjust the path as per your directory structure
-import grouptableimage from '../Assests/grouptable.jpg'; // Adjust the path as per your directory structure
-import coupletableimage from '../Assests/coupletable.jpg'; // Adjust the path as per your directory structure
-import { Button } from '@mui/base'
+import grouptableimage from '../Assests/grouptable.jpg'; 
+import coupletableimage from '../Assests/coupletable.jpg'; 
+
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -26,6 +26,9 @@ const UpdateBookingPage = () => {
     const [groupquantity, setGroupquantity] = useState('');
     const [name, setName] = useState('');
     const [telephoneno, setTelephoneNo] = useState('');
+    const [nameError, setNameError] = useState(null);
+    const [telError, setTelError] = useState(null);
+
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -91,7 +94,7 @@ const UpdateBookingPage = () => {
 
     const handleSubmitUpdateBooking = async (e) => {
         e.preventDefault();
-    
+        
         const totalCoupleTablesRequested = parseInt(couplequantity);
         const totalGroupTablesRequested = parseInt(groupquantity);
 
@@ -115,6 +118,7 @@ const UpdateBookingPage = () => {
             telephoneno: telephoneno 
         };
     
+        if(!nameError && !telError){
         try {
             const response = await axios.patch(`/api/booking/${id}`, booking);
             const json = response.data;
@@ -131,8 +135,13 @@ const UpdateBookingPage = () => {
             console.error('Error updating booking:', error);
             setError('An error occurred while updating the booking.');
         }
+        navigate("/mybookings");
+    }
+        else{
+            setError("Please enter valid details");
+        }
 
-        navigate("/");
+        
     };
 
     return (
@@ -172,13 +181,13 @@ const UpdateBookingPage = () => {
                             </select>
                         </li>
 
-                      <Button type="submit" variant="contained" onClick={handleSubmitCheckAvailability}> Check Now</Button>
+                      <Button sx={{marginTop: '12px', marginLeft: '288px', borderRadius: '20PX'}} variant="contained" onClick={handleSubmitCheckAvailability}> Check Now</Button>
                 
                   </ul>
               </nav>
 
               <Card className='imgprebooking'  sx={{ maxWidth: 800 }}>
-              <Grid container spacing={2}>
+              <Grid container spacing={2} sx={{backgroundColor: 'lightgray'}}>
                     <Grid sx={{pr: '16px', ml: '30px', mr: '15px', mt: '20px'}} item md={12}>
                         <h2 className='form-header-pre-booking'>Book Your Table</h2>
                     </Grid>
@@ -253,20 +262,52 @@ const UpdateBookingPage = () => {
                                     <h3 className='form-card-subtitles-bottom'>Enter Booking Details</h3>
                                     </Grid>
                                   </Grid>
-                                  
+                            <div>
                                 <div className="input-container">
                                     <label className='input-mybooking-label'>Name</label>
-                                    <input className='input-mybooking' type='text' onChange={(e) => setName(e.target.value)}
-                   value={name} ></input>
-                                </div>
-
+                                    <input className='input-mybooking' type='text' onChange={(e) => {
+                                        const value = e.target.value;
+                                        if (!/^[a-zA-Z ]*$/.test(value)) {
+                                        setNameError('Please enter a valid name (letters spaces only)');
+                                        } else {
+                                        setNameError('');
+                                        }
+                                        setName(value);
+                                    }}
+                                    value={name}
+                                    sx={{ width: "100%" }} />
+                                    </div>
+                                    <div style={{margin:'-10px 0px 10px 20px'}}>
+                                        {nameError && (
+                                            <Typography variant="body2" color="error">
+                                            {nameError}
+                                            </Typography>
+                                        )}
+                                    </div>
+                            </div>
+                            <div>
                                 <div className="input-container">
                                     <label className='input-mybooking-label'>Telephone</label>
-                                    <input className='input-mybooking' type='text' onChange={(e) => setTelephoneNo(e.target.value)}
-                   value={telephoneno}></input>
+                                    <input className='input-mybooking' type='text' onChange={(e) => {
+                                                        const value = e.target.value;
+                                                        if (!/^\d{10}$/.test(value)) {
+                                                            setTelError('Please enter a valid telephone number (10 digits)');
+                                                        } else {
+                                                            setTelError('');
+                                                        }
+                                                        setTelephoneNo(value);
+                                                        }}
+                                                        value={telephoneno}
+                                                        sx={{ width: "100%" }} />
                                 </div>
-                               <div>
-                                
+                              
+                               <div style={{margin:'-10px 0px 10px 20px'}}>
+                                                        {telError && (
+                                                            <Typography variant="body2" color="error">
+                                                                {telError}
+                                                            </Typography>
+                                                        )}
+                                                    </div>
                                </div>
                                 </Grid>
                                 <Grid item md={6}>
@@ -284,7 +325,7 @@ const UpdateBookingPage = () => {
  </Box>
                                     </Grid>
                                   </Grid>
-                                <button className='pre-booking-form-btn-bottom' onClick={handleSubmitUpdateBooking}>proceed</button>
+                                <Button variant="contained" sx={{marginLeft: '250px', borderRadius: '20px'}} onClick={handleSubmitUpdateBooking}>proceed</Button>
                                 {error && <div className="error">{error}</div>}
                                 </Grid>
                     </Grid>

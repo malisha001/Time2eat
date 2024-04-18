@@ -7,7 +7,7 @@
     margin-left: 20px;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: #828282e1;
     border-radius: 30px;
   }
   
@@ -55,14 +55,7 @@
     margin-top: 1px;
   }
 
-  .prebooking-bar Button{
-    padding: 14px;
-    /* Make the input field width 100% */
-    box-sizing: border-box; /* Ensure padding is included in width */
-    border-radius: 20px;
-    margin-left: 186px;
-    margin-top: 4px;
-  }
+ 
 
   /* .image-prebooking{
     margin-top: 100px;

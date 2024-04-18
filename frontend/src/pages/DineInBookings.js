@@ -35,8 +35,6 @@ const DineInBookings = () => {
                 <Table aria-label="simple table">
                     <TableHead sx={{bgcolor: 'lightblue'}}>
                         <TableRow>
-                            <TableCell>Customer ID</TableCell>
-                            <TableCell>Res ID</TableCell>
                             <TableCell>Name</TableCell>
                             <TableCell>Time</TableCell>
                             <TableCell>Date</TableCell>
@@ -50,8 +48,6 @@ const DineInBookings = () => {
                     <TableBody>
                         {dineBookings && dineBookings.map((dineBooking) => (
                             <TableRow key={dineBooking._id}>
-                                <TableCell>{dineBooking.cusid}</TableCell>
-                                <TableCell>{dineBooking.resid}</TableCell>
                                 <TableCell>{dineBooking.name}</TableCell>
                                 <TableCell>{dineBooking.time}</TableCell>
                                 <TableCell>{dineBooking.date}</TableCell>
