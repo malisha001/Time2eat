@@ -31,7 +31,6 @@ const AllCustomerDineInHistory = () => {
 
     const filteredBookings = dineBookings ? dineBookings.filter(dineBooking => {
         return (
-            dineBooking.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
             dineBooking.time.toLowerCase().includes(searchTerm.toLowerCase()) ||
             dineBooking.date.toLowerCase().includes(searchTerm.toLowerCase())
         );

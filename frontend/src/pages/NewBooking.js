@@ -289,17 +289,22 @@ const NewBooking = () => {
                                                 <div>
                                                     <div className="input-container">
                                                         <label className='input-mybooking-label'>Name</label>
-                                                        <input className='input-mybooking' type='text' onChange={(e) => {
-                                                            const value = e.target.value;
-                                                            if (!/^[a-zA-Z ]*$/.test(value)) {
-                                                            setNameError('Please enter a valid name (letters spaces only)');
-                                                            } else {
-                                                            setNameError('');
-                                                            }
-                                                            setName(value);
-                                                        }}
-                                                        value={name}
-                                                        sx={{ width: "100%" }} />
+                                                        <input
+                                                            className='input-mybooking'
+                                                            type='text'
+                                                            onChange={(e) => {
+                                                                const value = e.target.value;
+                                                                if (/[^a-zA-Z]/.test(value)) {
+                                                                    setNameError('Please enter a valid name (letters only)');
+                                                                } else {
+                                                                    setNameError('');
+                                                                }
+                                                                setName(value.replace(/[^a-zA-Z]/g, '')); 
+                                                            }}
+                                                            value={name}
+                                                            sx={{ width: "100%" }}
+                                                        />
+
                                                         
                                                     </div>
                                                     <div style={{margin:'-10px 0px 10px 20px'}}>
