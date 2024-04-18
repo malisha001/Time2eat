@@ -16,7 +16,7 @@ function Cart() {
     const [cartData, setCartData] = useState([]);
     const[isDataSent,setDataSent] = useState(false);
     const[message,setMessage] = useState('');
-    const[countdown,setCountdown] = useState(120);
+    const[countdown,setCountdown] = useState(10);
 
     //get radio button value
     const handleChange = (event) => {
@@ -29,13 +29,13 @@ function Cart() {
     //delivery handle function
     const handleDelivery = async(orderid) => {
         setDataSent(true)
-        setMessage('your delivery guy is finding')
+        setMessage('Looking for a rider!')
 
         try {
             const find = await checkRider(orderid);
             console.log('find:',find);
             if (find.length > 0) {
-                setMessage('Your delivery guy is found');
+                setMessage('Rider Found! Order placed successfully');
                 navigate('/payment')
             }
 
@@ -81,15 +81,15 @@ function Cart() {
             // Trigger handleDelivery every 9 seconds
             const intervalId = setInterval(() => {
                 handleDelivery(order); // Pass orderid or any other data you need
-            }, 9000);
+            }, 3000);
 
             // Stop triggering after 2 minutes
             setTimeout(() => {
                 clearInterval(intervalId);
                 clearInterval(countdownId); // Stop the countdown
-                setMessage('No delivery guy found try again or choose pickup option')
+                setMessage('No rider available in your area!')
                 setDataSent(false)
-            }, 120000); // 2 minutes in milliseconds
+            }, 10000); // 10 secs in milliseconds for now
 
         }
         else{
@@ -141,10 +141,13 @@ function Cart() {
     return (
         <div>
             <h1>Cart Page</h1>
+            {radiovalue === 'delivery' && ( 
             <div>
                 <p>{message}</p>
-                <p>{countdown} seconds remaining</p>
+                <p>Wait {countdown} seconds to find a rider!</p>
             </div>
+            )}
+
             <div>
                 {cartData.map((order) => (
                     <Paper key={order.orderid} sx={{ padding: '32px', bgcolor: '#F0F8FF', margin: '20px' }}>
@@ -160,7 +163,7 @@ function Cart() {
                             style={{ display: radiovalue === 'delivery' ? 'block' : 'none' }} // Show only if delivery is selected
                         /><br/>
                         <FormControl variant="outlined">
-                            <FormLabel id="demo-radio-buttons-group-label">parcel option</FormLabel>
+                            <FormLabel id="demo-radio-buttons-group-label">Options</FormLabel>
                             <RadioGroup
                                 aria-labelledby="demo-radio-buttons-group-label"
                                 defaultValue="delivery"
