@@ -1,0 +1,84 @@
+.sidebar {
+    width: 350px; /* Adjust width as needed */
+    height: 100vh; /* Make sidebar full height of the viewport */
+    background-color: #D7D7D7; /* Background color for the sidebar */
+    color: white; /* Text color */
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Arrange items vertically */
+}
+
+.sidebar p{
+    color: black;
+}
+/* Logo */
+.sidebar p img{
+    width: 60px;
+    height: 60px;
+    border-radius: 40px;
+    margin: 15px 0px 0px 30px;
+}
+
+/* Topic */
+.sidebar p h1{
+    font-weight:250;
+    font-size: 35px;
+    margin-left: 115px;
+    margin-top: -55px;
+
+}
+
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 25px 0px 0px 15px;
+    
+}
+
+.sidebar ul li {
+    padding: 10px;
+    line-height:1.7cm;
+    cursor: pointer;
+    color: black;
+    font-size: 24px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
+    font-weight: 600;
+}
+
+.sidebar ul li a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.sidebar ul li:hover {
+    background-color: #acacac; /* Change background color on hover */
+    width: 300px;
+    border-radius: 20px;
+}
+
+/* icon and li */
+ul li svg {
+    margin: 0 20px; 
+}
+
+/* Button */
+.navButton svg {
+    margin: 0px 25px 0px 0px;
+}
+
+.navButton{
+    margin-top: 50px;
+    margin-left: 15px;
+    background-color: #8B0000;
+    border-radius: 10px;
+    color: white;
+    padding: 10px 80px 10px 30px;
+    font-size: 24px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 600;
+}
+
+.navButton a {
+    text-decoration: none;
+    color: inherit;
+}

@@ -1,51 +1,44 @@
-
-
 // pages & components
 import Home from './pages/Home';
 
-
+import Navbar from "./Component/Navbar";
 import MyBookings from "./pages/MyBookings";
 import NewBooking from "./pages/NewBooking";
 import UpdateBookingDetails from "./Component/UpdateBookingDetails";
 import RestaurantStaff from "./pages/RestaurantStaff";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Menu from './pages/Menu';
-import AddfooditemsForm from './Component/AddfooditemsForm';
-import Restaurant from './pages/restaurant';
-import AddrestaurantsForm from './Component/AddrestaurantsForm';
-import UpdateFoodItems from './Component/updatefooditems';
-import Updaterestaurants from './Component/Updaterestaurants';
-import RestaurantProfile from './pages/Restaurantprofile';
-import UpdateRestaurantProfile from './Component/UpdateRestaurantProfile'
+
+
 
 function App() {
+  const {user} = useAuthContext()
   return (
-    <div className="App">
-
-
+    <div>
 
 
       <BrowserRouter>
-        
+        <Navbar />
         <div className="pages">
           <Routes>
-            <Route path="/" element={<NewBooking />} />
+            <Route path="/" element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<Signup />} />
+            
+            <Route path ="/" element ={user ? <Home />: <Navigate to="/login" />}/>
+      
+            <Route path ="/login" element ={!user ? <Login />: <Navigate to="/" />}/>
+          
+            <Route path ="/signup" element ={!user ? <Signup/>: <Navigate to="/" />}/>
+
+            
+            <Route path="/newbooking/:id" element={<NewBooking />} />
             <Route path="/mybookings" element={<MyBookings />} />
             <Route path="/update-booking/:id" element={<UpdateBookingDetails />} />
             <Route path="/realtime-staff" element={<RestaurantStaff />} />
-             <Route path="/inventory" element={<Home />} />
-            <Route path="/fooditems" element = {<Menu />} />
-            <Route path="/add-food-item" element = {<AddfooditemsForm />} />
-            <Route path="/update-food-item/:id/" element = {<UpdateFoodItems/>} />
-            <Route path="/restaurants" element = {<Restaurant />} />
-            <Route path="/addrestaurants" element = {<AddrestaurantsForm />} />
-            <Route path="/update-restaurant/:id/" element = {<Updaterestaurants/>} />
-            <Route path="/restaurants/:id/" element = {<RestaurantProfile />} />
-            <Route path="/update-restaurantprofile/:id/" element = {<UpdateRestaurantProfile/>} />
-
-
+             <Route path="/inventory" element={<Home />}
+              />
           </Routes>
-        </div>
+        </div>  
       </BrowserRouter>
 
 

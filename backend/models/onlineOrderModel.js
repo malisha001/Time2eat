@@ -9,26 +9,29 @@ const onlineOrdersSchema = new Schema({
     cusName:{
         type: String,
     },
+    customerLocation:{
+        type: String,
+    },
     restaurantid:{
         type: String,
     },
     restaurantname:{
         type: String,
     },
+    reslocation:{
+        type: String,
+    },
     fooditem:{
         type: String,
-        required:true
-    },
-    location:{
-        type: String,
+
     },
     quantity:{
         type: Number,
-        required:true
+
     },
     price:{
         type:Number,
-        required:true
+
     },
     paymentState:{
         type:Boolean,
@@ -36,6 +39,9 @@ const onlineOrdersSchema = new Schema({
     deliveryOpt:{    //select delivery option pickup or select rider
         type:String,
         required:true
+    },
+    riderSelected:{
+        type:Boolean,
     },
 })
 

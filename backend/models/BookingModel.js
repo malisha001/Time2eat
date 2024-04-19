@@ -6,11 +6,11 @@ const BookingSchema = new Schema({
     
     cusid: {
         type: String,
-        required: true
+        required: false
     },
     resid: {
         type: String,
-        required: true
+
     },
     name: {
         type:String,

@@ -5,11 +5,9 @@ const Schema = mongoose.Schema
 const RealTimeSchema = new Schema({
     cusid: {
         type: String,
-        required: true
     },
     resid: {
         type: String,
-        required: true
     },
     name: {
         type:String,
@@ -32,13 +30,9 @@ const RealTimeSchema = new Schema({
         required: true
     },
     telephoneno: {
-        type: Number,
+        type: String,
         required: true
     },
-    availability: {
-        type: Boolean,
-        required: true
-    }
 }, { timestamps: true })
 
 module.exports = mongoose.model('RealTimeBooking', RealTimeSchema)
