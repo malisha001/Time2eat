@@ -4,7 +4,8 @@ const {
     getRestaurant,
     getRestaurants,
     deleteRestaurant,
-    updateRestaurant
+    updateRestaurant,
+  
 } = require('../controllers/restaurantController')
 
 const router = express.Router()
@@ -27,6 +28,7 @@ router.delete('/:id', deleteRestaurant)
 
 //Update a Restaurant
 router.patch('/:id',updateRestaurant)
+
 
 
 module.exports = router;

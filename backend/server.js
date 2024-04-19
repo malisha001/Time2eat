@@ -7,6 +7,7 @@ const inventoryRoutes = require('./routers/inventory')
 const advertisementRoutes = require('./routers/advertisement')
 const employeesal = require('./routers/employeeSalary')
 const restaurants = require('./routers/restaurants')
+const fooditems = require('./routers/fooditems')
 const feedback = require('./routers/feedbacks')
 const deliveries = require('./routers/deliveryOrderf')
 const bookingRoutes = require('./routers/booking')
@@ -40,6 +41,8 @@ app.use('/api/realtimebooking', RealTimebookingRoutes)
 app.use('/api/customerhistoryroute', CustomerHistoryRoutes)
 //restaurent routers
 app.use('/api/restaurants',restaurants)
+//fooditems
+app.use('/api/fooditems',fooditems)
 //feedback and customer service routers
 app.use('/api/feedback',feedback)
 //employee details

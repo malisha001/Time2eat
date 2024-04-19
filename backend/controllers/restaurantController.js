@@ -7,7 +7,7 @@ const getRestaurants = async (req , res) =>{
     res.status(200).json(restaurants)
 }
 
-// get a single restaurant
+// get a single restaurant 
 const getRestaurant = async(req , res) =>{
     const {id} = req.params
 
@@ -21,10 +21,11 @@ const getRestaurant = async(req , res) =>{
 
 //add new restaurant
 const addRestaurant = async(req , res) => {
-    const{Restaurant_Id, Restaurant_name, contact} = req.body
+    const{Restaurant_Id, Restaurant_licensenumber, Restaurant_name, Restaurant_Managersname, Email_address, contact, Password, Confirm_paasword, Address, Couple_table, Group_table,status} = req.body
+    
     try{
        const restaurant = await Restaurant.create({
-        Restaurant_Id, Restaurant_name, contact
+        Restaurant_Id, Restaurant_licensenumber, Restaurant_name, Restaurant_Managersname, Email_address , contact, Password, Confirm_paasword, Address, Couple_table, Group_table,status
        })
        res.status(200).json(restaurant)
     }catch(error){
@@ -66,10 +67,11 @@ const updateRestaurant = async(req , res) =>{
     res.status(200).json(restaurant)
 }
 
+
 module.exports = {
   getRestaurant,
   getRestaurants,  
   addRestaurant,
   deleteRestaurant,
-  updateRestaurant
+  updateRestaurant, 
 }
