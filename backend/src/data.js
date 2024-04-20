@@ -1,17 +1,3 @@
- const sample_Rimages = [
-    {
-       id: '1',
-       name: ' Delicious',
-       favorite: false,
-       locations: ['Panadura', 'Malabe'],
-       stars: 4.5,
-       imageUrl: 'res-1.jpg',
-     
-    }
-];
-module.exports = {
-  sample_Rimages
-};
 
 const sample_foods =  [
     {
@@ -82,9 +68,7 @@ const sample_foods =  [
     },
   ];
 
-  module.exports = {
-    sample_foods
-  };
+
 
    const sample_tags = [
     { name: 'All', count: 6 },
@@ -99,7 +83,9 @@ const sample_foods =  [
 ];
 
 module.exports = {
-  sample_tags
+  sample_tags,
+  sample_foods,
+  
 };
   
 

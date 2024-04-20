@@ -30,7 +30,7 @@ return (
 
               <div>
                 <select value={item.quantity} onChange={e => changeQuantity(item, Number( e.target.value))}>
-                <option>1</option>
+              {/*  <option>1</option>
                 <option>2</option>
                 <option>3</option>
                 <option>4</option>
@@ -40,7 +40,12 @@ return (
                 <option>8</option>
                 <option>9</option>
                 <option>10</option>
-                </select>
+           </select>      */}
+
+               {[...Array(100)].map((_, index) => (
+                  <option key={index + 1}>{index + 1}</option>
+                ))}
+             </select>
               </div>
 
               <div>

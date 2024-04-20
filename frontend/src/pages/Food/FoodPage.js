@@ -5,9 +5,11 @@ import Price from '../../component/Price/Price';
 import StarRating from '../../component/StarRating/StarRating';
 import Tags from '../../component/Tags/Tags';
 import { useCart } from '../../hooks/useCart';
-import { getById } from '../../services/fooditemService';
+import { getById } from '../../services/foodService';
 import NotFound from '../../component/NotFound/NotFound';
 import classes from './foodPage.module.css';
+import axios from 'axios';
+
 export default function FoodPage() {
   const [food, setFood] = useState({});
   const { id } = useParams();

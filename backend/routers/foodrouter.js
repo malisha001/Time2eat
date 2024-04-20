@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { FoodItemModel } = require('../models/foodItemModel.js');
+const  FoodModel = require('../models/foodModel.js');
 const handler = require('express-async-handler');
+const mongoose = require('mongoose')
 
 
 
@@ -9,14 +10,14 @@ const handler = require('express-async-handler');
 router.get(
     '/',
     handler(async (req, res) => {
-      const foods = await FoodItemModel.find({});   //root api
+      const foods = await FoodModel.find({});   //root api
       res.send(foods);
     })
   );
   router.get(
     '/tags',
     handler(async (req, res) => {
-      const tags = await FoodItemModel.aggregate([
+      const tags = await FoodModel.aggregate([
         {
           $unwind: '$tags',
         },
@@ -37,7 +38,7 @@ router.get(
   
       const all = {
         name: 'All',
-        count: await FoodItemModel.countDocuments(),
+        count: await FoodModel.countDocuments(),
       };
   
       tags.unshift(all);
@@ -52,7 +53,7 @@ router.get(
       const { searchTerm } = req.params;
       const searchRegex = new RegExp(searchTerm, 'i');
   
-      const foods = await FoodItemModel.find({ name: { $regex: searchRegex } });
+      const foods = await FoodModel.find({ name: { $regex: searchRegex } });
       res.send(foods);
     })
   );
@@ -61,7 +62,7 @@ router.get(
     '/tag/:tag',
     handler(async (req, res) => {
       const { tag } = req.params;
-      const foods = await FoodItemModel.find({ tags: tag });
+      const foods = await FoodModel.find({ tags: tag });
       res.send(foods);
     })
   );
@@ -70,8 +71,18 @@ router.get(
     '/:foodId',
     handler(async (req, res) => {
       const { foodId } = req.params;
-      const food = await FoodItemModel.findById(foodId);
+      console.log('Food ID:', foodId);
+      if (!foodId) {
+        return res.status(400).send("Food ID is missing");
+      }
+      const food = await FoodModel.findById(foodId);
+      if (!food) {
+        return res.status(404).send("Food not found");
+      }
       res.send(food);
     })
   );
+
+
+  
 module.exports = router;

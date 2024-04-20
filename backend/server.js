@@ -1,4 +1,6 @@
 const express = require('express');
+const cors = require('cors');
+
 
 const mongoose = require('mongoose');
 require('dotenv').config()
@@ -14,14 +16,14 @@ const CustomerHistoryRoutes = require('./routers/customerhistoryroute')
 const advertisementRoutes = require('./routers/advertisement')
 const inventoryRoutes = require('./routers/inventory') 
 //const orderRoutes = require('./routers/orders')
-const fooditemrouter = require('./routers/fooditemrouter')
+const foodrouter = require('./routers/foodrouter')
 const onlineOrdersRoutes = require('./routers/onlineOrders')
 const employeeLeaveRoutes = require('./routers/employeeLeaves')
 const employees = require('./routers/employees')
 const payrun = require('./routers/empPayrun')
 const leaves = require('./routers/leaves')
-
-
+const { dbconnect } = require('./config/database.config.js');
+dbconnect();
 
 // express app
 const app = express();
@@ -30,11 +32,18 @@ const app = express();
 // middleware to parse incoming JSON data
 app.use(express.json());
 
+app.use(
+    cors({
+        credentials: true,
+        origin: ['http://localhost:3000'],
+    })
+)
+
 // middleware to log request path and method
 app.use((req,res,next)=>{
     console.log(req.path,res.methode);
     next()
-})
+}) 
 
 //booking routers
 app.use('/api/booking', bookingRoutes)
@@ -58,9 +67,14 @@ app.use('/api/advertisements',advertisementRoutes)
 //inventory routers
 app.use('/api/inventory/', inventoryRoutes)
 //order system routers
-//app.use('/api/orders',orderRoutes)
-app.use('/api/foods', fooditemrouter)
+app.use('/api/foods', foodrouter)
 app.use('/api/onlineOrders', onlineOrdersRoutes)
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Internal Server Error');
+});
+
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI)
