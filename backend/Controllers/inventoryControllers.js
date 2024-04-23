@@ -36,11 +36,11 @@ const getInventoryItem = async (req, res) => {
 
 // create a new inventory item
 const createInvenotyItem =  async (req, res) => {
-    const { itemId, itemName, itemQuantity, itemPrice, itemCategory } = req.body;
+    const { itemId, itemName, reOrderitem, itemInitialQuantity, itemPrice, itemCategory } = req.body;
 
     //add doc to db
     try {
-        const inventory = await Inventory.create({ itemId, itemName, itemQuantity, itemPrice, itemCategory });
+        const inventory = await Inventory.create({ itemId, itemName, reOrderitem, itemInitialQuantity, itemPrice, itemCategory });
         res.status(200).json(inventory);
     } catch (error) {
         res.status(400).json({ error: error.message });

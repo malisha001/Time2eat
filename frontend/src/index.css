@@ -25,8 +25,22 @@ code {
 
 
 /* appjs container */
+.App {
+  display:flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  height: 100vh;
+}
+
 .app-container {
-  display: flex; /* Use flexbox */
-  height: 100vh; /* Make the container full height of the viewport */
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.content {
+  flex-grow: 1; /* Content takes up remaining space */
+  overflow-y: auto; /* Enable scrolling for content */
+  margin-left: 350px;
 }
 

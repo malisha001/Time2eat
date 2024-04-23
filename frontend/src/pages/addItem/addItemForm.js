@@ -5,36 +5,43 @@ import './addItem.css';
 const ItemForm = () => {
     const [itemId, setItemId] = useState('');
     const [itemName, setItemName] = useState('');
-    const [itemQuantity, setItemQuantity] = useState('');
+    const [itemInitialQuantity, setItemInitialQuantity] = useState('');
     const [itemPrice, setItemPrice] = useState('');
     const [itemCategory, setItemCategory] = useState('');
+    const [reOrderitem, setReOrderitem] = useState('');
     const [itemNameError, setItemNameError] = useState(null); 
     const [itemCategoryError, setItemCategoryError] = useState(null); 
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     const handleItemNameChange = (value) => {
-        if (value.match(/\d/)) {
-            setItemNameError('Item Name should only contain letters and spaces');
-        } else {
+        if (!value.match(/\d/)) { // Check if the value contains letters
+            setItemName(value);
             setItemNameError('');
-        }
-        setItemName(value);
-    };
-
-    const handleItemCategoryChange = (value) => {
-        if (value.match(/\d/)) {
-            setItemCategoryError('Item Category should only contain letters and spaces');
         } else {
-            setItemCategoryError('');
+            setItemNameError('Item Name should only contain letters and spaces');
         }
-        setItemCategory(value);
     };
+    
+    const handleItemCategoryChange = (value) => {
+        if (!value.match(/\d/)) { // Check if the value contains letters
+            setItemCategory(value);
+            setItemCategoryError('');
+        } else {
+            setItemCategoryError('Item Category should only contain letters and spaces');
+        }
+    };
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const inventoryItem = { itemId, itemName, itemQuantity, itemPrice, itemCategory };
+        // Check if there are errors in item name or item category
+        if (itemNameError || itemCategoryError) {
+            return; // Exit the function if there are errors
+        }
+
+        const inventoryItem = { itemId, itemName, reOrderitem, itemInitialQuantity, itemPrice, itemCategory };
         const response = await fetch('/api/inventory/', {
             method: 'POST',
             body: JSON.stringify(inventoryItem),
@@ -53,10 +60,11 @@ const ItemForm = () => {
             // Clear input fields and errors on successful submission
             setItemId('');
             setItemName('');
-            setItemQuantity('');
+            setItemInitialQuantity('');
             setItemPrice('');
             setItemCategory('');
             setItemNameError('');
+            setReOrderitem('');
             setItemCategoryError('');
             setError(null);
             console.log('new item added', json);
@@ -80,8 +88,11 @@ const ItemForm = () => {
                         <input type="text" onChange={(e) => handleItemNameChange(e.target.value)} value={itemName} />
                         {itemNameError && <div className="inventoryAddItemError">{itemNameError}</div>} 
 
-                        <label>Item Quantity :</label>
-                        <input type="Number" onChange={(e) => setItemQuantity(e.target.value)} value={itemQuantity} />
+                        <label>Item Re-order Level :</label>
+                        <input type="Number" onChange={(e) => setReOrderitem(e.target.value)} value={reOrderitem} />
+
+                        <label>Initial Quantity :</label>
+                        <input type="Number" onChange={(e) => setItemInitialQuantity(e.target.value)} value={itemInitialQuantity} />
                     </div>
                     <img src="/Popular-foods.jpg" alt="" />
                 </div>

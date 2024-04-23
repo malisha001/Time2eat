@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import './upDate.css';
 
-
 function UpdateUser() {
     const { id } = useParams();
 
@@ -12,6 +11,10 @@ function UpdateUser() {
     const [quantity, setQuantity] = useState("");
     const [price, setPrice] = useState("");
     const [category, setCategory] = useState("");
+
+
+
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -41,8 +44,12 @@ function UpdateUser() {
 
     const handleUpdate = async (e) => {
         e.preventDefault();
+
+
+
         try {
             const response = await axios.patch(`/api/inventory/${id}`, {
+                itemId:itemid,
                 itemName: name,
                 itemQuantity: quantity,
                 itemPrice: price,
@@ -75,6 +82,7 @@ function UpdateUser() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
+             
 
                 <label>Item Quantity :</label>
                 <input
@@ -96,6 +104,8 @@ function UpdateUser() {
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                 />
+                
+
                 <br />
                 <button className="updateButton">Update Item</button>
             </form>
@@ -104,3 +114,18 @@ function UpdateUser() {
 }
 
 export default UpdateUser;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

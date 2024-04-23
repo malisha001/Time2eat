@@ -1,7 +1,7 @@
 import React from "react";
 import './NavbarStyle.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faHome, faUser, faList, faBowlFood, faNoteSticky, faComments, faRightFromBracket} from '@fortawesome/free-solid-svg-icons'
+import {faHome, faBars, faList, faBowlFood, faNoteSticky, faComments, faRightFromBracket} from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -13,7 +13,7 @@ const Navbar = () => {
 
             <ul>
                 <li><Link><FontAwesomeIcon icon={faHome} />Dashboard</Link></li>
-                <li><Link><FontAwesomeIcon icon={faUser} />Profile</Link></li>
+                <li><Link to ={"/inventory/reOrderitem"}><FontAwesomeIcon icon={faBars} />Re-order Details</Link></li> 
                 <li><Link><FontAwesomeIcon icon={faList} />Manage Orders</Link></li>
                 <li><Link to ={"/inventory/addItems"}><FontAwesomeIcon icon={faBowlFood} />Add Food Item</Link></li>
                 <li><Link to={"/inventory/items/"}><FontAwesomeIcon icon={faNoteSticky} />Food Items</Link></li>

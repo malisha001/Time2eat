@@ -5,29 +5,29 @@ import UpdateUser from './pages/update/UpdateUser';
 import ItemForm from './pages/addItem/addItemForm';
 import Usage from './pages/usage/usageForm';
 import Navbar from './components/navbar/Navbar';
+import ReOrder from './pages/reOrder/ReOrderItems';
 
 
 function App() {
   return (
+
     <div className="App">
-
       <BrowserRouter>
-    <div className="app-container">
-      <Navbar/> 
-        <div className="pages">
-          <Routes>
-             <Route path="/inventory/items" element={<Inventory />} />
-             <Route path="/inventory/addItems" element={<ItemForm />} />
-             <Route path="/inventory/update/:id" element={<UpdateUser />} />
-             <Route path="/inventory/usage" element={<Usage />} />
-          </Routes>
+        <div className="app-container">
+          <Navbar />
+          <div className="content">
+            <Routes>
+              <Route path="/inventory/items" element={<Inventory />} />
+              <Route path="/inventory/reOrderitem" element={<ReOrder />} />
+              <Route path="/inventory/addItems" element={<ItemForm />} />
+              <Route path="/inventory/update/:id" element={<UpdateUser />} />
+              <Route path="/inventory/usage" element={<Usage />} />
+            </Routes>
+          </div>
         </div>
-      </div>  
       </BrowserRouter>
-
-
-
     </div>
+
   );
 }
 

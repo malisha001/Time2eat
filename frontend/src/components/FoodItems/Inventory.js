@@ -61,7 +61,7 @@ const Home = () => {
                         <tr>
                             <th>Item ID</th>
                             <th>Item Name</th>
-                            <th>Item Quantity</th>
+                            <th>Initial Quantity</th>
                             <th>Item Price</th>
                             <th>Item Category</th>
                             <th>Action</th> 
@@ -72,7 +72,7 @@ const Home = () => {
                             <tr key={item._id}>
                                 <td>{item.itemId}</td>
                                 <td>{item.itemName}</td>
-                                <td>{item.itemQuantity}</td>
+                                <td>{item.itemInitialQuantity}</td>
                                 <td>{item.itemPrice}</td>
                                 <td>{item.itemCategory}</td>
                                 <td>

@@ -5,6 +5,10 @@
     color: white; /* Text color */
     display: flex; /* Use flexbox */
     flex-direction: column; /* Arrange items vertically */
+    position: fixed;
+    left: 0;
+    top: 0;
+
 }
 
 .sidebar p{
