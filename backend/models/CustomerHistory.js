@@ -5,11 +5,11 @@ const Schema = mongoose.Schema
 const CustomerHistorySchema = new Schema({
     cusid: {
         type: String,
-        required: true
+        
     },
     resid: {
         type: String,
-        required: true
+        
     },
     name: {
         type:String,

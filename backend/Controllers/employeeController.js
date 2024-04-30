@@ -1,5 +1,6 @@
 const Employee = require('../models/employeesModel');
 const mongoose = require('mongoose')
+const validator = require('validator')
 
 // get all employee details
 const getAllEmployees = async (req, res) => {
@@ -27,6 +28,8 @@ const getEmployeeById = async (req, res) => {
 //insert emplopyee details
 const createEmployee = async (req, res) => {
     const{empId,empName,position,basicSalary,bonus,ETFcollection,tax,netSalary} = req.body
+
+    
 
     try {
         const employee = await Employee.create({empId,empName,position,basicSalary,bonus,ETFcollection,tax,netSalary})
@@ -57,6 +60,7 @@ const updateEmployee = async (req, res) => {
 
 //delete employee details
 const deleteEmployee = async (req, res) => {
+
     try {
         const employee = await Employee.findById(req.params.id);
         if (!employee) {

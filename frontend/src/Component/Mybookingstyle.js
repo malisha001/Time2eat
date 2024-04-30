@@ -1,76 +1,165 @@
-// import React from 'react';
-// import { useTheme } from '@mui/material/styles';
-// import Box from '@mui/material/Box';
-// import Card from '@mui/material/Card';
-// import CardContent from '@mui/material/CardContent';
-// import CardMedia from '@mui/material/CardMedia';
-// import {Grid, Paper} from '@mui/material';
-// import IconButton from '@mui/material/IconButton';
-// import Typography from '@mui/material/Typography';
-// import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-// import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-// import SkipNextIcon from '@mui/icons-material/SkipNext';
-// import exampleImage from '../Assests/example.jpg';
-// import '../Component/Mybookingstyle.css';
+import { Box, CardActionArea, CardMedia, Card, Paper, Grid, CardContent, Typography, Button } from '@mui/material'
+import React from 'react'
+import { useParams } from 'react-router-dom';
+import exampleImage from '../Assests/example.jpg';
+import image1 from '../Assests/image1.jpg'
+import image2 from '../Assests/image2.jpg'
+import image3 from '../Assests/image3.jpg'
+import image4 from '../Assests/image4.jpg'
+import image5 from '../Assests/image5.jpg'
+import image6 from '../Assests/image6.jpg'
+import { useNavigate } from 'react-router-dom';
 
-// function Mybookingstyle() {
-//     const theme = useTheme();
-//     return (
-//         <div>
-//             <Paper sx={{width: '1000px',pt:'10px', mt: '100px', ml: '40px', mr: '40px', bgcolor:'#ffffff'}}>
-//                 <Grid container spacing={2}>
-//                     <Grid sx={{pr: '16px'}} item md={5}>
-//                         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-//                             <CardContent sx={{ width:'400px', flex: '1 0 auto' }}>
-//                                 <div className="input-container">
-//                                     <label className='input-mybooking-label'>Name</label>
-//                                     <label className='input-mybooking'>{booking.name}</label>
-                                    
-//                                 </div>
-//                                 <div className="input-container">
-//                                     <label className='input-mybooking-label'>Telephone No</label>
-//                                     <label className='input-mybooking'>{booking.telephoneno}</label>
-//                                 </div>
-//                                 <div className="input-container">
-//                                     <label className='input-mybooking-label'>Date</label>
-//                                     <label className='input-mybooking'>{booking.date}</label>
-//                                 </div>
-//                                 <div className="input-container">
-//                                     <label className='input-mybooking-label'>Time</label>
-//                                     <label className='input-mybooking'>{booking.time}</label>
-//                                 </div>
-//                             </CardContent>
-//                         </Box>
-//                     </Grid>
+function Mybookingstyle() {
+    const { id } = useParams();
+    const navigate = useNavigate();
 
-//                     <Grid item md={7}>
-//                         <Grid container spacing={2}>
-//                             <Grid item md={3}>
-//                                 <h7>Group Table</h7>
-//                                 <Box className='mybookings-tables-count'>{booking.groupquantity}</Box>
-//                             </Grid>
-//                             <Grid item md={3}>
-//                                 <h7>Couple Table</h7>
-//                                 <Box className='mybookings-tables-count'>{booking.couplequantity}</Box>
-//                             </Grid>
-//                             <Grid item md={6}>
-//                                 <CardMedia
-//                                     component="img"
-//                                     sx={{ ml: '50px', pt:'10px', pb:'10px', height: 200, width: 200, }}
-//                                     image={exampleImage}
-//                                     alt="Live from space album cover"
-//                                 />
-//                             </Grid>
-//                         </Grid>
-//                     </Grid>
+    const submitButton = () => { 
+        // Navigate to the newBooking page with the restaurant ID in the URL
+        navigate(`/newbooking/${id}`);
+    }
 
-//                 </Grid>
+  return (
+    <div>
+        <Paper>
+       <Box>
+       <Card sx={{maxWidth: 'auto' }}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="200"
+          image= {exampleImage}
+          alt="green iguana"
+        />
+        </CardActionArea>
+        </Card>
+        <Button
+                    variant="contained"
+                    onClick={submitButton}
+                    style={{ position: 'absolute', top: 220, right: 30 }}
+                >
+                    book table
+                </Button>
+       </Box>
 
-//                 <button className='mybookings-delete'>Delete</button>
-//                 <button className='mybookings-update'>Update</button>
-//             </Paper>
-//         </div>
-//     )
-// }
+       <Paper  sx={{marginTop: '80px', marginLeft: '20px', marginRight: '20px'}}>
+       
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+        
+            <Grid item xs={4}>
+            <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
+                    <CardMedia
+                    component="img"
+                    height="140"
+                    image={image1}
+                    alt="green iguana"
+                    />
+                    <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        Burger
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        Rs.1000
+                    </Typography>
+                    </CardContent>
+            </Card>
+            </Grid>
+            <Grid item xs={4}>
+            <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
+                    <CardMedia
+                    component="img"
+                    height="140"
+                    image={image2}
+                    alt="green iguana"
+                    />
+                    <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        Hot Dog
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        Rs.2000
+                    </Typography>
+                    </CardContent>
+            </Card>
+            </Grid>
+            <Grid item xs={4}>
+            <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
+                    <CardMedia
+                    component="img"
+                    height="140"
+                    image={image3}
+                    alt="green iguana"
+                    />
+                    <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        Mix Grill
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        Rs.3000
+                    </Typography>
+                    </CardContent>
+            </Card>
+            </Grid>
+            <Grid item xs={4}>
+            <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
+                    <CardMedia
+                    component="img"
+                    height="140"
+                    image={image4}
+                    alt="green iguana"
+                    />
+                    <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        Noodles
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        Rs.1500
+                    </Typography>
+                    </CardContent>
+            </Card>
+            </Grid>
+            <Grid item xs={4}>
+            <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
+                    <CardMedia
+                    component="img"
+                    height="140"
+                    image={image5}
+                    alt="green iguana"
+                    />
+                    <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        Prawn Rice
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        Rs.2500
+                    </Typography>
+                    </CardContent>
+            </Card>
+            </Grid>
+            <Grid item xs={4}>
+            <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
+                    <CardMedia
+                    component="img"
+                    height="140"
+                    image={image6}
+                    alt="green iguana"
+                    />
+                    <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        Chicken Soup
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        Rs.1500
+                    </Typography>
+                    </CardContent>
+            </Card>
+            </Grid>
+        </Grid>
+       </Paper>
+      
+        </Paper>
+    </div>
+  )
+}
 
-// export default Mybookingstyle;
+export default Mybookingstyle

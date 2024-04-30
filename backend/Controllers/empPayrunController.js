@@ -129,6 +129,7 @@ const monthlySalProcess = async(req,res) => {
         console.error('Error processing payruns:', error);
     }
 }
+// monthly payment salary show
 
 module.exports = {
     getEmpPayrun,

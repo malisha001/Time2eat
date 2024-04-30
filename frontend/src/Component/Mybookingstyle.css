@@ -19,18 +19,13 @@
   width: 53%;
   border-style: none;
 }
-.input{
-    
-    box-sizing: border-box;
-    border-radius: 20px;
-}
 
 .mybookings-delete{
   margin-left: 30px;
   margin-bottom: 10px;
 }
 .mybookings-update{
-  margin-left: 587px;
+  margin-left: 540px;
   margin-bottom: 10px;
 }
 .mybookings-tables-count{

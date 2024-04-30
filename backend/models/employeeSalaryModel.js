@@ -17,6 +17,10 @@ const employeeSalSchema = new Schema({
     bonusRate: {
         type: Number,
     },
+    empCatagory: {
+        type: String,
+        require: true
+    },
     leavePanalty: {
         type: Number,
     },

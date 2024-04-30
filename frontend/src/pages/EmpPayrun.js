@@ -1,9 +1,9 @@
-import { Grid, Stack,InputAdornment, TextField,MenuItem,Select,InputLabel,FormControl,Button, Paper } from '@mui/material';
+import { Grid,Divider, Stack,InputAdornment, TextField,MenuItem,Select,InputLabel,FormControl,Button, Paper } from '@mui/material';
 import React, { useState,useEffect } from 'react';
 import { updateEmpPayrunData,getPayrunData,paySalary } from '../services/api';
 import { Box, color, containerClasses, padding } from '@mui/system';
 import Payrunbtn from '../component/Payrunbtn';
-
+import ResNavbar from '../component/restauretNavbar/ResNavbar';
 
 function EmpPayrun() {
     const [payrunData, setPayrunData] = useState([]);
@@ -42,18 +42,19 @@ function EmpPayrun() {
 
     return (
         <div>
-            <h1>Employee Payrun Page</h1>
+            <h1>Employee Payrun</h1>
             <div>
                 <Paper sx={{padding:'32px',bgcolor: '#F0F8FF', margin: '20px'}} >
-                
-                    <Grid container spacing={3} >
+                    <h3>monthly paysheet</h3>
+                    <Divider />
+                    <Grid container spacing={3} sx={{ marginTop: '20px' }}>
                         {payrunData.map((item) => (
-                            <Grid item md ={4} padding={3} key={item._id} >
+                            <Grid item md ={4} padding={2} key={item._id} >
                                 <Grid container>
                                     <Grid item ={6}>
                                         {item.category}
                                         <Box bgcolor='#fff' p={2} >
-                                            {item.rate}    
+                                            {item.rate}
                                         </Box>
                                     </Grid>
                                     <Grid item ={6} spacing={2}>
@@ -64,8 +65,8 @@ function EmpPayrun() {
                             </Grid>
                         ))}         
                     </Grid>
-                    <h3>last update:</h3>
-                    <h3>Days to the next salary day:</h3>
+                    {/* <h3>last update:</h3>
+                    <h3>Days to the next salary day:</h3> */}
                 </Paper>
                 <Button variant='contained' color='primary' onClick={handlesubmit}>
                     pay salary

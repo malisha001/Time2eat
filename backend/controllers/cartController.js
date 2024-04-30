@@ -3,10 +3,9 @@ const mongoose = require('mongoose')
 
 //get spesific customer's orders with different restaurent (order id change for each restaurent)
 const getCart = async (req, res) => {
-    const { id } = req.params;
 
     try {
-        const carts = await Cart.find({ customerid: id });
+        const carts = await Cart.find({});
 
         if (!carts) {
             return res.status(404).json({ error: 'No order found for the specified restaurant' });
