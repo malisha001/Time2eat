@@ -1,6 +1,10 @@
 import { useState } from "react"
 import { useSignup } from "../hooks/useSignup"
 import styles from './Login.module.css';
+import { NavLink } from 'react-router-dom';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { Link } from '@mui/material';
 
 const Signup = () => {
     const[fullName, setFullName] = useState('')
@@ -13,57 +17,86 @@ const Signup = () => {
 
     const handleSubmit =async (e) => {
         e.preventDefault()
-
+        // Call signup function if all validations pass
         await signup(fullName,email,address,contactNo, password, confirmPassword)
     }
 
     return (
         <form className= {styles.signup} onSubmit={handleSubmit}>
-            <h3>Sign up</h3>
+            <h2>First time with us..</h2>
+            <h3>Create an account</h3>
 
-            <label>Full Name</label>
-            <input
+            <TextField
                 type="text"
-                onChange={(e)  => setFullName(e.target.value)}
-                value ={fullName}
+                label="Full Name"
+                variant="outlined"
+                onChange={(e) => setFullName(e.target.value)}
+                value={fullName}
+                fullWidth
+                margin="normal"
             />
 
-            <label>Email</label>
-            <input
+<TextField
                 type="email"
-                onChange={(e)  => setEmail(e.target.value)}
-                value ={email}
+                label="Email"
+                variant="outlined"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                fullWidth
+                margin="normal"
             />
 
-            <label>Address</label>
-            <input
+            <TextField
                 type="text"
-                onChange={(e)  => setAddress(e.target.value)}
-                value ={address}
+                label="Address"
+                variant="outlined"
+                onChange={(e) => setAddress(e.target.value)}
+                value={address}
+                fullWidth
+                margin="normal"
             />
 
-            <label>Contact No</label>
-            <input
+            <TextField
                 type="text"
-                onChange={(e)  => setContactNo(e.target.value)}
-                value ={contactNo}
+                label="Contact No"
+                variant="outlined"
+                onChange={(e) => setContactNo(e.target.value)}
+                value={contactNo}
+                fullWidth
+                margin="normal"
             />
 
-            <label>Password</label>
-            <input
+            <TextField
                 type="password"
-                onChange={(e)  => setPassword(e.target.value)}
-                value ={password}
+                label="Password"
+                variant="outlined"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                fullWidth
+                margin="normal"
             />
 
-            <label>Confirm Password</label>
-            <input
+            <TextField
                 type="password"
-                onChange={(e)  => setConfirmPassword(e.target.value)}
-                value ={confirmPassword}
+                label="Confirm Password"
+                variant="outlined"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                value={confirmPassword}
+                fullWidth
+                margin="normal"
             />
 
-             <button disabled= { isLoading }>Sign-up</button>
+            <Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                disabled={isLoading}
+            >
+                Sign up
+            </Button>
+
+            <p>Already have an account? <Link component={NavLink} to="/login">Log in</Link></p>
+
              {error && <div className = {styles.error}>{error}</div>}
         
         </form>
