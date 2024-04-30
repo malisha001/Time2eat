@@ -1,102 +1,59 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const FormValidationExample = () => {
+const AvailabilityStatus = () => {
+  const [availabilityPercentage, setAvailabilityPercentage] = useState(0);
 
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  })
+  useEffect(() => {
+    const fetchRealTimeBookings = async () => {
+      try {
+        // Make API call or fetch data from database
+        const response = await fetch('api/realtimebooking');
+        const data = await response.json();
 
-  const [errors, setErrors] = useState({})
+        // Calculate availableTables from the fetched data
+        const availableTables = data.reduce((total, table) => total + table.couplequantity, 0) + data.reduce((total, table) => total + table.groupquantity, 0);
 
-  const handleChange = (e) => {
-    const {name, value} = e.target;
-    let validationErrors = {...errors};
+        // Assuming you have totalTables available in the response itself
+        const totalTables = 25;  //get couple and group tables from database and get total
 
-    switch(name) {
-      case 'username':
-        validationErrors.username = value.trim() ? '' : 'username is required';
-        break;
-      case 'email':
-        validationErrors.email = value.trim() ? (/^\S+@\S+\.\S+$/.test(value) ? '' : 'email is not valid') : 'email is required';
-        break;
-      case 'password':
-        validationErrors.password = value.length >= 6 ? '' : 'password should be at least 6 char';
-        validationErrors.confirmPassword = formData.confirmPassword === value ? '' : 'password not matched';
-        break;
-      case 'confirmPassword':
-        validationErrors.confirmPassword = formData.password === value ? '' : 'password not matched';
-        break;
-      default:
-        break;
-    }
+        const percentage = (availableTables / totalTables) * 100;
 
-    setErrors(validationErrors);
-    setFormData({
-        ...formData,
-        [name]: value
-    });
+        setAvailabilityPercentage(percentage);
+      } catch (error) {
+        console.error('Error fetching real-time booking data:', error);
+      }
+    };
+
+    fetchRealTimeBookings();
+  }, []);
+
+  let availabilityColor;
+
+  if (availabilityPercentage >= 0 && availabilityPercentage <= 30) {
+    availabilityColor = 'green';
+  } else if (availabilityPercentage > 30 && availabilityPercentage <= 60) {
+    availabilityColor = 'yellow';
+  } else if (availabilityPercentage > 60 && availabilityPercentage <= 90) {
+    availabilityColor = 'orange';
+  } else if (availabilityPercentage > 90 && availabilityPercentage <= 100) {
+    availabilityColor = 'red';
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    if(Object.values(errors).every(error => !error)) {
-        alert("Form Submitted successfully");
-    } else {
-        alert("Please fix the errors in the form before submitting");
-    }
-  }
+  const circleStyle = {
+    width: '50px',
+    height: '50px',
+    borderRadius: '50%',
+    margin: '10px',
+    backgroundColor: availabilityColor // Dynamically set the background color
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Username:</label>
-        <input
-          type="text"
-          name="username"
-          placeholder='username'  
-          autoComplete='off'  
-          onChange={handleChange}   
-        />
-        {errors.username && <span>{errors.username}</span>}  
-      </div>
-      <div>
-        <label>Email:</label>
-        <input
-          type="email"
-          name="email"
-          placeholder='example@gmail.com'
-          autoComplete='off'
-          onChange={handleChange} 
-        />
-        {errors.email && <span>{errors.email}</span>}  
-      </div>
-      <div>
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          placeholder='******'
-          onChange={handleChange} 
-        />
-        {errors.password && <span>{errors.password}</span>}  
-      </div>
-      <div>
-        <label>Confirm Password:</label>
-        <input
-          type="password"
-          name="confirmPassword"
-          placeholder='******'
-          onChange={handleChange} 
-        />
-        {errors.confirmPassword && <span>{errors.confirmPassword}</span>}  
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+    <div className="home-page">
+      <h2>Restaurant Availability</h2>
+      <h2>Current availability percentage: {availabilityPercentage}</h2>
+      <div style={circleStyle}></div>
+    </div>
   );
 };
 
-export default FormValidationExample;
+export default AvailabilityStatus;
