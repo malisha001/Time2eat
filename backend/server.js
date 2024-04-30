@@ -4,7 +4,7 @@ require('dotenv').config()
 
 //import routers
 const inventoryRoutes = require('./routers/inventory') 
-const advertisementRoutes = require('./routers/advertisements')
+// const advertisementRoutes = require('./routers/advertisements')
 const employeesal = require('./routers/employeeSalary')
 const restaurants = require('./routers/restaurants')
 const fooditems = require('./routers/fooditems')
@@ -57,7 +57,7 @@ app.use('/api/deliveryorder',deliveries)
 // user routers
 app.use('/api/user', userRoutes)
 //adverticment routers
-app.use('/api/advertisements',advertisementRoutes)
+// app.use('/api/advertisements',advertisementRoutes)
 app.use('/api/inventory/', inventoryRoutes)
 //online orders
 app.use('/api/onlineOrders', onlineOrdersRoutes)
