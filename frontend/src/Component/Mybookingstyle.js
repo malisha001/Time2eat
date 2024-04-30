@@ -1,123 +1,165 @@
-// import React from 'react'
-// // import {Table, TableBody, TableHead, TableRow, TableCell,TableContainer,Paper,Button} from '@mui/material';
-// import {Grid, Paper} from '@mui/material';
-// import TextField from '@mui/material/TextField';
-// import Box from '@mui/material/Box';
-// import Card from '@mui/material/Card';
-// import CardActions from '@mui/material/CardActions';
-// import CardContent from '@mui/material/CardContent';
-// import Button from '@mui/material/Button';
-// import Typography from '@mui/material/Typography';
-// import groupImage from '../Assests/grouptable.jpg';
+import { Box, CardActionArea, CardMedia, Card, Paper, Grid, CardContent, Typography, Button } from '@mui/material'
+import React from 'react'
+import { useParams } from 'react-router-dom';
+import exampleImage from '../Assests/example.jpg';
+import image1 from '../Assests/image1.jpg'
+import image2 from '../Assests/image2.jpg'
+import image3 from '../Assests/image3.jpg'
+import image4 from '../Assests/image4.jpg'
+import image5 from '../Assests/image5.jpg'
+import image6 from '../Assests/image6.jpg'
+import { useNavigate } from 'react-router-dom';
 
+function Mybookingstyle() {
+    const { id } = useParams();
+    const navigate = useNavigate();
 
-// function Mybookingstyle() {
-//   return (
-//     <div>
-//       <Paper sx={{bgcolor: 'white'}}>
-//       <Box sx={{ marginLeft: '60px', marginRight: '60px', marginTop: '40px', marginBottom:'40px', padding: '20px' }}>
-//               <h2>Payment Details</h2>
-//               <Grid container spacing={4}>
+    const submitButton = () => { 
+        // Navigate to the newBooking page with the restaurant ID in the URL
+        navigate(`/newbooking/${id}`);
+    }
 
-//                 <Grid item xs={6}>
-//                   <TextField
-//                     required
-//                     id="outlined-required"
-//                     label="CusID"
-//                     type="text"
-//                     onChange={(e) => setcusID(e.target.value)}
-//                     value={cusid}
-//                     sx={{ width: '100%' }}
-//                   />
-//                 </Grid>
-//                 <Grid item xs={6}>
-//                   <TextField
-//                     required
-//                     id="outlined-required"
-//                     label="ResID"
-//                     type="text"
-//                     onChange={(e) => setresID(e.target.value)}
-//                     value={resid}
-//                     sx={{ width: '100%' }}
-//                   />
-//                 </Grid>
-                
-//                 <Grid item xs={6}>
-//                   <TextField
-//                     required
-//                     id="outlined-required"
-//                     label="Name"
-//                     type="text"
-//                     onChange={(e) => setName(e.target.value)}
-//                     value={name}
-//                     sx={{ width: '100%' }}
-//                   />
-//                 </Grid>
-//                 <Grid item xs={6}>
-//                   <TextField
-//                     required
-//                     id="outlined-required"
-//                     label="Time"
-//                     type="time"
-//                     onChange={(e) => setTime(e.target.value)}
-//                     value={time}
-//                     sx={{ width: '100%' }}
-//                   />
-//                 </Grid>
-                
-//                 <Grid item xs={6}>
-//                   <TextField
-//                     required
-//                     id="outlined-required"
-//                     label="Date"
-//                     type="date"
-//                     onChange={(e) => setDate(e.target.value)}
-//                     value={date}
-//                     sx={{ width: '100%' }}
-//                   />
-//                 </Grid>
-//                 <Grid item xs={6}>
-//                   <TextField
-//                     required
-//                     id="outlined-required"
-//                     label="CoupleQuantity"
-//                     type="number"
-//                     onChange={(e) => setCouplequantity(e.target.value)}
-//                     value={couplequantity}
-//                     sx={{ width: '100%' }}
-//                   />
-//                 </Grid>
+  return (
+    <div>
+        <Paper>
+       <Box>
+       <Card sx={{maxWidth: 'auto' }}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="200"
+          image= {exampleImage}
+          alt="green iguana"
+        />
+        </CardActionArea>
+        </Card>
+        <Button
+                    variant="contained"
+                    onClick={submitButton}
+                    style={{ position: 'absolute', top: 220, right: 30 }}
+                >
+                    book table
+                </Button>
+       </Box>
 
-//                 <Grid item xs={6}>
-//                   <TextField
-//                     required
-//                     id="outlined-required"
-//                     label="Groupquantity"
-//                     type="number"
-//                     onChange={(e) => setGroupquantity(e.target.value)}
-//                     value={groupquantity}
-//                     sx={{ width: '100%' }}
-//                   />
-//                 </Grid>
-//                 <Grid item xs={6}>
-//                   <TextField
-//                     required
-//                     id="outlined-required"
-//                     label="Telephone No"
-//                     type="text"
-//                     onChange={(e) => setTelephone(e.target.value)}
-//                     value={telephoneno}
-//                     sx={{ width: '100%' }}
-//                   />
-//                 </Grid>
-//               </Grid>
-//             </Box>
-//       </Paper>
+       <Paper  sx={{marginTop: '80px', marginLeft: '20px', marginRight: '20px'}}>
+       
+        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         
-//     </div>
+            <Grid item xs={4}>
+            <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
+                    <CardMedia
+                    component="img"
+                    height="140"
+                    image={image1}
+                    alt="green iguana"
+                    />
+                    <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        Burger
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        Rs.1000
+                    </Typography>
+                    </CardContent>
+            </Card>
+            </Grid>
+            <Grid item xs={4}>
+            <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
+                    <CardMedia
+                    component="img"
+                    height="140"
+                    image={image2}
+                    alt="green iguana"
+                    />
+                    <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        Hot Dog
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        Rs.2000
+                    </Typography>
+                    </CardContent>
+            </Card>
+            </Grid>
+            <Grid item xs={4}>
+            <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
+                    <CardMedia
+                    component="img"
+                    height="140"
+                    image={image3}
+                    alt="green iguana"
+                    />
+                    <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        Mix Grill
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        Rs.3000
+                    </Typography>
+                    </CardContent>
+            </Card>
+            </Grid>
+            <Grid item xs={4}>
+            <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
+                    <CardMedia
+                    component="img"
+                    height="140"
+                    image={image4}
+                    alt="green iguana"
+                    />
+                    <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        Noodles
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        Rs.1500
+                    </Typography>
+                    </CardContent>
+            </Card>
+            </Grid>
+            <Grid item xs={4}>
+            <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
+                    <CardMedia
+                    component="img"
+                    height="140"
+                    image={image5}
+                    alt="green iguana"
+                    />
+                    <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        Prawn Rice
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        Rs.2500
+                    </Typography>
+                    </CardContent>
+            </Card>
+            </Grid>
+            <Grid item xs={4}>
+            <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
+                    <CardMedia
+                    component="img"
+                    height="140"
+                    image={image6}
+                    alt="green iguana"
+                    />
+                    <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        Chicken Soup
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        Rs.1500
+                    </Typography>
+                    </CardContent>
+            </Card>
+            </Grid>
+        </Grid>
+       </Paper>
+      
+        </Paper>
+    </div>
+  )
+}
 
-//   )
-// }
-
-// export default Mybookingstyle
-
+export default Mybookingstyle

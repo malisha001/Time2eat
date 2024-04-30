@@ -1,1 +1,9 @@
-
+:root {
+    /*colour theme*/
+    --primary-color: #C02942;
+    --secondary-color: #F8983C;
+    --accent-color: #FCE94F;
+    --background-color: #FFFFFF;
+    --text-color: #000000;
+    --element-color: #EDEDED;
+  }

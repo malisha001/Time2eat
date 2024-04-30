@@ -6,8 +6,10 @@ const bcrypt = require('bcrypt')
 
 
 // return a token 
-const createToken = ( _id ) => { // user is gonna logged in for 3 days
-    return jwt.sign({_id}, process.env.SECRET, {expiresIn: '3d'})
+const createToken = ( user ) => { // user is gonna logged in for 1 days
+    return jwt.sign({_id: user._id,role:user.role}, process.env.SECRET, {expiresIn: '1d'})
+
+
 }
 
  // login a user
@@ -18,9 +20,9 @@ const createToken = ( _id ) => { // user is gonna logged in for 3 days
         const user = await User.login(email,password)
        
         //create token
-        const token =  createToken(user._id)
+        const token =  createToken(user)
 
-        res.status(200).json({email, token})
+        res.status(200).json({email, token,role:user.role}) 
     }catch (error){
         res.status(400).json({error: error.message})
     }
@@ -29,10 +31,10 @@ const createToken = ( _id ) => { // user is gonna logged in for 3 days
 
 // Signup a user
 const signupUser = async (req, res) => {
-    const {fullName,email,address,contactNo, password, confirmPassword} = req.body
+    const {fullName,email,address,contactNo, password, confirmPassword,role} = req.body
 
     try {
-        const user = await User.signup(fullName,email,address,contactNo, password, confirmPassword)
+        const user = await User.signup(fullName,email,address,contactNo, password, confirmPassword,role)
        
         //create token
         const token =  createToken(user._id)

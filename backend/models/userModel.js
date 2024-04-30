@@ -30,6 +30,7 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+
     verifytoksen:{
         type: String,
 
@@ -37,9 +38,16 @@ const userSchema = new Schema({
     role: {
         type: Number,
         default: 0,
-      }
+      },
+      role: {
+        type: String,
+        default: 'customer'
+    }
       
 }, { timestamps: true })
+
+    
+
 
 // static signup method
 userSchema.statics.signup = async function(fullName, email, address,contactNo, password, confirmPassword) {
