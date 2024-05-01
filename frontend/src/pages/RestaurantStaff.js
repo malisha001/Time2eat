@@ -1,21 +1,23 @@
-import { useState } from "react";
-
-import RealTimeIndicator from '../component/RealTimeIndicator.js';
-import DineCustomerRegForm from "../pages/DineCustomerRegForm";
+// import { useState } from "react";
 
 
-const RestaurantStaff = () => {
-    // State to trigger re-fetching of data in RealTimeIndicator
-    const [updateIndicator, setUpdateIndicator] = useState(false);
+// import RealTimeIndicator from "../component/RealTimeIndicator";
+// import DineCustomerRegForm from "../pages/DineCustomerRegForm";
 
-    return ( 
-        <div className="newbooking">
-            <div className="bookings">
-                <DineCustomerRegForm setUpdateIndicator={setUpdateIndicator} />
-                <RealTimeIndicator updateIndicator={updateIndicator} />
-            </div>
-        </div>
-    );
-}
 
-export default RestaurantStaff;
+
+// const RestaurantStaff = () => {
+//     // State to trigger re-fetching of data in RealTimeIndicator
+//     const [updateIndicator, setUpdateIndicator] = useState(false);
+
+//     return ( 
+//         <div className="newbooking">
+//             <div className="bookings">
+//                 <DineCustomerRegForm setUpdateIndicator={setUpdateIndicator} />
+//                 <RealTimeIndicator updateIndicator={updateIndicator} />
+//             </div>
+//         </div>
+//     );
+// }
+
+// export default RestaurantStaff;

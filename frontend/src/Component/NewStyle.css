@@ -1,11 +1,13 @@
+
 .prebooking-bar ul {
+
     list-style-type: none;
     width: 800px;
     height: 60px;
     margin-left: 20px;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: #828282e1;
     border-radius: 30px;
   }
   
@@ -15,7 +17,7 @@
   
   .prebooking-bar li a:hover {
     background-color: #111;
-  }
+  } */
 
   /* .PreDate{
     padding-left: 100px;
@@ -30,6 +32,7 @@
 
   .PreDate {
     padding: 10px;
+    margin-top: 8px;
     text-align: center; /* Center the text */
   }
   
@@ -37,22 +40,22 @@
     padding: 10px;
     text-align: center; /* Center the input field */
   }
+
+  .PreDateInput select {
+    padding: 10px;
+    text-align: center;
+    border-radius: 20px;
+  }
   
   .prebooking-bar input {
     padding: 10px;
     width: 100%; /* Make the input field width 100% */
     box-sizing: border-box; /* Ensure padding is included in width */
     border-radius: 20px;
+    margin-top: 1px;
   }
 
-  .prebooking-bar Button{
-    padding: 14px;
-    /* Make the input field width 100% */
-    box-sizing: border-box; /* Ensure padding is included in width */
-    border-radius: 20px;
-    margin-left: 186px;
-    margin-top: 7px;
-  }
+ 
 
   /* .image-prebooking{
     margin-top: 100px;

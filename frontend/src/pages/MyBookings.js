@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { Grid, Paper } from '@mui/material';
+import { Button, Grid, Paper } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import exampleImage from '../Assests/example.jpg';
 import QRCode from 'react-qr-code'; // Import the QRCode component
 import '../component/Mybookingstyle.css';
 import axios from "axios";
+import Navbar from "../component/Navbar";
 
 const MyBookings = () => {
     const [bookings, setBookings] = useState(null);
@@ -39,10 +40,11 @@ const MyBookings = () => {
 
     return (
         <div className="myBookings">
+            <Navbar />
             <div className="bookings">
                 {bookings && bookings.map((booking) => (
                     <div className="booking-details" key={booking._id}>
-                        <Paper sx={{ width: '1000px', pt: '10px', mt: '100px', ml: '40px', mr: '40px', bgcolor: '#ffffff' }}>
+                        <Paper sx={{ width: '1100px', pt: '10px', mt: '100px', ml: '40px', mr: '40px', bgcolor: 'lightgrey' }}>
                             <Grid container spacing={2}>
                                 <Grid sx={{ pr: '16px' }} item md={5}>
                                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -78,7 +80,7 @@ const MyBookings = () => {
                                             <Box className='mybookings-tables-count'>{booking.couplequantity}</Box>
                                         </Grid>
                                         <Grid item md={6}>
-                                            <Box sx={{ ml: '50px', pt: '10px', pb: '10px', height: 200, width: 200, }}>
+                                            <Box sx={{ ml: '30px', pt: '10px', pb: '10px', height: 200, width: 200, }}>
                                                 <QRCode value={JSON.stringify({
                                                     time: booking.time,
                                                     date: booking.date,
@@ -95,9 +97,9 @@ const MyBookings = () => {
                             </Grid>
 
                             <p>{booking.createAt}</p>
-                            <button className='mybookings-delete' onClick={() => handleDeleteBooking(booking._id)}>Delete</button>
+                            <Button variant="contained" sx={{bgcolor: 'red', marginLeft: '10px', marginBottom: '10px'}} onClick={() => handleDeleteBooking(booking._id)}>Delete</Button>
 
-                            <button className='mybookings-update'><Link to={`/update-pre-booking/${booking._id}`}>Update</Link></button>
+                            <Button variant="contained" style={{ textDecoration: 'none' }} sx={{marginLeft: '550px', marginBottom: '10px'}} ><Link style={{ textDecoration: 'none' }} to={`/update-pre-booking/${booking._id}`}>Update</Link></Button>
                         </Paper>
 
                     </div>

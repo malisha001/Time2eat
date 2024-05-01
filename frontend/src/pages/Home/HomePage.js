@@ -1,24 +1,99 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import { Link } from "react-router-dom"
 import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText, Grid, Box,Paper, Card, CardActionArea, CardContent, CardMedia, CardActions } from '@mui/material';
-import { Menu as MenuIcon, Inbox as InboxIcon, Mail as MailIcon, Margin } from '@mui/icons-material';
-import classes from './homePage.module.css'
-import exampleImage from '../../Assests/example.jpg';
+import { Menu as MenuIcon ,Person2 as Person2Icon, ShoppingCart, FormatListBulleted, TableBar, Favorite, RateReview } from '@mui/icons-material';
+import {createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
+
+// import classes from './HomePage.module.css'
+import exampleImage from '../../Assests/1.png';
+import exampleImage2 from '../../Assests/2.png';
+import exampleImage3 from '../../Assests/3.png';
+import exampleImage4 from '../../Assests/4.png';
+//food
+import exampleImage5 from '../../Assests/image1.jpg';
+import exampleImage6 from '../../Assests/image2.jpg';
+import exampleImage7 from '../../Assests/image3.jpg';
+import exampleImage8 from '../../Assests/image4.jpg';
+import exampleImage9 from '../../Assests/image5.jpg';
+import exampleImage10 from '../../Assests/image6.jpg';
+//restaurants
+import res1 from '../../Assests/res1.png';
+import res2 from '../../Assests/res2.png';
+import res3 from '../../Assests/res3.png';
+import res4 from '../../Assests/res4.png';
+import res5 from '../../Assests/res5.png';
+import res6 from '../../Assests/res6.png';
+
+import { useAuthContext } from '../../hooks/useAuthContext';
+import {useLogout} from '../../hooks/useLogout'
+import { getAllRestaurents } from '../../services/restaurentsApi';
+import Footer from '../../component/footer/Footer';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#C02942', // primary color
+    },
+    secondary: {
+      main: '#F8983C', // secondary color
+    },
+    accent: {
+      main: '#FCE94F', // accent color
+    },
+    background: {
+      main: '#FFFFFF', // background color
+    },
+    text: {
+      main: '#000000', // text color
+    },
+    element: {
+      main: '#EDEDED', // element color
+    }
+  }
+});
+
 
 export default function TemporaryDrawer() {
+  const {logout} = useLogout()
+  const {user} = useAuthContext()
+
     const [open, setOpen] = React.useState(false);
+    const [restuarents, setRestuarents] = useState([]);
+
+    const handleClick = () =>{
+      logout()
+    }
   
     const toggleDrawer = (newOpen) => () => {
       setOpen(newOpen);
     };
+
+    useEffect(() => {
+      const fetchrestuarents = async () => {
+        try {
+          const resData = await getAllRestaurents(); // Call your API function to fetch restaurant data
+          console.log("restauent data",resData)
+          setRestuarents(resData); // Update state with the fetched employee IDs
+          
+        } catch (error) {
+          console.error('Error fetching employee IDs:', error);
+        }
+      }
+      fetchrestuarents()
+    }, []);
   
+  
+    const icons = [Person2Icon, ShoppingCart, FormatListBulleted, TableBar, Favorite, RateReview]; // Array of imported Material icons
+
     const DrawerList = (
       <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          {['Profile', 'Cart', 'My Orders', 'My Bookings', 'Wishlist', 'Feedback'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {React.createElement(icons[index])}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItemButton>
@@ -26,26 +101,21 @@ export default function TemporaryDrawer() {
           ))}
         </List>
         <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+        <p> </p>
+
+        <Divider />
+        <Typography gutterBottom variant='subtitle2'>Register your restaurant</Typography>
+        <Typography gutterBottom variant='subtitle2'>Join as a delivery rider</Typography>
+
+        
       </Box>
     );
 
     return (
+      <ThemeProvider theme={theme}>
         <div className="home">
-            <h2>Home</h2>
             <Box sx={{ width: '100%' }}>
-                <AppBar position="static">
+                <AppBar position="fixed">
                     <Toolbar>
                         <IconButton
                             size="large"
@@ -58,53 +128,62 @@ export default function TemporaryDrawer() {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            News
+                            TIME2eat
                         </Typography>
-                        <Button color="inherit">Login</Button>
+                        {user && <Button color="inherit" onClick={handleClick}>Logout</Button>}
+                        {!user && <Button color="inherit" component={Link} to='/login'>Login</Button>}
+                        {!user && <Button color="inherit" component={Link} to='/signup'>sign in</Button>}
                     </Toolbar>
                 </AppBar>
-                <img src={exampleImage} alt="Example" style={{ width: '100%'}} />
+                <img src={exampleImage} alt="Example" style={{ width: '100%'}} sx={{margin: '50px'}} />
+                
 
-                <Paper sx={{margin: '0px', marginLeft:'40px', marginRight:'40px', bgcolor:'yellow'}}>
-                  <h2>offers</h2>
+                <Paper sx={{margin: '50px', marginLeft:'40px', marginRight:'40px'}}>
+                  <h2 style={{ margin: '20px', padding: '10px', color: theme.palette.primary.main }}>offers for you</h2>
+                                   
                   <Box sx={{marginLeft: '100px', marginRight: '100px'}}>
-                  <Grid container sx={{ bgcolor: 'red'}} spacing={2}>
+
+                  <Grid container  spacing={2}>
+
                     <Grid item md={4} >
-                      <Box  sx={{ margin:'10px', bgcolor:'#FFF', marginLeft:'0px'}}>
+                      <Box  sx={{ margin:'10px', marginLeft:'0px'}}>
                       <Card sx={{ maxWidth: 'auto', marginBottom:'10px' }}>
                         <CardActionArea>
                           <CardMedia
                             component="img"
                             height="200"
-                            image={exampleImage}
+                            image={exampleImage2}
                             alt="green iguana"
                           />
                         </CardActionArea>
                       </Card>
                       </Box>
                     </Grid>
+
                     <Grid item md={4} >
-                      <Box sx={{ margin:'10px', bgcolor:'#FFF' }}>
+                      <Box sx={{ margin:'10px'}}>
                       <Card sx={{ maxWidth: 'auto', marginBottom:'10px' }}>
                         <CardActionArea>
                           <CardMedia
                             component="img"
                             height="200"
-                            image={exampleImage}
+                            image={exampleImage3}
                             alt="green iguana"
                           />
+                          
                         </CardActionArea>
                       </Card>
                       </Box>
                     </Grid>
+
                     <Grid item md={4} >
-                      <Box sx={{ margin:'10px', bgcolor:'#FFF', padding: '10' }}>
+                      <Box sx={{ margin:'10px', padding: '10' }}>
                       <Card sx={{ maxWidth: 'auto', marginBottom:'10px' }}>
                         <CardActionArea>
                           <CardMedia
                             component="img"
                             height="200"
-                            image={exampleImage}
+                            image={exampleImage4}
                             alt="green iguana"
                           />
                         </CardActionArea>
@@ -112,13 +191,16 @@ export default function TemporaryDrawer() {
                       </Box>
                     </Grid>
                   </Grid>
+
                   </Box>
+
+                 
                  
 
-                  <h2>Search by Category</h2>
+                  <h2 style={{ margin: '20px', padding: '10px', color: theme.palette.primary.main }}>Search by Category</h2>
                 <Box sx={{marginLeft: '100px', marginRight: '100px'}}>
-                  <Grid container sx={{ bgcolor: 'red', mb: '10', marginBottom: '10px'}} spacing={2}>
-                    <Grid className='home-grid-catergory'item md={2} sx={{bgcolor:'blue', paddingLeft:'33px'}}>
+                  <Grid container sx={{ mb: '10', marginBottom: '10px'}} spacing={2}>
+                    <Grid className='home-grid-catergory'item md={2} sx={{paddingLeft:'33px'}}>
                       <Box sx={{bgcolor:'#FFF', borderRadius: '50%', width:'100px', height:'100px'}}>
                       <Card sx={{borderRadius: '50%' }}>
                         <CardActionArea>
@@ -126,11 +208,12 @@ export default function TemporaryDrawer() {
                             component="img"
                             height="100"
                             width="100"
-                            image={exampleImage}
+                            image={exampleImage5}
                             alt="green iguana"
                           />
                         </CardActionArea>
                       </Card>
+                      <Typography variant="body2" align='center'>Fast Food</Typography>
                       </Box>
                     </Grid>
                     <Grid item md={2} >
@@ -141,11 +224,12 @@ export default function TemporaryDrawer() {
                             component="img"
                             height="100"
                             width="100"
-                            image={exampleImage}
+                            image={exampleImage6}
                             alt="green iguana"
                           />
                         </CardActionArea>
                       </Card>
+                      <Typography variant="body2" align='center'>Street Food</Typography>
                       </Box>
                     </Grid>
                     <Grid item md={2} >
@@ -156,11 +240,12 @@ export default function TemporaryDrawer() {
                             component="img"
                             height="100"
                             width="100"
-                            image={exampleImage}
+                            image={exampleImage7}
                             alt="green iguana"
                           />
                         </CardActionArea>
                       </Card>
+                      <Typography variant="body2" align='center'>Japanese</Typography>
                       </Box>
                     </Grid>
                     <Grid item md={2} >
@@ -171,11 +256,12 @@ export default function TemporaryDrawer() {
                             component="img"
                             height="100"
                             width="100"
-                            image={exampleImage}
+                            image={exampleImage8}
                             alt="green iguana"
                           />
                         </CardActionArea>
                       </Card>
+                      <Typography variant="body2" align='center'>Italian</Typography>
                       </Box>
                     </Grid>
                     <Grid item md={2} >
@@ -186,11 +272,12 @@ export default function TemporaryDrawer() {
                             component="img"
                             height="100"
                             width="100"
-                            image={exampleImage}
+                            image={exampleImage9}
                             alt="green iguana"
                           />
                         </CardActionArea>
                       </Card>
+                      <Typography variant="body2" align='center'>Chinese</Typography>
                       </Box>
                     </Grid>
                     <Grid item md={2} >
@@ -201,90 +288,63 @@ export default function TemporaryDrawer() {
                             component="img"
                             height="100"
                             width="100"
-                            image={exampleImage}
+                            image={exampleImage10}
                             alt="green iguana"
                           />
                         </CardActionArea>
                       </Card>
+                      <Typography variant="body2" align='center'>Soup</Typography>
                       </Box>
-                    </Grid>
-                </Grid>
-              </Box>
-              <h2>Search by Category</h2>   
-              
-                <Box sx={{marginLeft: '100px', marginRight: '100px'}}>
-                  <Grid container sx={{ bgcolor: 'red'}} spacing={2}>
-                    <Grid item md={4} >
-                      <Box sx={{bgcolor:'#FFF', borderRadius: '50%', width:'100px', height:'100px'}}>
-                      <Card sx={{marginBottom:'10px', borderRadius: '50%' }}>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="100"
-                            width="100"
-                            image={exampleImage}
-                            alt="green iguana"
-                          />
-                        </CardActionArea>
-                      </Card>
-                      </Box>
-                    </Grid>
-                    <Grid item md={4} >
-                      <Box sx={{bgcolor:'#FFF', borderRadius: '50%', width:'100px', height:'100px'}}>
-                      <Card sx={{marginBottom:'10px', borderRadius: '50%' }}>
-                        <CardActionArea>
-                          <CardMedia
-                            component="img"
-                            height="100"
-                            width="100"
-                            image={exampleImage}
-                            alt="green iguana"
-                          />
-                        </CardActionArea>
-                      </Card>
-                      </Box>
-                    </Grid>
-                    <Grid item md={4} >
-                    <Card sx={{ maxWidth: 250 }}>
-      <CardMedia
-        component="img"
-        alt="green iguana"
-        height="250"
-        image={exampleImage}
-        sx={{borderRadius:'30px'}}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          <Box>Butter</Box>
-          <Box sx={{marginLeft:"182px", marginTop:"-32px"}}>hi</Box>
-        </Typography>
-      </CardContent>
-    </Card>
                     </Grid>
                     
                 </Grid>
               </Box>
+
+
+              {/* show restuarents */}
+              <h2 style={{ margin: '20px', padding: '10px', color: theme.palette.primary.main }}>Top rated restuarents</h2> 
               
-                </Paper>
+                <Box sx={{marginLeft: '100px', marginRight: '100px'}}>
+
+                  <Grid container spacing={2}>
+
+                    {restuarents.map((restuarent) => (
+
+                      <Grid item md={4} key={restuarent._id}>
+
+                          <Card sx={{ maxWidth: 250 }}>
+
+                            <CardActionArea component={Link} to ={`/restaurant/${restuarent.Restaurant_Id}`}>
+
+                              <CardMedia
+                                component="img"
+                                alt="green iguana"
+                                height="250"
+                                image={res1}
+                              />
+                              <CardContent>
+                                <Typography gutterBottom variant="h5" component="div">
+                                  <Box>{restuarent.Restaurant_name}</Box>
+                                  <Box sx={{marginLeft:"182px", marginTop:"-32px"}}>hi</Box>
+                                </Typography>
+                              </CardContent>
+                            </CardActionArea>
+                          </Card>
+                      </Grid>
+                    ))} 
+                  </Grid>
+                </Box>
+              </Paper>
+              
             <Drawer open={open} onClose={toggleDrawer(false)}>
                 {DrawerList}
             </Drawer>
+             
             </Box>
-                            
-                        
+            {/* <Footer/> */}
         </div>
+        </ThemeProvider>
     );
+   
 }
 
-
-// <Grid container spacing={2}>
-// <Grid item md={4} sx={{bgcolor:'blue'}}>
-//   <Box>xs</Box>
-// </Grid>
-// <Grid item md={4} sx={{bgcolor:'red'}}>
-//   <Box>xs=6</Box>
-// </Grid>
-// <Grid item md={4} sx={{bgcolor:'green'}}>
-//   <Box>xs</Box>
-// </Grid>
-// </Grid>
