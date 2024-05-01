@@ -9,23 +9,23 @@ const {
 
 const router = express.Router()
 
-//GET all Feedbacks
+//GET all inquiries
 router.get('/', getinquiries)
 
 
-//GET single Feedback
+//GET single inquiry
 router.get('/:id', getInquiry)
 
 
-//POST a new Feedbacks
+//POST a new inquiry
 router.post('/', addInquiry )
   
 
-//DELETE a Feedbacks
+//DELETE a inquiry
 router.delete('/:id', deleteInquiry)
 
 
-//Update a Feedbacks
+//Update a inquiry
 router.patch('/:id',updateInquiry)
 
 
