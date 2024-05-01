@@ -32,6 +32,10 @@ import Cart from './pages/Cart';
 import Payment from './pages/Payment';
 
 import BookingPayment from './pages/BookingPayment';
+import ResPage from './pages/ResPage/ResPage.js';
+import FoodPage from './pages/Food/FoodPage.js';
+import CartPage from './pages/Cart/CartPage.js';
+
 
 // import AdvertisementForm from './components/AdvertisementForm';
 // import UpdateAdvertisementForm from './components/UpdateAdvertisementForm';
@@ -50,6 +54,7 @@ import Updaterestaurants from './component/Updaterestaurants';
 // import RestaurantProfile from './pages/Restaurantprofile';
 import UpdateRestaurantProfile from './component/UpdateRestaurantProfile'
 
+
 function App() {
   const {user} = useAuthContext()
   return (
@@ -61,6 +66,7 @@ function App() {
       
         <div className="pages">
           <Routes>
+
             <Route path="/" element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<Signup />} />
@@ -73,12 +79,15 @@ function App() {
 
             
             <Route path="/newbooking/:id" element={<NewBooking />} />
+
             <Route path="/mybookings" element={<MyBookings />} />
-            {/* <Route path="/update-booking/:id" element={<UpdateBookingDetails />} /> */}
+           {/*} <Route path="/update-booking/:id" element={<UpdateBookingDetails />} />  */}
             <Route path="/update-pre-booking/:id" element={<UpdatePreBookings />} />
             <Route path="/update-dine-in-booking/:id" element={<UpdateDineIn />} />
             <Route path="/bookingpayment" element={<BookingPayment />} />
+
             {/* <Route path="/realtime-staff" element={<RestaurantStaff />} /> */}
+
 
             <Route path="/dine-in-form" element={<DineCustomerRegForm />} />
             <Route path="/dine-in-bookings" element={<DineInBookings />} />
@@ -94,6 +103,14 @@ function App() {
              
             <Route path='/employeesal' element={<EmployeeSal />}/>
             <Route path='/payrun' element={<EmpPayrun />}/>
+
+              
+            <Route path="/respage" element={<ResPage />} />
+            <Route path="/search/:searchTerm" element={<ResPage />} />
+            <Route path="/tag/:tag" element={<ResPage />} /> 
+            <Route path="/food/:id" element={<FoodPage />} />
+            <Route path="/cart" element={<CartPage/>} /> 
+
 
             <Route path='/riderdashborad/*' element={<RiderDashboard />}/>
             <Route path='/riderdashborad/ongoingorder' element={<OngoingOrder/>} />

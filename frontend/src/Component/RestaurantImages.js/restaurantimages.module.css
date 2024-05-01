@@ -1,0 +1,75 @@
+
+.rimagecontainer {
+    position: relative;
+    flex-direction: column;
+    align-items: center; 
+    width: 100%;
+  }
+  
+  .rimage {
+    width: 100%; 
+    height: 500px; 
+    object-fit: cover;
+
+  }
+  
+  .content {
+    flex-wrap: wrap;
+    
+    justify-content: center;
+    align-items: center;
+    
+    
+  }
+  
+  .name {
+    font-size: 100px; 
+    font-weight: bold; 
+    text-align: center;
+  }
+
+  .details {
+    display: flex;                                                 /* Display children inline */
+    justify-content: space-between;                                /* Distribute space between children */
+    align-items: center;     
+    padding-left: 600px;                                      /* Align items vertically */
+  }
+
+  .favourite {
+    
+    font-size: 20px;
+  }
+       
+  
+  
+  .stars {
+  
+  display: flex;                                                  /* Display locations inline */
+  align-items: center; 
+  padding-left: 30px;     
+  padding-right: 30px;                                        /* Align locations vertically */
+  }
+  
+  
+  .locations span{
+    border-radius: 2rem;
+    background-color: whitesmoke;
+    display: inline-block;
+    font-size: 0.8rem;
+    color: grey;
+    padding-left: 30px;
+    margin-left: 10px;
+    
+  }
+
+  .locations {
+    flex: 9;
+    display: flex;                                    /* Display locations inline */
+  align-items: center;                                /* Align locations vertically */
+}
+  
+  
+  
+  
+
+
