@@ -23,11 +23,11 @@ import DineInBookings from './pages/DineInBookings';
 import Newbookingsstyle from './pages/Newbookingsstyle';
 // import RealTimeIndicator from './component/RealTimeIndicator';
 import AllCustomerDineInHistory from './pages/AllCustomerDineInHistory';
-import EmployeeSal from './pages/EmployeeSal';
-import EmpPayrun from './pages/EmpPayrun';
+import EmployeeSal from './pages/restaurentEmp/EmployeeSal';
+import EmpPayrun from './pages/restaurentEmp/EmpPayrun';
 
-import RiderDashboard from './pages/RiderDashbord';
-import OngoingOrder from './pages/OngoingOrder';
+import RiderDashboard from './pages/riders/RiderDashbord';
+import OngoingOrder from './pages/riders/OngoingOrder';
 import Cart from './pages/Cart';
 import Payment from './pages/Payment';
 

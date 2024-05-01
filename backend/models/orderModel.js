@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema;
 
-const { OrderStatus } = require('../constants/orderStatus.js');
-const { FoodModel } = require('./foodModel.js');
+const { OrderStatus } = require('../src/constants/orderStatus.js');
+const FoodModel = require('./foodModel.js');
 
 
 const OrderItemSchema = new Schema(
