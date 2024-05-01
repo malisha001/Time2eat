@@ -3,13 +3,13 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const { OrderStatus } = require('../constants/orderStatus.js');
-const { FoodItemModel } = require('./foodItemModel.js');
+const { FoodModel } = require('./foodModel.js');
 
 
 const OrderItemSchema = new Schema(
     {
 
-        food: { type: FoodItemModel.schema, required: true},
+        food: { type: FoodModel.schema, required: true},
         price: {type: Number, required: true},
         quantity: { type:Number, required: true},
     },
