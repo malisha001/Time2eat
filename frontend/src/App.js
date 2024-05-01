@@ -37,8 +37,8 @@ import BookingPayment from './pages/BookingPayment';
 // import UpdateAdvertisementForm from './components/UpdateAdvertisementForm';
 // import AdvertisementPage  from './pages/AdvertisementPage'
 
-import Login from './pages/Login';
-import Signup from './pages/Signup';
+import Login from './pages/login/Login';
+import Signup from './pages/login/Signup';
 
 import Mybookingstyle from './component/Mybookingstyle';
 

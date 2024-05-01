@@ -1,11 +1,10 @@
 import { useState } from "react"
-import { useLogin } from "../hooks/useLogin"
+import { useLogin } from "../../hooks/useLogin"
 import style from './Login.module.css';
-import { Navigate } from "react-router-dom"
-import { NavLink } from 'react-router-dom';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { Link } from '@mui/material';
+import { Navigate,NavLink } from "react-router-dom"
+import { Link,Button,TextField } from '@mui/material';
+import Navbar from '../../component/Navbar'
+// import bgimg from './foodbgimage.png'
 
 const Login = () => {
     const [email, setEmail] = useState('')
@@ -29,6 +28,9 @@ const Login = () => {
     // }
 
     return (
+        <div>
+        <Navbar />
+        <div className={style.bgcontainer}>
         <form className={style.login} onSubmit={handleSubmit}>
 
             <h2>Welcome Back! Log in</h2>
@@ -69,7 +71,9 @@ const Login = () => {
 
             {error && <div className={style.error}>{error}</div>}
         </form>
+        </div>
+        </div>
     )
-
+    
 }
 export default Login

@@ -1,10 +1,11 @@
 import { useState } from "react"
-import { useSignup } from "../hooks/useSignup"
+import { useSignup } from "../../hooks/useSignup"
 import styles from './Login.module.css';
 import { NavLink } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { Link } from '@mui/material';
+import { Grid, Link } from '@mui/material';
+import Navbar from '../../component/Navbar'
 
 const Signup = () => {
     const[fullName, setFullName] = useState('')
@@ -22,10 +23,17 @@ const Signup = () => {
     }
 
     return (
+        <div>
+        <Navbar />
+        <div className={styles.regcontainer}>
+        <Grid container>
+        <Grid item sx={6}>
+            <p>crate account</p>
+        </Grid>
+        <Grid item sx={6}>
         <form className= {styles.signup} onSubmit={handleSubmit}>
-            <h2>First time with us..</h2>
             <h3>Create an account</h3>
-
+        
             <TextField
                 type="text"
                 label="Full Name"
@@ -34,9 +42,10 @@ const Signup = () => {
                 value={fullName}
                 fullWidth
                 margin="normal"
+                size="small"
             />
 
-<TextField
+            <TextField 
                 type="email"
                 label="Email"
                 variant="outlined"
@@ -44,6 +53,7 @@ const Signup = () => {
                 value={email}
                 fullWidth
                 margin="normal"
+                size="small"
             />
 
             <TextField
@@ -54,6 +64,7 @@ const Signup = () => {
                 value={address}
                 fullWidth
                 margin="normal"
+                size="small"
             />
 
             <TextField
@@ -64,6 +75,7 @@ const Signup = () => {
                 value={contactNo}
                 fullWidth
                 margin="normal"
+                size="small"
             />
 
             <TextField
@@ -74,6 +86,7 @@ const Signup = () => {
                 value={password}
                 fullWidth
                 margin="normal"
+                size="small"
             />
 
             <TextField
@@ -84,6 +97,7 @@ const Signup = () => {
                 value={confirmPassword}
                 fullWidth
                 margin="normal"
+                size="small"
             />
 
             <Button
@@ -100,6 +114,10 @@ const Signup = () => {
              {error && <div className = {styles.error}>{error}</div>}
         
         </form>
+        </Grid>
+        </Grid>
+        </div>
+        </div>
     )
     
 }
