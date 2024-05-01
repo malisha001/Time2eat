@@ -1,14 +1,14 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const employeeSchema = new Schema({
+const employeeSalSchema = new Schema({
     empId: {
         type: String,
         require: true
     },
     resId: {
         type: String,
-        require: true
+
     },
     basicEmpSalary: {
         type: Number,
@@ -16,11 +16,13 @@ const employeeSchema = new Schema({
     },
     bonusRate: {
         type: Number,
-        require: true
     },
     empCatagory: {
         type: String,
         require: true
+    },
+    leavePanalty: {
+        type: Number,
     },
     taxRate: {
         type: Number,
@@ -28,12 +30,12 @@ const employeeSchema = new Schema({
     },
     ETFrate: {
         type: Number,
-        require: true
+
     },
     Fsalary: {
         type: Number,
-        require: true
+
     },
 },{timestamps: true})
 
-module.exports = mongoose.model('Employeesalary',employeeSchema)
+module.exports = mongoose.model('Employeesalary',employeeSalSchema) 

@@ -5,11 +5,11 @@ const Schema = mongoose.Schema
 const CustomerHistorySchema = new Schema({
     cusid: {
         type: String,
-        required: true
+        
     },
     resid: {
         type: String,
-        required: true
+        
     },
     name: {
         type:String,
@@ -35,10 +35,6 @@ const CustomerHistorySchema = new Schema({
         type: Number,
         required: true
     },
-    availability: {
-        type: Boolean,
-        required: true
-    }
 }, { timestamps: true })
 
 module.exports = mongoose.model('Allcustomerhistory', CustomerHistorySchema)

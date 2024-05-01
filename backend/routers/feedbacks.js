@@ -12,11 +12,14 @@ const router = express.Router()
 //GET all Feedbacks
 router.get('/', getFeedbacks)
 
-//POST a new Feedbacks
-router.post('/', addFeedback )
 
 //GET single Feedback
-router.get('/:id', getFeedback)  
+router.get('/:id', getFeedback)
+
+
+//POST a new Feedbacks
+router.post('/add',addFeedback )
+  
 
 //DELETE a Feedbacks
 router.delete('/:id', deleteFeedback)
