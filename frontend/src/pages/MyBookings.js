@@ -7,7 +7,7 @@ import { Grid, Paper } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import exampleImage from '../Assests/example.jpg';
-import QRCode from 'react-qr-code'; // Import the QRCode component
+import QRCode from 'qrcode.react'; // Import the QRCode component
 import '../component/Mybookingstyle.css';
 import axios from "axios";
 import Navbar from "../component/Navbar";
@@ -80,16 +80,9 @@ const MyBookings = () => {
                                             <Box className='mybookings-tables-count'>{booking.couplequantity}</Box>
                                         </Grid>
                                         <Grid item md={6}>
-                                            <Box sx={{ ml: '30px', pt: '10px', pb: '10px', height: 200, width: 200, }}>
-                                                <QRCode value={JSON.stringify({
-                                                    time: booking.time,
-                                                    date: booking.date,
-                                                    couplequantity: booking.couplequantity,
-                                                    groupquantity: booking.groupquantity,
-                                                    name: booking.name,
-                                                    telephoneno: booking.telephoneno
-                                                })} />
-                                            </Box>
+                                            {/* Create a link to the dine-in form page with booking ID */}
+                                            <QRCode value={`http://localhost:3000/dine-in-form/${booking._id}`} />
+
                                         </Grid>
                                     </Grid>
                                 </Grid>
