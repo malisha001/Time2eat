@@ -166,8 +166,8 @@ const NewBooking = () => {
             setTotalCoupleTablesBooked(coupleTablesBooked);
             setTotalGroupTablesBooked(groupTablesBooked);
 
-            const availableCoupleTables = 10 - coupleTablesBooked;
-            const availableGroupTables = 15 - groupTablesBooked;
+            const availableCoupleTables = tabledetails.Couple_table - coupleTablesBooked;
+            const availableGroupTables = tabledetails.Group_table - groupTablesBooked;
 
             setAvailableTables({ couple: availableCoupleTables, group: availableGroupTables });
         } catch (error) {
@@ -420,7 +420,7 @@ const NewBooking = () => {
                                         Total
                                     </Box>
                                     <Box className='availability-status-bottom'>
-                                    {tabledetails.Couple_table}
+                                    {tabledetails.Group_table}
                                     </Box>
                                 </Grid>
                                 <Grid item md={4}>
@@ -440,7 +440,7 @@ const NewBooking = () => {
                                     </Card>
                                 </Grid>
                                 <Grid item md={4}>
-                                    <Box className='availability-status'>{tabledetails.Group_table}</Box>
+                                    <Box className='availability-status'>{tabledetails.Couple_table}</Box>
                                 </Grid>
                                 <Grid item md={4}>
                                     <Box className='availability-status'>{availableTables.couple}</Box>
@@ -469,9 +469,9 @@ const NewBooking = () => {
                                     <Box className='availability-status-top'>
                                         Total
                                     </Box>
-                                    {/* show couple tables */}
+                                    {/* show group tables */}
                                     <Box className='availability-status-bottom'>
-                                        {tabledetails.Couple_table}
+                                    {tabledetails.Group_table}
                                     </Box>
                                 </Grid>
                                 <Grid item md={4}>
@@ -492,7 +492,7 @@ const NewBooking = () => {
                                 </Grid>
                                 {/* couple tables */}
                                 <Grid item md={4}>
-                                    <Box className='availability-status'>{tabledetails.Group_table}</Box>
+                                    <Box className='availability-status'>{tabledetails.Couple_table}</Box>
                                 </Grid>
                                 <Grid item md={4}>
                                     <Box className='availability-status'>{tableCount.couple}</Box>
