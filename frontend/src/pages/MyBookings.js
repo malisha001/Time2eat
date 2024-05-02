@@ -11,15 +11,23 @@ import QRCode from 'qrcode.react'; // Import the QRCode component
 import '../component/Mybookingstyle.css';
 import axios from "axios";
 import Navbar from "../component/Navbar";
+import { useParams } from 'react-router-dom';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const MyBookings = () => {
+    const { id } = useParams(); 
+    const {user} = useAuthContext()
+    console.log("userr",user)
     const [bookings, setBookings] = useState(null);
 
     useEffect(() => {
         const fetchMyBookings = async () => {
             try {
-                const response = await axios.get('/api/booking');
+                const userr = user.email
+                console.log("u",userr)
+                const response = await axios.get(`/api/booking/books?userId=${userr}&restaurantId=${id}`);
                 const data = response.data;
+                console.log("my bookinggg",response.data)
                 setBookings(data);
             } catch (error) {
                 console.error('Error fetching bookings:', error);

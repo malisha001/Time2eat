@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import QRCode from 'react-qr-code';
+// import QRCode from 'react-qr-code';
 import { useParams } from 'react-router-dom';
 import React, { useState,useEffect } from 'react';
 import {Grid, Paper, CardActionArea,Box,Card,CardMedia, Typography} from '@mui/material';
@@ -11,23 +11,33 @@ import exampleImage from '../Assests/example.jpg';
 import grouptableimage from '../Assests/grouptable.jpg';
 import coupletableimage from '../Assests/coupletable.jpg';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../component/Bookingformstyle.css';
 import Navbar from '../component/Navbar';
 import PreStyles from '../component/NewStyle.css'
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const NewBooking = () => {
-    const { id } = useParams();
+    const { id } = useParams(); 
+    const {user} = useAuthContext()
+    const navigate = useNavigate();
+
     const [selectedDateTime, setSelectedDateTime] = useState({ date: '', time: '' });
-    const [availableTables, setAvailableTables] = useState({ couple: 10, group: 15 });
+    //table detaills
+    const [availableTables, setAvailableTables] = useState({ couple: '', group: '' });
     const [totalCoupleTablesBooked, setTotalCoupleTablesBooked] = useState(0);
     const [totalGroupTablesBooked, setTotalGroupTablesBooked] = useState(0);
+    const [showAvailability, setAvailability] = useState(false);
+    const [tabledetails,settabledetails] = useState('')
+    
+    //form
     const [couplequantity, setCouplequantity] = useState('');
     const [groupquantity, setGroupquantity] = useState('');
     const [name, setName] = useState('');
     const [telephoneno, setTelephoneNo] = useState('');
-    const [error, setError] = useState(null);
     const [showForm, setShowForm] = useState(false);
-    const [showAvailability, setAvailability] = useState(false);
+    //errors
+    const [error, setError] = useState(null);
     const [nameError, setNameError] = useState(null);
     const [telError, setTelError] = useState(null);
     const [tableCount, setTableCount] = useState({ couple: 0, group: 0 });
@@ -47,41 +57,47 @@ const NewBooking = () => {
         }
     };
 
-    useEffect(() => {
+    useEffect(()=>{
+        //get tables from related restaurent
+        const fetchtabledata = async () => {
+            try {
+                const tabledata = await axios.get(`/api/restaurants/${id}`);
+                settabledetails(tabledata.data)
+                console.log("table details",tabledetails)
 
-        // Fetch data initially
-        fetchData();
+            } catch (error) {
+                console.error('Error fetching table data:', error);
+            }
+        }
+        fetchtabledata()
+        
+    },[]);
 
-        // Set interval to fetch data every second
-        const interval = setInterval(() => {
-            fetchData();
-        }, 1000);
+    // useEffect(() => {
 
-        // Clear interval on component unmount
-        return () => clearInterval(interval);
+    //     // Fetch data initially
+    //     fetchData();
 
-    }, []);
+    //     // Set interval to fetch data every second
+    //     const interval = setInterval(() => {
+    //         fetchData();
+    //     }, 1000);
+
+    //     // Clear interval on component unmount
+    //     return () => clearInterval(interval);
+
+    // }, []);
 
     ///////////////////////////////////////////////////////////
 
     useEffect(() => {
-        //get tables from related restaurent
-        // const fetchtabledata = async () => {
-        //     try {
-        //         const tabledata = await axios.get(`/api/restaurants/${id}`);
-        //         console.log("table",tabledata.data);
-        //         setCtable(tabledata.data.Couple_table);
-        //         setGtable(tabledata.data.Group_table);
-        //     } catch (error) {
-        //         console.error('Error fetching table data:', error);
-        //     }
-        // }
+
+
 
 
         if (selectedDateTime.date && selectedDateTime.time) {
             fetchBookings(selectedDateTime.date, selectedDateTime.time);
         }
-        // fetchtabledata();
     }, [selectedDateTime]);
 
     const handleCheckAvailability = async (e) => {
@@ -110,7 +126,9 @@ const NewBooking = () => {
             couplequantity: couplequantity,
             groupquantity: groupquantity,
             name: name,
-            telephoneno: telephoneno
+            telephoneno: telephoneno,
+            cusid:user.email,
+            resid:id
         };
 
         if(!nameError && !telError){
@@ -125,6 +143,7 @@ const NewBooking = () => {
                 setTelephoneNo('')
                 setError(null);
                 console.log('New booking added', json);
+                navigate(`/mybookings/${id}`);
             } else {
                 setError(json.error);
             }
@@ -135,6 +154,7 @@ const NewBooking = () => {
         else{
             setError("Please enter valid details");
         }
+        
     };
 
     const fetchBookings = async (date, time) => {
@@ -400,7 +420,7 @@ const NewBooking = () => {
                                         Total
                                     </Box>
                                     <Box className='availability-status-bottom'>
-                                        15
+                                    {tabledetails.Couple_table}
                                     </Box>
                                 </Grid>
                                 <Grid item md={4}>
@@ -420,7 +440,7 @@ const NewBooking = () => {
                                     </Card>
                                 </Grid>
                                 <Grid item md={4}>
-                                    <Box className='availability-status'>10</Box>
+                                    <Box className='availability-status'>{tabledetails.Group_table}</Box>
                                 </Grid>
                                 <Grid item md={4}>
                                     <Box className='availability-status'>{availableTables.couple}</Box>
@@ -449,8 +469,9 @@ const NewBooking = () => {
                                     <Box className='availability-status-top'>
                                         Total
                                     </Box>
+                                    {/* show couple tables */}
                                     <Box className='availability-status-bottom'>
-                                        15
+                                        {tabledetails.Couple_table}
                                     </Box>
                                 </Grid>
                                 <Grid item md={4}>
@@ -469,8 +490,9 @@ const NewBooking = () => {
                                         </CardActionArea>
                                     </Card>
                                 </Grid>
+                                {/* couple tables */}
                                 <Grid item md={4}>
-                                    <Box className='availability-status'>10</Box>
+                                    <Box className='availability-status'>{tabledetails.Group_table}</Box>
                                 </Grid>
                                 <Grid item md={4}>
                                     <Box className='availability-status'>{tableCount.couple}</Box>
@@ -479,7 +501,7 @@ const NewBooking = () => {
                             </>
                             )}
                             
-                            <Link to="/mybookings">
+                            <Link to= {`/mybookings/${id}`}>
                                 <Button variant="contained" sx={{marginLeft: '160px'}}>My Reservations</Button>
                             </Link>
                         </Grid>

@@ -80,7 +80,7 @@ function App() {
             
             <Route path="/newbooking/:id" element={<NewBooking />} />
 
-            <Route path="/mybookings" element={<MyBookings />} />
+            <Route path="/mybookings/:id" element={<MyBookings />} />
            {/*} <Route path="/update-booking/:id" element={<UpdateBookingDetails />} />  */}
             <Route path="/update-pre-booking/:id" element={<UpdatePreBookings />} />
             <Route path="/update-dine-in-booking/:id" element={<UpdateDineIn />} />
