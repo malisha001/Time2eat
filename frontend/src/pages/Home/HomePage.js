@@ -314,8 +314,7 @@ export default function TemporaryDrawer() {
 
                           <Card sx={{ maxWidth: 250 }}>
 
-                            <CardActionArea component={Link} to ={`/restaurant/${restuarent.Restaurant_Id}`}>
-
+                          <CardActionArea component={Link} to ={`/respage/${restuarent.Restaurant_Id}`}>
                               <CardMedia
                                 component="img"
                                 alt="green iguana"

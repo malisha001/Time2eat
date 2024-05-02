@@ -105,7 +105,7 @@ function App() {
             <Route path='/payrun' element={<EmpPayrun />}/>
 
               
-            <Route path="/respage" element={<ResPage />} />
+            <Route path="/respage/:id" element={<ResPage />} />
             <Route path="/search/:searchTerm" element={<ResPage />} />
             <Route path="/tag/:tag" element={<ResPage />} /> 
             <Route path="/food/:id" element={<FoodPage />} />
