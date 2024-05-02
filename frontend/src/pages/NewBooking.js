@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import QRCode from 'react-qr-code';
+// import QRCode from 'react-qr-code';
 import { useParams } from 'react-router-dom';
 import React, { useState,useEffect } from 'react';
 import {Grid, Paper, CardActionArea,Box,Card,CardMedia, Typography} from '@mui/material';

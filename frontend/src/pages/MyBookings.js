@@ -7,7 +7,7 @@ import { Button, Grid, Paper } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import exampleImage from '../Assests/example.jpg';
-import QRCode from 'react-qr-code'; // Import the QRCode component
+// import QRCode from 'react-qr-code'; // Import the QRCode component
 import '../component/Mybookingstyle.css';
 import axios from "axios";
 import Navbar from "../component/Navbar";
@@ -81,14 +81,14 @@ const MyBookings = () => {
                                         </Grid>
                                         <Grid item md={6}>
                                             <Box sx={{ ml: '30px', pt: '10px', pb: '10px', height: 200, width: 200, }}>
-                                                <QRCode value={JSON.stringify({
+                                                {/* <QRCode value={JSON.stringify({
                                                     time: booking.time,
                                                     date: booking.date,
                                                     couplequantity: booking.couplequantity,
                                                     groupquantity: booking.groupquantity,
                                                     name: booking.name,
                                                     telephoneno: booking.telephoneno
-                                                })} />
+                                                })} /> */}
                                             </Box>
                                         </Grid>
                                     </Grid>
