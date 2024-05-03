@@ -46,6 +46,7 @@ import Signup from './pages/login/Signup';
 
 import Mybookingstyle from './component/Mybookingstyle';
 
+import Menu from './pages/Menu';
 import AddfooditemsForm from './component/AddfooditemsForm';
 import Restaurant from './pages/restaurant';
 import AddrestaurantsForm from './component/AddrestaurantsForm';
@@ -124,7 +125,7 @@ function App() {
 
             <Route path="/restaurant/:id" element={<Mybookingstyle />} />
 
-            {/* <Route path="/fooditems" element = {<Menu />} /> */}
+            <Route path="/fooditems" element = {<Menu />} />
             <Route path="/add-food-item" element = {<AddfooditemsForm />} />
             <Route path="/update-food-item/:id/" element = {<UpdateFoodItems/>} />
             <Route path="/restaurants" element = {<Restaurant />} />
