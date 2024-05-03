@@ -24,10 +24,10 @@ const getFooditem = async(req , res) =>{
 
 //add new fooditem
 const addFooditem = async(req , res) => {
-    const{Item_id, Item_name, catagory, Price, Average_preparetime} = req.body
+    const{Item_id, Item_name, catagory, Price, Cost,Profit,Average_preparetime} = req.body
     try{
        const fooditem = await Fooditems.create({
-        Item_id, Item_name, catagory, Price ,Average_preparetime
+        Item_id, Item_name, catagory, Price ,Cost,Profit,Average_preparetime
        })
        res.status(200).json(fooditem)
     }catch(error){
