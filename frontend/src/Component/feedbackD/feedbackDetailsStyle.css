@@ -1,0 +1,67 @@
+
+
+.feedback-detail {
+    background-color: rgba(205, 86, 54, 0.194);
+    border-radius: 10px; 
+    padding: 20px;
+    margin-bottom: 20px; 
+    margin-top: 20px;
+    margin-left: 25px;
+    margin-right: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.523); 
+}
+
+h4 {
+    color: #000000; 
+}
+
+p {
+    color: #312a2a; 
+    margin: 5px 0; 
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between; 
+    margin-top: 20px; 
+}
+
+.delete-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.update-button {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.delete-button:hover, .update-button:hover {
+    opacity: 0.8; /* Hover effect */
+}
+
+
+.add-feedback-button {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: block; 
+    width: 80%; 
+    text-align: center; 
+}
+
+.add-feedback-button:hover {
+    opacity: 0.8;
+}

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper,Button } from '@mui/material';
-import { getDeliveryOrders,acceptOrder,showRider } from '../services/api';
+import { getDeliveryOrders,acceptOrder,showRider } from '../../services/api';
 import {useNavigate,Route,Routes} from 'react-router-dom';
-import { useAuthContext } from '../hooks/useAuthContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 //nested router
-import OngoingOrder from '../pages/OngoingOrder';
+import OngoingOrder from './OngoingOrder';
 
 function RiderDashboard() {
     const {user} = useAuthContext()

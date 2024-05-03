@@ -104,9 +104,15 @@ export default function TemporaryDrawer() {
         <p> </p>
 
         <Divider />
-        <Typography gutterBottom variant='subtitle2'>Register your restaurant</Typography>
-        <Typography gutterBottom variant='subtitle2'>Join as a delivery rider</Typography>
-
+        <Link to = "/addrestaurants">
+          <Typography gutterBottom variant='subtitle2'>Register your restaurant</Typography>
+        </Link>
+        <Link to = "/reslogin">
+          <Typography gutterBottom variant='subtitle2'>Login your restaurant</Typography>
+        </Link>
+        <Link to = "/signup">
+          <Typography gutterBottom variant='subtitle2'>Join as a delivery rider</Typography>
+        </Link>
         
       </Box>
     );
@@ -314,8 +320,7 @@ export default function TemporaryDrawer() {
 
                           <Card sx={{ maxWidth: 250 }}>
 
-                            <CardActionArea component={Link} to ={`/restaurant/${restuarent.Restaurant_Id}`}>
-
+                          <CardActionArea component={Link} to ={`/respage/${restuarent.Restaurant_Id}`}>
                               <CardMedia
                                 component="img"
                                 alt="green iguana"

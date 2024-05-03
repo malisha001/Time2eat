@@ -1,11 +1,6 @@
 /* google font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
 
-/* layout */
-:root {
-  --primary: #1aac83;
-  --error: #e7195a;
-}
 body {
   background: #f1f1f1;
   margin: 0;
@@ -30,6 +25,24 @@ header a {
   max-width: 1400px;
   padding: 20px;
   margin: 0 auto;
+}
+.bgcontainer {
+  background-image: url('./foodbgimage.png');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.regcontainer{
+  background-image: url('./registerbg.png');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* homepage */
@@ -82,15 +95,7 @@ input {
   border-radius: 4px;
   box-sizing: border-box;
 }
-/* form button {
-  background: var(--primary);
-  border: 0;
-  color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
-  cursor: pointer;
-} */
+
 div.error {
   padding: 10px;
   background: #ffefef;
@@ -103,31 +108,18 @@ input.error {
   border: 1px solid var(--error);
 }
 
-/* navbar */
-/* nav {
-  display: flex;
-  align-items: center;
-}
-nav a {
-  margin-left: 10px;
-}
-nav button {
-  background: #fff;
-  color: var(--primary);
-  border: 2px solid var(--primary);
-  padding: 6px 10px;
-  border-radius: 4px;
-  font-family: "Poppins";
-  cursor: pointer;
-  font-size: 1em;
-  margin-left: 10px ;
-} */
-
 /* auth forms */
 form.signup, form.login {
   max-width: 400px;
   margin: 40px auto;
   padding: 20px;
   background: #fff;
+  border-radius: 4px;
+}
+form.login {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.5); /* Adjust the last value (alpha) to control transparency */
   border-radius: 4px;
 }

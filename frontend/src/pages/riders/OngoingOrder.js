@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react';
 import { TextField,Paper, Grid,Button,TableContainer,TableHead,Table,TableRow,TableCell,TableBody } from '@mui/material';
-import { getOngoingOrder } from '../services/api';
+import { getOngoingOrder } from '../../services/api';
 
 function OngoingOrder() {
     const [ongoingOrderData, setOngoingOrderData] = useState([]);

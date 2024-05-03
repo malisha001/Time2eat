@@ -13,12 +13,12 @@ const getFeedback = async(req , res) =>{
     const {id} = req.params
 
     if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error: 'No such Feedback'})
+        return res.status(404).json({error: 'The specified feedback could not be found.Please try again.'})
     }
     const feedback = await Feedback.findById(id)
 
     if(!feedback){
-        return res.status(404).json({error : 'No such Feedback'})
+        return res.status(404).json({error : 'The specified feedback could not be found.Please try again.'})
     }
     res.status(200).json(feedback)
 }
@@ -44,12 +44,12 @@ const deleteFeedback = async(req , res) =>{
     const {id} = req.params
 
     if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error : 'No such Feedback'})
+        return res.status(404).json({error : 'The specified feedback could not be found.Please try again.'})
     }
     const feedback = await Feedback.findByIdAndDelete({_id: id})
 
     if(!feedback){
-        return res.status(404).json({error : 'No such Feedback'})
+        return res.status(404).json({error : 'The specified feedback could not be found.Please try again.'})
     }
     res.status(200).json(feedback)
 }
@@ -60,14 +60,14 @@ const updateFeedback = async(req , res) =>{
     const {id} = req.params
 
     if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error : 'No such Feedback'})
+        return res.status(404).json({error : 'The specified feedback could not be found.Please try again.'})
     }
     const feedback = await Feedback.findByIdAndUpdate({_id: id},{
         ...req.body
     })
   
     if(!feedback){
-        return res.status(404).json({error : 'No such Feedback'})
+        return res.status(404).json({error : 'The specified feedback could not be found.Please try again.'})
     }
     res.status(200).json(feedback)
 }
