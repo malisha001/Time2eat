@@ -3,8 +3,12 @@ import { Button, Grid, Paper, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import axios from "axios";
+import { useAuthContext } from '../hooks/useAuthContext';
 
 function DineCustomerRegForm() {
+
+  const {user} = useAuthContext()
+  
   const [cusid, setcusID] = useState("");
   const [resid, setresID] = useState("");
   const [name, setName] = useState("");

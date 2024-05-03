@@ -44,7 +44,7 @@ const NewBooking = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('/api/realtimebooking');
+            const response = await axios.get(`/api/realtimebooking/${id}`);
             
             // Calculate total tables for both couple and group
             const totalCoupleTables = response.data.reduce((total, table) => total + table.couplequantity, 0);
@@ -69,6 +69,7 @@ const NewBooking = () => {
                 console.error('Error fetching table data:', error);
             }
         }
+        fetchData()
         fetchtabledata()
         
     },[]);
