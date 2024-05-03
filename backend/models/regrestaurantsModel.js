@@ -5,7 +5,8 @@ const Schema = mongoose.Schema
 const restaurantSchema = new Schema({
     Restaurant_Id:{
         type: String, 
-        required:true
+        required:true,
+        unique: true
     },
     Restaurant_licensenumber:{
         type:String,
@@ -21,7 +22,8 @@ const restaurantSchema = new Schema({
     },
     Email_address:{
         type:String,
-        required : true
+        required : true,
+        unique: true
     },
     contact :{
         type:Number,
@@ -52,6 +54,10 @@ const restaurantSchema = new Schema({
     },
     status:{
         type:String,
+    },
+    role:{
+        type:String,
+        default: 'restaurant'
     }
 },{timestamps : true })
 
