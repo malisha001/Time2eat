@@ -5,17 +5,40 @@ import './use.css'
 const Usage = () => {
     const [Uitems, setUItems] = useState(null);
     const [usageItemName, setUsageItemName] = useState('');
-    const [initialQuantities, setInitialQuantities] = useState({});
     const [newQuantities, setNewQuantities] = useState({});
+    const [itemInitialQuantities, setItemInitialQuantities] = useState({});
     const [error, setError] = useState(null);
+
 
     useEffect(() => {
         const fetchAllItems = async () => {
-            const response = await fetch('/api/inventory');
-            const json = await response.json();
+            try {
+                const response = await fetch('/api/inventory');
+                const json = await response.json();
 
-            if(response.ok) {
-                setUItems(json);
+                if(response.ok) {
+                    setUItems(json);
+
+                    // Extract item IDs
+                    const itemIds = json.map(item => item._id);
+
+                    // Fetch item initial quantities for each item
+                    const initialQuantities = await Promise.all(
+                        itemIds.map(async itemId => {
+                            const response = await fetch(`/api/inventory/${itemId}`);
+                            const data = await response.json();
+                            return { [itemId]: data.itemInitialQuantity };
+                        })
+                    );
+
+                    // Merge initial quantities into a single object
+                    const mergedQuantities = Object.assign({}, ...initialQuantities);
+                    setItemInitialQuantities(mergedQuantities);
+                } else {
+                    setError('Failed to fetch inventory items.');
+                }
+            } catch (error) {
+                setError('An error occurred while fetching inventory items.');
             }
         };
         fetchAllItems();
@@ -23,13 +46,6 @@ const Usage = () => {
 
     const handleItemSelect = (itemName) => {
         setUsageItemName(itemName);
-    };
-
-    const handleInitialQuantityChange = (itemId, value) => {
-        setInitialQuantities(prevState => ({
-            ...prevState,
-            [itemId]: value
-        }));
     };
 
     const handleNewQuantityChange = (itemId, value) => {
@@ -43,21 +59,26 @@ const Usage = () => {
         e.preventDefault();
     
         // Check if there are any items selected
-        if (Object.keys(initialQuantities).length === 0) {
-            setError("Please select at least one item.");
+        if (Object.keys(newQuantities).length === 0) {
+            setError("Please enter new quantities for at least one item.");
             return;
         }
     
         // Iterate over the selected items and send them to the database separately
-        for (const itemId in initialQuantities) {
-            const initialQuantity = initialQuantities[itemId];
+        for (const itemId in newQuantities) {
             const newQuantity = newQuantities[itemId];
             
             // Get the item name based on the item ID
             const selectedItem = Uitems.find(item => item._id === itemId);
             const itemName = selectedItem.itemName;
+            const itemInitialQuantity = selectedItem.itemInitialQuantity;
+            const itemPrice = selectedItem.itemPrice;
             
-            const usageItem = { usageItemName: itemName, initialQuantity, newQuantity };
+
+            const initialQuantity = itemInitialQuantities[itemId];
+            const remainingQuant = (initialQuantity - newQuantity) * -1 ;
+            
+            const usageItem = { usageItemName: itemName, newQuantity, remainingQuant, Iquantity:itemInitialQuantity, Uprice:itemPrice };
             const response = await fetch('/api/usage/', {
                 method: 'POST',
                 body: JSON.stringify(usageItem),
@@ -75,7 +96,6 @@ const Usage = () => {
         }
     
         // Clear the state after successful submission
-        setInitialQuantities({});
         setNewQuantities({});
         setError(null);
     };
@@ -84,7 +104,7 @@ const Usage = () => {
     return (
 
         <div>
-            <Navbar />
+            <Navbar/>
             <div className="usage-home">
                 <h1>Enter Usage details here</h1>
                 <hr />
@@ -94,7 +114,6 @@ const Usage = () => {
                                     <thead className="usageHead">
                                         <tr>
                                             <th>Item Name</th>
-                                            <th>Initial Quantity</th>
                                             <th>New Quantity</th>
                                         </tr>
                                     </thead>
@@ -102,8 +121,7 @@ const Usage = () => {
                                         {Uitems && Uitems.map((item)=> (
                                             <tr key={item._id}>
                                                 <td onClick={() => handleItemSelect(item.itemName)}>{item.itemName}</td>
-                                                <td><input type="Number" onChange={(e) => handleInitialQuantityChange(item._id, e.target.value)} value={initialQuantities[item._id] || ''}/></td>
-                                                <td><input type="Number" onChange={(e) => handleNewQuantityChange(item._id, e.target.value)} value={newQuantities[item._id] || ''} /></td>
+                                                <td><input type="Number" onChange={(e) => handleNewQuantityChange(item._id, e.target.value)} value={newQuantities[item._id] || ''} min={0}/></td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -119,3 +137,4 @@ const Usage = () => {
 };
 
 export default Usage;
+
