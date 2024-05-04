@@ -1,6 +1,13 @@
-/* .home{
+/*.home{
     margin: 20px 0px 0px 40px;
 } */
+
+
+.home{
+    margin-left: 380px;
+    width: 950px;
+}
+
 
 .home hr{
     width: 990px;

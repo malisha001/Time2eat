@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import './foodItem.css'
-import ResNavbar from "../../component/restauretNavbar/ResNavbar"
+import Navbar from "../../component/inventoryNavbar/invNavBar";
 const Home = () => {
     const [items, setItems] = useState(null)
 
@@ -32,7 +32,7 @@ const Home = () => {
 
           
         <div> 
-        <ResNavbar />
+        <Navbar />
             <div className="home"> 
             
                 <h1>Welcome to TIME<strong>2eat</strong> Food Item Lists</h1>

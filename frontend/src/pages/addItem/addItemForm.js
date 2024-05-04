@@ -1,6 +1,7 @@
 import React,{ useState } from "react";
 import {useNavigate} from "react-router-dom";
 import './addItem.css'
+import Navbar from "../../component/inventoryNavbar/invNavBar";
 
 const ItemForm = () => {
 
@@ -49,6 +50,9 @@ const ItemForm = () => {
 
     return(
 
+        <div>
+        <Navbar />
+
         <div className="addFood">
             <h1>Welcome to TIME<strong>2eat</strong> Inventory</h1>
             <hr />
@@ -56,7 +60,6 @@ const ItemForm = () => {
 
         <form className="create" onSubmit={handleSubmit}>
 
-        
             <div className="input-image">
                 <div className="firstIn">
                     <label>Item ID :</label>
@@ -80,7 +83,7 @@ const ItemForm = () => {
 
             <div className="inputTwo">
                 <div className="input-container">
-                    <label>Item Price:</label>
+                    <label>Item Price : </label><br/>
                     <input type="Number" onChange={(e) => setItemPrice(e.target.value)} value={itemPrice} />
                 </div>
                 
@@ -97,6 +100,7 @@ const ItemForm = () => {
 
         </form>
 
+    </div>
     </div>
 
     )
