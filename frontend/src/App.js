@@ -52,7 +52,7 @@ import Restaurant from './pages/restaurant';
 import AddrestaurantsForm from './component/AddrestaurantsForm';
 import UpdateFoodItems from './component/updatefooditems';
 import Updaterestaurants from './component/Updaterestaurants';
-// import RestaurantProfile from './pages/Restaurantprofile';
+import RestaurantProfile from './pages/Restaurantprofile';
 import UpdateRestaurantProfile from './component/UpdateRestaurantProfile'
 
 
@@ -131,7 +131,7 @@ function App() {
             <Route path="/restaurants" element = {<Restaurant />} />
             <Route path="/addrestaurants" element = {<AddrestaurantsForm />} />
             <Route path="/update-restaurant/:id/" element = {<Updaterestaurants/>} />
-            {/* <Route path="/restaurants/:id/" element = {<RestaurantProfile />} /> */}
+            <Route path="/restaurants/:id/" element = {<RestaurantProfile />} />
             <Route path="/update-restaurantprofile/:id/" element = {<UpdateRestaurantProfile/>} />
 
           </Routes>
