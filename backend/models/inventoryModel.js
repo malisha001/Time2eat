@@ -12,13 +12,13 @@ const inventorySchema = new Schema({
         type: String,
         required: true
     },
-    itemQuantity: {
+    reOrderitem: {
+        type: Number,
+        reequired: true
+    },
+    itemInitialQuantity: {
         type: Number,
         required: true
-    },
-    reOrderitem:{
-        type:Number,
-        required:true
     },
     itemPrice: {
         type: Number,
