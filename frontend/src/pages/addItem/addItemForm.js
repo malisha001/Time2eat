@@ -110,12 +110,12 @@ const ItemForm = () => {
 
                     <label>Item Quantity : </label>
                     <input 
-                    type="Number" onChange={(e) => setReOrderitem(e.target.value)} value={reOrderitem}
+                    type="Number" onChange={(e) => setItemQuantity(e.target.value)} value={itemInitialQuantity}
                      min={0}/>
 
                     <label>Re-order Level : </label>
                     <input 
-                    type="Number" onChange={(e) => setItemQuantity(e.target.value)} value={itemQuantity}
+                    type="Number" onChange={(e) => setReOrderitem(e.target.value)} value={reOrderitem}
                      min={0}/>
                 </div>
                 <div className="addItemImageInv">

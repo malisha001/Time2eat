@@ -4,7 +4,7 @@ import Inventory from './pages/FoodItems/Inventory'
 import UpdateUser from './pages/update/UpdateUser';
 import ItemForm from './pages/addItem/addItemForm';
 import Usage from './pages/usage/usageForm';
-
+import ReOrder from './pages/invReOrder/invreOrder';
 
 
 import Home from './pages/Home/HomePage';
@@ -123,6 +123,7 @@ function App() {
               <Route path="/inventory/addItems" element={<ItemForm />} />
               <Route path="/inventory/update/:id" element={<UpdateUser />} />
               <Route path="/inventory/usage" element={<Usage />} /> 
+              <Route path="/inventory/reOrderitem" element={<ReOrder/>} />
            
 
             <Route path="/restaurant/:id" element={<Mybookingstyle />} />
