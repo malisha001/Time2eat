@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import './restaurant.css'
-
+import Admin from "../component/Admin";
 
 const Restaurant = () => { 
   const [restaurants, setRestaurants] = useState(null);
@@ -43,6 +43,8 @@ const Restaurant = () => {
   }
 };
   return (
+    <div className="container">
+      <Admin/>
     <div className="res">
       <div className="restaurant">
         
@@ -83,6 +85,7 @@ const Restaurant = () => {
       </tbody>
       </table>
       <Link to="/addrestaurants"><button>Add Restaurant</button></Link>
+    </div>
     </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import "./Updaterestaurants.css"
 
 const Updaterestaurants = () => {
     const { id } = useParams(); // Get the restaurant id from URL params
@@ -66,7 +67,7 @@ const Updaterestaurants = () => {
                                 checked={values.status === "true"} 
                                 onChange={handleStatusChange} 
                             />
-                            Accepted
+                            Accept
                         </label>
                         <label>
                             <input 
@@ -75,7 +76,7 @@ const Updaterestaurants = () => {
                                 checked={values.status === "false"} 
                                 onChange={handleStatusChange} 
                             />
-                            Pending
+                            Reject
                         </label>
                     </div>
                 </div>
