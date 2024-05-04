@@ -3,10 +3,10 @@ import { Button, Grid, Paper } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
-function DineCustomerRegForm() {
-  const navigate = useNavigate();
+function PrebookingDineInForm() {
+  const [bookingIdInput, setBookingIdInput] = useState("");
+  const [booking, setBooking] = useState(null);
   const [cusid, setcusID] = useState("");
   const [resid, setresID] = useState("");
   const [name, setName] = useState("");
@@ -16,65 +16,48 @@ function DineCustomerRegForm() {
   const [groupquantity, setGroupquantity] = useState("");
   const [telephoneno, setTelephone] = useState("");
   const [error, setError] = useState(null);
-  const [availableTables, setAvailableTables] = useState({
-    couple: 10,
-    group: 15,
-  });
 
   useEffect(() => {
-    fetchBookings();
+    fetchBooking();
   }, []);
 
-  const fetchBookings = async () => {
+  const fetchBooking = async () => {
     try {
-      const response = await axios.get("/api/realtimebooking");
-      const bookings = response.data;
-
-      // Calculate total booked tables
-      const coupleTablesBooked = bookings.reduce(
-        (acc, booking) => acc + booking.couplequantity,
-        0
-      );
-      const groupTablesBooked = bookings.reduce(
-        (acc, booking) => acc + booking.groupquantity,
-        0
-      );
-
-      // Calculate available tables
-      const availableCoupleTables = 10 - coupleTablesBooked;
-      const availableGroupTables = 15 - groupTablesBooked;
-
-      setAvailableTables({ couple: availableCoupleTables, group: availableGroupTables });
+      const response = await axios.get(`/api/booking/${bookingIdInput}`);
+      setBooking(response.data);
     } catch (error) {
       console.error(error);
-      setError("An error occurred while fetching table availability.");
+      setError("An error occurred while fetching booking details.");
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Convert input quantities to numbers
-    const totalCoupleTablesRequested = parseInt(couplequantity);
-    const totalGroupTablesRequested = parseInt(groupquantity);
-
-    // Check if the requested tables exceed the available tables
-    if (totalCoupleTablesRequested > availableTables.couple) {
-      setError("The requested couple table count exceeds the available couple tables.");
-      return;
-    }
-
-    if (totalGroupTablesRequested > availableTables.group) {
-      setError("The requested group table count exceeds the available group tables.");
-      return;
-    }
-
-    // Proceed with booking if everything is valid
-    const DineCustomerRegForm = { cusid, resid, name, time, date, couplequantity, groupquantity, telephoneno };
+    const PreBookingDetails = {
+      cusid,
+      resid,
+      name,
+      time,
+      date,
+      couplequantity,
+      groupquantity,
+      telephoneno,
+    };
 
     try {
-      await axios.post("/api/realtimebooking", DineCustomerRegForm);
-      await axios.post("/api/customerhistoryroute", DineCustomerRegForm);
+      // Add booking details
+      await axios.post("/api/realtimebooking", PreBookingDetails);
+
+      // Add customer history route
+      await axios.post("/api/customerhistoryroute", {
+        ...PreBookingDetails,
+        bookingId: booking.id, // Assuming `booking` contains the fetched booking data
+      });
+
+    //   // Delete the entry from the booking table
+    //   await axios.delete(`/api/booking/${booking.id}`);
+
       clearFormFields();
     } catch (error) {
       console.error("Error adding booking:", error);
@@ -94,18 +77,50 @@ function DineCustomerRegForm() {
     setError(null);
   };
 
-  const handlePreBookingsClick = () => {
-    navigate("/pre-booking-dine-in-form");
+  const handleBookingIdInputChange = (e) => {
+    setBookingIdInput(e.target.value);
+  };
+
+  const handleCheckBookingId = async () => {
+    try {
+      const response = await axios.get(`/api/booking/${bookingIdInput}`);
+      const fetchedBooking = response.data;
+      if (fetchedBooking) {
+        setBooking(fetchedBooking);
+        setcusID(fetchedBooking.cusid);
+        setresID(fetchedBooking.resid);
+        setName(fetchedBooking.name);
+        setTime(fetchedBooking.time);
+        setDate(fetchedBooking.date);
+        setCouplequantity(fetchedBooking.couplequantity);
+        setGroupquantity(fetchedBooking.groupquantity);
+        setTelephone(fetchedBooking.telephoneno);
+        setError(null);
+      } else {
+        setError("Entered booking ID does not match any existing booking.");
+      }
+    } catch (error) {
+      console.error(error);
+      setError("An error occurred while fetching booking details.");
+    }
   };
 
   return (
     <form className="create" onSubmit={handleSubmit}>
       <h3>Add a New Booking</h3>
-
-    
       <Paper sx={{ bgcolor: "white" }}>
         <Box sx={{ marginLeft: "60px", marginRight: "60px", marginTop: "40px", marginBottom: "40px", padding: "20px" }}>
           <h2>Payment Details</h2>
+          <TextField
+            required
+            id="booking-id"
+            label="Booking ID"
+            type="text"
+            onChange={handleBookingIdInputChange}
+            value={bookingIdInput}
+            sx={{ width: "100%" }}
+          />
+          <Button onClick={handleCheckBookingId}>Check Booking ID</Button>
           <Grid container spacing={4}>
             <Grid item xs={6}>
               <TextField
@@ -171,7 +186,6 @@ function DineCustomerRegForm() {
                 onChange={(e) => setCouplequantity(e.target.value)}
                 value={couplequantity}
                 sx={{ width: "100%" }}
-                title={`Available couple tables: ${availableTables.couple}`}
               />
             </Grid>
             <Grid item xs={6}>
@@ -183,7 +197,6 @@ function DineCustomerRegForm() {
                 onChange={(e) => setGroupquantity(e.target.value)}
                 value={groupquantity}
                 sx={{ width: "100%" }}
-                title={`Available group tables: ${availableTables.group}`}
               />
             </Grid>
             <Grid item xs={6}>
@@ -200,11 +213,10 @@ function DineCustomerRegForm() {
           </Grid>
         </Box>
       </Paper>
-      <Button onClick={handlePreBookingsClick}>Pre Bookings</Button>
-      <button>Add Booking</button>
+      <Button type="submit">Submit</Button>
       {error && <div className="error">{error}</div>}
     </form>
   );
 }
 
-export default DineCustomerRegForm;
+export default PrebookingDineInForm;

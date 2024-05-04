@@ -238,7 +238,7 @@ export default function TemporaryDrawer() {
                 </Grid>
               </Box>
               {/* show restuarents */}
-              <h2>restuarents</h2> 
+              <h2>restuarents</h2>  
               
                 <Box sx={{marginLeft: '100px', marginRight: '100px'}}>
                   <Grid container sx={{ bgcolor: 'red'}} spacing={2}>
