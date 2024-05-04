@@ -1,6 +1,6 @@
 // pages & components
 
-import Inventory from './component/FoodItems/Inventory'
+import Inventory from './pages/FoodItems/Inventory'
 import UpdateUser from './pages/update/UpdateUser';
 import ItemForm from './pages/addItem/addItemForm';
 import Usage from './pages/usage/usageForm';
@@ -117,10 +117,12 @@ function App() {
             <Route path='/cart' element={<Cart/>} />
             <Route path='/payment' element={<Payment/>} />
 
-            <Route path="/inventory/items" element={<Inventory />} />
-            <Route path="/inventory/addItems" element={<ItemForm />} />
-            <Route path="/inventory/update/:id" element={<UpdateUser />} />
-            <Route path="/inventory/usage" element={<Usage />} /> 
+     
+              <Route path="/inventory/items" element={<Inventory />} />
+              <Route path="/inventory/addItems" element={<ItemForm />} />
+              <Route path="/inventory/update/:id" element={<UpdateUser />} />
+              <Route path="/inventory/usage" element={<Usage />} /> 
+           
 
             <Route path="/restaurant/:id" element={<Mybookingstyle />} />
 

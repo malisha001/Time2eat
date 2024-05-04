@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import './foodItem.css'
-import ResNavbar from "../restauretNavbar/ResNavbar"
+import ResNavbar from "../../component/restauretNavbar/ResNavbar"
 const Home = () => {
     const [items, setItems] = useState(null)
 
