@@ -1,24 +1,23 @@
-.addFood {
+.inventoryAddFood {
     width: 1200px;
     max-width: 800px;
     padding: 0px;
     margin: 20px 0px 0px 380px;
-    height: auto;
 
 }
 /* Form part */
 .create{
-    height: auto;
+    height: 1000px auto;
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    background-color: #E7E7E7; 
-    padding: 60px 0px 60px 50px; 
-     margin: 0px -160px 0px 0px; 
-    line-height: 40px; 
+    background-color: #E7E7E7;
+    padding: 60px 0px 60px 50px;
+    margin: 0px -160px 140px 0px;
+    line-height: 40px;
 }
 
-.addFood h1 {
+.inventoryAddFood h1 {
     font-size: 45px;
     font-weight:400;
     margin-bottom: 20px;
@@ -27,21 +26,21 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-.addFood hr {
+.inventoryAddFood hr {
     border: none;
     height: 2px;
     background-color: #ccc;
     margin: -10px -157px 0px 0px ;
 }
 
-.addFood h4 {
+.inventoryAddFood h4 {
     font-size: 20px;
     color: #000000;
     font-weight: 400;
     margin-top: 15px;
 }
 
-.addFood form label {
+.inventoryAddFood form label {
     font-size: 20px;
     display: block;
     margin-bottom: 5px;
@@ -49,7 +48,7 @@
     font-weight: 500;
 }
 
-.addFood form input {
+.inventoryAddFood form input {
     width: 380px;
     padding: 10px;
     font-size: 16px;
@@ -59,7 +58,7 @@
 }
 
 /* Button */
-.addButton {
+.inventoryAddButton {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     background-color: #1B6E06;
     color: #fff;
@@ -74,48 +73,10 @@
     margin-top: -10px;
 }
 
-.addButton:hover {
+.inventoryAddButton:hover {
     background-color: #6fce74;
     color: black;
 }
-
-.addError{
-    color: red;
-    font-size: 16px;
-    margin-top: 10px;
-}
-
-/* last two inputs */
-.lastInput{
-    display: flex;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-/* image */
-.input-image{
-    display: flex;
-}
-.addItemImageInv{
-    margin-top: 60px;
-}
-
-.inputOne{
-    margin-right: 90px;
-}
-
-.input-image img{
-    width: 320px;
-    margin: -20px 0px 0px 100px;
-    height: 300px;
-    border-radius: 10px;
-}
-
-/* first 3 inputs */
-.firstIn{
-    margin-top: -25px;
-}
-
 
 /* last error after submit */
 .addError{
@@ -136,6 +97,35 @@
     margin-top: -17px;
     margin-bottom: 10px;
     
+}
+
+
+
+/* last two inputs */
+.inputTwo{
+    display: flex;
+    margin-top: 10px;
+}
+
+.inputTwo .input-container{
+    margin: 0px 70px -10px 0px;
+}
+
+/* image */
+.input-image{
+    display: flex;
+}
+
+.input-image img{
+    width: 320px;
+    margin: -20px 0px 0px 100px;
+    height: 300px;
+    border-radius: 10px;
+}
+
+/* first 3 inputs */
+.firstIn{
+    margin-top: -25px;
 }
 
 
