@@ -8,7 +8,7 @@
 }
 /* Form part */
 .create{
-    height: 460px;
+    height: auto;
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -86,18 +86,22 @@
 }
 
 /* last two inputs */
-.inputTwo{
+.lastInput{
     display: flex;
     margin-top: 10px;
-}
-
-.inputTwo .input-container{
-    margin: 0px 70px -10px 0px;
+    margin-bottom: 10px;
 }
 
 /* image */
 .input-image{
     display: flex;
+}
+.addItemImageInv{
+    margin-top: 60px;
+}
+
+.inputOne{
+    margin-right: 90px;
 }
 
 .input-image img{
@@ -110,6 +114,28 @@
 /* first 3 inputs */
 .firstIn{
     margin-top: -25px;
+}
+
+
+/* last error after submit */
+.addError{
+    color: red;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* itemName and itemCategory error */
+.inventoryAddItemError{
+    font-weight: 400;
+    font-size: 18px;
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(0, 0, 0);
+    background-color: rgb(226, 121, 112);
+    padding: 0px 0px 0px 18px;
+    border-radius: 5px;
+    margin-top: -17px;
+    margin-bottom: 10px;
+    
 }
 
 

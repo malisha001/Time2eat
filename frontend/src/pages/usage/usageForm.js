@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Navbar from "../../component/inventoryNavbar/invNavBar";
 import './use.css'
 
 const Usage = () => {
@@ -81,34 +82,38 @@ const Usage = () => {
     
 
     return (
-        <div className="usage-home">
-            <h1>Enter Usage details here</h1>
-            <hr />
-            <form className="uForm" onSubmit={handleSubmit}>    
-                <div className="U-items">
-                            <table className="usageItemTable">
-                                <thead className="usageHead">
-                                    <tr>
-                                        <th>Item Name</th>
-                                        <th>Initial Quantity</th>
-                                        <th>New Quantity</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="usageBody">
-                                    {Uitems && Uitems.map((item)=> (
-                                        <tr key={item._id}>
-                                            <td onClick={() => handleItemSelect(item.itemName)}>{item.itemName}</td>
-                                            <td><input type="Number" onChange={(e) => handleInitialQuantityChange(item._id, e.target.value)} value={initialQuantities[item._id] || ''}/></td>
-                                            <td><input type="Number" onChange={(e) => handleNewQuantityChange(item._id, e.target.value)} value={newQuantities[item._id] || ''} /></td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                </div> 
 
-                <button className="usageButton" type="submit" >Submit</button>
-                {error && <div className="UsageError">{error}</div>}           
-            </form>
+        <div>
+            <Navbar />
+            <div className="usage-home">
+                <h1>Enter Usage details here</h1>
+                <hr />
+                <form className="uForm" onSubmit={handleSubmit}>    
+                    <div className="U-items">
+                                <table className="usageItemTable">
+                                    <thead className="usageHead">
+                                        <tr>
+                                            <th>Item Name</th>
+                                            <th>Initial Quantity</th>
+                                            <th>New Quantity</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="usageBody">
+                                        {Uitems && Uitems.map((item)=> (
+                                            <tr key={item._id}>
+                                                <td onClick={() => handleItemSelect(item.itemName)}>{item.itemName}</td>
+                                                <td><input type="Number" onChange={(e) => handleInitialQuantityChange(item._id, e.target.value)} value={initialQuantities[item._id] || ''}/></td>
+                                                <td><input type="Number" onChange={(e) => handleNewQuantityChange(item._id, e.target.value)} value={newQuantities[item._id] || ''} /></td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                    </div> 
+
+                    <button className="usageButton" type="submit" >Submit</button>
+                    {error && <div className="UsageError">{error}</div>}           
+                </form>
+            </div>
         </div>
     );
 };

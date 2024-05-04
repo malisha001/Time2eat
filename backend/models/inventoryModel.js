@@ -16,6 +16,10 @@ const inventorySchema = new Schema({
         type: Number,
         required: true
     },
+    reOrderitem:{
+        type:Number,
+        required:true
+    },
     itemPrice: {
         type: Number,
         required: true
