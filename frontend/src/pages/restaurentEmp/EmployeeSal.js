@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import EmployeeNav from '../../component/employeeNavbar/EmployeeNav';
 import AddIcon from '@mui/icons-material/Add';
-import { Dialog, DialogTitle, DialogContent, Button, DialogActions, Stack, TextField, MenuItem } from '@mui/material';
+import {Dialog, DialogTitle, DialogContent, Button, DialogActions, Stack, TextField, MenuItem, Divider } from '@mui/material';
 import { Table, TableBody, TableHead, TableRow, TableCell, TableContainer, Paper } from '@mui/material';
 import { addEmployeeSalaryData, getAllEmployeeData, getAllEmployeeSalaryData, deleteEmployeeSalaryData } from '../../services/api';
 
@@ -126,6 +126,9 @@ const EmployeeSal = () => {
     <div>
       <h1>Employee Salary Page</h1>
       <EmployeeNav />
+      <br/>
+      <Divider/>
+      <br/>
       <Button
         variant="contained"
         onClick={() => setOpenPopup(true)}

@@ -1,14 +1,28 @@
 import React from 'react';
+import { Grid,Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const EmployeeNav = () => {
     return (
-        <nav>
-            <ul>
-                <li><a href="#">Staff Manager</a></li>
-                <li><a href="#">Leaving</a></li>
-                <li><a href="#">Salary</a></li>
-            </ul>
-        </nav>
+        <div style={{ margin: '0 500px 0 0' }}>
+            <Grid container spacing={2}>
+                <Grid item xs={4}>
+                    <Box sx={{ backgroundColor: 'lightblue', padding: '10px',textAlign: 'center'}}>
+                        <Link to="/employeeSal" style={{textDecoration: 'none', color: 'black'}}>staff member</Link>
+                    </Box>
+                </Grid>
+                <Grid item xs={4}>
+                    <Box sx={{ backgroundColor: 'lightblue', padding: '10px',textAlign: 'center' }}>
+                        <Link to="/employeeSal" style={{textDecoration: 'none', color: 'black'}}>leaving</Link>
+                    </Box>
+                </Grid>
+                <Grid item xs={4}>
+                    <Box sx={{ backgroundColor: 'lightblue', padding: '10px' ,textAlign: 'center'}}>
+                        <Link to="/employeeSal" style={{textDecoration: 'none', color: 'black'}}>monthly salary</Link>
+                    </Box>
+                </Grid>
+            </Grid>
+        </div>
     );
 };
 
