@@ -3,23 +3,31 @@ import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { Button, Grid, Paper } from '@mui/material';
+import { Grid, Paper } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import exampleImage from '../Assests/example.jpg';
-import QRCode from 'react-qr-code'; // Import the QRCode component
+import QRCode from 'qrcode.react'; // Import the QRCode component
 import '../component/Mybookingstyle.css';
 import axios from "axios";
 import Navbar from "../component/Navbar";
+import { useParams } from 'react-router-dom';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const MyBookings = () => {
+    const { id } = useParams(); 
+    const {user} = useAuthContext()
+    console.log("userr",user)
     const [bookings, setBookings] = useState(null);
 
     useEffect(() => {
         const fetchMyBookings = async () => {
             try {
-                const response = await axios.get('/api/booking');
+                const userr = user.email
+                console.log("u",userr)
+                const response = await axios.get(`/api/booking/books?userId=${userr}&restaurantId=${id}`);
                 const data = response.data;
+                console.log("my bookinggg",response.data)
                 setBookings(data);
             } catch (error) {
                 console.error('Error fetching bookings:', error);
@@ -80,16 +88,9 @@ const MyBookings = () => {
                                             <Box className='mybookings-tables-count'>{booking.couplequantity}</Box>
                                         </Grid>
                                         <Grid item md={6}>
-                                            <Box sx={{ ml: '30px', pt: '10px', pb: '10px', height: 200, width: 200, }}>
-                                                <QRCode value={JSON.stringify({
-                                                    time: booking.time,
-                                                    date: booking.date,
-                                                    couplequantity: booking.couplequantity,
-                                                    groupquantity: booking.groupquantity,
-                                                    name: booking.name,
-                                                    telephoneno: booking.telephoneno
-                                                })} />
-                                            </Box>
+                                            {/* Create a link to the dine-in form page with booking ID */}
+                                            <QRCode value={`http://localhost:3000/dine-in-form/${booking._id}`} />
+
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -97,9 +98,9 @@ const MyBookings = () => {
                             </Grid>
 
                             <p>{booking.createAt}</p>
-                            <Button variant="contained" sx={{bgcolor: 'red', marginLeft: '10px', marginBottom: '10px'}} onClick={() => handleDeleteBooking(booking._id)}>Delete</Button>
+                            <button className='mybookings-delete' onClick={() => handleDeleteBooking(booking._id)}>Delete</button>
 
-                            <Button variant="contained" style={{ textDecoration: 'none' }} sx={{marginLeft: '550px', marginBottom: '10px'}} ><Link style={{ textDecoration: 'none' }} to={`/update-pre-booking/${booking._id}`}>Update</Link></Button>
+                            <button className='mybookings-update'><Link to={`/update-pre-booking/${booking._id}`}>Update</Link></button>
                         </Paper>
 
                     </div>

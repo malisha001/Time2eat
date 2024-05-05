@@ -9,11 +9,11 @@ const getBookings = async (req, res) => {
 
 //get a single Bookings
 const getBooking = async (req, res) => {
-    const {id} = req.params
+    const {userId,restaurantId} = req.query;
 
-    const booking = await Booking.findById(id)
-
-
+    console.log("data",userId)
+    const booking = await Booking.find({resid:restaurantId,cusid:userId})
+    
     if (!booking) {
         return res.status(404).json({error: 'No such Booking'})
     }

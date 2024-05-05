@@ -55,7 +55,11 @@ import UpdateFoodItems from './component/updatefooditems';
 import Updaterestaurants from './component/Updaterestaurants';
 // import RestaurantProfile from './pages/Restaurantprofile';
 import UpdateRestaurantProfile from './component/UpdateRestaurantProfile'
+
+import PrebookingDineInForm from './pages/prebookingdinein';
+
 import RestaurantDashboard from './pages/restaurentDashbord/RestaurenrDashbord';
+
 
 function App() {
   const {user} = useAuthContext()
@@ -82,7 +86,7 @@ function App() {
             
             <Route path="/newbooking/:id" element={<NewBooking />} />
 
-            <Route path="/mybookings" element={<MyBookings />} />
+            <Route path="/mybookings/:id" element={<MyBookings />} />
            {/*} <Route path="/update-booking/:id" element={<UpdateBookingDetails />} />  */}
             <Route path="/update-pre-booking/:id" element={<UpdatePreBookings />} />
             <Route path="/update-dine-in-booking/:id" element={<UpdateDineIn />} />
@@ -92,6 +96,7 @@ function App() {
 
 
             <Route path="/dine-in-form" element={<DineCustomerRegForm />} />
+            <Route path="/pre-booking-dine-in-form" element={<PrebookingDineInForm />} />
             <Route path="/dine-in-bookings" element={<DineInBookings />} />
             <Route path="/stylepage" element={<Newbookingsstyle />} />
             {/* <Route path="/realtimeindecator" element={<RealTimeIndicator />} /> */}
