@@ -113,6 +113,19 @@ export async function paySalary() {
         throw error;
     }
 }
+//get all employee salaries
+export async function fetchEmployeeSalaries() {
+    try {
+        const response = await fetch('/api/emppayrun/allempsalaries');
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error('Error fetching employee salaries:', error);
+        throw error;
+    }
+
+}
 //delivery function
 //customer place order by selecting delivery option
 export async function placeorder(order) {

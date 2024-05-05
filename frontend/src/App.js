@@ -25,6 +25,8 @@ import Newbookingsstyle from './pages/Newbookingsstyle';
 import AllCustomerDineInHistory from './pages/AllCustomerDineInHistory';
 import EmployeeSal from './pages/restaurentEmp/EmployeeSal';
 import EmpPayrun from './pages/restaurentEmp/EmpPayrun';
+import Empleaves from './pages/restaurentEmpLeaves/EmpLeaves';
+import EmployeePaysalaries from './pages/restaurentEmp/EmployeePaysalaries';
 
 import RiderDashboard from './pages/riders/RiderDashbord';
 import OngoingOrder from './pages/riders/OngoingOrder';
@@ -103,6 +105,8 @@ function App() {
              
             <Route path='/employeesal' element={<EmployeeSal />}/>
             <Route path='/payrun' element={<EmpPayrun />}/>
+            <Route path="/empleaves" element={<Empleaves />} />
+            <Route path="/employeepaysalaries" element={<EmployeePaysalaries />} />
 
               
             <Route path="/respage/:id" element={<ResPage />} />
