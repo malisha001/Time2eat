@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import './foodItem.css'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faSearch} from '@fortawesome/free-solid-svg-icons';
 import Navbar from "../../component/inventoryNavbar/invNavBar";
 const Home = () => {
     const [items, setItems] = useState(null)
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         const fetchInventoryItems = async () => {
@@ -28,6 +31,14 @@ const Home = () => {
         }
     };
 
+    const handleSearch = (e) => {
+        setSearchQuery(e.target.value);
+    };
+
+    // Filter items based on search query
+    const filteredItems = items ? items.filter(item => item.itemName.toLowerCase().startsWith(searchQuery.toLowerCase())) : [];
+
+
     return (
 
           
@@ -38,6 +49,17 @@ const Home = () => {
                 <h1>Welcome to TIME<strong>2eat</strong> Food Item Lists</h1>
                 <hr />
                 <h4>Given below are the food items,</h4>
+
+                <div className="foodItemSearch">
+                    <FontAwesomeIcon icon={faSearch} className="foodSeacrhIcon" />
+                    <input 
+                    type="text" 
+                    placeholder="Search any item here" 
+                    value={searchQuery} 
+                    onChange={handleSearch} 
+                    className="Fsearch-bar"
+                />
+                </div>
                     <div className="items">
                     
                         <table>
