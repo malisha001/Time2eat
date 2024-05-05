@@ -1,0 +1,63 @@
+.create {
+    width: 400px;
+    height:auto;
+    margin: 0 auto;
+    top: 30px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+  
+  .create h3 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .create label {
+    display: block;
+    margin-bottom: 5px;
+    width:100%;
+  }
+  
+  .create input [type="String"],
+  .create input[type="text"],
+  .create input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .create input [type="String"],
+  .create input[type="text"]:focus,
+  .create input[type="number"]:focus {
+    outline: none;
+    border-color: rgb(245, 94, 39);
+  }
+  
+  .create button {
+    width: 100%;
+    padding: 10px;
+    background-color:rgb(245, 94, 39);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .create button:hover {
+    background-color: rgb(245, 94, 39);
+  }
+  
+  .error {
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+  }
+  

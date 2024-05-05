@@ -28,7 +28,7 @@ const Signup = () => {
         <div className={styles.regcontainer}>
         <Grid container>
         <Grid item sx={6}>
-            <p>crate account</p>
+            <p>create account</p>
         </Grid>
         <Grid item sx={6}>
         <form className= {styles.signup} onSubmit={handleSubmit}>

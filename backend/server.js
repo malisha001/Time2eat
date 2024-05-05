@@ -20,7 +20,7 @@ const advertisementRoutes = require('./routers/advertisement')
 //const orderRoutes = require('./routers/orders')
 const foodrouter = require('./routers/foodrouter')
 const userRoutes = require('./routers/user')
-const orderRoutes = require('./routers/orders')
+const orderRoutes = require('./routers/orders.js')
 const cartRoutes = require('./routers/carts')
 
 const onlineOrdersRoutes = require('./routers/onlineOrders')
@@ -28,7 +28,7 @@ const employeeLeaveRoutes = require('./routers/employeeLeaves')
 const employees = require('./routers/employees')
 const payrun = require('./routers/empPayrun')
 const leaves = require('./routers/leaves')
-
+const dineinorder = require('./routers/dineinOrder.js')
 const { dbconnect } = require('./config/database.config.js');
 dbconnect();
 
@@ -82,6 +82,7 @@ app.use('/api/inventory/', inventoryRoutes)
 app.use('/api/foods', foodrouter)
 app.use('/api/onlineOrders', onlineOrdersRoutes)
 app.use('/api/orders', orderRoutes)
+app.use('/api/dineinorders',dineinorder)
 
 
 

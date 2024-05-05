@@ -35,6 +35,7 @@ import BookingPayment from './pages/BookingPayment';
 import ResPage from './pages/ResPage/ResPage.js';
 import FoodPage from './pages/Food/FoodPage.js';
 import CartPage from './pages/Cart/CartPage.js';
+import DineIn from './pages/DineIn/DineIn';
 
 
 // import AdvertisementForm from './components/AdvertisementForm';
@@ -53,7 +54,7 @@ import UpdateFoodItems from './component/updatefooditems';
 import Updaterestaurants from './component/Updaterestaurants';
 // import RestaurantProfile from './pages/Restaurantprofile';
 import UpdateRestaurantProfile from './component/UpdateRestaurantProfile'
-
+import CheckoutPage from './pages/Checkout/CheckoutPage';
 
 function App() {
   const {user} = useAuthContext()
@@ -132,7 +133,8 @@ function App() {
             <Route path="/update-restaurant/:id/" element = {<Updaterestaurants/>} />
             {/* <Route path="/restaurants/:id/" element = {<RestaurantProfile />} /> */}
             <Route path="/update-restaurantprofile/:id/" element = {<UpdateRestaurantProfile/>} />
-
+             <Route path="/dinein" element = {<DineIn />} />
+            <Route path="/checkout" element={<CheckoutPage />} /> 
           </Routes>
         </div>  
       </BrowserRouter>
