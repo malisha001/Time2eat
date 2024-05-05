@@ -102,13 +102,12 @@
 
 
 /* last two inputs */
-.inputTwo{
+.lastInput{
     display: flex;
-    margin-top: 10px;
 }
 
-.inputTwo .input-container{
-    margin: 0px 70px -10px 0px;
+.addItem-InContainer{
+    margin-right: 100px;
 }
 
 /* image */
@@ -118,7 +117,7 @@
 
 .input-image img{
     width: 320px;
-    margin: -20px 0px 0px 100px;
+    margin: 50px 0px 0px 100px;
     height: 300px;
     border-radius: 10px;
 }

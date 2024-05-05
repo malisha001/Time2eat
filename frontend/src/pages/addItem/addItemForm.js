@@ -101,16 +101,15 @@ const ItemForm = () => {
                         <img src="/Popular-foods.jpg" alt="" />
                     </div>
 
-                    <div className="inputTwo">
-                        <div className="input-container">
-                            <label>Item Price:</label>
+                    <div className="lastInput">
+                        <div className="addItem-InContainer">
+                            <label>Item Price : </label>
                             <input type="Number" onChange={(e) => setItemPrice(e.target.value)} value={itemPrice} />
                         </div>
-
-                        <div className="input-container">
-                            <label>Item Category:</label>
+                        <div className="addItem-InContainer">
+                            <label>Item Category : </label>
                             <input type="text" onChange={(e) => handleItemCategoryChange(e.target.value)} value={itemCategory} />
-                            {itemCategoryError && <div className="inventoryAddItemError">{itemCategoryError}</div>} {/* Display Item Category error */}
+                            {itemCategoryError && <div className="inventoryAddItemError">{itemCategoryError}</div>}
                         </div>
                     </div>
 
