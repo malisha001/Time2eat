@@ -7,11 +7,8 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import { useNavigate } from "react-router-dom";
 
 function DineCustomerRegForm() {
-
-  const {user} = useAuthContext()
+  const { user } = useAuthContext();
   const navigate = useNavigate();
-  const [cusid, setcusID] = useState("");
-  const [resid, setresID] = useState("");
   const [name, setName] = useState("");
   const [time, setTime] = useState("");
   const [date, setDate] = useState("");
@@ -22,37 +19,49 @@ function DineCustomerRegForm() {
   const [nameError, setNameError] = useState(null);
   const [telError, setTelError] = useState(null);
   const [availableTables, setAvailableTables] = useState({
-    couple: 10,
-    group: 15,
+    couple: 0,
+    group: 0,
   });
 
   useEffect(() => {
-    fetchBookings();
-  }, []);
+    if (user) {
+      fetchBookingData(user.resId);
+    }
+  }, [user]);
 
-  const fetchBookings = async () => {
+  const fetchBookingData = async (resId) => {
     try {
-      const response = await axios.get("/api/realtimebooking");
-      const bookings = response.data;
+      // Fetch realtime bookings
+      const bookingsResponse = await axios.get(`/api/realtimebooking/${resId}`);
+      const bookingsData = bookingsResponse.data;
 
-      // Calculate total booked tables
-      const coupleTablesBooked = bookings.reduce(
+      // Fetch restaurant data
+      const restaurantResponse = await axios.get(`/api/restaurants/${resId}`);
+      const restaurantData = restaurantResponse.data;
+
+      // Calculate available tables
+      const coupleTablesBooked = bookingsData.reduce(
         (acc, booking) => acc + booking.couplequantity,
         0
       );
-      const groupTablesBooked = bookings.reduce(
+      const groupTablesBooked = bookingsData.reduce(
         (acc, booking) => acc + booking.groupquantity,
         0
       );
 
-      // Calculate available tables
-      const availableCoupleTables = 10 - coupleTablesBooked;
-      const availableGroupTables = 15 - groupTablesBooked;
+      console.log(restaurantData.Couple_table)
+      console.log(restaurantData.Group_table)
+
+      console.log(coupleTablesBooked)
+      console.log(groupTablesBooked)
+
+      const availableCoupleTables = restaurantData.Couple_table - coupleTablesBooked;
+      const availableGroupTables = restaurantData.Group_table - groupTablesBooked;
 
       setAvailableTables({ couple: availableCoupleTables, group: availableGroupTables });
     } catch (error) {
-      console.error(error);
-      setError("An error occurred while fetching table availability.");
+      console.error("Error fetching booking data:", error);
+      setError("An error occurred while fetching booking data.");
     }
   };
 
@@ -75,26 +84,23 @@ function DineCustomerRegForm() {
     }
 
     // Proceed with booking if everything is valid
-    const DineCustomerRegForm = { cusid, resid, name, time, date, couplequantity, groupquantity, telephoneno };
+    const dineCustomerRegForm = { resid: user.resId, name, time, date, couplequantity, groupquantity, telephoneno };
 
-    if(!nameError && !telError){ 
+    if (!nameError && !telError) {
       try {
-        await axios.post("/api/realtimebooking", DineCustomerRegForm);
-        await axios.post("/api/customerhistoryroute", DineCustomerRegForm);
+        await axios.post("/api/realtimebooking", dineCustomerRegForm);
+        await axios.post("/api/customerhistoryroute", dineCustomerRegForm);
         clearFormFields();
       } catch (error) {
         console.error("Error adding booking:", error);
         setError("An error occurred while adding the booking.");
       }
-    }
-    else{
+    } else {
       setError("Please enter valid details");
     }
   };
 
   const clearFormFields = () => {
-    setcusID("");
-    setresID("");
     setName("");
     setTime("");
     setDate("");
@@ -103,6 +109,7 @@ function DineCustomerRegForm() {
     setTelephone("");
     setError(null);
     setNameError(null);
+    setTelError(null);
   };
 
   const handlePreBookingsClick = () => {
@@ -119,31 +126,31 @@ function DineCustomerRegForm() {
           <Grid container spacing={4}>
 
             <Grid item xs={6}>
-              
-            <TextField
-              required
-              id="outlined-required"
-              label="Name"
-              type="text"
-              onChange={(e) => {
-                const value = e.target.value;
-                if (!/^[a-zA-Z]*$/.test(value)) {
-                  setNameError('Please enter a valid name (letters only)');
-                } else {
-                  setNameError('');
-                }
-                setName(value);
-              }}
-              value={name}
-              sx={{ width: "100%" }}
-            />{nameError && (
+              <TextField
+                required
+                id="outlined-required"
+                label="Name"
+                type="text"
+                onChange={(e) => {
+                  const value = e.target.value;
+                  if (!/^[a-zA-Z]*$/.test(value)) {
+                    setNameError('Please enter a valid name (letters only)');
+                  } else {
+                    setNameError('');
+                  }
+                  setName(value);
+                }}
+                value={name}
+                sx={{ width: "100%" }}
+              />
+              {nameError && (
                 <Typography variant="body2" color="error">
                   {nameError}
                 </Typography>
               )}
             </Grid>
             <Grid item xs={6}>
-          <TextField
+              <TextField
                 required
                 id="outlined-required"
                 label="Time"
@@ -189,7 +196,6 @@ function DineCustomerRegForm() {
               />
             </Grid>
             <Grid item xs={6}>
-            <Grid item xs={6}>
               <TextField
                 required
                 id="outlined-required"
@@ -214,15 +220,12 @@ function DineCustomerRegForm() {
               )}
             </Grid>
 
-            </Grid>
           </Grid>
           <Button onClick={handlePreBookingsClick}>Pre Bookings</Button>
-          <Button type="submit" contained sx={{marginTop: '20px', backgroundColor: 'lightblue'}}>Add Booking</Button>
+          <Button type="submit" contained sx={{ marginTop: '20px', backgroundColor: 'lightblue' }}>Add Booking</Button>
           {error && <div className="error">{error}</div>}
         </Box>
       </Paper>
-
-      
     </form>
   );
 }

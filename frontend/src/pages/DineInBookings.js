@@ -1,24 +1,29 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import { Table, TableBody, TableHead, TableRow, TableCell, TableContainer, Paper, Button } from '@mui/material';
 import axios from "axios";
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const DineInBookings = () => {
+    const { user } = useAuthContext();
     const [dineBookings, setDineBookings] = useState(null);
 
     useEffect(() => {
-        const fetchDineInBookings = async () => {
-            try {
-                const response = await axios.get('/api/realtimebooking');
-                const data = response.data;
-                setDineBookings(data);
-            } catch (error) {
-                console.error('Error fetching Dine In Bookings:', error);
-            }
-        };
+        // Check if user and user.resId exist
+        if (user && user.resId) {
+            const fetchDineInBookings = async () => {
+                try {
+                    const response = await axios.get(`/api/realtimebooking/${user.resId}`);
+                    const data = response.data;
+                    setDineBookings(data);
+                } catch (error) {
+                    console.error('Error fetching Dine In Bookings:', error);
+                }
+            };
 
-        fetchDineInBookings();
-    }, []);
+            fetchDineInBookings();
+        }
+    }, [user]); // Add user to the dependency array to re-fetch bookings when user changes
 
     const handleClick = async (deleteDineBookings) => {
         try {
@@ -31,7 +36,7 @@ const DineInBookings = () => {
 
     return (
         <div>
-            <TableContainer component={Paper} style={{ marginBottom: '20px', backgroundColor: 'lightgrey', marginTop: '40px'  }}>
+            <TableContainer component={Paper} style={{ marginBottom: '20px', backgroundColor: 'lightgrey', marginTop: '40px' }}>
                 <Table aria-label="simple table">
                     <TableHead sx={{bgcolor: 'lightblue'}}>
                         <TableRow>
