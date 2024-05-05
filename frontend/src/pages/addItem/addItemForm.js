@@ -103,7 +103,7 @@ const ItemForm = () => {
 
                     <div className="lastInput">
                         <div className="addItem-InContainer">
-                            <label>Item Price : </label>
+                            <label>Item Price (Rs.) : </label>
                             <input type="Number" onChange={(e) => setItemPrice(e.target.value)} value={itemPrice} />
                         </div>
                         <div className="addItem-InContainer">

@@ -47,7 +47,7 @@ const Home = () => {
                                     <th>Name</th>
                                     <th>Quantity</th>
                                     <th>Re-Order Level</th>
-                                    <th>Price</th>
+                                    <th>Price (Rs.)</th>
                                     <th>Category</th>
                                     <th>Action</th> 
                                 </tr>

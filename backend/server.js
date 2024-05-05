@@ -8,7 +8,7 @@ require('dotenv').config()
 //import routers
 const inventoryRoutes = require('./routers/inventory') 
 const usageRoutes = require('./routers/usageItem.js')
-const updateRoute = require('./routers/')
+
 // const advertisementRoutes = require('./routers/advertisements')
 const employeesal = require('./routers/employeeSalary')
 const restaurants = require('./routers/restaurants')
