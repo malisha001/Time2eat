@@ -1,10 +1,13 @@
 // pages & components
 
 import Inventory from './pages/FoodItems/Inventory'
-import UpdateUser from './pages/update/UpdateUser';
+import UpdateUser from './pages/updateFoodItems/UpdateUser';
 import ItemForm from './pages/addItem/addItemForm';
 import Usage from './pages/usage/usageForm';
 import ReOrder from './pages/invReOrder/invreOrder';
+import InvMangeOrder from './pages/invManOrders/manageOrd';
+import UpdateOnlineOrder from './pages/updateOnlineOrders/updateOnline';
+import Dashboard from './pages/invDasboard/inDashboard'
 
 
 import Home from './pages/Home/HomePage';
@@ -124,6 +127,9 @@ function App() {
               <Route path="/inventory/update/:id" element={<UpdateUser />} />
               <Route path="/inventory/usage" element={<Usage />} /> 
               <Route path="/inventory/reOrderitem" element={<ReOrder/>} />
+              <Route path="/inventory/invMgOrd" element={<InvMangeOrder/>} />
+              <Route path="/inventory/onlineOrd/update/:id" element={<UpdateOnlineOrder/>} />
+              <Route path="/inventory/dashboard" element={<Dashboard/>} />
            
 
             <Route path="/restaurant/:id" element={<Mybookingstyle />} />

@@ -3,28 +3,28 @@
 } */
 
 
-.home{
+.inv-manageOrder{
     margin-left: 380px;
     width: 950px;
 }
 
 
-.home hr{
-    width: 1030px;
+.inv-manageOrder hr{
+    width: 990px;
 }
 
-.items {
+.OnlineOrder-Items {
     margin: 40px 0px 0px 0px;
 }
 
 /* Table style */
-.items table {
-    width: 109%;
+.OnlineOrder-Items table {
+    width: 106%;
     border-collapse: collapse;
 }
 
 /* Table header style */
-.items table thead th {
+.OnlineOrder-Items table thead th {
     background-color: #D1CCCC;
     padding: 23px;
     text-align: center;
@@ -34,7 +34,7 @@
 }
 
 /* Table body style */
-.items table tbody td {
+.OnlineOrder-Items table tbody td {
     padding: 15px;
     border-bottom: 1.5px solid #84b0b4;
     text-align: center;
@@ -43,12 +43,12 @@
 }
 
 /* Alternate row color */
-.items table tbody  {
+.OnlineOrder-Items table tbody  {
     background-color: #d7f3f2;
 }
 
 /* Button style */
-.invDeleteButton {
+.OnlineOrder-DeleteButton {
     background-color: #8e1010;
     color: white;
     border: none;
@@ -65,13 +65,13 @@
 }
 
 /* Button hover style */
-.invDeleteButton:hover {
+.OnlineOrder-DeleteButton:hover {
     background-color: #ffa9a9;
     color: black;
     cursor: pointer;
 }
 
-.update-button {
+.OnlineOrder-UpdateButton {
     background-color: #105c22; 
     color: white; 
     border: none; 
@@ -85,7 +85,7 @@
     transition: background-color 0.3s; 
 }
 
-.update-button:hover {
+.OnlineOrder-UpdateButton:hover {
     background-color: #54c66c;
     cursor: pointer;
 }
@@ -95,7 +95,7 @@
 
 
 /* Style for Topic and h4 */
-.home h1 {
+.inv-manageOrder h1 {
     font-size: 45px;
     font-weight:400;
     margin-bottom: 20px;
@@ -104,14 +104,14 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-.home hr {
+.inv-manageOrder hr {
     border: none;
     height: 2px;
     background-color: #ccc;
     margin: -10px -157px 0px 0px ;
 }
 
-.home h4 {
+.inv-manageOrder h4 {
     font-size: 20px;
     color: #000000;
     font-weight: 400;
@@ -119,31 +119,3 @@
 }
 
 
-/* Search container */
-.foodItemSearch {
-    position: relative;
-    margin-left: 0px;
-    margin-top: 50px;
-}
-
-/* Search bar */
-.Fsearch-bar {
-    border: 1px solid #000000;
-    border-radius: 20px;
-    padding: 10px 40px 10px 35px; /* Adjust left padding to make room for the icon */
-    font-size: 16px;
-    width: 300px;
-    margin-left: 40px;
-    margin-top: -33px;
-}
-
-/* Search icon */
-.foodSearchIcon {
-    position: absolute;
-    top: 60%;
-    transform: translateY(-50%);
-    color: #999;
-    cursor: pointer;
-    margin-left: 100px;
-    
-}

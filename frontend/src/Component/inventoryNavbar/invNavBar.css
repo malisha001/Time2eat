@@ -1,4 +1,4 @@
-.sidebar {
+.inv-sidebar {
     width: 350px; /* Adjust width as needed */
     height: 100vh; /* Make sidebar full height of the viewport */
     background-color: #D7D7D7; /* Background color for the sidebar */
@@ -11,11 +11,11 @@
 
 }
 
-.sidebar p{
+.inv-sidebar p{
     color: black;
 }
 /* Logo */
-.sidebar p img{
+.inv-sidebar p img{
     width: 60px;
     height: 60px;
     border-radius: 40px;
@@ -23,7 +23,7 @@
 }
 
 /* Topic */
-.sidebar p h1{
+.inv-sidebar p h1{
     font-weight:250;
     font-size: 35px;
     margin-left: 115px;
@@ -32,14 +32,14 @@
 }
 
 
-.sidebar ul {
+.inv-sidebar ul {
     list-style-type: none;
     padding: 0;
     margin: 25px 0px 0px 15px;
     
 }
 
-.sidebar ul li {
+.inv-sidebar ul li {
     padding: 10px;
     line-height:1.7cm;
     cursor: pointer;
@@ -49,14 +49,14 @@
     font-weight: 600;
 }
 
-.sidebar ul li a{
+.inv-sidebar ul li a{
     text-decoration: none;
     color: inherit;
 }
 
-.sidebar ul li:hover {
+.inv-sidebar ul li:hover {
     background-color: #acacac; /* Change background color on hover */
-    width: 300px;
+    width: 301px;
     border-radius: 20px;
 }
 
@@ -66,11 +66,11 @@ ul li svg {
 }
 
 /* Button */
-.navButton svg {
+.inv-navButton svg {
     margin: 0px 25px 0px 0px;
 }
 
-.navButton{
+.inv-navButton{
     margin-top: 50px;
     margin-left: 15px;
     background-color: #8B0000;
@@ -82,7 +82,12 @@ ul li svg {
     font-weight: 600;
 }
 
-.navButton a {
+.inv-navButton a {
     text-decoration: none;
     color: inherit;
 }
+
+
+
+
+

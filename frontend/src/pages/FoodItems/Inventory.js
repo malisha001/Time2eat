@@ -4,6 +4,9 @@ import './foodItem.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
 import Navbar from "../../component/inventoryNavbar/invNavBar";
+
+
+
 const Home = () => {
     const [items, setItems] = useState(null)
     const [searchQuery, setSearchQuery] = useState('');
@@ -38,6 +41,7 @@ const Home = () => {
     // Filter items based on search query
     const filteredItems = items ? items.filter(item => item.itemName.toLowerCase().startsWith(searchQuery.toLowerCase())) : [];
 
+    const totalItems = items ? items.length : 0;
 
     return (
 
@@ -67,23 +71,23 @@ const Home = () => {
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Quantity</th>
-                                    <th>Re-Order Level</th>
+                                    <th>Quantity (Kg)</th>
+                                    <th>Re-Order Level (Kg)</th>
                                     <th>Price (Rs.)</th>
                                     <th>Category</th>
                                     <th>Action</th> 
                                 </tr>
                             </thead>
                             <tbody>
-                                {items && items.map((item) => (
-                                    <tr key={item._id}>
-                                        <td>{item.itemId}</td>
-                                        <td>{item.itemName}</td>
-                                        <td>{item.itemInitialQuantity}</td>
-                                        <td>{item.reOrderitem}</td>
-                                        <td>{item.itemPrice}</td>
-                                        <td>{item.itemCategory}</td>
-                                        <td>
+                                {filteredItems.map((item) => (
+                                <tr key={item._id}>
+                                    <td>{item.itemId}</td>
+                                    <td>{item.itemName}</td>
+                                    <td>{item.itemInitialQuantity}</td>
+                                    <td>{item.reOrderitem}</td>
+                                    <td>{item.itemPrice}</td>
+                                    <td>{item.itemCategory}</td>
+                                    <td>
                                             <button onClick={() => handleDelete(item._id)} className="invDeleteButton">Delete</button>
                                             <Link to={`/inventory/update/${item._id}`}><button className="update-button">Update</button></Link>
                                         </td>
@@ -92,6 +96,7 @@ const Home = () => {
                             </tbody>
                         </table>
                     </div>
+                 
                     <br /><br /><br />
                
             </div>

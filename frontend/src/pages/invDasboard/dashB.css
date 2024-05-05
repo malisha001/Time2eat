@@ -1,0 +1,81 @@
+.Inv-dashborad{
+    margin-left: 380px;
+    width: 1050px;
+    margin-top: -2px;
+}
+
+/* Upper part of dashboard */
+.dash-Upper{
+    display: flex;
+    
+}
+
+.da-head1{
+    margin-right: 400px;
+    margin-inline-start: 20px;
+}
+.da-head1 h1{
+    font-size:30px;
+}
+
+.da-head1 h4{
+    font-size: 13px;
+    margin-left: 71px;
+    margin-top: -20px;
+    font-weight: 400;
+}
+
+.da-head1 h1 svg {
+    margin-right: 20px;
+    font-size: 40px;
+    margin-top: 10px;
+}
+
+/* name part */
+.da-head2 h1{
+    font-size:16px;
+}
+
+.da-head2 h4{
+    font-size: 10px;
+    margin-left: 109px;
+    margin-top: -10px;
+    font-weight: 400;
+}
+
+.da-head2 h1 svg {
+    margin-right: 20px;
+    font-size: 20px;
+    margin-left: 70px;
+    margin-top: 30px;
+}
+
+
+/* INVERNTORY STATUS */
+.dash-center h1{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.dash-center hr{
+    margin-top: 40px;
+}
+
+/* First 3 boxes */
+.Boxes-One{
+    display: flex;
+}
+
+.Boxes-One .box1{
+    width: 350px;
+    height: 200px;
+    background-color: rgb(189, 178, 196);
+    margin-right: 27px;
+    border-radius: 10px;
+}
+
+.Boxes-One .box1 h1{
+    font-size: 25px;
+    font-weight: 400;
+    padding-top: 40px;
+}
