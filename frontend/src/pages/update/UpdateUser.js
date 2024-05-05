@@ -9,6 +9,7 @@ function UpdateUser() {
 
     const [itemid, setItemId] = useState("");
     const [name, setName] = useState("");
+    const [reorder, setReOrder] = useState("")
     const [quantity, setQuantity] = useState("");
     const [price, setPrice] = useState("");
     const [category, setCategory] = useState("");
@@ -26,6 +27,7 @@ function UpdateUser() {
                 // Assuming data structure is like { itemid, name, quantity, price, category }
                 setItemId(data.itemId);
                 setName(data.itemName);
+                setReOrder(data.reOrderitem);
                 setQuantity(data.itemQuantity);
                 setPrice(data.itemPrice);
                 setCategory(data.itemCategory);
@@ -81,6 +83,13 @@ function UpdateUser() {
                     type="Number"
                     value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}
+                />
+
+                <label>Re-order Level :</label>
+                <input
+                    type="Number"
+                    value={reorder}
+                    onChange={(e) => setReOrder(e.target.value)}
                 />
 
                 <label>Item Price :</label>
