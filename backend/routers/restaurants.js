@@ -8,6 +8,7 @@ const {
   
 } = require('../controllers/restaurantController')
 
+
 const router = express.Router()
 
 //GET all Rstaurants
@@ -28,6 +29,7 @@ router.delete('/:id', deleteRestaurant)
 
 //Update a Restaurant
 router.patch('/:id',updateRestaurant)
+
 
 
 

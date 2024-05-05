@@ -1,5 +1,6 @@
 const Restaurant = require('../models/regrestaurantsModel')
 const mongoose = require('mongoose')
+const nodemailer = require('nodemailer');
 
 //get all restaurants
 const getRestaurants = async (req , res) =>{
@@ -51,21 +52,50 @@ const deleteRestaurant = async(req , res) =>{
 
 
 //update restaurant
-const updateRestaurant = async(req , res) =>{
+const updateRestaurant = async(req , res) => {
     const {id} = req.params
 
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(404).json({error : 'No such Restaurant'})
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such Restaurant' })
     }
-    const restaurant = await Restaurant.findByIdAndUpdate({_id: id},{
+    const restaurant = await Restaurant.findByIdAndUpdate({ _id: id }, {
         ...req.body
     })
-  
-    if(!restaurant){
-        return res.status(404).json({error : 'No such Restauran'})
+
+    if (!restaurant) {
+        return res.status(404).json({ error: 'No such Restaurant' })
     }
+
+    if (req.body.status === 'true') {
+        try {
+            // Create a nodemailer transporter
+            let transporter = nodemailer.createTransport({
+                // Your email configuration (SMTP or other)
+                // For example, using Gmail SMTP:
+                service: 'gmail',
+                auth: {
+                    user: 'rathnamalalathenuka@gmail.com',
+                    pass: 'uliq kqlz nhds cuhx'
+                }
+            });
+
+            // Send mail with defined transport object
+            let info = await transporter.sendMail({
+                from: '"Admin" <rathnamalalathenuka@gmail.com>',
+                to: req.body.Email_address, // Use the relevant email address from your request body
+                subject: 'Your Restaurant Application is Approved!',
+                text: 'Congratulations! Your restaurant application has been approved.'
+            });
+
+            console.log('Message sent: %s', info.messageId);
+        } catch (error) {
+            console.error('Error sending email:', error);
+        }
+    }
+
     res.status(200).json(restaurant)
 }
+
 
 
 module.exports = {

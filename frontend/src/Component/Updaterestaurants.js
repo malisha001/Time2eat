@@ -40,6 +40,9 @@ const Updaterestaurants = () => {
                 body: JSON.stringify(values)
             });
             if (response.ok) {
+                if (values.status === 'true') {
+                    alert('An email will be sent to the relevant email address upon acceptance.');
+                }
                 navigate('/restaurants'); 
             } else {
                 console.error("Failed to update restaurant");
@@ -48,6 +51,7 @@ const Updaterestaurants = () => {
             console.error("Error updating restaurant:", error);
         }
     };
+    
 
     const handleStatusChange = (e) => {
         const statusValue = e.target.value;
