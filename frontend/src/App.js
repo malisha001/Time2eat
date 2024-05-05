@@ -4,7 +4,7 @@ import Inventory from './component/FoodItems/Inventory'
 import UpdateUser from './pages/update/UpdateUser';
 import ItemForm from './pages/addItem/addItemForm';
 import Usage from './pages/usage/usageForm';
-
+import Reglogin from './pages/login/RestaurentLogin'
 
 import Home from './pages/Home/HomePage';
 import Navbar from "./component/Navbar";
@@ -25,6 +25,8 @@ import Newbookingsstyle from './pages/Newbookingsstyle';
 import AllCustomerDineInHistory from './pages/AllCustomerDineInHistory';
 import EmployeeSal from './pages/restaurentEmp/EmployeeSal';
 import EmpPayrun from './pages/restaurentEmp/EmpPayrun';
+import Empleaves from './pages/restaurentEmpLeaves/EmpLeaves';
+import EmployeePaysalaries from './pages/restaurentEmp/EmployeePaysalaries';
 
 import RiderDashboard from './pages/riders/RiderDashbord';
 import OngoingOrder from './pages/riders/OngoingOrder';
@@ -53,7 +55,11 @@ import UpdateFoodItems from './component/updatefooditems';
 import Updaterestaurants from './component/Updaterestaurants';
 // import RestaurantProfile from './pages/Restaurantprofile';
 import UpdateRestaurantProfile from './component/UpdateRestaurantProfile'
+
 import PrebookingDineInForm from './pages/prebookingdinein';
+
+import RestaurantDashboard from './pages/restaurentDashbord/RestaurenrDashbord';
+
 
 function App() {
   const {user} = useAuthContext()
@@ -104,9 +110,11 @@ function App() {
              
             <Route path='/employeesal' element={<EmployeeSal />}/>
             <Route path='/payrun' element={<EmpPayrun />}/>
+            <Route path="/empleaves" element={<Empleaves />} />
+            <Route path="/employeepaysalaries" element={<EmployeePaysalaries />} />
 
               
-            <Route path="/respage" element={<ResPage />} />
+            <Route path="/respage/:id" element={<ResPage />} />
             <Route path="/search/:searchTerm" element={<ResPage />} />
             <Route path="/tag/:tag" element={<ResPage />} /> 
             <Route path="/food/:id" element={<FoodPage />} />
@@ -129,6 +137,8 @@ function App() {
             <Route path="/add-food-item" element = {<AddfooditemsForm />} />
             <Route path="/update-food-item/:id/" element = {<UpdateFoodItems/>} />
             <Route path="/restaurants" element = {<Restaurant />} />
+            <Route path="/reslogin" element = {<Reglogin />} />
+            <Route path='/restaurentDashbord' element={<RestaurantDashboard />} />
             <Route path="/addrestaurants" element = {<AddrestaurantsForm />} />
             <Route path="/update-restaurant/:id/" element = {<Updaterestaurants/>} />
             {/* <Route path="/restaurants/:id/" element = {<RestaurantProfile />} /> */}

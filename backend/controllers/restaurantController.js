@@ -1,5 +1,12 @@
 const Restaurant = require('../models/regrestaurantsModel')
 const mongoose = require('mongoose')
+const jwt = require('jsonwebtoken')
+
+// return a token 
+const createToken = ( user ) => { // user is gonna logged in for 1 days
+    return jwt.sign({_id: user._id,role:user.role}, process.env.SECRET, {expiresIn: '1d'})
+
+}
 
 //get all restaurants
 const getRestaurants = async (req , res) =>{
@@ -66,12 +73,45 @@ const updateRestaurant = async(req , res) =>{
     }
     res.status(200).json(restaurant)
 }
+//restaurent login
+const loginRestaurant = async (req, res) => {
+    const { email, password } = req.body;
+    const Email_address = email;
+    const Password = password;
 
+    try {
+        if (!Email_address || !Password) {
+            throw Error('All fields must be filled');
+        }
+
+        // Assuming `User` is your model for users
+        const user = await Restaurant.findOne({ Email_address });
+        if (!user) {
+            throw Error('Incorrect email');
+        }
+
+        if (user.status !== 'true') {
+            throw Error('Admin not approved');
+        }
+
+        // Assuming `Restaurant` is your model for restaurants
+        const restaurant = await Restaurant.findOne({ Email_address, Password });
+        if (!restaurant) {
+            return res.status(404).json({ error: 'No such Restaurant' });
+        }
+
+        const token = createToken(restaurant);
+        res.status(200).json({ Email_address, token, role: restaurant.role,resId:restaurant.Restaurant_Id });
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
 
 module.exports = {
   getRestaurant,
   getRestaurants,  
   addRestaurant,
   deleteRestaurant,
-  updateRestaurant, 
+  updateRestaurant,
+  loginRestaurant
 }

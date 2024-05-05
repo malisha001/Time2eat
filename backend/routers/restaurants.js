@@ -5,6 +5,7 @@ const {
     getRestaurants,
     deleteRestaurant,
     updateRestaurant,
+    loginRestaurant,
   
 } = require('../controllers/restaurantController')
 
@@ -29,6 +30,8 @@ router.delete('/:id', deleteRestaurant)
 //Update a Restaurant
 router.patch('/:id',updateRestaurant)
 
+//login a Restaurant
+router.post('/login',loginRestaurant)
 
 
 module.exports = router;

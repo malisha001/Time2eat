@@ -1,4 +1,5 @@
 const Fooditems = require('../models/fooditemsModel')
+const foodModel = require('../models/foodModel')
 const mongoose = require('mongoose')
 
 //get all fooditems
@@ -24,10 +25,10 @@ const getFooditem = async(req , res) =>{
 
 //add new fooditem
 const addFooditem = async(req , res) => {
-    const{Item_id, Item_name, catagory, Price, Average_preparetime} = req.body
+    const{name,restaurantId, cookTime, price, favourite, origins, stars, imageUrl, tags} = req.body
     try{
-       const fooditem = await Fooditems.create({
-        Item_id, Item_name, catagory, Price ,Average_preparetime
+       const fooditem = await foodModel.create({
+        name,restaurantId, cookTime, price, favourite, origins, stars, imageUrl, tags
        })
        res.status(200).json(fooditem)
     }catch(error){
