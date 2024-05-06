@@ -5,7 +5,7 @@ import UpdateUser from './pages/updateFoodItems/UpdateUser';
 import ItemForm from './pages/addItem/addItemForm';
 import Usage from './pages/usage/usageForm';
 import ReOrder from './pages/invReOrder/invreOrder';
-import InvMangeOrder from './pages/invManOrders/manageOrd';
+import InvMangeOrder from './pages/invReOrder/invreOrder';
 import UpdateOnlineOrder from './pages/updateOnlineOrders/updateOnline';
 import Dashboard from './pages/invDasboard/inDashboard'
 

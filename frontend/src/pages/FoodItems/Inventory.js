@@ -48,7 +48,7 @@ const Home = () => {
           
         <div> 
         <Navbar />
-            <div className="home"> 
+            <div className="homeeee"> 
             
                 <h1>Welcome to TIME<strong>2eat</strong> Food Item Lists</h1>
                 <hr />
