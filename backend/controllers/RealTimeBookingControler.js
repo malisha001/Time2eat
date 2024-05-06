@@ -9,17 +9,31 @@ const getRealTimeBookings = async (req, res) => {
 
 //get a single Bookings
 const getRealTimeBooking = async (req, res) => {
-    const {id} = req.params
+    const { id } = req.params;
 
-    const RTbookings = await RealTimeBooking.find({resid:id})
+    try {
+        let RTbookings;
 
+        // Check if the provided id is a MongoDB _id
+        if (mongoose.Types.ObjectId.isValid(id)) {
+            // If it is a valid MongoDB _id, find the booking(s) by _id
+            RTbookings = await RealTimeBooking.find({ _id: id });
+        } else {
+            // If it's not a valid MongoDB _id, assume it's a resid and search by that
+            RTbookings = await RealTimeBooking.find({ resid: id });
+        }
 
-    if (!RTbookings) {
-        return res.status(404).json({error: 'No such Booking'})
+        if (RTbookings.length === 0) {
+            return res.status(404).json({ error: 'No such Booking' });
+        }
+
+        res.status(200).json(RTbookings);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-
-    res.status(200).json(RTbookings)
 }
+
 
 // create new booking
 const createRealTimeBooking = async (req, res) => {

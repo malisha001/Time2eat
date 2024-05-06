@@ -8,6 +8,8 @@ const DineInBookings = () => {
     const { user } = useAuthContext();
     const [dineBookings, setDineBookings] = useState(null);  // State to store dine-in bookings data
 
+
+    console.log(user)
      // Fetch dine-in bookings data when the component mounts or when user changes
     useEffect(() => {
         // Check if user and user.resId exist
