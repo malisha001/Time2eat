@@ -127,20 +127,22 @@ const OrderForm = () => {
     /> 
 
         <label>State: </label>
-        {/*<input 
+        <input 
             type="text"
             onChange={(e) => setState(e.target.value)}
             value={state}
             className={emptyFields.includes('title') ? 'error' : ''}
-    /> */}
-        <select
-    onChange={(e) => setState(e.target.value)}
-    value={state}
-    className={emptyFields.includes('title') ? 'error' : ''}
->
+    /> 
+        {/*<select
+        
+        onChange={(e) => setState(e.target.value)}
+        value={state}
+        
+        className={emptyFields.includes('title') ? 'error' : ''}
+        >
     <option value="completed">Completed</option>
     <option value="processing">Processing</option>
-    </select>
+    </select>*/}
 
 
          

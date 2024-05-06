@@ -50,9 +50,7 @@ const createOrder = async (req, res) => {
     if (!price) {
         emptyFields.push('price')
     }
-    if (!state) {
-        emptyFields.push('state')
-    }
+    
     if (!name) {
         emptyFields.push('name')
     }

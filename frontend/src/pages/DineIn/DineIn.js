@@ -1,3 +1,7 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import  PDFReport  from '../../component/DorderDetails/DordersPdfreport.js';
+import { PDFViewer, Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 import { useEffect} from 'react';
 import classes from './dinein.module.css';
 import { useDorderContext } from '../../hooks/useDorderContext';
@@ -20,8 +24,25 @@ const DineIn = () => {
           }
        fetchDineinOrders()
     }, [dispatch])
-  
-  
+
+    
+      const generatePDF = () => {
+        const MyDocument = () => (
+          <Document>
+            <Page>
+              <PDFReport orders={orders} />
+            </Page>
+          </Document>
+        );
+         // Open the PDF in a new tab using PDFViewer
+  const App = () => (
+    <PDFViewer width="100%" height="100%">
+      <MyDocument />
+    </PDFViewer>
+  );
+  ReactDOM.render(<App />, document.getElementById('root'));
+};
+    
     return (
      <div className={classes.topic}>
        <h2>Dine-In Orders</h2>
@@ -35,14 +56,15 @@ const DineIn = () => {
 
       </div> 
       </div>
-
+      
       
 
 
         <OrderForm />
-       
+        <button onClick={generatePDF}>Generate PDF Report</button>
 
         </div>
+
         </div>
         
     )
