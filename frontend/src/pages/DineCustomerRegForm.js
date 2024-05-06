@@ -7,8 +7,11 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import { useNavigate } from "react-router-dom";
 
 function DineCustomerRegForm() {
+  // Using custom hooks for authentication context and navigation
   const { user } = useAuthContext();
   const navigate = useNavigate();
+
+  // State variables for form fields, error messages, and available tables
   const [name, setName] = useState("");
   const [time, setTime] = useState("");
   const [date, setDate] = useState("");
@@ -23,12 +26,14 @@ function DineCustomerRegForm() {
     group: 0,
   });
 
+  // Fetch booking data when user changes
   useEffect(() => {
     if (user) {
       fetchBookingData(user.resId);
     }
   }, [user]);
 
+  // Function to fetch booking data
   const fetchBookingData = async (resId) => {
     try {
       // Fetch realtime bookings
@@ -49,22 +54,27 @@ function DineCustomerRegForm() {
         0
       );
 
+      // Log data for debugging
       console.log(restaurantData.Couple_table)
       console.log(restaurantData.Group_table)
 
       console.log(coupleTablesBooked)
       console.log(groupTablesBooked)
 
+      // Calculate available tables
       const availableCoupleTables = restaurantData.Couple_table - coupleTablesBooked;
       const availableGroupTables = restaurantData.Group_table - groupTablesBooked;
 
+      // Set available tables state
       setAvailableTables({ couple: availableCoupleTables, group: availableGroupTables });
     } catch (error) {
+      // Log error and set error state
       console.error("Error fetching booking data:", error);
       setError("An error occurred while fetching booking data.");
     }
   };
 
+  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -88,10 +98,13 @@ function DineCustomerRegForm() {
 
     if (!nameError && !telError) {
       try {
+        // Send booking data to server
         await axios.post("/api/realtimebooking", dineCustomerRegForm);
         await axios.post("/api/customerhistoryroute", dineCustomerRegForm);
+        // Clear form fields after successful submission
         clearFormFields();
       } catch (error) {
+        // Log error and set error state
         console.error("Error adding booking:", error);
         setError("An error occurred while adding the booking.");
       }
@@ -100,6 +113,7 @@ function DineCustomerRegForm() {
     }
   };
 
+  // Function to clear form fields
   const clearFormFields = () => {
     setName("");
     setTime("");
@@ -112,19 +126,21 @@ function DineCustomerRegForm() {
     setTelError(null);
   };
 
+  // Function to handle navigation to pre-booking page
   const handlePreBookingsClick = () => {
     navigate("/pre-booking-dine-in-form");
   };
 
+  // Render form components
   return (
     <form className="create" onSubmit={handleSubmit}>
       <h3>Add a New Booking</h3>
 
       <Paper sx={{ bgcolor: "white", height: '400px', marginLeft: '20px', marginRight: '20px', backgroundColor: 'lightgray' }}>
         <Box sx={{ marginLeft: "60px", marginRight: "60px", marginTop: "40px", marginBottom: "40px", padding: "20px" }}>
-          <h2>Payment Details</h2>
+          <h2>Dine In Booking Details</h2>
           <Grid container spacing={4}>
-
+            {/* Name field */}
             <Grid item xs={6}>
               <TextField
                 required
@@ -133,22 +149,24 @@ function DineCustomerRegForm() {
                 type="text"
                 onChange={(e) => {
                   const value = e.target.value;
-                  if (!/^[a-zA-Z]*$/.test(value)) {
-                    setNameError('Please enter a valid name (letters only)');
+                  if (/[^a-zA-Z\s]/.test(value)) {
+                    setNameError('Please enter a valid name (letters and spaces only)');
                   } else {
                     setNameError('');
+                    setName(value.replace(/[^a-zA-Z\s]/g, '')); // Remove numbers and special characters
                   }
-                  setName(value);
                 }}
                 value={name}
                 sx={{ width: "100%" }}
               />
-              {nameError && (
+              { nameError && (
                 <Typography variant="body2" color="error">
                   {nameError}
                 </Typography>
               )}
             </Grid>
+
+            {/* Time field */}
             <Grid item xs={6}>
               <TextField
                 required
@@ -160,6 +178,8 @@ function DineCustomerRegForm() {
                 sx={{ width: "100%" }}
               />
             </Grid>
+
+            {/* Date field */}
             <Grid item xs={6}>
               <TextField
                 required
@@ -171,6 +191,8 @@ function DineCustomerRegForm() {
                 sx={{ width: "100%" }}
               />
             </Grid>
+
+            {/* Couple quantity field */}
             <Grid item xs={6}>
               <TextField
                 required
@@ -183,6 +205,8 @@ function DineCustomerRegForm() {
                 title={`Available couple tables: ${availableTables.couple}`}
               />
             </Grid>
+
+            {/* Group quantity field */}
             <Grid item xs={6}>
               <TextField
                 required
@@ -195,34 +219,40 @@ function DineCustomerRegForm() {
                 title={`Available group tables: ${availableTables.group}`}
               />
             </Grid>
+
+            {/* Telephone number field */}
             <Grid item xs={6}>
-              <TextField
-                required
-                id="outlined-required"
-                label="Telephone No"
-                type="tel"
-                onChange={(e) => {
-                  const value = e.target.value;
-                  if (!/^\d{10}$/.test(value)) {
-                    setTelError('Please enter a valid telephone number (10 digits)');
-                  } else {
-                    setTelError('');
-                  }
-                  setTelephone(value);
-                }}
-                value={telephoneno}
-                sx={{ width: "100%" }}
-              />
-              {telError && (
-                <Typography variant="body2" color="error">
-                  {telError}
-                </Typography>
-              )}
-            </Grid>
+            <TextField
+              required
+              id="outlined-required"
+              label="Telephone No"
+              type="tel"
+              onChange={(e) => {
+                const value = e.target.value;
+                if (/[^0-9]/.test(value)) {
+                  setTelError('Please enter a valid telephone number (digits only)');
+                } else {
+                  setTelError('');
+                  setTelephone(value.replace(/[^0-9]/g, '')); // Remove non-digits
+                }
+              }}
+              value={telephoneno}
+              sx={{ width: "100%" }}
+            />
+            { telError && (
+              <Typography variant="body2" color="error">
+                {telError}
+              </Typography>
+            )}
+          </Grid>
+
 
           </Grid>
+          {/* Button to navigate to pre-booking page */}
           <Button onClick={handlePreBookingsClick}>Pre Bookings</Button>
+          {/* Button to submit the form */}
           <Button type="submit" contained sx={{ marginTop: '20px', backgroundColor: 'lightblue' }}>Add Booking</Button>
+          {/* Display error message if any */}
           {error && <div className="error">{error}</div>}
         </Box>
       </Paper>

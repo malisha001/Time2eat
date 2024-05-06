@@ -15,17 +15,25 @@ import { useParams } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 
 const MyBookings = () => {
+    // Get the URL parameter
     const { id } = useParams(); 
+    // Get user from authentication context
     const {user} = useAuthContext()
     console.log("userr",user)
+    // State to store bookings data
     const [bookings, setBookings] = useState(null);
 
     useEffect(() => {
         const fetchMyBookings = async () => {
             try {
+                // Extract user email
                 const userr = user.email
                 console.log("u",userr)
+
+                // Fetch bookings data for the current user and restaurant
                 const response = await axios.get(`/api/booking/books?userId=${userr}&restaurantId=${id}`);
+
+                // Extract data from response and update state
                 const data = response.data;
                 console.log("my bookinggg",response.data)
                 setBookings(data);
@@ -35,11 +43,16 @@ const MyBookings = () => {
         };
 
         fetchMyBookings();
-    }, []);
+    }, []); // Empty dependency array ensures useEffect runs only once on component mount
 
+
+    // Function to handle deleting a booking
     const handleDeleteBooking = async (bookingId) => {
         try {
+            // Send DELETE request to delete the booking
             await axios.delete(`/api/booking/${bookingId}`);
+
+            // Filter out the deleted booking from the state
             setBookings(bookings.filter(booking => booking._id !== bookingId));
         } catch (error) {
             console.error('Error deleting booking:', error);

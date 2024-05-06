@@ -17,13 +17,14 @@ import Navbar from '../component/Navbar';
 import PreStyles from '../component/NewStyle.css'
 import { useAuthContext } from '../hooks/useAuthContext';
 
+// Functional component for NewBooking
 const NewBooking = () => {
     const { id } = useParams(); 
     const {user} = useAuthContext()
     const navigate = useNavigate();
 
+    // State variables for managing form input and data
     const [selectedDateTime, setSelectedDateTime] = useState({ date: '', time: '' });
-    //table detaills
     const [availableTables, setAvailableTables] = useState({ couple: '', group: '' });
     const [totalCoupleTablesBooked, setTotalCoupleTablesBooked] = useState(0);
     const [totalGroupTablesBooked, setTotalGroupTablesBooked] = useState(0);
@@ -42,6 +43,7 @@ const NewBooking = () => {
     const [telError, setTelError] = useState(null);
     const [tableCount, setTableCount] = useState({ couple: 0, group: 0 });
 
+    // Function to fetch table data from the server
     const fetchData = async () => {
         try {
             const response = await axios.get(`/api/realtimebooking/${id}`);
@@ -57,6 +59,7 @@ const NewBooking = () => {
         }
     };
 
+    // Function to fetch table data from the server on component mount
     useEffect(()=>{
         //get tables from related restaurent
         const fetchtabledata = async () => {
@@ -74,43 +77,27 @@ const NewBooking = () => {
         
     },[]);
 
-    // useEffect(() => {
-
-    //     // Fetch data initially
-    //     fetchData();
-
-    //     // Set interval to fetch data every second
-    //     const interval = setInterval(() => {
-    //         fetchData();
-    //     }, 1000);
-
-    //     // Clear interval on component unmount
-    //     return () => clearInterval(interval);
-
-    // }, []);
-
-    ///////////////////////////////////////////////////////////
-
+    // Function to fetch booking data based on selected date and time
     useEffect(() => {
-
-
-
 
         if (selectedDateTime.date && selectedDateTime.time) {
             fetchBookings(selectedDateTime.date, selectedDateTime.time);
         }
     }, [selectedDateTime]);
 
+    // Function to check availability based on selected date and time
     const handleCheckAvailability = async (e) => {
         e.preventDefault();
         fetchBookings(selectedDateTime.date, selectedDateTime.time);
     };
 
+    // Function to add booking to the database
     const handleAddBooking = async (e) => {
         e.preventDefault();
         const totalCoupleTablesRequested = parseInt(couplequantity);
         const totalGroupTablesRequested = parseInt(groupquantity);
 
+        // Validating requested table counts against available tables
         if (totalCoupleTablesRequested > availableTables.couple) {
             setError('The requested couple table count exceeds the available couple tables.');
             return;
@@ -121,6 +108,7 @@ const NewBooking = () => {
             return;
         }
 
+        // Creating booking object
         const booking = {
             time: selectedDateTime.time,
             date: selectedDateTime.date,
@@ -132,12 +120,14 @@ const NewBooking = () => {
             resid:id
         };
 
+        // Making POST request to add booking
         if(!nameError && !telError){
         try {
             const response = await axios.post('/api/booking', booking);
             const json = response.data;
 
             if (response.status === 200) {
+                // Resetting form fields and error
                 setCouplequantity('');
                 setGroupquantity('');
                 setName('');
@@ -158,6 +148,7 @@ const NewBooking = () => {
         
     };
 
+    
     const fetchBookings = async (date, time) => {
         try {
             const response = await axios.get(`/api/booking`, { params: { date, time} });

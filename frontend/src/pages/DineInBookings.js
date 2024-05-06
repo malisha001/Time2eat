@@ -6,8 +6,9 @@ import { useAuthContext } from '../hooks/useAuthContext';
 
 const DineInBookings = () => {
     const { user } = useAuthContext();
-    const [dineBookings, setDineBookings] = useState(null);
+    const [dineBookings, setDineBookings] = useState(null);  // State to store dine-in bookings data
 
+     // Fetch dine-in bookings data when the component mounts or when user changes
     useEffect(() => {
         // Check if user and user.resId exist
         if (user && user.resId) {
@@ -25,9 +26,13 @@ const DineInBookings = () => {
         }
     }, [user]); // Add user to the dependency array to re-fetch bookings when user changes
 
+    // Function to handle deletion of a dine-in booking
     const handleClick = async (deleteDineBookings) => {
         try {
+            // Sending DELETE request to delete the specified dine-in booking
             await axios.delete(`/api/realtimebooking/${deleteDineBookings}`);
+
+            // Updating state to remove the deleted booking from dineBookings
             setDineBookings(prevBookings => prevBookings.filter(dineBooking => dineBooking._id !== deleteDineBookings));
         } catch (error) {
             console.error('Error deleting booking:', error);
