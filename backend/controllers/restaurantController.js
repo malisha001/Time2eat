@@ -15,8 +15,19 @@ const getRestaurants = async (req , res) =>{
     const restaurants = await Restaurant.find({}).sort({createAt: -1})
     res.status(200).json(restaurants)
 }
+//get single restaurant for bookings
+const getRestaurant = async(req , res) =>{
+    const {id} = req.params
 
-// get a single restaurant for bookings
+    const restaurant = await Restaurant.findOne({Restaurant_Id:id})
+
+    if(!restaurant){
+        return res.status(404).json({error : 'No such Restauran'})
+    }
+    res.status(200).json(restaurant)
+}
+
+// get a single restaurant for restaurent
 const getRestaurantdetails = async(req , res) =>{
     const {id} = req.params
 
