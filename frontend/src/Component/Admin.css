@@ -1,0 +1,81 @@
+.sidebar {
+    width: 265px; /* Reduced width */
+    height: 100vh;
+    background-color: #D7D7D7;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+/* Logo */
+.sidebar p img{
+    width: 50px; /* Reduced width */
+    height: 50px; /* Reduced height */
+    border-radius: 30px; /* Adjusted border-radius */
+    margin: 10px 0px 0px 20px; /* Adjusted margin */
+}
+
+/* Topic */
+.sidebar p h1{
+    font-weight:250;
+    font-size: 30px; /* Reduced font size */
+    margin-left: 85px; /* Adjusted margin */
+    margin-top: -45px; /* Adjusted margin */
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0px 0px 15px; /* Adjusted margin */
+}
+
+.sidebar ul li {
+    padding: 8px; /* Reduced padding */
+    line-height: 1.5cm; /* Adjusted line height */
+    cursor: pointer;
+    color: black;
+    font-size: 20px; /* Reduced font size */
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 600;
+}
+
+.sidebar ul li a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.sidebar ul li:hover {
+    background-color: #acacac;
+    width: 220px; /* Reduced width */
+    border-radius: 15px; /* Adjusted border-radius */
+}
+
+/* icon and li */
+ul li svg {
+    margin: 0 15px; /* Reduced margin */
+}
+
+/* Button */
+.navButton svg {
+    margin: 0px 20px 0px 0px; /* Reduced margin */
+}
+
+.navButton{
+    margin-top: 40px; /* Adjusted margin */
+    margin-left: 15px;
+    background-color: #8B0000;
+    border-radius: 8px; /* Adjusted border-radius */
+    color: white;
+    padding: 8px 60px 8px 20px; /* Reduced padding */
+    font-size: 20px; /* Reduced font size */
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 600;
+}
+
+.navButton a {
+    text-decoration: none;
+    color: inherit;
+}

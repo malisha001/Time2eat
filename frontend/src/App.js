@@ -1,10 +1,18 @@
 // pages & components
 
-import Inventory from './component/FoodItems/Inventory'
-import UpdateUser from './pages/update/UpdateUser';
+import Inventory from './pages/FoodItems/Inventory'
+import UpdateUser from './pages/updateFoodItems/UpdateUser';
 import ItemForm from './pages/addItem/addItemForm';
 import Usage from './pages/usage/usageForm';
+
+import ReOrder from './pages/invReOrder/invreOrder';
+import InvMangeOrder from './pages/invReOrder/invreOrder';
+import UpdateOnlineOrder from './pages/updateOnlineOrders/updateOnline';
+import Dashboard from './pages/invDasboard/inDashboard'
+
+
 import Reglogin from './pages/login/RestaurentLogin'
+
 
 import Home from './pages/Home/HomePage';
 import Navbar from "./component/Navbar";
@@ -48,14 +56,19 @@ import Signup from './pages/login/Signup';
 
 import Mybookingstyle from './component/Mybookingstyle';
 
+import Menu from './pages/Menu';
 import AddfooditemsForm from './component/AddfooditemsForm';
 import Restaurant from './pages/restaurant';
 import AddrestaurantsForm from './component/AddrestaurantsForm';
 import UpdateFoodItems from './component/updatefooditems';
 import Updaterestaurants from './component/Updaterestaurants';
-// import RestaurantProfile from './pages/Restaurantprofile';
+import RestaurantProfile from './pages/Restaurantprofile';
 import UpdateRestaurantProfile from './component/UpdateRestaurantProfile'
+
+import PrebookingDineInForm from './pages/prebookingdinein';
+
 import RestaurantDashboard from './pages/restaurentDashbord/RestaurenrDashbord';
+
 
 function App() {
   const {user} = useAuthContext()
@@ -82,7 +95,7 @@ function App() {
             
             <Route path="/newbooking/:id" element={<NewBooking />} />
 
-            <Route path="/mybookings" element={<MyBookings />} />
+            <Route path="/mybookings/:id" element={<MyBookings />} />
            {/*} <Route path="/update-booking/:id" element={<UpdateBookingDetails />} />  */}
             <Route path="/update-pre-booking/:id" element={<UpdatePreBookings />} />
             <Route path="/update-dine-in-booking/:id" element={<UpdateDineIn />} />
@@ -92,6 +105,7 @@ function App() {
 
 
             <Route path="/dine-in-form" element={<DineCustomerRegForm />} />
+            <Route path="/pre-booking-dine-in-form" element={<PrebookingDineInForm />} />
             <Route path="/dine-in-bookings" element={<DineInBookings />} />
             <Route path="/stylepage" element={<Newbookingsstyle />} />
             {/* <Route path="/realtimeindecator" element={<RealTimeIndicator />} /> */}
@@ -121,14 +135,20 @@ function App() {
             <Route path='/cart' element={<Cart/>} />
             <Route path='/payment' element={<Payment/>} />
 
-            <Route path="/inventory/items" element={<Inventory />} />
-            <Route path="/inventory/addItems" element={<ItemForm />} />
-            <Route path="/inventory/update/:id" element={<UpdateUser />} />
-            <Route path="/inventory/usage" element={<Usage />} /> 
+     
+              <Route path="/inventory/items" element={<Inventory />} />
+              <Route path="/inventory/addItems" element={<ItemForm />} />
+              <Route path="/inventory/update/:id" element={<UpdateUser />} />
+              <Route path="/inventory/usage" element={<Usage />} /> 
+              <Route path="/inventory/reOrderitem" element={<ReOrder/>} />
+              <Route path="/inventory/invMgOrd" element={<InvMangeOrder/>} />
+              <Route path="/inventory/onlineOrd/update/:id" element={<UpdateOnlineOrder/>} />
+              <Route path="/inventory/dashboard" element={<Dashboard/>} />
+           
 
             <Route path="/restaurant" element={<Mybookingstyle />} />
 
-            {/* <Route path="/fooditems" element = {<Menu />} /> */}
+            <Route path="/fooditems" element = {<Menu />} />
             <Route path="/add-food-item" element = {<AddfooditemsForm />} />
             <Route path="/update-food-item/:id/" element = {<UpdateFoodItems/>} />
             <Route path="/restaurants" element = {<Restaurant />} />
@@ -136,7 +156,7 @@ function App() {
             <Route path='/restaurentDashbord' element={<RestaurantDashboard />} />
             <Route path="/addrestaurants" element = {<AddrestaurantsForm />} />
             <Route path="/update-restaurant/:id/" element = {<Updaterestaurants/>} />
-            {/* <Route path="/restaurants/:id/" element = {<RestaurantProfile />} /> */}
+            <Route path="/restaurants/:id/" element = {<RestaurantProfile />} />
             <Route path="/update-restaurantprofile/:id/" element = {<UpdateRestaurantProfile/>} />
 
           </Routes>
