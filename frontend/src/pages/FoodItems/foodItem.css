@@ -1,9 +1,16 @@
-/* .home{
+/*.home{
     margin: 20px 0px 0px 40px;
 } */
 
-.home hr{
-    width: 990px;
+
+.homeeee{
+    margin-left: 380px;
+    width: 950px;
+}
+
+
+.homeeee hr{
+    width: 1030px;
 }
 
 .items {
@@ -12,7 +19,7 @@
 
 /* Table style */
 .items table {
-    width: 106%;
+    width: 109%;
     border-collapse: collapse;
 }
 
@@ -109,4 +116,34 @@
     color: #000000;
     font-weight: 400;
     margin-top: 15px;
+}
+
+
+/* Search container */
+.foodItemSearch {
+    position: relative;
+    margin-left: 0px;
+    margin-top: 50px;
+}
+
+/* Search bar */
+.Fsearch-bar {
+    border: 1px solid #000000;
+    border-radius: 20px;
+    padding: 10px 40px 10px 35px; /* Adjust left padding to make room for the icon */
+    font-size: 16px;
+    width: 300px;
+    margin-left: 40px;
+    margin-top: -33px;
+}
+
+/* Search icon */
+.foodSearchIcon {
+    position: absolute;
+    top: 60%;
+    transform: translateY(-50%);
+    color: #999;
+    cursor: pointer;
+    margin-left: 100px;
+    
 }

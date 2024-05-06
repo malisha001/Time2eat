@@ -9,16 +9,24 @@ const usageSchema = new Schema({
         required: false
     },
 
-    initialQuantity:{
+    newQuantity:{
         type: Number,
         required: true
     },
 
-    newQuantity:{
-        type: Number,
-        required: true
-    }
+    remainingQuant:{
+        type:Number,
+        required:true
+    },
 
+    Iquantity:{
+        type:Number,
+        required:true
+    },
+    Uprice:{
+        type:Number,
+        required:true
+    }
     
 }, {Timestamp: true})
 
