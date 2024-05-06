@@ -28,6 +28,7 @@ import res6 from '../../Assests/res6.png';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import {useLogout} from '../../hooks/useLogout'
 import { getAllRestaurents } from '../../services/restaurentsApi';
+import AvailabilityStatus from '../../component/AvailabilityStatus';
 import Footer from '../../component/footer/Footer';
 
 const theme = createTheme({
@@ -104,9 +105,15 @@ export default function TemporaryDrawer() {
         <p> </p>
 
         <Divider />
-        <Typography gutterBottom variant='subtitle2'>Register your restaurant</Typography>
-        <Typography gutterBottom variant='subtitle2'>Join as a delivery rider</Typography>
-
+        <Link to = "/addrestaurants">
+          <Typography gutterBottom variant='subtitle2'>Register your restaurant</Typography>
+        </Link>
+        <Link to = "/reslogin">
+          <Typography gutterBottom variant='subtitle2'>Login your restaurant</Typography>
+        </Link>
+        <Link to = "/signup">
+          <Typography gutterBottom variant='subtitle2'>Join as a delivery rider</Typography>
+        </Link>
         
       </Box>
     );
@@ -324,7 +331,10 @@ export default function TemporaryDrawer() {
                               <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">
                                   <Box>{restuarent.Restaurant_name}</Box>
-                                  <Box sx={{marginLeft:"182px", marginTop:"-32px"}}>hi</Box>
+                                  <Box sx={{marginLeft:"182px", marginTop:"-32px"}}>hi
+                                  {/* Pass restaurant ID to AvailabilityStatus */}
+                                    <AvailabilityStatus restaurantId={restuarent.Restaurant_Id} />
+                                  </Box>
                                 </Typography>
                               </CardContent>
                             </CardActionArea>

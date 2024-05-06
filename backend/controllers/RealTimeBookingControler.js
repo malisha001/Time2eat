@@ -11,7 +11,7 @@ const getRealTimeBookings = async (req, res) => {
 const getRealTimeBooking = async (req, res) => {
     const {id} = req.params
 
-    const RTbookings = await RealTimeBooking.findById(id)
+    const RTbookings = await RealTimeBooking.find({resid:id})
 
 
     if (!RTbookings) {

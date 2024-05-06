@@ -1,0 +1,28 @@
+/* updaterestaurants.css */
+
+.form-container {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .form-container label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .form-container input[type="radio"] {
+    margin-right: 5px;
+  }
+  
+  .form-container button {
+    background-color: #008cba;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .form-container button:hover {
+    background-color: #005f73;
+  }
+  
