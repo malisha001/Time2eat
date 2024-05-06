@@ -48,12 +48,13 @@ import Signup from './pages/login/Signup';
 
 import Mybookingstyle from './component/Mybookingstyle';
 
+import Menu from './pages/Menu';
 import AddfooditemsForm from './component/AddfooditemsForm';
 import Restaurant from './pages/restaurant';
 import AddrestaurantsForm from './component/AddrestaurantsForm';
 import UpdateFoodItems from './component/updatefooditems';
 import Updaterestaurants from './component/Updaterestaurants';
-// import RestaurantProfile from './pages/Restaurantprofile';
+import RestaurantProfile from './pages/Restaurantprofile';
 import UpdateRestaurantProfile from './component/UpdateRestaurantProfile'
 
 import PrebookingDineInForm from './pages/prebookingdinein';
@@ -133,7 +134,7 @@ function App() {
 
             <Route path="/restaurant/:id" element={<Mybookingstyle />} />
 
-            {/* <Route path="/fooditems" element = {<Menu />} /> */}
+            <Route path="/fooditems" element = {<Menu />} />
             <Route path="/add-food-item" element = {<AddfooditemsForm />} />
             <Route path="/update-food-item/:id/" element = {<UpdateFoodItems/>} />
             <Route path="/restaurants" element = {<Restaurant />} />
@@ -141,7 +142,7 @@ function App() {
             <Route path='/restaurentDashbord' element={<RestaurantDashboard />} />
             <Route path="/addrestaurants" element = {<AddrestaurantsForm />} />
             <Route path="/update-restaurant/:id/" element = {<Updaterestaurants/>} />
-            {/* <Route path="/restaurants/:id/" element = {<RestaurantProfile />} /> */}
+            <Route path="/restaurants/:id/" element = {<RestaurantProfile />} />
             <Route path="/update-restaurantprofile/:id/" element = {<UpdateRestaurantProfile/>} />
 
           </Routes>

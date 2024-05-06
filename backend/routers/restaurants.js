@@ -10,6 +10,7 @@ const {
   
 } = require('../controllers/restaurantController')
 
+
 const router = express.Router()
 
 //GET all Rstaurants
@@ -36,5 +37,6 @@ router.post('/login',loginRestaurant)
 
 //restaurent details for bookings
 router.get('/details/:id', getRestaurantdetails)
+
 
 module.exports = router;
