@@ -12,7 +12,7 @@ const getRestaurants = async (req , res) =>{
 const getRestaurant = async(req , res) =>{
     const {id} = req.params
 
-    const restaurant = await Restaurant.findOne({Restaurant_Id:id})
+    const restaurant = await Restaurant.findOne({_id:id})
 
     if(!restaurant){
         return res.status(404).json({error : 'No such Restauran'})
@@ -45,7 +45,7 @@ const deleteRestaurant = async(req , res) =>{
     const restaurant = await Restaurant.findByIdAndDelete({_id: id})
 
     if(!restaurant){
-        return res.status(404).json({error : 'No such Restauran'})
+        return res.status(404).json({error : 'No such Restaurant'})
     }
     res.status(200).json(restaurant)
 }

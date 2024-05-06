@@ -32,7 +32,7 @@ const Restaurant = () => {
     "Action",
   ];
   const handeClick = async (id) => {
-    const response = await fetch(`/api/restaurant/${id}`, {
+    const response = await fetch(`/api/restaurants/${id}`, {
         method: 'DELETE'
     });
   
