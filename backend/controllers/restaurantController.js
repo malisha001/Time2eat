@@ -14,8 +14,8 @@ const getRestaurants = async (req , res) =>{
     res.status(200).json(restaurants)
 }
 
-// get a single restaurant 
-const getRestaurant = async(req , res) =>{
+// get a single restaurant for bookings
+const getRestaurantdetails = async(req , res) =>{
     const {id} = req.params
 
     const restaurant = await Restaurant.findOne({Restaurant_Id:id})
@@ -111,6 +111,7 @@ module.exports = {
   getRestaurant,
   getRestaurants,  
   addRestaurant,
+  getRestaurantdetails,
   deleteRestaurant,
   updateRestaurant,
   loginRestaurant
