@@ -4,8 +4,12 @@ const {
     getEmpPayrun,
     createEmpPayrun,
     updateEmpPayrun,
+    getAllEmployeeSalaryData,
     monthlySalProcess
 } = require('../Controllers/empPayrunController')
+
+//get all employee slalary data
+router.get('/allempsalaries', getAllEmployeeSalaryData)
 
 // Get all employee payrun
 router.get('/', getEmpPayrun)
@@ -19,6 +23,7 @@ router.get('/:id', monthlySalProcess)
 // Update employee salary
 router.patch('/:id', updateEmpPayrun)
 
-
+// //get all employee slalary data
+// router.get('/allempsalaries', getAllEmployeeSalaryData)
 
 module.exports = router
