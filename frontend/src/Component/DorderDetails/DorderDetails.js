@@ -1,6 +1,10 @@
 import classes from './dorderDetails.module.css';
+import { useDorderContext} from '../../hooks/useDorderContext';
+//date fns
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
 const DIorderDetails = ({ order}) => {
+  const { dispatch } =  useDorderContext()
 
     const handleClick = async () => {
       const response = await fetch('/api/dineinorders/' + order._id,{
@@ -8,22 +12,29 @@ const DIorderDetails = ({ order}) => {
       })
        const json = await response.json()
 
+       if (response.ok) {
+        dispatch({type: 'DELETE_ORDER', payload: json})
+  
+      }
        
     }
 
     return (
         
         <div className={classes.dineindetails}>
-            <h4>{order.restaurantid}</h4>
+          
+            <h4>{order.resname}</h4>
+            <p><strong>Restaurant id: </strong>{order.restaurantid}</p>
             <p><strong>Table ID: </strong> {order.tableid}</p>
             <p><strong>Food Item: </strong> {order.fooditem}</p>
             <p><strong>Food Name: </strong> {order.name}</p>
             <p><strong>Quantity: </strong> {order.quantity}</p>
-            <p><strong>Price (LKR): </strong> {order.price}</p>
+            <p><strong>Price: </strong> {order.price}</p>
             <p><strong>Order State: </strong> {order.state}</p>
-            <p>{order.createdAt}</p>
 
-            <span onClick={handleClick} >delete</span>
+            <p>{formatDistanceToNow(new Date(order.createdAt),{addSuffix: true })}</p>
+            
+            <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
         </div>
     )
 }

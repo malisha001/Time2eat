@@ -28,12 +28,44 @@ const getOrder = async (req, res) => {
 
 //create new dine in order
 const createOrder = async (req, res) => {
-    const { restaurantid, tableid,fooditem, quantity, price,state , name } = req.body
+    const { resname,restaurantid, tableid,fooditem, quantity, price,state , name } = req.body
+
+    let emptyFields = []
+
+    if (!resname) {
+        emptyFields.push('resname')
+    }
+    if (!restaurantid) {
+        emptyFields.push('restaurantid')
+    }
+    if (!tableid) {
+        emptyFields.push('tableid')
+    }
+    if (!fooditem) {
+        emptyFields.push('fooditem')
+    }
+    if (!quantity) {
+        emptyFields.push('quantity')
+    }
+    if (!price) {
+        emptyFields.push('price')
+    }
+    if (!state) {
+        emptyFields.push('state')
+    }
+    if (!name) {
+        emptyFields.push('name')
+    }
+    
+
+    if (emptyFields.length > 0) {
+        return res.status(400).json({ error: 'Please fill in all the fields', emptyFields})
+    }
 
     //add doc to database
     try {
 
-        const order = await dineinorder.create({restaurantid, tableid, fooditem, quantity, price, state,name })
+        const order = await dineinorder.create({resname,restaurantid, tableid, fooditem, quantity, price, state,name })
         res.status(200).json(order)
     }catch (error){
         res.status(400).json({error: error.message})

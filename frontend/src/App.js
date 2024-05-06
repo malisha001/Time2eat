@@ -13,6 +13,7 @@ import NewBooking from "./pages/NewBooking";
 // import RestaurantStaff from "./pages/RestaurantStaff";
 import Feedback from './pages/Feedback';
 import { BrowserRouter, Routes, Route,Navigate,useLocation } from 'react-router-dom';
+
 import { useAuthContext } from './hooks/useAuthContext'
 import AddfeedbackForm from './component/AddfeedbackForm';
 import UpdateFeedback from './component/Updatefeedback';

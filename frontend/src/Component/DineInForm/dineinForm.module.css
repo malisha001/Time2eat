@@ -3,12 +3,13 @@
     height:auto;
     margin: 0 auto;
     top: 30px;
-    padding: 20px;
+    padding: 10px;
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-left: 20px;
     margin-top: 20px;
+    
   }
   
   .create h3 {
@@ -22,24 +23,17 @@
     margin-bottom: 5px;
     width:100%;
   }
-  
-  .create input [type="String"],
-  .create input[type="text"],
-  .create input[type="number"] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
+
+  .create  select{
+    display: block;
+    margin-bottom: 5px;
+    width:100%;
+    padding: 10px;
+    margin-bottom: 30px;
+    border-radius: 8px;
   }
   
-  .create input [type="String"],
-  .create input[type="text"]:focus,
-  .create input[type="number"]:focus {
-    outline: none;
-    border-color: rgb(245, 94, 39);
-  }
+ 
   
   .create button {
     width: 100%;
@@ -56,8 +50,24 @@
   }
   
   .error {
-    color: red;
-    margin-top: 10px;
-    text-align: center;
+    padding: 10px;
+    background: #ffefef;
+    border: 1px solid var(--error);
+    color: var(--error);
+    border-radius: 4px;
+    margin: 20px 0;
   }
   
+  .error {
+    border: 1px solid var(--error);
+  }
+
+  input {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }

@@ -25,3 +25,11 @@ body {
   padding: 20px;
   margin: 0 auto;
   }
+
+  .topic h2{
+    
+    align-items: center;
+    color: rgb(245, 94, 39);
+    padding: 20px;
+    
+  }
