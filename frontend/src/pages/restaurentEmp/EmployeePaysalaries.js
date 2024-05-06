@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Table, TableBody, TableHead, TableRow, TableCell, TableContainer, Paper, Button, Toolbar, Typography, IconButton, Menu, MenuItem, Select, FormControl, InputLabel, Box } from '@mui/material';
+import { Table,TextField, TableBody, TableHead, TableRow, TableCell, TableContainer, Paper, Button, Toolbar, Typography, IconButton, Menu, MenuItem, Select, FormControl, InputLabel, Box } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { fetchEmployeeSalaries} from '../../services/api';
+import { fetchEmployeeSalaries,getAllEmployeeData} from '../../services/api';
 
 function EmployeePaysalaries() {
 
-    const [employeeSalaries, setEmployeeSalaries] = useState([]);
+  const [employeeSalaries, setEmployeeSalaries] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [employeeIDs, setEmployeeIDs] = useState([]);
   const [filterCriteria, setFilterCriteria] = useState({
     employeeId: '',
-    restaurantId: '',
-    position: ''
+    year: '',
+    month: ''
   });
 
   const handleFilterClick = (event) => {
@@ -24,8 +25,23 @@ function EmployeePaysalaries() {
   };
 
   const handleFilterApply = () => {
-    // Add logic to apply filter criteria (e.g., fetching filtered data)
     console.log('Filter Criteria:', filterCriteria);
+
+    // Filter the employee salaries based on the selected criteria
+    const data = employeeSalaries.filter(empsal =>{
+      const salaryDate = new Date(empsal.createdAt);
+      const slaryyear = salaryDate.getFullYear();
+      const slarymonth = salaryDate.getMonth() + 1;
+      return empsal.empId === filterCriteria.employeeId || 
+      slaryyear === filterCriteria.year || 
+      slarymonth === filterCriteria.month;
+      
+    } );
+
+    console.log('Filter Data:', filterCriteria.year);
+  // Update the state with the filtered data
+  setEmployeeSalaries(data);
+
     setAnchorEl(null); // Close the filter popup after applying
   };
 
@@ -36,6 +52,16 @@ function EmployeePaysalaries() {
   };
   //get all employee salary data
   useEffect(() => {
+    const fetchEmployeeIDs = async () => {
+      try {
+        const Empdata = await getAllEmployeeData();
+        const ids = Empdata.map(item => item.empId);
+        setEmployeeIDs(ids);
+      } catch (error) {
+        console.error('Error fetching employee IDs:', error);
+      }
+    };
+
     const getAllEmployeeSalaryData = async () => {
       try {
         const salaryData = await fetchEmployeeSalaries();
@@ -46,8 +72,8 @@ function EmployeePaysalaries() {
       }
     };
 
-    getAllEmployeeSalaryData();
-        
+    fetchEmployeeIDs();
+    getAllEmployeeSalaryData();    
   }, []); // Add any dependencies as needed
 
   return (
@@ -103,58 +129,62 @@ function EmployeePaysalaries() {
       >
         <Box p={2}>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="employeeId-label">Employee ID</InputLabel>
-            <Select
+            <TextField
+              select
               labelId="employeeId-label"
               id="employeeId"
               name="employeeId"
               value={filterCriteria.employeeId}
               onChange={handleInputChange}
+              label="Emp Id"
             >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
-              {/* Add dropdown options here */}
-            </Select>
+              {employeeIDs.map((id) => (
+                <MenuItem key={id} value={id}>
+                  {id}
+                </MenuItem>
+              ))}
+            </TextField>
           </FormControl>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="restaurantId-label">year</InputLabel>
-            <Select
+            <TextField
+              select
               labelId="restaurantId-label"
-              id="restaurantId"
-              name="restaurantId"
-              value={filterCriteria.restaurantId}
+              id="year"
+              name="year"
+              value={filterCriteria.year}
               onChange={handleInputChange}
+              label="year"
             >
               <MenuItem value={2024}>2024</MenuItem>
                 <MenuItem value={2023}>2023</MenuItem>
                 <MenuItem value={2022}>2022</MenuItem>
               {/* Add dropdown options here */}
-            </Select>
+            </TextField>
           </FormControl>
           <FormControl sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="position-label">month</InputLabel>
-            <Select
+            <TextField
+              select
               labelId="position-label"
-              id="position"
-              name="position"
+              id="month"
+              name="month"
               value={filterCriteria.position}
               onChange={handleInputChange}
+              label="month"
             >
               <MenuItem value={1}>jan</MenuItem>
-                <MenuItem value={2}>feb</MenuItem>
-                <MenuItem value={3}>march</MenuItem>
+              <MenuItem value={2}>feb</MenuItem>
+              <MenuItem value={3}>march</MenuItem>
               <MenuItem value={4}>april</MenuItem>
-                <MenuItem value={5}>may</MenuItem>
-                <MenuItem value={6}>june</MenuItem>
+              <MenuItem value={5}>may</MenuItem>
+              <MenuItem value={6}>june</MenuItem>
               <MenuItem value={7}>july</MenuItem>
-                <MenuItem value={8}>aug</MenuItem>
-                <MenuItem value={9}>sep</MenuItem>
+              <MenuItem value={8}>aug</MenuItem>
+              <MenuItem value={9}>sep</MenuItem>
               <MenuItem value={10}>oct</MenuItem>
-                <MenuItem value={11}>nov</MenuItem>
-                <MenuItem value={12}>dec</MenuItem>
+              <MenuItem value={11}>nov</MenuItem>
+              <MenuItem value={12}>dec</MenuItem>
               {/* Add dropdown options here */}
-            </Select>
+            </TextField>
           </FormControl>
           <Button variant="contained" onClick={handleFilterApply}>Apply</Button>
         </Box>
