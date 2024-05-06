@@ -6,13 +6,14 @@ import {
   search,
   getAllByRestaurantId,
  } from '../../services/foodService';
-
+import { Box, CardActionArea, CardMedia, Card, Paper, Grid, CardContent, Typography, Button } from '@mui/material'
 import Thumbnails from '../../component/Thumbnails/Thumbnails';
 import { useParams } from 'react-router-dom';
 import Search from '../../component/Search/Search';
 import Tags from '../../component/Tags/Tags.js';
 import NotFound from '../../component/NotFound/NotFound';
 import { useNavigate } from 'react-router-dom';
+import exampleImage from '../../Assests/example.jpg';
 
 const initialState = { foods: [], tags: [] };
 
@@ -50,8 +51,31 @@ export default function ResPage() {
         }
     }, [id]);
 
+    const submitButton = () => { 
+        // Navigate to the newBooking page with the restaurant ID in the URL
+        navigate(`/newbooking/${id}`);
+    }
+
+
     return (
         <>
+            <Card sx={{maxWidth: 'auto' }}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="200"
+          image= {exampleImage}
+          alt="green iguana"
+        />
+        </CardActionArea>
+        </Card>
+        <Button
+                    variant="contained"
+                    onClick={submitButton}
+                    style={{ position: 'absolute', top: 220, right: 30 }}
+                >
+                    book table
+                </Button>
             <Search />
             <Tags tags={tags} />
             {foods.length === 0 && <NotFound linkText="Reset Search" />}

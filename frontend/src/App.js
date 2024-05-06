@@ -132,7 +132,7 @@ function App() {
             <Route path="/inventory/update/:id" element={<UpdateUser />} />
             <Route path="/inventory/usage" element={<Usage />} /> 
 
-            <Route path="/restaurant/:id" element={<Mybookingstyle />} />
+            <Route path="/restaurant" element={<Mybookingstyle />} />
 
             <Route path="/fooditems" element = {<Menu />} />
             <Route path="/add-food-item" element = {<AddfooditemsForm />} />
