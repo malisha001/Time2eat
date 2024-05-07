@@ -1,10 +1,18 @@
 // pages & components
 
-import Inventory from './component/FoodItems/Inventory'
-import UpdateUser from './pages/update/UpdateUser';
+import Inventory from './pages/FoodItems/Inventory'
+import UpdateUser from './pages/updateFoodItems/UpdateUser';
 import ItemForm from './pages/addItem/addItemForm';
 import Usage from './pages/usage/usageForm';
+
+import ReOrder from './pages/invReOrder/invreOrder';
+import InvMangeOrder from './pages/invReOrder/invreOrder';
+import UpdateOnlineOrder from './pages/updateOnlineOrders/updateOnline';
+import Dashboard from './pages/invDasboard/inDashboard'
+
+
 import Reglogin from './pages/login/RestaurentLogin'
+
 
 import Home from './pages/Home/HomePage';
 import Navbar from "./component/Navbar";
@@ -13,6 +21,7 @@ import NewBooking from "./pages/NewBooking";
 // import RestaurantStaff from "./pages/RestaurantStaff";
 import Feedback from './pages/Feedback';
 import { BrowserRouter, Routes, Route,Navigate,useLocation } from 'react-router-dom';
+
 import { useAuthContext } from './hooks/useAuthContext'
 import AddfeedbackForm from './component/AddfeedbackForm';
 import UpdateFeedback from './component/Updatefeedback';
@@ -37,6 +46,7 @@ import BookingPayment from './pages/BookingPayment';
 import ResPage from './pages/ResPage/ResPage.js';
 import FoodPage from './pages/Food/FoodPage.js';
 import CartPage from './pages/Cart/CartPage.js';
+import DineIn from './pages/DineIn/DineIn';
 
 
 // import AdvertisementForm from './components/AdvertisementForm';
@@ -48,17 +58,22 @@ import Signup from './pages/login/Signup';
 
 import Mybookingstyle from './component/Mybookingstyle';
 
+import Menu from './pages/Menu';
 import AddfooditemsForm from './component/AddfooditemsForm';
 import Restaurant from './pages/restaurant';
 import AddrestaurantsForm from './component/AddrestaurantsForm';
 import UpdateFoodItems from './component/updatefooditems';
 import Updaterestaurants from './component/Updaterestaurants';
-// import RestaurantProfile from './pages/Restaurantprofile';
+import RestaurantProfile from './pages/Restaurantprofile';
 import UpdateRestaurantProfile from './component/UpdateRestaurantProfile'
+
 
 import PrebookingDineInForm from './pages/prebookingdinein';
 
 import RestaurantDashboard from './pages/restaurentDashbord/RestaurenrDashbord';
+
+
+import CheckoutPage from './pages/Checkout/CheckoutPage';
 
 
 function App() {
@@ -126,14 +141,20 @@ function App() {
             <Route path='/cart' element={<Cart/>} />
             <Route path='/payment' element={<Payment/>} />
 
-            <Route path="/inventory/items" element={<Inventory />} />
-            <Route path="/inventory/addItems" element={<ItemForm />} />
-            <Route path="/inventory/update/:id" element={<UpdateUser />} />
-            <Route path="/inventory/usage" element={<Usage />} /> 
+     
+              <Route path="/inventory/items" element={<Inventory />} />
+              <Route path="/inventory/addItems" element={<ItemForm />} />
+              <Route path="/inventory/update/:id" element={<UpdateUser />} />
+              <Route path="/inventory/usage" element={<Usage />} /> 
+              <Route path="/inventory/reOrderitem" element={<ReOrder/>} />
+              <Route path="/inventory/invMgOrd" element={<InvMangeOrder/>} />
+              <Route path="/inventory/onlineOrd/update/:id" element={<UpdateOnlineOrder/>} />
+              <Route path="/inventory/dashboard" element={<Dashboard/>} />
+           
 
-            <Route path="/restaurant/:id" element={<Mybookingstyle />} />
+            <Route path="/restaurant" element={<Mybookingstyle />} />
 
-            {/* <Route path="/fooditems" element = {<Menu />} /> */}
+            <Route path="/fooditems" element = {<Menu />} />
             <Route path="/add-food-item" element = {<AddfooditemsForm />} />
             <Route path="/update-food-item/:id/" element = {<UpdateFoodItems/>} />
             <Route path="/restaurants" element = {<Restaurant />} />
@@ -141,9 +162,10 @@ function App() {
             <Route path='/restaurentDashbord' element={<RestaurantDashboard />} />
             <Route path="/addrestaurants" element = {<AddrestaurantsForm />} />
             <Route path="/update-restaurant/:id/" element = {<Updaterestaurants/>} />
-            {/* <Route path="/restaurants/:id/" element = {<RestaurantProfile />} /> */}
+            <Route path="/restaurants/:id/" element = {<RestaurantProfile />} />
             <Route path="/update-restaurantprofile/:id/" element = {<UpdateRestaurantProfile/>} />
-
+             <Route path="/dinein" element = {<DineIn />} />
+            <Route path="/checkout" element={<CheckoutPage />} /> 
           </Routes>
         </div>  
       </BrowserRouter>

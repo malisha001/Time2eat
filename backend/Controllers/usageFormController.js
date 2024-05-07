@@ -1,12 +1,14 @@
-const usageInventory = require('../model/usageFormModel')
+const usageInventory = require('../models/usageFormModel')
 const mongoose = require('mongoose')
 
 // create new usage item
 const createUsageItem = async (req, res) => {
-    const { initialQuantity, newQuantity, usageItemName } = req.body;
+
+    const {  newQuantity, usageItemName, remainingQuant, Iquantity, Uprice } = req.body;
 
     try{
-        const usageitem = await usageInventory.create({ usageItemName, initialQuantity, newQuantity });
+ 
+        const usageitem = await usageInventory.create({ usageItemName, newQuantity,remainingQuant, Iquantity, Uprice });
         res.status(200).json(usageitem)
 
     }catch(error){
@@ -77,7 +79,6 @@ const getAusageItem = async (req, res) => {
         return res.status(500).json({ error: 'Server Error' });
     }
 };
-
 
 
 

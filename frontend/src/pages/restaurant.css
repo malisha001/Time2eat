@@ -1,34 +1,32 @@
-
-
-
-
 /* Table style */
- table {
-    width: 106%;
+.restaurant table {
+    width: 75%; /* Adjusted width */
+    margin-top: 100px; /* Added margin to push the table down */
+    margin-left: 275px; /* Moved the table to the right */
     border-collapse: collapse;
 }
 
 /* Table header style */
-.restaurant thead table th {
-    background-color: #5a4343;
-    padding: 23px;
+.restaurant th {
+    background-color: #D1CCCC;
+    padding: 12px; /* Reduced padding */
     text-align: center;
     border-bottom: 2px solid #ddd;
-    font-size: 21px;
+    font-size: 16px; /* Reduced font size */
     font-family: 'Times New Roman', Times, serif;
 }
 
 /* Table body style */
 td {
-    padding: 15px;
-    border-bottom: 1.5px solid #84b0b4;
+    padding: 8px; /* Reduced padding */
+    border-bottom: 1px solid #84b0b4; /* Reduced border thickness */
     text-align: center;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px; /* Reduced font size */
 }
 
 /* Alternate row color */
-tbody  {
+tbody {
     background-color: #d7f3f2;
 }
 
@@ -37,15 +35,15 @@ tbody  {
     background-color: #8e1010;
     color: white;
     border: none;
-    padding: 10px 12px;
+    padding: 6px 8px; /* Reduced padding */
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 14px;
+    font-size: 10px; /* Reduced font size */
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-right: 10px;
-    border-radius: 10px;
+    margin-right: 4px; /* Reduced margin */
+    border-radius: 5px; /* Reduced border radius */
     font-weight: 1000;
 }
 
@@ -57,17 +55,17 @@ tbody  {
 }
 
 .update-button {
-    background-color: #105c22; 
-    color: white; 
-    border: none; 
-    padding: 10px 12px;
-    text-align: center; 
-    text-decoration: none; 
-    display: inline-block; 
-    font-size: 14px; 
-    cursor: pointer; 
-    border-radius: 10px;
-    transition: background-color 0.3s; 
+    background-color: #105c22;
+    color: white;
+    border: none;
+    padding: 6px 8px; /* Reduced padding */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px; /* Reduced font size */
+    cursor: pointer;
+    border-radius: 5px; /* Reduced border radius */
+    transition: background-color 0.3s;
 }
 
 .update-button:hover {
@@ -75,14 +73,10 @@ tbody  {
     cursor: pointer;
 }
 
-
-
-
-
 /* Style for Topic and h4 */
 .home h1 {
-    font-size: 45px;
-    font-weight:400;
+    font-size: 30px; /* Reduced font size */
+    font-weight: 400;
     margin-bottom: 20px;
     letter-spacing: 1px;
     word-spacing: 1px;
@@ -93,12 +87,12 @@ tbody  {
     border: none;
     height: 2px;
     background-color: #ccc;
-    margin: -10px -157px 0px 0px ;
+    margin: -10px -157px 0px 0px;
 }
 
 .home h4 {
-    font-size: 20px;
+    font-size: 14px; /* Reduced font size */
     color: #000000;
     font-weight: 400;
-    margin-top: 15px;
+    margin-top: 15px;
 }
