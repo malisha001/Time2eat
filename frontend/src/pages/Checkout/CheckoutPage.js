@@ -14,6 +14,7 @@ export default function CheckoutPage() {
 
     const { cart } = useCart();
     const { user } = useAuthContext();
+    console.log("user",user)
     const navigate = useNavigate();
     const [order, setOrder] = useState({...cart });  //order has all the items of the cart(put a shallow copy of the cart inside the order)
     const{signup, setSignup} = useSignup();
@@ -48,17 +49,8 @@ export default function CheckoutPage() {
         <div className={classes.content}>
           <Title title="Order Form" fontSize="1.6rem" />
           <div className={classes.inputs}>
-            <Input
-               value={user.fullName}
-               label="Name"
-               onChange={(e) => setSignup({  fullName: e.target.value })}
-           />
-            
-            <Input
-               value={user.address}
-               label="Address"
-               onChange={(e) => setSignup({  address: e.target.value })}
-            />
+          <p>name: {user&&user.name}</p>
+          <p>email:{user&&user.email}</p>
             </div> 
         <OrderItemsList order={order} /> 
         </div>
