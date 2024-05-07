@@ -7,13 +7,6 @@ const mongoose = require('mongoose')
 
 
 
-router.get(
-    '/',
-    handler(async (req, res) => {
-      const foods = await FoodModel.find({});   //root api
-      res.send(foods);
-    })
-  );
   router.get(
     '/tags',
     handler(async (req, res) => {
@@ -46,7 +39,16 @@ router.get(
       res.send(tags);
     })
   );
+  router.get(
+    '/restaurant/:id',
+    handler(async (req, res) => {
+      const { id } = req.params;
+      const foods = await FoodModel.find({ restaurantId: id });
+      res.send(foods);
+    })
+  );
   
+
   router.get(
     '/search/:searchTerm',
     handler(async (req, res) => {
