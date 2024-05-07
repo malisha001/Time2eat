@@ -104,7 +104,7 @@ function App() {
             <Route path="/mybookings/:id" element={<MyBookings />} />
            {/*} <Route path="/update-booking/:id" element={<UpdateBookingDetails />} />  */}
             <Route path="/update-pre-booking/:id" element={<UpdatePreBookings />} />
-            <Route path="/update-dine-in-booking/:id" element={<UpdateDineIn />} />
+            <Route path="/update-dine-in-booking/:id/:resId" element={<UpdateDineIn />} />
             <Route path="/bookingpayment" element={<BookingPayment />} />
 
             {/* <Route path="/realtime-staff" element={<RestaurantStaff />} /> */}
