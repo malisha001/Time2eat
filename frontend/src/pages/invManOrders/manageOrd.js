@@ -26,6 +26,18 @@ const ManageOrder = () => {
         };
         fetchOnlineOrders();
     }, []);
+
+    const handleDelete = async (orderId) => {
+        const response = await fetch('/api/onlineOrders/' + orderId, {
+            method: 'DELETE'
+        });
+        if (response.ok) {
+            // Remove the deleted item from the items state
+            setOrders(orders.filter(order => order._id !== orderId));
+            // Update total category count after deletion
+           /*updateTotalCategoryCount(items.filter(item => item._id !== itemId));*/
+        }
+    };
     
 
 
@@ -61,7 +73,7 @@ const ManageOrder = () => {
                                     <td>{order.quantity}</td>
                                     <td>{order.price}</td>
                                     <td>
-                                            <button  className="OnlineOrder-DeleteButton">Delete</button>
+                                            <button onClick={() => handleDelete(order._id)} className="OnlineOrder-DeleteButton">Delete</button>
                                             <Link to={`/inventory/onlineOrd/update/${order._id}`} ><button className="OnlineOrder-UpdateButton">Update</button></Link>
                                         </td>
                                     </tr>

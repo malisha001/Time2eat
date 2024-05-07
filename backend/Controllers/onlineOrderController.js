@@ -6,7 +6,7 @@ const getOnlineOrders = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const resOrder = await Onlineorder.find({ restaurantid: id });
+        const resOrder = await Onlineorder.findOne({ _id: id });
 
         if (!resOrder) {
             return res.status(404).json({ error: 'No online orders' });

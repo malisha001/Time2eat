@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import './invreOr.css';
-import axios from "axios";
+
 import Navbar from "../../component/inventoryNavbar/invNavBar";
 
 const ReOrder = () => {
 
-    const { id } = useParams();
+  
+
     const [rItems, setRItems] = useState(null);
     const [totalPrices, setTotalPrices] = useState({});
+    const [reOrderItemName, setReOrderItemName] = useState("");
+    const [reOrderQuantity, setReOrderQuantity] = useState(0);
+    const [reOrderAmount, setReOrderAmount] = useState(0);
 
     useEffect(() => {
         const fetchReorderItems = async () => {
@@ -32,28 +37,50 @@ const ReOrder = () => {
             ...prevState,
             [itemId]: totalPrice
         }));
+        setReOrderQuantity(quantity);
     };
 
-   const handleReOrder = () => {
+    const navigate = useNavigate() 
 
-   }
+    const handleReOrder = async (itemname,itemprice) => {
+        try {
 
-   const handleDelete = async(e) => {
-    e.preventDefault();
-    try {
-        const response = await axios.patch(`/api/inventory/${id}`, {
-            
-        });
-        console.log(response.data);
-        navigate('/inventory/items');
-    } catch (error) {
-        console.error('Failed to update item:', error);
+            console.log("test reorder");
+            const reOrderItem = { 
+                reOrderItemName: itemname, 
+                reOrderQuantity: reOrderQuantity, 
+                reOrderAmount: itemprice
+            };
+            const response = await fetch('/api/reorder/', {
+                method: 'POST',
+                body: JSON.stringify(reOrderItem),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            const json = await response.json();
+    
+            if (!response.ok) {
+                console.log("error button");
+            } else {
+                // Clear input fields and errors on successful submission
+                setReOrderItemName("");
+                setReOrderQuantity(0);
+                setReOrderAmount(0);
+                console.log('New item added:', json);
+                navigate("/inventory/items/");
+            }
+        } catch (error) {
+            console.error('Failed to update item:', error);
+        }
     }
-   }
+    
+    
+
+
 
     return (
-
-
         <div>
             <Navbar/>
             <div className="inv-ReorderHome">
@@ -87,8 +114,7 @@ const ReOrder = () => {
                                             <td>{totalPrice}</td>
                                             <td>
                                                 
-                                                <button onClick={() => handleDelete(item._id)} className="inv-ReorderDeleteBtn">Delete</button>
-                                                <button onClick={() => handleReOrder(item._id)} className="inv-ReorderUpdateBtn">Re-Order</button>
+                                                <button onClick={() => handleReOrder(item.usageItemName,totalPrice)} className="inv-ReorderUpdateBtn">Re-Order</button>
                                             </td>
                                         </tr>
                                     );
@@ -106,5 +132,3 @@ const ReOrder = () => {
 }
 
 export default ReOrder;
-
-

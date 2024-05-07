@@ -8,6 +8,7 @@ require('dotenv').config()
 //import routers
 const inventoryRoutes = require('./routers/inventory') 
 const usageRoutes = require('./routers/usageItem.js')
+const reOrderRoute = require('./routers/invReOrder.js')
 
 // const advertisementRoutes = require('./routers/advertisements')
 const employeesal = require('./routers/employeeSalary')
@@ -80,6 +81,7 @@ app.use('/api/user', userRoutes)
 // app.use('/api/advertisements',advertisementRoutes)
 app.use('/api/inventory/', inventoryRoutes)
 app.use('/api/usage/', usageRoutes)
+app.use('/api/reorder/', reOrderRoute)
 
 //order system routers
 app.use('/api/foods', foodrouter)
