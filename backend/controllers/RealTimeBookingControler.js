@@ -17,7 +17,7 @@ const getRealTimeBooking = async (req, res) => {
         // Check if the provided id is a MongoDB _id
         if (mongoose.Types.ObjectId.isValid(id)) {
             // If it is a valid MongoDB _id, find the booking(s) by _id
-            RTbookings = await RealTimeBooking.find({ _id: id });
+            RTbookings = await RealTimeBooking.findOne({ _id: id });
         } else {
             // If it's not a valid MongoDB _id, assume it's a resid and search by that
             RTbookings = await RealTimeBooking.find({ resid: id });

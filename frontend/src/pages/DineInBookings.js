@@ -70,7 +70,7 @@ const DineInBookings = () => {
                                     <Button onClick={() => handleClick(dineBooking._id)} variant='contained'>Delete</Button>
                                 </TableCell>
                                 <TableCell>
-                                    <Button variant='contained'><Link to={`/update-dine-in-booking/${dineBooking._id}`}>Update</Link></Button>
+                                    <Button variant='contained'><Link to={`/update-dine-in-booking/${dineBooking._id}/${user.resId}`}>Update</Link></Button>
                                 </TableCell>
                             </TableRow>
                         ))}
