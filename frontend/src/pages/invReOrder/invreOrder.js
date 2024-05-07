@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import './invreOr.css';
+import axios from "axios";
 import Navbar from "../../component/inventoryNavbar/invNavBar";
 
 const ReOrder = () => {
+
+    const { id } = useParams();
     const [rItems, setRItems] = useState(null);
     const [totalPrices, setTotalPrices] = useState({});
 
@@ -31,17 +34,34 @@ const ReOrder = () => {
         }));
     };
 
+   const handleReOrder = () => {
+
+   }
+
+   const handleDelete = async(e) => {
+    e.preventDefault();
+    try {
+        const response = await axios.patch(`/api/inventory/${id}`, {
+            
+        });
+        console.log(response.data);
+        navigate('/inventory/items');
+    } catch (error) {
+        console.error('Failed to update item:', error);
+    }
+   }
+
     return (
 
 
         <div>
             <Navbar/>
-            <div className="home">
+            <div className="inv-ReorderHome">
                 <h1>Welcome to restaurant’s Re-order details</h1>
                 <hr />
                 <h4>Given below are the food items that need to be Re-Order,</h4>
 
-                <div className="items">
+                <div className="inv-ReOrdItems">
                     <table>
                         <thead>
                             <tr>
@@ -56,7 +76,7 @@ const ReOrder = () => {
                                 const totalPrice = totalPrices[item._id] || 0;
 
                                 // Assuming Iquantity and Uprice are properties of each item in rItems
-                                if (item.remainingQuant < item.Iquantity) {
+                                if (item.remainingQuant <= item.reOrderQuan) {
                                     return (
                                         <tr key={item._id}>
                                             <td>{item.usageItemName}</td>
@@ -67,8 +87,8 @@ const ReOrder = () => {
                                             <td>{totalPrice}</td>
                                             <td>
                                                 
-                                                <button className="invDeleteButton">Delete</button>
-                                                <button className="update-button">Re-Order</button>
+                                                <button onClick={() => handleDelete(item._id)} className="inv-ReorderDeleteBtn">Delete</button>
+                                                <button onClick={() => handleReOrder(item._id)} className="inv-ReorderUpdateBtn">Re-Order</button>
                                             </td>
                                         </tr>
                                     );

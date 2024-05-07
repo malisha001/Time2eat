@@ -122,7 +122,7 @@ function App() {
             <Route path='/payment' element={<Payment/>} />
 
      
-              <Route path="/inventory/items" element={<Inventory />} />
+              <Route path="/inventory/items" element={<Inventory/>} />
               <Route path="/inventory/addItems" element={<ItemForm />} />
               <Route path="/inventory/update/:id" element={<UpdateUser />} />
               <Route path="/inventory/usage" element={<Usage />} /> 

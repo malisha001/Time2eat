@@ -4,11 +4,11 @@ const mongoose = require('mongoose')
 // create new usage item
 const createUsageItem = async (req, res) => {
 
-    const {  newQuantity, usageItemName, remainingQuant, Iquantity, Uprice } = req.body;
+    const {  newQuantity, usageItemName,reOrderQuan, remainingQuant, Iquantity, Uprice } = req.body;
 
     try{
  
-        const usageitem = await usageInventory.create({ usageItemName, newQuantity,remainingQuant, Iquantity, Uprice });
+        const usageitem = await usageInventory.create({ usageItemName, newQuantity,remainingQuant,reOrderQuan, Iquantity, Uprice });
         res.status(200).json(usageitem)
 
     }catch(error){

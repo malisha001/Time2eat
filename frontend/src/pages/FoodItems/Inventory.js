@@ -18,7 +18,8 @@ const Home = () => {
             console.log("inventory", json)
 
             if (response.ok) {
-                setItems(json)  
+                setItems(json);
+                 
             }
         }
         fetchInventoryItems()
@@ -44,7 +45,7 @@ const Home = () => {
     const totalItems = items ? items.length : 0;
 
     return (
-
+        
           
         <div> 
         <Navbar />
@@ -90,13 +91,14 @@ const Home = () => {
                                     <td>
                                             <button onClick={() => handleDelete(item._id)} className="invDeleteButton">Delete</button>
                                             <Link to={`/inventory/update/${item._id}`}><button className="update-button">Update</button></Link>
-                                        </td>
+                                    </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
                     </div>
-                 
+                
+               
                     <br /><br /><br />
                
             </div>

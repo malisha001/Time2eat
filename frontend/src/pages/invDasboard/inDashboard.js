@@ -4,13 +4,14 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import{faHouseFire, faUser} from '@fortawesome/free-solid-svg-icons'
 
 
-const Dash = ({totalItems}) => {
+const Dash = () => {
 
     
 
     return(
         <div>
             <Navbar/>
+                
                 <div className="Inv-dashborad">
 
                     <div className="dash-Upper">
@@ -35,7 +36,7 @@ const Dash = ({totalItems}) => {
                                 </div>
                                 <div className="box1">
                                     <h1>Total Products</h1>
-                                    <h3>{totalItems}</h3>
+                                    
                                     
                                 </div>
                             </div>

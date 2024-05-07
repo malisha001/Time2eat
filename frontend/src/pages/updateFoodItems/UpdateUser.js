@@ -45,9 +45,6 @@ function UpdateUser() {
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-
-
-
         try {
             const response = await axios.patch(`/api/inventory/${id}`, {
                 itemId:itemid,

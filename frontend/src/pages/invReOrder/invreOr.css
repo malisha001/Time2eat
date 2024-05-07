@@ -1,4 +1,121 @@
-.update-button{
-    margin-right: 10px;
+/*.home{
+    margin: 20px 0px 0px 40px;
+} */
+
+
+.inv-ReorderHome{
+    margin-left: 380px;
+    width: 950px;
 }
+
+
+.inv-ReorderHome hr{
+    width: 1030px;
+}
+
+.inv-ReOrdItems {
+    margin: 40px 0px 0px 0px;
+}
+
+/* Table style */
+.inv-ReOrdItems table {
+    width: 109%;
+    border-collapse: collapse;
+}
+
+/* Table header style */
+.inv-ReOrdItems table thead th {
+    background-color: #D1CCCC;
+    padding: 23px;
+    text-align: center;
+    border-bottom: 2px solid #ddd;
+    font-size: 21px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+/* Table body style */
+.inv-ReOrdItems table tbody td {
+    padding: 15px;
+    border-bottom: 1.5px solid #84b0b4;
+    text-align: center;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+}
+
+/* Alternate row color */
+.inv-ReOrdItems table tbody  {
+    background-color: #d7f3f2;
+}
+
+/* Button style */
+.inv-ReorderDeleteBtn {
+    background-color: #8e1010;
+    color: white;
+    border: none;
+    padding: 10px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 10px;
+    border-radius: 10px;
+    font-weight: 1000;
+}
+
+/* Button hover style */
+.inv-ReorderDeleteBtn:hover {
+    background-color: #ffa9a9;
+    color: black;
+    cursor: pointer;
+}
+
+.inv-ReorderUpdateBtn {
+    background-color: #105c22; 
+    color: white; 
+    border: none; 
+    padding: 10px 12px;
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block; 
+    font-size: 14px; 
+    cursor: pointer; 
+    border-radius: 10px;
+    transition: background-color 0.3s; 
+}
+
+.inv-ReorderUpdateBtn:hover {
+    background-color: #54c66c;
+    cursor: pointer;
+}
+
+
+
+
+
+/* Style for Topic and h4 */
+.inv-ReorderHome h1 {
+    font-size: 45px;
+    font-weight:400;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    word-spacing: 1px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.inv-ReorderHome hr {
+    border: none;
+    height: 2px;
+    background-color: #ccc;
+    margin: -10px -157px 0px 0px ;
+}
+
+.inv-ReorderHome h4 {
+    font-size: 20px;
+    color: #000000;
+    font-weight: 400;
+    margin-top: 15px;
+}
+
 
