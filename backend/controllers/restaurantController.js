@@ -142,7 +142,7 @@ const loginRestaurant = async (req, res) => {
         }
 
         const token = createToken(restaurant);
-        res.status(200).json({ Email_address, token, role: restaurant.role,resId:restaurant.Restaurant_Id });
+        res.status(200).json({ Email_address, token, role: restaurant.role,resId:restaurant.Restaurant_Id,resName:restaurant.Restaurant_name });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

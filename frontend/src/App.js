@@ -127,7 +127,7 @@ function App() {
             <Route path="/search/:searchTerm" element={<ResPage />} />
             <Route path="/tag/:tag" element={<ResPage />} /> 
             <Route path="/food/:id" element={<FoodPage />} />
-            <Route path="/cart" element={<CartPage/>} /> 
+            <Route path="/cart" element={<CartPage/>} />
 
 
             <Route path='/riderdashborad/*' element={<RiderDashboard />}/>
