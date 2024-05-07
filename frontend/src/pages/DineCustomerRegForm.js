@@ -3,8 +3,13 @@ import { Button, Grid, Paper, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import axios from "axios";
+import { useAuthContext } from '../hooks/useAuthContext';
+import { useNavigate } from "react-router-dom";
 
 function DineCustomerRegForm() {
+
+  const {user} = useAuthContext()
+  const navigate = useNavigate();
   const [cusid, setcusID] = useState("");
   const [resid, setresID] = useState("");
   const [name, setName] = useState("");
@@ -98,6 +103,10 @@ function DineCustomerRegForm() {
     setTelephone("");
     setError(null);
     setNameError(null);
+  };
+
+  const handlePreBookingsClick = () => {
+    navigate("/pre-booking-dine-in-form");
   };
 
   return (
@@ -207,6 +216,7 @@ function DineCustomerRegForm() {
 
             </Grid>
           </Grid>
+          <Button onClick={handlePreBookingsClick}>Pre Bookings</Button>
           <Button type="submit" contained sx={{marginTop: '20px', backgroundColor: 'lightblue'}}>Add Booking</Button>
           {error && <div className="error">{error}</div>}
         </Box>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import RestaurantprofileDetails from "../Component/RestaurantprofileDetails";
+import RestaurantprofileDetails from "../component/RestaurantprofileDetails";
 
 const RestaurantProfile = () => {
   const [restaurant, setRestaurant] = useState(null);

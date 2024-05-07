@@ -5,8 +5,11 @@ const {
     getRestaurants,
     deleteRestaurant,
     updateRestaurant,
+    loginRestaurant,
+    getRestaurantdetails,
   
 } = require('../controllers/restaurantController')
+
 
 const router = express.Router()
 
@@ -29,6 +32,11 @@ router.delete('/:id', deleteRestaurant)
 //Update a Restaurant
 router.patch('/:id',updateRestaurant)
 
+//login a Restaurant
+router.post('/login',loginRestaurant)
+
+//restaurent details for bookings
+router.get('/details/:id', getRestaurantdetails)
 
 
 module.exports = router;

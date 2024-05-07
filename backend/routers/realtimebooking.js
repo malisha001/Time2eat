@@ -5,7 +5,7 @@ const {
     createRealTimeBooking,
     deleteRealTimeBookings,
     updateRealTimeBookings
-} = require('../controllers/RealTimeBookingControler');
+} = require('../Controllers/RealTimeBookingControler');
 
 const router = express.Router();
 
