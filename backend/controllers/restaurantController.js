@@ -16,7 +16,7 @@ const getRestaurants = async (req , res) =>{
     res.status(200).json(restaurants)
 }
 //get single restaurant for bookings
-const getRestaurant = async(req , res) =>{
+const getRestaurantdetails = async(req , res) =>{
     const {id} = req.params
 
     const restaurant = await Restaurant.findOne({Restaurant_Id:id})
@@ -28,7 +28,7 @@ const getRestaurant = async(req , res) =>{
 }
 
 // get a single restaurant for restaurent
-const getRestaurantdetails = async(req , res) =>{
+const getRestaurant = async(req , res) =>{
     const {id} = req.params
 
     const restaurant = await Restaurant.findOne({_id:id})
