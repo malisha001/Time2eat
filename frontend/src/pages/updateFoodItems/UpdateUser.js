@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import './upDate.css';
 
-
 function UpdateUser() {
     const { id } = useParams();
 
@@ -12,6 +11,10 @@ function UpdateUser() {
     const [quantity, setQuantity] = useState("");
     const [price, setPrice] = useState("");
     const [category, setCategory] = useState("");
+    const [reorder, setReOrder] = useState("");
+
+
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,7 +29,8 @@ function UpdateUser() {
                 // Assuming data structure is like { itemid, name, quantity, price, category }
                 setItemId(data.itemId);
                 setName(data.itemName);
-                setQuantity(data.itemQuantity);
+                setQuantity(data.itemInitialQuantity);
+                setReOrder(data.reOrderitem);
                 setPrice(data.itemPrice);
                 setCategory(data.itemCategory);
             } catch (err) {
@@ -41,10 +45,15 @@ function UpdateUser() {
 
     const handleUpdate = async (e) => {
         e.preventDefault();
+
+
+
         try {
             const response = await axios.patch(`/api/inventory/${id}`, {
+                itemId:itemid,
                 itemName: name,
-                itemQuantity: quantity,
+                itemInitialQuantity: quantity,
+                reOrderitem:reorder,
                 itemPrice: price,
                 itemCategory: category
             });
@@ -75,6 +84,7 @@ function UpdateUser() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
+             
 
                 <label>Item Quantity :</label>
                 <input
@@ -83,7 +93,14 @@ function UpdateUser() {
                     onChange={(e) => setQuantity(e.target.value)}
                 />
 
-                <label>Item Price :</label>
+                <label>Re-order Level :</label>
+                <input
+                    type="Number"
+                    value={reorder}
+                    onChange={(e) => setReOrder(e.target.value)}
+                />
+
+                <label>Item Price (Rs.) :</label>
                 <input
                     type="Number"
                     value={price}
@@ -96,6 +113,8 @@ function UpdateUser() {
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                 />
+                
+
                 <br />
                 <button className="updateButton">Update Item</button>
             </form>

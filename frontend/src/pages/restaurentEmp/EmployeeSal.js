@@ -22,6 +22,7 @@ const EmployeeSal = () => {
   const [basicEmpSalaryError, setBasicEmpSalaryError] = useState(false);
   const [taxRateError, setTaxRateError] = useState(false);
   const [empCatagoryError, setEmpCatagoryError] = useState(false);
+  
 
   useEffect(() => {
     const fetchEmployeeIDs = async () => {
@@ -142,13 +143,12 @@ const EmployeeSal = () => {
           <Stack spacing={2} margin={2}>
             <TextField
               select
-              name="empId"
+              name="empIdd"
               value={formData.empId}
               onChange={handleChange}
               variant="outlined"
-              label="Employee ID"
+              label="Employee IDdd"
               fullWidth
-              required
             >
               {employeeIDs.map((id) => (
                 <MenuItem key={id} value={id}>
