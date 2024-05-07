@@ -156,7 +156,7 @@ function App() {
             <Route path='/restaurentDashbord' element={<RestaurantDashboard />} />
             <Route path="/addrestaurants" element = {<AddrestaurantsForm />} />
             <Route path="/update-restaurant/:id/" element = {<Updaterestaurants/>} />
-            <Route path="/restaurants/:id/" element = {<RestaurantProfile />} />
+            <Route path="/restaurantsp" element = {<RestaurantProfile />} />
             <Route path="/update-restaurantprofile/:id/" element = {<UpdateRestaurantProfile/>} />
 
           </Routes>

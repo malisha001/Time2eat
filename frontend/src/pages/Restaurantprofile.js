@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import RestaurantprofileDetails from "../component/RestaurantprofileDetails";
 import { useAuthContext } from '../hooks/useAuthContext';
+import Resuppernav from '../component/restauretNavbar/Resuppernav';
+import ResNavbar from '../component/restauretNavbar/ResNavbar';
 
 const RestaurantProfile = () => {
   const [restaurant, setRestaurant] = useState(null);
@@ -11,7 +13,7 @@ const RestaurantProfile = () => {
   useEffect(() => {
     const fetchRestaurant = async () => {
       try {
-        const response = await fetch(`/api/restaurants/${user.oid}`);
+        const response = await fetch(`/api/restaurants/${user.obId}`);
         if (!response.ok) {
           throw new Error("Failed to fetch restaurant");
         }
@@ -30,8 +32,14 @@ const RestaurantProfile = () => {
   };
 
   return (
-    <div className="restaurant-profile">
-      {restaurant && <RestaurantprofileDetails res={restaurant} onDelete={handleDelete} />}
+    <div>
+      <ResNavbar/>
+      <div className="Inv-dashborad">
+      <Resuppernav/>
+        <div className="restaurant-profile">
+          {restaurant && <RestaurantprofileDetails res={restaurant} onDelete={handleDelete} />}
+        </div>
+      </div>
     </div>
   );
 };

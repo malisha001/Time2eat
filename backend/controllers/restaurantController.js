@@ -16,7 +16,7 @@ const getRestaurants = async (req , res) =>{
     res.status(200).json(restaurants)
 }
 //get single restaurant for bookings
-const getRestaurant = async(req , res) =>{
+const getRestaurantdetails = async(req , res) =>{getRestaurant
     const {id} = req.params
 
     const restaurant = await Restaurant.findOne({Restaurant_Id:id})
@@ -28,13 +28,13 @@ const getRestaurant = async(req , res) =>{
 }
 
 // get a single restaurant for restaurent
-const getRestaurantdetails = async(req , res) =>{
+const getRestaurant = async(req , res) =>{
     const {id} = req.params
 
     const restaurant = await Restaurant.findOne({_id:id})
 
     if(!restaurant){
-        return res.status(404).json({error : 'No such Restauran'})
+        return res.status(404).json({error : 'No such Restauran profile'})
     }
     res.status(200).json(restaurant)
 }
@@ -142,7 +142,7 @@ const loginRestaurant = async (req, res) => {
         }
 
         const token = createToken(restaurant);
-        res.status(200).json({ Email_address, token, role: restaurant.role,resId:restaurant.Restaurant_Id,resName:restaurant.Restaurant_name,oid:_id });
+        res.status(200).json({ Email_address, token, role: restaurant.role,resId:restaurant.Restaurant_Id,resName:restaurant.Restaurant_name,obId:restaurant._id});
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
