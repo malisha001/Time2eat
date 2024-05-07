@@ -1,63 +1,64 @@
 import React from 'react';
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { Page, View, Document, StyleSheet, Text } from '@react-pdf/renderer';
 
 // Create styles
 const styles = StyleSheet.create({
   page: {
     flexDirection: 'column',
-    backgroundColor: '#ffffff', 
-    paddingTop: 20, 
-    paddingLeft: 20, 
-    paddingRight: 20, 
-    paddingBottom: 20, 
-   
-
-  },
-  section: {
-    marginBottom: 10,
+    backgroundColor: '#ffffff',
+    padding: 20,
   },
   header: {
     fontSize: 20,
     marginBottom: 10,
     borderBottom: '1 solid black',
   },
-  order: {
-    marginBottom: 10,
+  table: {
+    display: 'table',
+    width: 'auto',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderRightWidth: 0,
+    borderBottomWidth: 0,
   },
-  orderId: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  orderDetail: {
-    fontSize: 12,
-    paddingtop:20,
-    marginLeft: 10,
-  },
+  tableRow: { margin: 'auto', flexDirection: 'row' },
+  tableColHeader: { width: '20%', borderStyle: 'solid', borderWidth: 1, borderLeftWidth: 0, borderTopWidth: 0 },
+  tableCol: { width: '20%', borderStyle: 'solid', borderWidth: 1, borderLeftWidth: 0, borderTopWidth: 0 },
 });
 
 // Define PDF report component
 const PDFReport = ({ orders }) => (
   <Document>
     <Page size="A4" style={styles.page}>
-      <View style={styles.section}>
-        <Text style={styles.header}>Dine-In Orders Daily Report</Text>
-      </View>
-      {orders.map((order) => (
-        <View key={order._id} style={styles.order}>
-          <Text style={styles.orderId}>Order ID: {order._id}</Text>
-          <View style={styles.orderDetail}>
-            <Text>Restaurant Name: {order.resname}</Text>
-            <Text>Table ID: {order.tableid}</Text>
-            <Text>Food Item: {order.fooditem}</Text>
-            <Text>Food Name: {order.name}</Text>
-            <Text>Quantity: {order.quantity}</Text>
-            <Text>Price (LKR): {order.price}</Text>
-            <Text>Order State: {order.state}</Text>
-            <Text>Order Date: {new Date(order.createdAt).toLocaleString()}</Text>
-          </View>
+      <Text style={styles.header}>Dine-In Orders Daily Report</Text>
+      <View style={styles.table}>
+        {/* Table Header */}
+        <View style={styles.tableRow}>
+          <Text style={styles.tableColHeader}>Order ID</Text>
+          <Text style={styles.tableColHeader}>Restaurant Name</Text>
+          <Text style={styles.tableColHeader}>Table ID</Text>
+          <Text style={styles.tableColHeader}>Food Item</Text>
+          <Text style={styles.tableColHeader}>Food Name</Text>
+          <Text style={styles.tableColHeader}>Quantity</Text>
+          <Text style={styles.tableColHeader}>Price (LKR)</Text>
+          <Text style={styles.tableColHeader}>Order State</Text>
+          <Text style={styles.tableColHeader}>Order Date</Text>
         </View>
-      ))}
+        {/* Table Rows */}
+        {orders.map((order) => (
+          <View key={order._id} style={styles.tableRow}>
+            <Text style={styles.tableCol}>{order._id}</Text>
+            <Text style={styles.tableCol}>{order.resname}</Text>
+            <Text style={styles.tableCol}>{order.tableid}</Text>
+            <Text style={styles.tableCol}>{order.fooditem}</Text>
+            <Text style={styles.tableCol}>{order.name}</Text>
+            <Text style={styles.tableCol}>{order.quantity}</Text>
+            <Text style={styles.tableCol}>{order.price}</Text>
+            <Text style={styles.tableCol}>{order.state}</Text>
+            <Text style={styles.tableCol}>{new Date(order.createdAt).toLocaleString()}</Text>
+          </View>
+        ))}
+      </View>
     </Page>
   </Document>
 );
