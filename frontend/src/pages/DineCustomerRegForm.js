@@ -111,6 +111,8 @@ function DineCustomerRegForm() {
     } else {
       setError("Please enter valid details");
     }
+
+    navigate("/dine-in-bookings")
   };
 
   // Function to clear form fields
@@ -127,9 +129,9 @@ function DineCustomerRegForm() {
   };
 
   // Function to handle navigation to pre-booking page
-  const handlePreBookingsClick = () => {
-    navigate("/pre-booking-dine-in-form");
-  };
+  // const handlePreBookingsClick = () => {
+  //   ;
+  // };
 
   // Render form components
   return (
@@ -248,8 +250,6 @@ function DineCustomerRegForm() {
 
 
           </Grid>
-          {/* Button to navigate to pre-booking page */}
-          <Button onClick={handlePreBookingsClick}>Pre Bookings</Button>
           {/* Button to submit the form */}
           <Button type="submit" contained sx={{ marginTop: '20px', backgroundColor: 'lightblue' }}>Add Booking</Button>
           {/* Display error message if any */}
