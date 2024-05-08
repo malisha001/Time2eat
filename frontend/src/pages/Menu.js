@@ -51,7 +51,7 @@ const Menu = () => {
       const rowData = [
         item.Item_id,
         item.Item_name,
-        item.Category,
+        item.catagory,
         item.Price,
         item.Cost,
         item.Profit,
@@ -73,7 +73,7 @@ const Menu = () => {
     if (!foodItems) return [];
     if (!searchQuery) return foodItems;
     
-    return foodItems.filter(item => item.Category.toLowerCase().includes(searchQuery.toLowerCase()));
+    return foodItems.filter(item => item.catagory.toLowerCase().includes(searchQuery.toLowerCase()));
   };
 
   return (
@@ -110,7 +110,7 @@ const Menu = () => {
                 <tr key={index}>
                   <td>{foodItem.Item_id}</td>
                   <td>{foodItem.Item_name}</td>
-                  <td>{foodItem.Category}</td>
+                  <td>{foodItem.catagory}</td>
                   <td>{foodItem.Price}</td>
                   <td>{foodItem.Cost}</td>
                   <td>{foodItem.Profit}</td>
