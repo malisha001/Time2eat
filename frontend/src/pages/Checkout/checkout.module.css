@@ -13,7 +13,7 @@
   }
   
   .content,
-  .inputs {
+  .inputs p{
     display: flex;
     flex-direction: column;
   }

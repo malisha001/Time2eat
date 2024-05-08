@@ -23,8 +23,7 @@ const DIorderDetails = ({ order}) => {
         
         <div className={classes.dineindetails}>
           
-            <h4>{order.resname}</h4>
-            <p><strong>Restaurant id: </strong>{order.restaurantid}</p>
+           
             <p><strong>Table ID: </strong> {order.tableid}</p>
             <p><strong>Food Item: </strong> {order.fooditem}</p>
             <p><strong>Food Name: </strong> {order.name}</p>
