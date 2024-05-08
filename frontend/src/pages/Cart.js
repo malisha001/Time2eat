@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Paper, Grid, Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField, FormControl, FormLabel, RadioGroup, Radio, FormControlLabel } from '@mui/material';
 import { getCartData, checkRider } from '../services/api';
 import { useNavigate } from 'react-router-dom';
-import { placeorder,deleteCartData } from '../services/api';
+import { placeorder, deleteCartData } from '../services/api';
 import { useAuthContext } from '../hooks/useAuthContext';
 import Navbar from '../component/Navbar';
 
@@ -18,8 +18,6 @@ function Cart() {
     const [message, setMessage] = useState('');
     const [countdown, setCountdown] = useState(10);
     const [error, setError] = useState('');
-    const [deleteorder, setdeleteorder] = useState('');
-    var deleteee;
 
     //get radio button value
     const handleChange = (event) => {
@@ -56,6 +54,12 @@ function Cart() {
 
         //if delivery is selected
         if (radiovalue === 'delivery') {
+            // Validate the location input
+            if (!isValidLocation(location)) {
+                setError('Enter valid Location');
+                return;
+            }
+
             const data = {
                 orderid: order,
                 cusName: user.email,
@@ -70,8 +74,6 @@ function Cart() {
             try {
                 const response = await placeorder(data);
                 console.log('data:', response._id);
-                deleteee = response._id;
-                setdeleteorder(response._id);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -80,15 +82,7 @@ function Cart() {
             } catch (error) {
                 console.error('Error placing order:', error);
             }
-            const deletfunction = async () => {
-                try {
-                    console.log('delete order:', deleteee);
-                    const delt = await deleteCartData(deleteee);
-                    console.log('delete:', delt);
-                } catch (error) {
-                    console.error('delete order errer:', error);
-                }
-            }
+
             // Trigger handleDelivery every 9 seconds
             const intervalId = setInterval(() => {
                 handleDelivery(order); // Pass orderid or any other data you need
@@ -99,7 +93,6 @@ function Cart() {
                 clearInterval(intervalId);
                 clearInterval(countdownId); // Stop the countdown
                 setMessage('No rider available in your area!')
-                deletfunction();
                 setDataSent(false)
             }, 10000); // 10 secs in milliseconds for now
 
@@ -151,6 +144,13 @@ function Cart() {
 
     }, []);
 
+    // Location input validation function
+    const isValidLocation = (value) => {
+        // allow only letters, numbers, and /
+        const regex = /^[a-zA-Z0-9/]+$/;
+        return regex.test(value);
+    };
+
     return (
         <div>
             <Navbar />
@@ -179,10 +179,17 @@ function Cart() {
                                     name="resId"
                                     variant="outlined"
                                     label="Location"
-                                    // value={location}
-                                    // onChange={testfieldhandle}
-                                    // error={Boolean(error)}
-                                    // helperText={error}
+                                    value={location}
+                                    onChange={(e) => {
+                                        setLocation(e.target.value);
+                                        if (!isValidLocation(e.target.value)) {
+                                            setError('Enter valid Location');
+                                        } else {
+                                            setError('');
+                                        }
+                                    }}
+                                    error={Boolean(error)}
+                                    helperText={error}
                                     style={{ display: radiovalue === 'delivery' ? 'block' : 'none' }}
                                 /><br />
                                 <FormControl variant="outlined">
@@ -208,28 +215,6 @@ function Cart() {
                 ))}
             </div>
         </div>
-
-                    //get textfield value
-    // const testfieldhandle = (event) => {
-    //     const value = event.target.value;
-    //     setLocation(value);
-    //     // Validate the input
-    //     if (!isValidLocation(value)) {
-    //         // If input is invalid, set an error message
-    //         setError('Enter valid Location');
-    //     } else {
-    //         // If input is valid, clear the error message
-    //         setError('');
-    //     }
-    // }
-
-    // const isValidLocation = (value) => {
-    //     // allow only letters, numbers, and /
-    //     const regex = /^[a-zA-Z0-9/]+$/;
-    //     return regex.test(value);
-    // };
-
-
     );
 }
 
