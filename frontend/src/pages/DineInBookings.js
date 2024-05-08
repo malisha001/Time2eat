@@ -1,28 +1,40 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import { Table, TableBody, TableHead, TableRow, TableCell, TableContainer, Paper, Button } from '@mui/material';
 import axios from "axios";
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const DineInBookings = () => {
-    const [dineBookings, setDineBookings] = useState(null);
+    const { user } = useAuthContext();
+    const [dineBookings, setDineBookings] = useState(null);  // State to store dine-in bookings data
 
+
+    console.log(user)
+     // Fetch dine-in bookings data when the component mounts or when user changes
     useEffect(() => {
-        const fetchDineInBookings = async () => {
-            try {
-                const response = await axios.get('/api/realtimebooking');
-                const data = response.data;
-                setDineBookings(data);
-            } catch (error) {
-                console.error('Error fetching Dine In Bookings:', error);
-            }
-        };
+        // Check if user and user.resId exist
+        if (user && user.resId) {
+            const fetchDineInBookings = async () => {
+                try {
+                    const response = await axios.get(`/api/realtimebooking/${user.resId}`);
+                    const data = response.data;
+                    setDineBookings(data);
+                } catch (error) {
+                    console.error('Error fetching Dine In Bookings:', error);
+                }
+            };
 
-        fetchDineInBookings();
-    }, []);
+            fetchDineInBookings();
+        }
+    }, [user]); // Add user to the dependency array to re-fetch bookings when user changes
 
+    // Function to handle deletion of a dine-in booking
     const handleClick = async (deleteDineBookings) => {
         try {
+            // Sending DELETE request to delete the specified dine-in booking
             await axios.delete(`/api/realtimebooking/${deleteDineBookings}`);
+
+            // Updating state to remove the deleted booking from dineBookings
             setDineBookings(prevBookings => prevBookings.filter(dineBooking => dineBooking._id !== deleteDineBookings));
         } catch (error) {
             console.error('Error deleting booking:', error);
@@ -31,7 +43,7 @@ const DineInBookings = () => {
 
     return (
         <div>
-            <TableContainer component={Paper} style={{ marginBottom: '20px', backgroundColor: 'lightgrey', marginTop: '40px'  }}>
+            <TableContainer component={Paper} style={{ marginBottom: '20px', backgroundColor: 'lightgrey', marginTop: '40px' }}>
                 <Table aria-label="simple table">
                     <TableHead sx={{bgcolor: 'lightblue'}}>
                         <TableRow>
@@ -58,7 +70,7 @@ const DineInBookings = () => {
                                     <Button onClick={() => handleClick(dineBooking._id)} variant='contained'>Delete</Button>
                                 </TableCell>
                                 <TableCell>
-                                    <Button variant='contained'><Link to={`/update-dine-in-booking/${dineBooking._id}`}>Update</Link></Button>
+                                    <Button variant='contained'><Link to={`/update-dine-in-booking/${dineBooking._id}/${user.resId}`}>Update</Link></Button>
                                 </TableCell>
                             </TableRow>
                         ))}

@@ -4,7 +4,7 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
 const UpdateDineInBooking = () => {
-  const { id } = useParams();
+  const { id, resId } = useParams();
   const [selectedDateTime, setSelectedDateTime] = useState({ date: '', time: '' });
   const [couplequantity, setCouplequantity] = useState('');
   const [groupquantity, setGroupquantity] = useState('');
@@ -17,7 +17,9 @@ const UpdateDineInBooking = () => {
     const fetchBookingData = async () => {
       try {
         const response = await axios.get(`/api/realtimebooking/${id}`);
+        console.log("hi", response)
         const { name, date, time, couplequantity, groupquantity, telephoneno } = response.data;
+        
         setName(name);
         setSelectedDateTime({ date, time });
         setCouplequantity(couplequantity);
@@ -31,14 +33,21 @@ const UpdateDineInBooking = () => {
     fetchBookingData();
   }, [id]);
 
+  console.log(name !== null ? name : "Name is null");
+
+
   useEffect(() => {
     fetchAvailableTables();
   }, [couplequantity, groupquantity]);
 
   const fetchAvailableTables = async () => {
     try {
-      const response = await axios.get("/api/realtimebooking");
+      const response = await axios.get(`/api/realtimebooking/${resId}`);
       const bookings = response.data;
+
+      // Fetch restaurant data
+      const restaurantResponse = await axios.get(`/api/restaurants/${resId}`);
+      const restaurantData = restaurantResponse.data;
 
       const coupleTablesBooked = bookings.reduce(
         (acc, booking) => acc + booking.couplequantity,
@@ -49,8 +58,8 @@ const UpdateDineInBooking = () => {
         0
       );
 
-      const availableCoupleTables = (10 - coupleTablesBooked) + couplequantity; // Max available couple tables minus tables already booked and those requested
-      const availableGroupTables = (15 - groupTablesBooked) + groupquantity; // Max available group tables minus tables already booked and those requested
+      const availableCoupleTables = (restaurantData.Couple_table - coupleTablesBooked) + couplequantity; // Max available couple tables minus tables already booked and those requested
+      const availableGroupTables = (restaurantData.Group_table - groupTablesBooked) + groupquantity; // Max available group tables minus tables already booked and those requested
 
       setAvailableTables({ couple: availableCoupleTables, group: availableGroupTables });
     } catch (error) {
