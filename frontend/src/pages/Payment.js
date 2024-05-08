@@ -37,7 +37,7 @@ function Payment() {
                     <TextField
                       required
                       id="outlined-required"
-                      label="Required"
+                      label="Name On Card"
                       defaultValue="Hello World"
                       sx={{ width: '100%' }}
                     />
@@ -46,7 +46,7 @@ function Payment() {
                     <TextField
                       required
                       id="outlined-required"
-                      label="Required"
+                      label="Bank"
                       defaultValue="Hello World"
                       sx={{ width: '100%' }}
                     />
@@ -55,7 +55,7 @@ function Payment() {
                     <TextField
                       required
                       id="outlined-required"
-                      label="Required"
+                      label="Branch"
                       defaultValue="Hello World"
                       sx={{ width: '100%' }}
                     />
@@ -64,7 +64,7 @@ function Payment() {
                     <TextField
                       required
                       id="outlined-required"
-                      label="Required"
+                      label="Card Number"
                       defaultValue="Hello World"
                       sx={{ width: '100%' }}
                     />
@@ -73,7 +73,7 @@ function Payment() {
                     <TextField
                       required
                       id="outlined-required"
-                      label="Required"
+                      label="Date"
                       defaultValue="Hello World"
                       sx={{ width: '100%' }}
                     />
@@ -82,7 +82,7 @@ function Payment() {
                     <TextField
                       required
                       id="outlined-required"
-                      label="Required"
+                      label="CVV"
                       defaultValue="Hello World"
                       sx={{ width: '100%' }}
                     />
