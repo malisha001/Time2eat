@@ -1,0 +1,64 @@
+/* AddrestaurantsForm.css */
+
+.create.res {
+    max-width: 800px; /* Increased width to accommodate two columns */
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    display: flex; /* Use flexbox */
+    flex-wrap: wrap; /* Allow wrapping */
+}
+
+.create.res h2 {
+    width: 100%; /* Span across both columns */
+    text-align: center;
+    color: #333333;
+}
+
+.create.res .input-container {
+    width: 50%; /* Each input container takes 50% width */
+    padding-right: 15px; /* Adjust spacing between columns */
+    box-sizing: border-box;
+}
+
+.create.res label {
+    display: block;
+    margin-bottom: 5px; /* Add margin below each label */
+}
+
+.create.res input[type="text"],
+.create.res input[type="password"],
+.create.res input[type="number"] {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    margin-bottom: 10px; /* Add margin below each input field */
+}
+
+.create.res button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.create.res button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.create.res .error {
+    width: 100%; /* Span across both columns */
+    color: #ff3333;
+    font-size: 14px;
+    margin-top: 5px;
+}

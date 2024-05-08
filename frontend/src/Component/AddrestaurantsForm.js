@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import './AddrestaurantsForm.css'
 
 const AddrestaurantsForm = () => {
     const navigate = useNavigate();
@@ -152,7 +153,7 @@ const AddrestaurantsForm = () => {
     };
 
     return (
-        <form className="create" onSubmit={handleSubmit}>
+        <form className="create res" onSubmit={handleSubmit}>
             <h2>Add Restaurant</h2>
 
             <label>Restaurant Id :</label>
