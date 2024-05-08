@@ -17,7 +17,7 @@ const onlinePaymentModel = new Schema({
         required: true
     },
     cardno: {
-        type: Number,
+        type: String,
         required: true
     },
     date: {
@@ -25,7 +25,7 @@ const onlinePaymentModel = new Schema({
         required: true
     },
     cvv: {
-        type: Number,
+        type: String,
         required: true
     },
 }, { timestamps: true })
