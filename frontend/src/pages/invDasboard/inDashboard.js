@@ -11,6 +11,7 @@ const Dash = () => {
     const [rItems,setRItems] = useState("");
     const [totalCategoryCount, setTotalCategoryCount] = useState(0);
     const [orders, setOrders] = useState(null);
+    const [rSitem, setRSitem] = useState(null)
 
     useEffect(() => {
         const fetchInventoryItems = async () => {
@@ -58,11 +59,22 @@ const Dash = () => {
                 console.error('Error fetching online orders:', error);
             }
         };
+
+        const fetchCompletedRestock = async () => {
+            const response = await fetch('/api/reorder/')
+            const json = await response.json()
+            console.log("reOrder", json)
+
+            if (response.ok) {
+                setRSitem(json);
+            }
+        }
       
     
         fetchOnlineOrders();
         fetchReorderItems();
         fetchInventoryItems()
+        fetchCompletedRestock();
 
 
     }, [])
@@ -70,6 +82,7 @@ const Dash = () => {
     const totalItems = items ? items.length : 0;
     const totalReorderItems = rItems ? rItems.length : 0;
     const totalOnlineOrders = orders ? orders.length : 0;
+    const totalRestock = rSitem ? rSitem.length : 0;
     
 
     return(
@@ -103,22 +116,19 @@ const Dash = () => {
                                 <div className="box1">
                                     <h1>Total Products</h1>
                                     <h3>{totalItems}</h3>
-
                                 </div>
                             </div>
                             
                         <hr />
                         <h1>ORDER STATUS</h1>
                         <div className="Boxes-One">
-                                <div className="box1">
+                                <div className="box2">
                                     <h1>Order Requests</h1>
                                     <h3>{totalOnlineOrders}</h3>
                                 </div>
-                                <div className="box1">
-                                    <h1>Completed Orders</h1>
-                                </div>
-                                <div className="box1">
+                                <div className="box2">
                                     <h1>Re-Stocks</h1>
+                                    <h3>{totalRestock}</h3>
                                 </div>
                             </div>
                     </div>

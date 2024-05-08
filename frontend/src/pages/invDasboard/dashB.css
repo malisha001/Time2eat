@@ -83,3 +83,21 @@
 .box1 h3{
     text-align: center;
 }
+
+.Boxes-One .box2 {
+    width: 550px;
+    height: 200px;
+    background-color: rgb(189, 178, 196);
+    margin-right: 30px;
+    border-radius: 10px;
+}
+
+.box2 h3{
+    text-align: center;
+}
+
+.Boxes-One .box2 h1{
+    font-size: 25px;
+    font-weight: 400;
+    padding-top: 40px;
+}

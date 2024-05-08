@@ -90,7 +90,7 @@ const Home = () => {
                                     <td>{item.itemCategory}</td>
                                     <td>
                                         <button onClick={() => handleDelete(item._id)} className="invDeleteButton">Delete</button>
-                                        <Link to={`/inventory/update/${item._id}`}><button className="update-button">Update</button></Link>
+                                        <Link to={`/inventory/update/${item._id}`}><button className="invupdate-button">Update</button></Link>
                                     </td>
                                 </tr>
                             ))}
