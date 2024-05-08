@@ -1,0 +1,60 @@
+/* Container style */
+.up-restprof {
+    margin: 0 auto; /* Center the form horizontally */
+    max-width: 500px; /* Limit the width of the form */
+    padding: 20px; /* Add padding around the form */
+    border: 1px solid #ccc; /* Add a border */
+    border-radius: 8px; /* Add border radius */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a box shadow */
+    background-color: #f9f9f9; /* Set background color */
+}
+
+/* Form header style */
+.up-restprof h3 {
+    font-size: 24px; /* Set font size */
+    color: #333; /* Set text color */
+    margin-bottom: 20px; /* Add bottom margin */
+}
+
+/* Label style */
+.up-restprof label {
+    font-size: 16px; /* Set font size */
+    display: block; /* Make labels block-level */
+    margin-bottom: 8px; /* Add bottom margin */
+    color: #555; /* Set label text color */
+}
+
+/* Input style */
+.up-restprof input {
+    width: 100%; /* Set input width to fill container */
+    padding: 10px; /* Add padding */
+    font-size: 16px; /* Set font size */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 4px; /* Add border radius */
+    margin-bottom: 16px; /* Add bottom margin */
+    box-sizing: border-box; /* Include padding and border in the input's total width */
+}
+
+/* Error message style */
+.up-restprof .error {
+    color: #ff0000; /* Set error message color */
+    font-size: 14px; /* Set font size */
+    margin-top: 4px; /* Add top margin */
+}
+
+/* Button style */
+.up-restprof button[type="submit"] {
+    background-color: #007bff; /* Set button background color */
+    color: #fff; /* Set button text color */
+    border: none; /* Remove border */
+    padding: 12px 20px; /* Add padding */
+    font-size: 18px; /* Set font size */
+    border-radius: 4px; /* Add border radius */
+    cursor: pointer; /* Set cursor to pointer */
+    transition: background-color 0.3s; /* Add transition effect */
+}
+
+/* Button hover style */
+.up-restprof button[type="submit"]:hover {
+    background-color: #0056b3; /* Change background color on hover */
+}

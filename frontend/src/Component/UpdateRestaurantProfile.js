@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import './UpdateRestaurantProfile.css';
+
 
 const Updaterestaurants = () => {
     const { id } = useParams(); // Get the restaurant id from URL params
@@ -89,7 +91,7 @@ const Updaterestaurants = () => {
     };
 
     return ( 
-        <div>
+        <div className="up-restprof">
             <form onSubmit={handleSubmit}>
                 <h3>Update Restaurant Details</h3>
                 

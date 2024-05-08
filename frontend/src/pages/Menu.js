@@ -77,6 +77,8 @@ const Menu = () => {
   };
 
   return (
+    <div className="men">
+    <h1>Menu Table</h1>
     <div className="container">
       <div className="fooditems">
         <input
@@ -132,6 +134,7 @@ const Menu = () => {
           </table>
         </div>
       </div>
+    </div>
     </div>
   );
 };

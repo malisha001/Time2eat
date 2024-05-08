@@ -1,34 +1,31 @@
-
-
-
-
 /* Table style */
 .menu table {
-    width: 106%;
+    width: 90%; /* Adjusted width */
     border-collapse: collapse;
+    margin-top: 20px;
 }
 
 /* Table header style */
 .menu table th {
     background-color: #D1CCCC;
-    padding: 23px;
+    padding: 15px; /* Reduced padding */
     text-align: center;
     border-bottom: 2px solid #ddd;
-    font-size: 21px;
+    font-size: 18px; /* Reduced font size */
     font-family: 'Times New Roman', Times, serif;
 }
 
 /* Table body style */
 td {
-    padding: 15px;
-    border-bottom: 1.5px solid #84b0b4;
+    padding: 10px; /* Reduced padding */
+    border-bottom: 1px solid #84b0b4;
     text-align: center;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14px; /* Reduced font size */
 }
 
 /* Alternate row color */
-tbody  {
+tbody {
     background-color: #d7f3f2;
 }
 
@@ -37,15 +34,15 @@ tbody  {
     background-color: #8e1010;
     color: white;
     border: none;
-    padding: 10px 12px;
+    padding: 8px 10px; /* Reduced padding */
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 14px;
+    font-size: 12px; /* Reduced font size */
     cursor: pointer;
     transition: background-color 0.3s;
-    margin-right: 10px;
-    border-radius: 10px;
+    margin-right: 8px; /* Reduced margin */
+    border-radius: 8px; /* Reduced border radius */
     font-weight: 1000;
 }
 
@@ -57,48 +54,68 @@ tbody  {
 }
 
 .update-button {
-    background-color: #105c22; 
-    color: white; 
-    border: none; 
-    padding: 10px 12px;
-    text-align: center; 
-    text-decoration: none; 
-    display: inline-block; 
-    font-size: 14px; 
-    cursor: pointer; 
-    border-radius: 10px;
-    transition: background-color 0.3s; 
+    background-color: #105c22;
+    color: white;
+    border: none;
+    padding: 8px 10px; /* Reduced padding */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px; /* Reduced font size */
+    cursor: pointer;
+    border-radius: 8px; /* Reduced border radius */
+    transition: background-color 0.3s;
 }
 
 .update-button:hover {
     background-color: #54c66c;
     cursor: pointer;
 }
+/* CSS for Menu component */
 
-
-
-
-
-/* Style for Topic and h4 */
-.home h1 {
-    font-size: 45px;
-    font-weight:400;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-    word-spacing: 1px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-}
-
-.home hr {
-    border: none;
-    height: 2px;
-    background-color: #ccc;
-    margin: -10px -157px 0px 0px ;
-}
-
-.home h4 {
-    font-size: 20px;
-    color: #000000;
-    font-weight: 400;
-    margin-top: 15px;
-}
+/* Search input style */
+.fooditems input[type="text"] {
+    width: 200px; /* Adjust width as needed */
+    padding: 8px; /* Add padding */
+    margin-bottom: 8px; /* Add bottom margin */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 4px; /* Add border radius */
+    box-sizing: border-box; /* Include padding and border in the input's total width */
+    font-size: 14px; /* Set font size */
+  }
+  
+  /* Add Menu button style */
+  .menu .add {
+    background-color: #007bff; /* Set button background color */
+    color: #fff; /* Set button text color */
+    border: none; /* Remove border */
+    padding: 8px 16px; /* Add padding */
+    font-size: 14px; /* Set font size */
+    border-radius: 4px; /* Add border radius */
+    margin-left: 1050px;
+    cursor: pointer; /* Set cursor to pointer */
+    transition: background-color 0.3s; /* Add transition effect */
+  }
+  /* Add Menu button hover style */
+  .menu .add:hover {
+    background-color: #0056b3; /* Change background color on hover */
+  }
+  
+  /* Generate Report button style */
+  .menu .generate-report {
+    background-color: #28a745; /* Set button background color */
+    color: #fff; /* Set button text color */
+    border: none; /* Remove border */
+    padding: 8px 16px; /* Add padding */
+    font-size: 14px; /* Set font size */
+    border-radius: 4px; /* Add border radius */
+    cursor: pointer; /* Set cursor to pointer */
+    transition: background-color 0.3s; /* Add transition effect */
+    margin-right: 8px; /* Add right margin */
+  }
+  
+  /* Generate Report button hover style */
+  .menu .generate-report:hover {
+    background-color: #218838; /* Change background color on hover */
+  }
+  
