@@ -26,6 +26,9 @@ function RiderDashboard() {
                 reslocation: order.reslocation,
                 price: order.price
             });
+
+            //delete order from rider dashbord
+            
             // res.status(200).json(orderres);
             navigate('/riderdashborad/ongoingorder')
         } catch (error) {
