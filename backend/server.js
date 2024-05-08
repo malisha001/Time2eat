@@ -86,7 +86,7 @@ app.use('/api/foods', foodrouter)
 app.use('/api/onlineOrders', onlineOrdersRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/dineinorders',dineinorder)
-
+app.use('/api/carts', cartRoutes)
 
 
 // middleware to parse incoming JSON data

@@ -4,6 +4,7 @@ import { getCartData, checkRider } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 import { placeorder } from '../services/api';
 import { useAuthContext } from '../hooks/useAuthContext';
+import Navbar from '../component/Navbar';
 
 function Cart() {
     const { user } = useAuthContext(); //get user details
@@ -104,7 +105,7 @@ function Cart() {
             } catch (error) {
                 console.error('Error placing order:', error);
             }
-            console.log('navigate to payment page:');
+            navigate('/payment')
         }
 
     }
@@ -118,9 +119,9 @@ function Cart() {
                 const ordersMap = new Map();
                 fetchCartData.forEach(item => {
                     if (ordersMap.has(item.orderid)) {
-                        ordersMap.get(item.orderid).items.push(item.fooditem);
+                        ordersMap.get(item.orderid).items.push(item.foodname);
                     } else {
-                        ordersMap.set(item.orderid, { ...item, items: [item.fooditem] });
+                        ordersMap.set(item.orderid, { ...item, items: [item.foodname] });
                     }
                 });
                 // Convert map values to array
@@ -137,50 +138,57 @@ function Cart() {
 
     return (
         <div>
-            <h1>Cart Page</h1>
+            <Navbar />
+            <h1>My order</h1>
             {radiovalue === 'delivery' && (
                 <div>
                     <p>{message}</p>
                     <p>Wait {countdown} seconds to find a rider!</p>
                 </div>
             )}
-
+            
             <div>
                 {cartData.map((order) => (
                     <Paper key={order.orderid} sx={{ padding: '32px', bgcolor: '#F0F8FF', margin: '20px' }}>
-                        <h2>Restaurant name: {order.restaurantname}</h2>
-                        <h3>Order Id: {order.orderid}</h3>
-                        <h3>Items:</h3>
-                        <ul>
-                            {order.items.map((foodItem, index) => (
-                                <li key={index}>{foodItem}</li>
-                            ))}
-                        </ul>
-                        <TextField
-                            name="resId"
-                            variant="outlined"
-                            label="Location"
-                            // value={location}
-                            // onChange={testfieldhandle}
-                            // error={Boolean(error)}
-                            // helperText={error}
-                            style={{ display: radiovalue === 'delivery' ? 'block' : 'none' }}
-                        /><br />
-                        <FormControl variant="outlined">
-                            <FormLabel id="demo-radio-buttons-group-label">Options</FormLabel>
-                            <RadioGroup
-                                aria-labelledby="demo-radio-buttons-group-label"
-                                defaultValue="delivery"
-                                name="radio-buttons-group"
-                                value={radiovalue}
-                                onChange={handleChange}
-                            >
-                                <FormControlLabel value="pickup" control={<Radio />} label="pickup" />
-                                <FormControlLabel value="delivery" control={<Radio />} label="delivery" />
-                            </RadioGroup>
-                        </FormControl><br />
-                        <Button variant='contained' onClick={() => handleClickConfirm(order.orderid, order.restaurantname)} disabled={isDataSent}> confirm</Button>
-
+                        <Grid container >
+                            <Grid item ={6}>
+                                <h2>Restaurant name: {order.restaurantname}</h2>
+                                <h3>Order Id: {order.orderid}</h3>
+                                <h3>Items:</h3>
+                                <ul>
+                                    {order.items.map((foodname, index) => (
+                                        <li key={index}>{foodname}</li>
+                                    ))}
+                                </ul>
+                                <TextField
+                                    name="resId"
+                                    variant="outlined"
+                                    label="Location"
+                                    // value={location}
+                                    // onChange={testfieldhandle}
+                                    // error={Boolean(error)}
+                                    // helperText={error}
+                                    style={{ display: radiovalue === 'delivery' ? 'block' : 'none' }}
+                                /><br />
+                                <FormControl variant="outlined">
+                                    <FormLabel id="demo-radio-buttons-group-label">Options</FormLabel>
+                                    <RadioGroup
+                                        aria-labelledby="demo-radio-buttons-group-label"
+                                        defaultValue="delivery"
+                                        name="radio-buttons-group"
+                                        value={radiovalue}
+                                        onChange={handleChange}
+                                    >
+                                        <FormControlLabel value="pickup" control={<Radio />} label="pickup" />
+                                        <FormControlLabel value="delivery" control={<Radio />} label="delivery" />
+                                    </RadioGroup>
+                                </FormControl><br />
+                                <Button variant='contained' onClick={() => handleClickConfirm(order.orderid, order.restaurantname)} disabled={isDataSent}> confirm</Button>
+                            </Grid>
+                            <Grid item ={6} >
+                                <h3>Price: {order.tprice}</h3>
+                            </Grid>
+                        </Grid>
                     </Paper>
                 ))}
             </div>

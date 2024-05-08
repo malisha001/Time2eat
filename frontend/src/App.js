@@ -138,7 +138,7 @@ function App() {
 
             <Route path='/riderdashborad/*' element={<RiderDashboard />}/>
             <Route path='/riderdashborad/ongoingorder' element={<OngoingOrder/>} />
-            <Route path='/cart' element={<Cart/>} />
+            <Route path='/carts' element={<Cart/>} />
             <Route path='/payment' element={<Payment/>} />
 
      
@@ -164,7 +164,7 @@ function App() {
             <Route path="/update-restaurant/:id/" element = {<Updaterestaurants/>} />
             <Route path="/restaurants/:id/" element = {<RestaurantProfile />} />
             <Route path="/update-restaurantprofile/:id/" element = {<UpdateRestaurantProfile/>} />
-             <Route path="/dinein" element = {<DineIn />} />
+            <Route path="/dinein" element = {<DineIn />} />
             <Route path="/checkout" element={<CheckoutPage />} /> 
           </Routes>
         </div>  
