@@ -1,0 +1,35 @@
+body {
+    background: #f1f1f1;
+    margin: 0;
+    font-family: "Poppins";
+  }
+
+.dinein {
+    display:inline-flex;
+    flex-direction: row;
+    
+}
+  
+  .dorders {
+    display: inline-block;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .home {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 100px;
+    max-width: 1400px;
+  padding: 20px;
+  margin: 0 auto;
+  }
+
+  .topic h2{
+    
+    align-items: center;
+    color: rgb(245, 94, 39);
+    padding: 20px;
+    
+  }

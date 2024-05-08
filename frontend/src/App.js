@@ -21,6 +21,7 @@ import NewBooking from "./pages/NewBooking";
 // import RestaurantStaff from "./pages/RestaurantStaff";
 import Feedback from './pages/Feedback';
 import { BrowserRouter, Routes, Route,Navigate,useLocation } from 'react-router-dom';
+
 import { useAuthContext } from './hooks/useAuthContext'
 import AddfeedbackForm from './component/AddfeedbackForm';
 import UpdateFeedback from './component/Updatefeedback';
@@ -45,6 +46,7 @@ import BookingPayment from './pages/BookingPayment';
 import ResPage from './pages/ResPage/ResPage.js';
 import FoodPage from './pages/Food/FoodPage.js';
 import CartPage from './pages/Cart/CartPage.js';
+import DineIn from './pages/DineIn/DineIn';
 
 
 // import AdvertisementForm from './components/AdvertisementForm';
@@ -65,9 +67,13 @@ import Updaterestaurants from './component/Updaterestaurants';
 import RestaurantProfile from './pages/Restaurantprofile';
 import UpdateRestaurantProfile from './component/UpdateRestaurantProfile'
 
+
 import PrebookingDineInForm from './pages/prebookingdinein';
 
 import RestaurantDashboard from './pages/restaurentDashbord/RestaurenrDashbord';
+
+
+import CheckoutPage from './pages/Checkout/CheckoutPage';
 
 
 function App() {
@@ -98,7 +104,7 @@ function App() {
             <Route path="/mybookings/:id" element={<MyBookings />} />
            {/*} <Route path="/update-booking/:id" element={<UpdateBookingDetails />} />  */}
             <Route path="/update-pre-booking/:id" element={<UpdatePreBookings />} />
-            <Route path="/update-dine-in-booking/:id" element={<UpdateDineIn />} />
+            <Route path="/update-dine-in-booking/:id/:resId" element={<UpdateDineIn />} />
             <Route path="/bookingpayment" element={<BookingPayment />} />
 
             {/* <Route path="/realtime-staff" element={<RestaurantStaff />} /> */}
@@ -132,7 +138,7 @@ function App() {
 
             <Route path='/riderdashborad/*' element={<RiderDashboard />}/>
             <Route path='/riderdashborad/ongoingorder' element={<OngoingOrder/>} />
-            <Route path='/cart' element={<Cart/>} />
+            <Route path='/carts' element={<Cart/>} />
             <Route path='/payment' element={<Payment/>} />
 
      
@@ -158,7 +164,8 @@ function App() {
             <Route path="/update-restaurant/:id/" element = {<Updaterestaurants/>} />
             <Route path="/restaurants/:id/" element = {<RestaurantProfile />} />
             <Route path="/update-restaurantprofile/:id/" element = {<UpdateRestaurantProfile/>} />
-
+            <Route path="/dinein" element = {<DineIn />} />
+            <Route path="/checkout" element={<CheckoutPage />} /> 
           </Routes>
         </div>  
       </BrowserRouter>

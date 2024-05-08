@@ -26,7 +26,7 @@ OrderItemSchema.pre('validate', function (next) {
 const orderSchema = new Schema(
     {
 
-    name: { type: String, required: true },
+    fullname: { type: String, required: true },
     address: { type: String, required: true },
     /*addressLatLng: { type: LatLngSchema, required: true }, */
     paymentId: { type: String },
@@ -37,7 +37,12 @@ const orderSchema = new Schema(
   },
   {
     timestamps: true,
-    
+    toJSON: {
+        virtuals: true,
+      },
+      toObject: {
+        virtuals: true,
+      },
   }
 );
 
