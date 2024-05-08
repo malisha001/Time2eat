@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-//import Navbar from "../components/Navbar";
-//import './addfooditems.css';
 
 const AddfooditemsForm = () => {
     const navigate = useNavigate();
@@ -13,7 +11,7 @@ const AddfooditemsForm = () => {
     const [Average_preparetime, setAverage_preparetime] = useState('');
     const [error, setError] = useState(null);
     const [priceError, setPriceError] = useState('');
-    const [costError, setcostError] = useState('');
+    const [costError, setCostError] = useState('');
     const [timeError, setTimeError] = useState('');
     const [nameError, setNameError] = useState('');
     const [categoryError, setCategoryError] = useState('');
@@ -27,12 +25,13 @@ const AddfooditemsForm = () => {
         setPriceError('');
         return true;
     };
-    const validatecost = (value) => {
+
+    const validateCost = (value) => {
         if (!value || isNaN(value)) {
-            setcostError('Price must be a number');
+            setCostError('Cost must be a number');
             return false;
         }
-        setPriceError('');
+        setCostError('');
         return true;
     };
 
@@ -56,24 +55,22 @@ const AddfooditemsForm = () => {
     };
 
     const handleNameChange = (value) => {
-        setItem_name(value);
         if (!value) {
-            setNameError('Item Name is required'); 
-          }else if(/\d/.test(value)){
-            setNameError('Name cannot contain numbers')
-          }
-         else {
+            setNameError('Item Name is required');
+        } else if (/\d/.test(value)) {
+            setNameError('Name cannot contain numbers');
+        } else {
             setNameError('');
+            setItem_name(value);
         }
     };
 
     const handleCategoryChange = (value) => {
-        setCatagory(value);
         if (!value) {
             setCategoryError('Category is required');
-        }
-         else {
+        } else {
             setCategoryError('');
+            setCatagory(value);
         }
     };
 
@@ -87,12 +84,12 @@ const AddfooditemsForm = () => {
         }
 
         // Check for valid Price, Average_preparetime, and Item ID
-        if (!validatePrice(Price) || !validateTime(Average_preparetime) || !validateID(Item_id)) {
+        if (!validatePrice(Price) || !validateCost(Cost) || !validateTime(Average_preparetime) || !validateID(Item_id)) {
             setError('Please ensure all fields are filled correctly.');
             return;
         }
 
-        const fooditem = { Item_id, Item_name, catagory, Price,Cost, Average_preparetime };
+        const fooditem = { Item_id, Item_name, catagory, Price, Cost, Average_preparetime };
 
         try {
             const response = await fetch('/api/fooditems', {
@@ -127,7 +124,6 @@ const AddfooditemsForm = () => {
 
     return (
         <div className="container">
-            {/* <Navbar /> */}
             <form className="create" onSubmit={handleSubmit}>
                 <h2>Add Food Items</h2>
 
@@ -138,7 +134,7 @@ const AddfooditemsForm = () => {
                         setItem_id(e.target.value);
                         validateID(e.target.value);
                     }}
-                    value={Item_id}
+                    value={idError ? '' : Item_id}
                 />
                 {idError && <div className="error">{idError}</div>}
 
@@ -146,7 +142,7 @@ const AddfooditemsForm = () => {
                 <input
                     type="text"
                     onChange={(e) => handleNameChange(e.target.value)}
-                    value={Item_name}
+                    value={nameError ? '' : Item_name}
                 />
                 {nameError && <div className="error">{nameError}</div>}
 
@@ -154,7 +150,7 @@ const AddfooditemsForm = () => {
                 <input
                     type="text"
                     onChange={(e) => handleCategoryChange(e.target.value)}
-                    value={catagory}
+                    value={categoryError ? '' : catagory}
                 />
                 {categoryError && <div className="error">{categoryError}</div>}
 
@@ -165,24 +161,21 @@ const AddfooditemsForm = () => {
                         setPrice(e.target.value);
                         validatePrice(e.target.value);
                     }}
-                    value={Price}
+                    value={priceError ? '' : Price}
                 />
                 {priceError && <div className="error">{priceError}</div>}
-                
+
                 <label>Cost:(LKR)</label>
                 <input
                     type="text"
-                    name="Cost"
-                   onChange={(e) => {
-                    setCost(e.target.value);
-                    validatecost(e.target.value);
+                    onChange={(e) => {
+                        setCost(e.target.value);
+                        validateCost(e.target.value);
                     }}
-                   value={Cost}
+                    value={costError ? '' : Cost}
                 />
-
                 {costError && <div className="error">{costError}</div>}
-                
-            
+
                 <label>Average Prepare Time:(min)</label>
                 <input
                     type="text"
@@ -190,7 +183,7 @@ const AddfooditemsForm = () => {
                         setAverage_preparetime(e.target.value);
                         validateTime(e.target.value);
                     }}
-                    value={Average_preparetime}
+                    value={timeError ? '' : Average_preparetime}
                 />
                 {timeError && <div className="error">{timeError}</div>}
 

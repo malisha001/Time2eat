@@ -18,28 +18,38 @@ const AddrestaurantsForm = () => {
     const [passwordError, setPasswordError] = useState('');
     const [error, setError] = useState(null);
     const [managerNameError, setManagerNameError] = useState('');
+    const [idError, setIdError] = useState('');
+    const [licenseNumberError, setLicenseNumberError] = useState('');
+    const [emailError, setEmailError] = useState('');
+    const [contactError, setContactError] = useState('');
 
     const validateEmail = (email) => {
-        // Basic email validation
         const regex = /\S+@\S+\.\S+/;
         return regex.test(email);
     };
 
     const validateContact = (contact) => {
-        // Validate if contact contains only numbers and has 10 digits
         const regex = /^[0-9]{10}$/;
         return regex.test(contact);
     };
 
     const validatePassword = (password) => {
-        // Basic password validation
-        return password.length >= 6; // Example validation, adjust as needed
+        return password.length >= 6;
     };
 
     const validateManagerName = (name) => {
-        // Validate if the name contains only letters
         const regex = /^[A-Za-z\s]+$/;
         return regex.test(name);
+    };
+
+    const validateID = (value) => {
+        const regex = /^[a-zA-Z0-9]+$/;
+        return regex.test(value);
+    };
+
+    const validateLicenseNumber = (value) => {
+        const regex = /^[0-9]+$/;
+        return regex.test(value);
     };
 
     const handleConfirmPasswordChange = (value) => {
@@ -52,40 +62,49 @@ const AddrestaurantsForm = () => {
     };
 
     const handleManagerNameChange = (value) => {
-        setRestaurant_Managersname(value);
         if (!validateManagerName(value)) {
             setManagerNameError('Restaurant manager\'s name must contain only letters.');
         } else {
             setManagerNameError('');
+            setRestaurant_Managersname(value);
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Perform validation checks
         if (!Restaurant_Id || !Restaurant_licensenumber || !Restaurant_name || !Restaurant_Managersname || !Email_address || !contact || !Password || !Confirm_paasword || !Address || !Couple_table || !Group_table) {
             setError('Please fill in all required fields.');
             return;
         }
 
         if (!validateEmail(Email_address)) {
-            setError('Please enter a valid email address.');
+            setEmailError('Please enter a valid email address.');
             return;
         }
 
         if (!validateContact(contact)) {
-            setError('Please enter a valid 10-digit contact number.');
+            setContactError('Please enter a valid 10-digit contact number.');
             return;
         }
 
         if (!validatePassword(Password)) {
-            setError('Password must be at least 6 characters long.');
+            setPasswordError('Password must be at least 6 characters long.');
             return;
         }
 
         if (Password !== Confirm_paasword) {
-            setError('Passwords do not match.');
+            setPasswordError('Passwords do not match.');
+            return;
+        }
+
+        if (!validateID(Restaurant_Id)) {
+            setIdError('Restaurant ID must contain only alphanumeric characters.');
+            return;
+        }
+
+        if (!validateLicenseNumber(Restaurant_licensenumber)) {
+            setLicenseNumberError('Restaurant license number must contain only numbers.');
             return;
         }
 
@@ -94,7 +113,6 @@ const AddrestaurantsForm = () => {
             return;
         }
 
-        // If all validations pass, proceed with form submission
         const restaurant = { Restaurant_Id, Restaurant_licensenumber, Restaurant_name, Restaurant_Managersname, Email_address, contact, Password, Confirm_paasword, Address, Couple_table, Group_table, status };
 
         try {
@@ -111,7 +129,6 @@ const AddrestaurantsForm = () => {
             if (!response.ok) {
                 setError(json.error);
             } else {
-                // Reset form fields and error state
                 setRestaurant_id('');
                 setRestaurant_licensenumber('');
                 setRestaurant_name('');
@@ -127,7 +144,6 @@ const AddrestaurantsForm = () => {
                 setError(null);
                 console.log('New restaurant added', json);
 
-                // Navigate to the desired page
                 navigate('/restaurants');
             }
         } catch (error) {
@@ -142,16 +158,32 @@ const AddrestaurantsForm = () => {
             <label>Restaurant Id :</label>
             <input
                 type="text"
-                onChange={(e) => setRestaurant_id(e.target.value)}
+                onChange={(e) => {
+                    if (!validateID(e.target.value)) {
+                        setIdError('Restaurant ID must contain only alphanumeric characters.');
+                        return;
+                    }
+                    setIdError('');
+                    setRestaurant_id(e.target.value);
+                }}
                 value={Restaurant_Id}
             />
+            {idError && <div className="error">{idError}</div>}
 
             <label>Restaurant License Number:</label>
             <input
                 type="text"
-                onChange={(e) => setRestaurant_licensenumber(e.target.value)}
+                onChange={(e) => {
+                    if (!validateLicenseNumber(e.target.value)) {
+                        setLicenseNumberError('Restaurant license number must contain only numbers.');
+                        return;
+                    }
+                    setLicenseNumberError('');
+                    setRestaurant_licensenumber(e.target.value);
+                }}
                 value={Restaurant_licensenumber}
             />
+            {licenseNumberError && <div className="error">{licenseNumberError}</div>}
 
             <label>Restaurant Name :</label>
             <input
@@ -171,18 +203,26 @@ const AddrestaurantsForm = () => {
             <label>Email Address :</label>
             <input
                 type="text"
-                onChange={(e) => setEmail_address(e.target.value)}
+                onChange={(e) => {
+                    setEmailError('');
+                    setEmail_address(e.target.value);
+                }}
                 value={Email_address}
             />
-            {!validateEmail(Email_address) && Email_address !== '' && <div className="error">Please enter a valid email address.</div>}
+            {emailError && <div className="error">{emailError}</div>}
 
             <label>Contact :</label>
             <input
                 type="text"
-                onChange={(e) => setContact(e.target.value)}
+                onChange={(e) => {
+                    if (!isNaN(e.target.value) && e.target.value.length <= 10) {
+                        setContactError('');
+                        setContact(e.target.value);
+                    }
+                }}
                 value={contact}
             />
-            {!validateContact(contact) && contact !== '' && <div className="error">Please enter a valid 10-digit contact number.</div>}
+            {contactError && <div className="error">{contactError}</div>}
 
             <label>Password :</label>
             <input
@@ -219,8 +259,6 @@ const AddrestaurantsForm = () => {
                 onChange={(e) => setGroup_table(e.target.value)}
                 value={Group_table}
             />
-
-            
 
             <button type="submit">Add Restaurant</button>
 

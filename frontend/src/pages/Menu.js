@@ -41,7 +41,7 @@ const Menu = () => {
 
   // Function to generate PDF report
   const generatePDFReport = () => {
-    if (!foodItems) return; // No data to generate report
+    if (!foodItems) return; 
 
     const doc = new jsPDF();
     const tableColumn = ["Item Id", "Item Name", "Category", "Price(Rs)", "Cost(Rs)", "Profit(Rs)", "Average Preparetime(min)"];
