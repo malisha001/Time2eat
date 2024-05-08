@@ -105,7 +105,7 @@ function Cart() {
             } catch (error) {
                 console.error('Error placing order:', error);
             }
-            console.log('navigate to payment page:');
+            navigate('/payment')
         }
 
     }
