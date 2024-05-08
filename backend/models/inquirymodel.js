@@ -7,10 +7,7 @@ const InquirySchema = new Schema({
     inquiry_Id:{
         type: String,
         required : true
-    },
-    customer_name:{
-        type:String,
-        required : true
+    
     },
     contact :{
         type:Number,

@@ -89,7 +89,7 @@ const AddfeedbackForm = () => {
     };
 
     return (
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", backgroundColor: "maroon" }}>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh", backgroundColor: "#ff8086" }}>
             <form style={{ backgroundColor: "rgba(255, 255, 255, 0.9)", padding: "45px", borderRadius: "10px" }} onSubmit={handleSubmit}>
                 <h2>Add Feedback</h2>
 

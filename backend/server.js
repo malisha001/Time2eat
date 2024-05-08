@@ -12,6 +12,7 @@ const employeesal = require('./routers/employeeSalary')
 const restaurants = require('./routers/restaurants')
 const fooditems = require('./routers/fooditems')
 const feedback = require('./routers/feedbacks')
+const inquiry= require('./routers/inquiry')
 const deliveries = require('./routers/deliveryOrderf')
 const bookingRoutes = require('./routers/booking')
 const RealTimebookingRoutes = require('./routers/realtimebooking')
@@ -63,6 +64,7 @@ app.use('/api/restaurants',restaurants)
 app.use('/api/fooditems',fooditems)
 //feedback and customer service routers
 app.use('/api/feedback',feedback)
+app.use('/api/inquiry',inquiry)
 //employee details
 app.use('/api/employees',employees)
 //employee salary and leaves

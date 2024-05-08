@@ -24,10 +24,10 @@ const getInquiry = async(req , res) =>{
 
 //add new inquiry
 const addInquiry = async(req , res) => {
-    const{inquiry_Id, customer_name, contact,email,topic,message} = req.body
+    const{inquiry_Id,contact,email,topic,message} = req.body
     try{
        const inquiry = await Inquiry.create({
-        inquiry_Id, customer_name, contact,email,topic,message
+        inquiry_Id,contact,email,topic,message
        })
        res.status(200).json(inquiry)
     }catch(error){
