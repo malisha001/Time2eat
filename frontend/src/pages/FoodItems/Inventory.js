@@ -45,9 +45,14 @@ const Home = () => {
     const filteredItems = items ? items.filter(item => item.itemName.toLowerCase().startsWith(searchQuery.toLowerCase())) : [];
 
     return (
-        <div>
-            <Navbar />
-            <div className="home">
+
+
+          
+        <div> 
+        <Navbar />
+            <div className="homeeee"> 
+            
+
                 <h1>Welcome to TIME<strong>2eat</strong> Food Item Lists</h1>
                 <hr />
                 <h4>Given below are the food items,</h4>

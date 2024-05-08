@@ -19,6 +19,13 @@ const fooditemSchema = new Schema({
         type:String,
         required : true
     },
+    Cost :{
+        type:String,
+    
+    },
+    Profit :{
+        type:String,
+    },
     Average_preparetime:{
         type:String,
         required : true

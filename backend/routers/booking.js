@@ -5,7 +5,7 @@ const {
     getBooking,
     deleteBooking,
     updateBooking
-} = require('../controllers/BookingController');
+} = require('../Controllers/BookingController');
 
 const router = express.Router();
 
@@ -13,7 +13,7 @@ const router = express.Router();
 router.get('/', getBookings)
 
 // GET a single Booking 
-router.get('/:id', getBooking)
+router.get('/books', getBooking)
 
 // POST a new Booking 
 router.post('/', createBooking)

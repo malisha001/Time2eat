@@ -1,34 +1,36 @@
 import { useState } from "react"
-import { useLogin } from "../../hooks/useLogin"
 import style from './Login.module.css';
-import { Navigate,NavLink } from "react-router-dom"
+import { useLogin } from "../../hooks/useLogin"
+import { useNavigate ,NavLink } from "react-router-dom"
 import { Link,Button,TextField } from '@mui/material';
 import Navbar from '../../component/Navbar'
 // import bgimg from './foodbgimage.png'
 
-const Login = () => {
+const RestaurentLogin = () => {
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { loginrole, login, error, isLoading } = useLogin()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        //calling login custom hook
-        await login(email, password)
+
+        const res = await fetch('api/restaurants/login', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ email, password })
+        })
+        const data = await res.json()
+        if(res.ok){
+            localStorage.setItem('user',JSON.stringify(data))
+            navigate('/restaurentDashbord');
+        }
     }
-    console.log("login role", loginrole)
-    if (loginrole === 'customer') {
-        return <Navigate to="/" />
-    }
-    else if (loginrole === 'rider') {
-        return <Navigate to="/riderdashborad" />
-    }
-    else if(loginrole === 'admin'){
-        return <Navigate to ="/restaurants"/>
-    }
-    else if(loginrole === 'restaurant'){
-        return <Navigate to ="/restaurentDashbord"/>
-    }
+
+    // if (loginrole === 'customer') {
+    //     return <Navigate to="/" />
+    // }
 
     return (
         <div>
@@ -36,7 +38,7 @@ const Login = () => {
         <div className={style.bgcontainer}>
         <form className={style.login} onSubmit={handleSubmit}>
 
-            <h2>Welcome Back! Log in</h2>
+            <h2>Welcome Back! your restaurent</h2>
             <h4>Hi, we're glad you're back. Please log in.</h4>
 
             <TextField
@@ -66,7 +68,7 @@ const Login = () => {
                 type="submit"
                 variant="contained"
                 color="primary"
-                disabled={isLoading}>
+                >
                 Log in
             </Button>
 
@@ -78,4 +80,4 @@ const Login = () => {
     )
     
 }
-export default Login
+export default RestaurentLogin
