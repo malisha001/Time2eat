@@ -9,29 +9,27 @@ const employeeSchema = new Schema(
         },
         empName: {
             type: String,
-            require: true
+
         },
-        position: {
+        resId: {
             type: String,
-            require: true
+
         },
-        basicSalary: {
-            type: Number,
-            require: true
+        leavetype: {
+            type: String,
+
         },
-        bonus: {
-            type: Number,
-            require: true
+        startDate: {
+            type: String,
+
         },
-        ETFcollection: {
+        endDate: {
+            type: String,
+
+        },
+        numofdate: {
             type: Number,
         },
-        tax: {
-            type: Number,
-        },
-        netSalary: {
-            type: Number,
-        }
     },{ timestamps: true }
 )
 

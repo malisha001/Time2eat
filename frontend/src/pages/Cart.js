@@ -101,7 +101,7 @@ function Cart() {
                 setMessage('No rider available in your area!')
                 deletfunction();
                 setDataSent(false)
-            }, 10000); // 10 secs in milliseconds for now
+            }, 20000); // 10 secs in milliseconds for now
 
         }
         else {

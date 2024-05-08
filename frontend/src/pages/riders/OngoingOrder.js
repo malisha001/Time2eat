@@ -1,6 +1,8 @@
 import React, { useEffect,useState } from 'react';
 import { TextField,Paper, Grid,Button,TableContainer,TableHead,Table,TableRow,TableCell,TableBody } from '@mui/material';
 import { getOngoingOrder } from '../../services/api';
+import Ridernav from '../../component/ridernav/Ridernav';
+import RiderUpNav from '../../component/ridernav/riderupnav';
 
 function OngoingOrder() {
     const [ongoingOrderData, setOngoingOrderData] = useState([]);
@@ -19,6 +21,9 @@ function OngoingOrder() {
     }, []);
     return (
         <div>
+        <Ridernav/>
+        <div className="Inv-dashborad">
+        <RiderUpNav/>
         <h1>Ongoing Order</h1>
         {ongoingOrderData.map((item) => (
             <Paper key={item._id} sx={{ padding: '32px', bgcolor: '#F0F8FF', margin: '20px' }}>
@@ -62,6 +67,7 @@ function OngoingOrder() {
                 </TableBody>
             </Table>
             </TableContainer>
+        </div>
         </div>
     </div>
     );

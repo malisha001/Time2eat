@@ -7,11 +7,18 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import{ useState, useEffect } from 'react';
 import {getAllEmployeeData} from '../../services/api';
+import {getRestaurentLeaves,addRestaurentLeaves} from '../../services/restaurentsApi';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './EmpLeaves.css';
+import Resuppernav from '../../component/restauretNavbar/Resuppernav';
+import ResNavbar from '../../component/restauretNavbar/ResNavbar';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { toDate } from 'date-fns';
 
 function EmpLeaves() {
+    const {user} = useAuthContext();
+    const [users, setUsers] = useState('');
     const [openPopup, setOpenPopup] = useState(false);
     const[openPopupEdit, setOpenPopupEdit] = useState(false);
     const[openPopupfee, setOpenPopupfee] = useState(false);
@@ -20,12 +27,13 @@ function EmpLeaves() {
     const [formData, setFormData] = useState({
         empId: '',
         resId: '',
-        basicEmpSalary: '',
-        empCatagory: '',
-        bonusRate: '',
-        taxRate: '',
-        fromDate: null // New state for the date picker
+        leavetype: '',
+        fromDate: null, // New state for the date picker
+        toDate: null,
+        numofdate: ''
       });
+      const [selectedFromDate, setSelectedFromDate] = useState(null);
+      const [selectedToDate, setSelectedToDate] = useState(null);
     //error msg
     const [basicEmpSalaryError, setBasicEmpSalaryError] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null);
@@ -34,6 +42,7 @@ function EmpLeaves() {
     };
 
     useEffect(() => {
+      setUsers(user);
         //fetch employee employee ids
         const fetchEmployeeIDs = async () => {
             try {
@@ -45,8 +54,54 @@ function EmpLeaves() {
             }
           };
 
-          fetchEmployeeIDs();
-    }, []);
+        //fetch employee leaves
+        const fetchEmployeeLeaves = async () => {
+          try {
+            const leavesData = await getRestaurentLeaves();
+            setemployeeLeaves(leavesData);
+          } catch (error) {
+            console.error('Error fetching employee leaves:', error);
+            
+          }
+        }
+
+        //add empployee leaves
+        const addEmployeeLeaves = async () => {
+          try {
+            const newEmployeeLeaves = {
+              empId: formData.empId,
+              resId: users.resId,
+              leavetype: formData.leavetype,
+              empCatagory: formData.empCatagory,
+              fromDate: formData.fromDate
+            };
+
+            console.log('New employee salary data:', newEmployeeLeaves);
+            const response = await addRestaurentLeaves(newEmployeeLeaves);
+            console.log('New employee salary data:', response);
+            if (response.error) {
+              throw new Error(response.error);
+            }
+            setOpenPopup(false);
+          } catch (error) {
+            console.error('Error adding employee salary data:', error);
+            // alert(error)
+          }
+          setFormData({
+            empId: '',
+            resId: '',
+            leavetype: '',
+            fromDate: null, // Reset date picker value after succesfull response
+            toDate: null,
+            numofdate: ''
+          });
+          setOpenPopup(false);
+        }
+        addEmployeeLeaves()
+        fetchEmployeeLeaves();
+        fetchEmployeeIDs();
+
+    }, [user]);
     const handleSubmit = async () => {
         try {
 
@@ -63,11 +118,10 @@ function EmpLeaves() {
         setFormData({
           empId: '',
           resId: '',
-          basicEmpSalary: '',
-          empCatagory: '',
-          bonusRate: '',
-          taxRate: '',
-          fromDate: null // Reset date picker value after submission
+          leavetype: '',
+          fromDate: null, // Reset date picker value after submission
+          toDate: null,
+          numofdate: ''
         });
         setOpenPopup(false);
     };
@@ -84,6 +138,9 @@ function EmpLeaves() {
     }
     return (
         <div>
+          <ResNavbar/>
+          <div className="Inv-dashborad">
+            <Resuppernav/>
             <Grid container spacing={2} >
                 <Grid item xs={6}>
                     <h1>Employee Leaves</h1>
@@ -114,22 +171,28 @@ function EmpLeaves() {
                           </MenuItem>
                       ))}
                       </TextField>
-                        <TextField name="basicEmpSalary" value={formData.basicEmpSalary} onChange={handleChange} variant="outlined" label="leave type" fullWidth error={basicEmpSalaryError} helperText={basicEmpSalaryError ? "Please enter a numeric value" : ""}/>
+                        <TextField name="leavetype" value={formData.leavetype} onChange={handleChange} variant="outlined" label="leave type" fullWidth error={basicEmpSalaryError} helperText={basicEmpSalaryError ? "Please enter a numeric value" : ""}/>
                         <div className="datepicker-label">From</div>
                         <DatePicker
-                          selected={selectedDate}
-                          onChange={handleDateChange}
+                          selected={selectedFromDate}
+                          onChange={(date) => {
+                            setFormData({ ...formData, fromDate: date });
+                            setSelectedFromDate(date);
+                          }}
                           dateFormat="dd/MM/yyyy"
                           className="custom-datepicker"
                         />
                         <div className="datepicker-label">To</div>
                         <DatePicker
-                          selected={selectedDate}
-                          onChange={handleDateChange}
+                          selected={selectedToDate}
+                          onChange={(date) => {
+                            setFormData({ ...formData, toDate: date });
+                            setSelectedToDate(date);
+                          }}
                           dateFormat="dd/MM/yyyy"
                           className="custom-datepicker"
                         />
-                        <TextField name="basicEmpSalary" value={formData.basicEmpSalary} onChange={handleChange} variant="outlined" label="number of days" fullWidth error={basicEmpSalaryError} helperText={basicEmpSalaryError ? "Please enter a numeric value" : ""}/>
+                        <TextField name="numofdate" value={formData.numofdate} onChange={handleChange} variant="outlined" label="number of days" fullWidth error={basicEmpSalaryError} helperText={basicEmpSalaryError ? "Please enter a numeric value" : ""}/>
 
                     </Stack>
                   </DialogContent>
@@ -194,7 +257,7 @@ function EmpLeaves() {
               <TableRow key={salaryData.id}>
                 <TableCell>{salaryData.empId}</TableCell>
                 <TableCell>{salaryData.resId}</TableCell>
-                <TableCell>{salaryData.basicEmpSalary}</TableCell>
+                <TableCell>{salaryData.leavetype}</TableCell>
                 <TableCell>{salaryData.empCatagory}</TableCell>
                 {/* <TableCell>{salaryData.bonusRate}</TableCell>
                 <TableCell>{salaryData.taxRate}</TableCell> */}
@@ -207,6 +270,7 @@ function EmpLeaves() {
         </Table>
       </TableContainer>
         </div>
+      </div>
     );
 }
 

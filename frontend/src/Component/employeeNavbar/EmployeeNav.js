@@ -13,12 +13,12 @@ const EmployeeNav = () => {
                 </Grid>
                 <Grid item xs={4}>
                     <Box sx={{ backgroundColor: 'lightblue', padding: '10px',textAlign: 'center' }}>
-                        <Link to="/employeeSal" style={{textDecoration: 'none', color: 'black'}}>leaving</Link>
+                        <Link to="/empleaves" style={{textDecoration: 'none', color: 'black'}}>leaving</Link>
                     </Box>
                 </Grid>
                 <Grid item xs={4}>
                     <Box sx={{ backgroundColor: 'lightblue', padding: '10px' ,textAlign: 'center'}}>
-                        <Link to="/employeeSal" style={{textDecoration: 'none', color: 'black'}}>monthly salary</Link>
+                        <Link to="/employeepaysalaries" style={{textDecoration: 'none', color: 'black'}}>monthly salary</Link>
                     </Box>
                 </Grid>
             </Grid>

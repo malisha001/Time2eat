@@ -4,6 +4,7 @@ import { getDeliveryOrders,acceptOrder,showRider } from '../../services/api';
 import {useNavigate,Route,Routes} from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import Ridernav from '../../component/ridernav/Ridernav';
+import RiderUpNav from '../../component/ridernav/riderupnav';
 //nested router
 import OngoingOrder from './OngoingOrder';
 
@@ -69,6 +70,9 @@ function RiderDashboard() {
 
     return (
         <div>
+        <Ridernav/>
+        <div className="Inv-dashborad">
+            <RiderUpNav/>
             <h1>Rider Dashboard</h1>
             <TableContainer component={Paper}>
                 <Table aria-label="simple table">
@@ -102,6 +106,7 @@ function RiderDashboard() {
             <Routes>
                 <Route path="riderdashborad/ongoingorder" element={<OngoingOrder/>} />
             </Routes>
+        </div>
         </div>
     )
 }

@@ -25,7 +25,7 @@ const ResNavbar = () => {
                 <li><Link to={"/restaurentDashbord"}><FontAwesomeIcon icon={faHome} />Dashboard</Link></li>
                 <li><Link to ={"/inventory/reOrderitem"}><FontAwesomeIcon icon={faBars} />profile</Link></li> 
                 <li><Link to={"/payrun"}><FontAwesomeIcon icon={faList} />payrun</Link></li>
-                <li><Link to ={"/inventory/addItems"}><FontAwesomeIcon icon={faBowlFood} />employee</Link></li>
+                <li><Link to ={"/employeesal"}><FontAwesomeIcon icon={faBowlFood} />employee</Link></li>
                 <li><Link to={"/fooditems"}><FontAwesomeIcon icon={faNoteSticky} />menu</Link></li>
                 <li><Link to={"/dine-in-form"}><FontAwesomeIcon icon={faComments} />resiption staff</Link></li>
                 <button className="inv-navButton" onClick={logouthandle}><FontAwesomeIcon icon={faRightFromBracket}/>Logout</button>

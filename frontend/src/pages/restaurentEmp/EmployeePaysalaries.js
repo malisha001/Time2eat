@@ -4,6 +4,9 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 import DownloadIcon from '@mui/icons-material/Download';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { fetchEmployeeSalaries,getAllEmployeeData} from '../../services/api';
+import EmployeeNav from '../../component/employeeNavbar/EmployeeNav';
+import ResNavbar from '../../component/restauretNavbar/ResNavbar';
+import Resuppernav from '../../component/restauretNavbar/Resuppernav';
 
 function EmployeePaysalaries() {
 
@@ -78,9 +81,13 @@ function EmployeePaysalaries() {
 
   return (
     <div>
+      <ResNavbar/>
+      <div className="Inv-dashborad">
+      <Resuppernav/>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Employee Paysalaries
         </Typography>
+        <EmployeeNav/>
       <Toolbar>
         <IconButton color="inherit" onClick={handleFilterClick}>
           <FilterListIcon />
@@ -189,6 +196,7 @@ function EmployeePaysalaries() {
           <Button variant="contained" onClick={handleFilterApply}>Apply</Button>
         </Box>
       </Menu>
+      </div>
     </div>
   );
 }
