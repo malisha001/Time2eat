@@ -11,7 +11,7 @@ const getCustomerHistories = async (req, res) => {
 const getCustomerHistory = async (req, res) => {
     const {id} = req.params
 
-    const customerhistory = await CustomerHistory.findById(id)
+    const customerhistory = await CustomerHistory.find({resid: id})
 
 
     if (!customerhistory) {

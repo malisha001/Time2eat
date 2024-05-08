@@ -189,16 +189,6 @@ const NewBooking = () => {
                                             required
                                             min={new Date().toISOString().split('T')[0]}  // aditional
                                         /></li>
-                                        {/* <li className='PreDateInput'>
-                                            <input
-                                                type="time"
-                                                id="time"
-                                                value={selectedDateTime.time}
-                                                onChange={(e) => setSelectedDateTime({ ...selectedDateTime, time: e.target.value })}
-                                                step="3600"
-                                                required
-                                            />
-                                        </li> */}
 
                                         {/* 24 hour format  */}
                                         <li className='PreDate'>Time</li>

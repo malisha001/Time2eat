@@ -53,16 +53,16 @@ const AvailabilityStatus = ({ restaurantId }) => {
   }
 
   const circleStyle = {
-    width: '50px',
-    height: '50px',
+    width: '28px',
+    height: '28px',
     borderRadius: '50%',
-    margin: '10px',
+    margin: '-5px',
+    marginTop: '2px',
     backgroundColor: availabilityColor // Dynamically set the background color
   };
 
   return (
     <div className="home-page">
-      <h6>Current availability percentage: {availabilityPercentage}</h6>
       <div style={circleStyle}></div>
     </div>
   );

@@ -1,222 +1,148 @@
-import React, { useState, useEffect } from "react";
-import { Button, Grid, Paper } from "@mui/material";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
+import { useEffect, useState } from "react";
+import {
+  Table,
+  TableBody,
+  TableHead,
+  TableRow,
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  TableCell,
+  TableContainer,
+  Paper,
+  Button,
+  TextField,
+} from "@mui/material";
 import axios from "axios";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { Link } from "react-router-dom";
 
-function PrebookingDineInForm() {
-  const [bookingIdInput, setBookingIdInput] = useState("");
-  const [booking, setBooking] = useState(null);
-  const [cusid, setcusID] = useState("");
-  const [resid, setresID] = useState("");
-  const [name, setName] = useState("");
-  const [time, setTime] = useState("");
-  const [date, setDate] = useState("");
-  const [couplequantity, setCouplequantity] = useState("");
-  const [groupquantity, setGroupquantity] = useState("");
-  const [telephoneno, setTelephone] = useState("");
-  const [error, setError] = useState(null);
+const PrebookingDineInForm = () => {
+  const { user } = useAuthContext();
 
+  const [dineBookings, setDineBookings] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  console.log(user);
   useEffect(() => {
-    fetchBooking();
-  }, []);
-
-  const fetchBooking = async () => {
-    try {
-      const response = await axios.get(`/api/booking/${bookingIdInput}`);
-      setBooking(response.data);
-    } catch (error) {
-      console.error(error);
-      setError("An error occurred while fetching booking details.");
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const PreBookingDetails = {
-      cusid,
-      resid,
-      name,
-      time,
-      date,
-      couplequantity,
-      groupquantity,
-      telephoneno,
+    const fetchDineInBookings = async () => {
+      try {
+        const response = await axios.get(`/api/booking/${user.resId}`);
+        const data = response.data;
+        setDineBookings(data);
+      } catch (error) {
+        console.error("Error fetching Dine In Bookings:", error);
+      }
     };
 
+    fetchDineInBookings();
+  }, [user]);
+
+  const handleClick = async (deleteDineBookings) => {
     try {
-      // Add booking details
-      await axios.post("/api/realtimebooking", PreBookingDetails);
-
-      // Add customer history route
-      await axios.post("/api/customerhistoryroute", {
-        ...PreBookingDetails,
-        bookingId: booking.id, // Assuming `booking` contains the fetched booking data
-      });
-
-    //   // Delete the entry from the booking table
-    //   await axios.delete(`/api/booking/${booking.id}`);
-
-      clearFormFields();
+      await axios.delete(`/api/customerhistoryroute/${deleteDineBookings}`);
+      setDineBookings((prevBookings) =>
+        prevBookings.filter(
+          (dineBooking) => dineBooking._id !== deleteDineBookings
+        )
+      );
     } catch (error) {
-      console.error("Error adding booking:", error);
-      setError("An error occurred while adding the booking.");
+      console.error("Error deleting booking:", error);
     }
   };
 
-  const clearFormFields = () => {
-    setcusID("");
-    setresID("");
-    setName("");
-    setTime("");
-    setDate("");
-    setCouplequantity("");
-    setGroupquantity("");
-    setTelephone("");
-    setError(null);
-  };
-
-  const handleBookingIdInputChange = (e) => {
-    setBookingIdInput(e.target.value);
-  };
-
-  const handleCheckBookingId = async () => {
-    try {
-      const response = await axios.get(`/api/booking/${bookingIdInput}`);
-      const fetchedBooking = response.data;
-      if (fetchedBooking) {
-        setBooking(fetchedBooking);
-        setcusID(fetchedBooking.cusid);
-        setresID(fetchedBooking.resid);
-        setName(fetchedBooking.name);
-        setTime(fetchedBooking.time);
-        setDate(fetchedBooking.date);
-        setCouplequantity(fetchedBooking.couplequantity);
-        setGroupquantity(fetchedBooking.groupquantity);
-        setTelephone(fetchedBooking.telephoneno);
-        setError(null);
-      } else {
-        setError("Entered booking ID does not match any existing booking.");
-      }
-    } catch (error) {
-      console.error(error);
-      setError("An error occurred while fetching booking details.");
-    }
-  };
+  const filteredBookings = dineBookings
+    ? dineBookings.filter((dineBooking) => {
+        return (
+          dineBooking.time.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          dineBooking.date.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      })
+    : [];
 
   return (
-    <form className="create" onSubmit={handleSubmit}>
-      <h3>Add a New Booking</h3>
-      <Paper sx={{ bgcolor: "white" }}>
-        <Box sx={{ marginLeft: "60px", marginRight: "60px", marginTop: "40px", marginBottom: "40px", padding: "20px" }}>
-          <h2>Payment Details</h2>
-          <TextField
-            required
-            id="booking-id"
-            label="Booking ID"
-            type="text"
-            onChange={handleBookingIdInputChange}
-            value={bookingIdInput}
-            sx={{ width: "100%" }}
-          />
-          <Button onClick={handleCheckBookingId}>Check Booking ID</Button>
-          <Grid container spacing={4}>
-            <Grid item xs={6}>
-              <TextField
-                required
-                id="outlined-required"
-                label="CusID"
-                type="text"
-                onChange={(e) => setcusID(e.target.value)}
-                value={cusid}
-                sx={{ width: "100%" }}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                required
-                id="outlined-required"
-                label="ResID"
-                type="text"
-                onChange={(e) => setresID(e.target.value)}
-                value={resid}
-                sx={{ width: "100%" }}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                required
-                id="outlined-required"
-                label="Name"
-                type="text"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-                sx={{ width: "100%" }}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                required
-                id="outlined-required"
-                label="Time"
-                type="time"
-                onChange={(e) => setTime(e.target.value)}
-                value={time}
-                sx={{ width: "100%" }}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                required
-                id="outlined-required"
-                label="Date"
-                type="date"
-                onChange={(e) => setDate(e.target.value)}
-                value={date}
-                sx={{ width: "100%" }}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                required
-                id="outlined-required"
-                label="CoupleQuantity"
-                type="number"
-                onChange={(e) => setCouplequantity(e.target.value)}
-                value={couplequantity}
-                sx={{ width: "100%" }}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                required
-                id="outlined-required"
-                label="Groupquantity"
-                type="number"
-                onChange={(e) => setGroupquantity(e.target.value)}
-                value={groupquantity}
-                sx={{ width: "100%" }}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <TextField
-                required
-                id="outlined-required"
-                label="Telephone No"
-                type="text"
-                onChange={(e) => setTelephone(e.target.value)}
-                value={telephoneno}
-                sx={{ width: "100%" }}
-              />
-            </Grid>
-          </Grid>
-        </Box>
-      </Paper>
-      <Button type="submit">Submit</Button>
-      {error && <div className="error">{error}</div>}
-    </form>
+    <div>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Link to={"/dine-in-form"} style={{ color: "white" }}>Dine In Form</Link>
+          </Typography>
+
+          <Link to={"/dine-in-bookings"} style={{ color: "white" }}>
+            <Button color="inherit">Dine In</Button>
+          </Link>
+          <Button
+            color="inherit"
+            component={Link}
+            to="/pre-booking-dine-in-form"
+          >
+            Pre Bookings
+          </Button>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            component={Link}
+            to="/menu"
+          ></IconButton>
+        </Toolbar>
+      </AppBar>
+      <TextField
+        label="Search"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      <TableContainer
+        component={Paper}
+        style={{
+          marginBottom: "20px",
+          backgroundColor: "lightgrey",
+          marginTop: "40px",
+        }}
+      >
+        <Table aria-label="simple table">
+          <TableHead sx={{ bgcolor: "lightblue" }}>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Time</TableCell>
+              <TableCell>Date</TableCell>
+              <TableCell>Couple Tables</TableCell>
+              <TableCell>Group Tables</TableCell>
+              <TableCell>Telephone No</TableCell>
+              <TableCell></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {filteredBookings.map((dineBooking) => (
+              <TableRow key={dineBooking._id}>
+                <TableCell>{dineBooking.name}</TableCell>
+                <TableCell>{dineBooking.time}</TableCell>
+                <TableCell>{dineBooking.date}</TableCell>
+                <TableCell>{dineBooking.couplequantity}</TableCell>
+                <TableCell>{dineBooking.groupquantity}</TableCell>
+                <TableCell>{dineBooking.telephoneno}</TableCell>
+                <TableCell>
+                  <Button
+                    onClick={() => handleClick(dineBooking._id)}
+                    variant="contained"
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
-}
+};
 
 export default PrebookingDineInForm;
