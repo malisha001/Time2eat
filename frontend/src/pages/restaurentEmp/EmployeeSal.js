@@ -4,6 +4,8 @@ import AddIcon from '@mui/icons-material/Add';
 import {Dialog, DialogTitle, DialogContent, Button, DialogActions, Stack, TextField, MenuItem, Divider } from '@mui/material';
 import { Table, TableBody, TableHead, TableRow, TableCell, TableContainer, Paper } from '@mui/material';
 import { addEmployeeSalaryData, getAllEmployeeData, getAllEmployeeSalaryData, deleteEmployeeSalaryData } from '../../services/api';
+import Resuppernav from '../../component/restauretNavbar/Resuppernav';
+import ResNavbar from '../../component/restauretNavbar/ResNavbar';
 
 const EmployeeSal = () => {
   const [openPopup, setOpenPopup] = useState(false);
@@ -125,76 +127,80 @@ const EmployeeSal = () => {
 
   return (
     <div>
-      <h1>Employee Salary Page</h1>
-      <EmployeeNav />
-      <br/>
-      <Divider/>
-      <br/>
-      <Button
-        variant="contained"
-        onClick={() => setOpenPopup(true)}
-      >
-        <AddIcon /> Add
-      </Button>
+      <ResNavbar/>
+      <div className="Inv-dashborad">
+      <Resuppernav/>
+        <h1>Employee Salary Page</h1>
+        <EmployeeNav />
+        <br/>
+        <Divider/>
+        <br/>
+        <Button
+          variant="contained"
+          onClick={() => setOpenPopup(true)}
+        >
+          <AddIcon /> Add
+        </Button>
 
-      <Dialog open={openPopup} onClose={() => setOpenPopup(false)} fullWidth>
-        <DialogTitle>Add Employee Salary</DialogTitle>
-        <DialogContent>
-          <Stack spacing={2} margin={2}>
-            <TextField
-              select
-              name="empIdd"
-              value={formData.empId}
-              onChange={handleChange}
-              variant="outlined"
-              label="Employee IDdd"
-              fullWidth
-            >
-              {employeeIDs.map((id) => (
-                <MenuItem key={id} value={id}>
-                  {id}
-                </MenuItem>
-              ))}
-            </TextField>
-            <TextField name="resId" value={formData.resId} onChange={handleChange} variant="outlined" label="Restaurant ID" fullWidth required/>
-            <TextField name="basicEmpSalary" value={formData.basicEmpSalary} onChange={handleChange} variant="outlined" label="Basic Salary" fullWidth error={basicEmpSalaryError} helperText={basicEmpSalaryError ? "Please enter a numeric value" : ""} required/>
-            <TextField name="empCatagory" value={formData.empCatagory} onChange={handleChange} variant="outlined" label="Position" fullWidth error={empCatagoryError} helperText={empCatagoryError ? "Please enter only letters" : ""} required/>
-          </Stack>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenPopup(false)} variant='contained'>Cancel</Button>
-          <Button onClick={handleSubmit} variant='contained'>Submit</Button>
-        </DialogActions>
-      </Dialog>
+        <Dialog open={openPopup} onClose={() => setOpenPopup(false)} fullWidth>
+          <DialogTitle>Add Employee Salary</DialogTitle>
+          <DialogContent>
+            <Stack spacing={2} margin={2}>
+              <TextField
+                select
+                name="empIdd"
+                value={formData.empId}
+                onChange={handleChange}
+                variant="outlined"
+                label="Employee IDdd"
+                fullWidth
+              >
+                {employeeIDs.map((id) => (
+                  <MenuItem key={id} value={id}>
+                    {id}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <TextField name="resId" value={formData.resId} onChange={handleChange} variant="outlined" label="Restaurant ID" fullWidth required/>
+              <TextField name="basicEmpSalary" value={formData.basicEmpSalary} onChange={handleChange} variant="outlined" label="Basic Salary" fullWidth error={basicEmpSalaryError} helperText={basicEmpSalaryError ? "Please enter a numeric value" : ""} required/>
+              <TextField name="empCatagory" value={formData.empCatagory} onChange={handleChange} variant="outlined" label="Position" fullWidth error={empCatagoryError} helperText={empCatagoryError ? "Please enter only letters" : ""} required/>
+            </Stack>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setOpenPopup(false)} variant='contained'>Cancel</Button>
+            <Button onClick={handleSubmit} variant='contained'>Submit</Button>
+          </DialogActions>
+        </Dialog>
 
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
-          <TableHead>
-            <TableRow sx={{bgcolor: 'lightblue'}}>
-              <TableCell>Employee ID</TableCell>
-              <TableCell>Restaurant ID</TableCell>
-              <TableCell>Basic Salary</TableCell>
-              <TableCell>Position</TableCell>
-              {/* <TableCell>Bonus Rate</TableCell>
-              <TableCell>Tax Rate</TableCell> */}
-              <TableCell>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody sx={{bgcolor: 'lightgrey'}}>
-            {employeeSalaries.map((salaryData) => (
-              <TableRow key={salaryData.id}>
-                <TableCell>{salaryData.empId}</TableCell>
-                <TableCell>{salaryData.resId}</TableCell>
-                <TableCell>{salaryData.basicEmpSalary}</TableCell>
-                <TableCell>{salaryData.empCatagory}</TableCell>
-                {/* <TableCell>{salaryData.bonusRate}</TableCell>
-                <TableCell>{salaryData.taxRate}</TableCell> */}
-                <TableCell><Button onClick={() => deletebutton(salaryData._id)} variant='contained'>Delete</Button></TableCell>
+        <TableContainer component={Paper}>
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow sx={{bgcolor: 'lightblue'}}>
+                <TableCell>Employee ID</TableCell>
+                <TableCell>Restaurant ID</TableCell>
+                <TableCell>Basic Salary</TableCell>
+                <TableCell>Position</TableCell>
+                {/* <TableCell>Bonus Rate</TableCell>
+                <TableCell>Tax Rate</TableCell> */}
+                <TableCell>Action</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody sx={{bgcolor: 'lightgrey'}}>
+              {employeeSalaries.map((salaryData) => (
+                <TableRow key={salaryData.id}>
+                  <TableCell>{salaryData.empId}</TableCell>
+                  <TableCell>{salaryData.resId}</TableCell>
+                  <TableCell>{salaryData.basicEmpSalary}</TableCell>
+                  <TableCell>{salaryData.empCatagory}</TableCell>
+                  {/* <TableCell>{salaryData.bonusRate}</TableCell>
+                  <TableCell>{salaryData.taxRate}</TableCell> */}
+                  <TableCell><Button onClick={() => deletebutton(salaryData._id)} variant='contained'>Delete</Button></TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
     </div>
   );
 };

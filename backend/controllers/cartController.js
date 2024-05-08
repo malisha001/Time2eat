@@ -1,4 +1,5 @@
-// const Cart = require('../models/cartModel')
+const Cart = require('../models/cartModel')
+const OnlineOrderModel = require('../models/onlineOrderModel')
 const mongoose = require('mongoose')
 
 //get spesific customer's orders with different restaurent (order id change for each restaurent)
@@ -20,12 +21,12 @@ const getCart = async (req, res) => {
 
 //create new cart
 const createCart = async (req, res) => {
-    const {orderid,customerid,cusName,restaurantid, restaurantname, fooditem , quantity,price } = req.body
+    const {cusId,cusname,restaurantid,foodname, orderid, tprice} = req.body
 
     //add doc to database
     try {
 
-        const cart = await Cart.create({orderid,customerid,cusName,restaurantid, restaurantname, fooditem , quantity,price })
+        const cart = await Cart.create({cusId,cusname,restaurantid,foodname, orderid, tprice})
         res.status(200).json(cart)
     }catch (error){
         res.status(400).json({error: error.message})
@@ -39,10 +40,10 @@ const deleteCart = async (req, res) => {
     const {id} = req.params
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such cart'})
+        return res.status(404).json({error: 'invalide object id'})
     }
 
-    const cart = await Cart.findOneAndDelete({_id: id})
+    const cart = await OnlineOrderModel.findOneAndDelete({_id: id})
 
     if (!cart) {
         return res.status(404).json({error: 'No such cart'})

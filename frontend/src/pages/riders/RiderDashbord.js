@@ -3,6 +3,7 @@ import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper
 import { getDeliveryOrders,acceptOrder,showRider } from '../../services/api';
 import {useNavigate,Route,Routes} from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import Ridernav from '../../component/ridernav/Ridernav';
 //nested router
 import OngoingOrder from './OngoingOrder';
 
@@ -25,6 +26,9 @@ function RiderDashboard() {
                 reslocation: order.reslocation,
                 price: order.price
             });
+
+            //delete order from rider dashbord
+            
             // res.status(200).json(orderres);
             navigate('/riderdashborad/ongoingorder')
         } catch (error) {

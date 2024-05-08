@@ -1,61 +1,58 @@
-.inv-sidebar {
-    width: 280px; /* Adjust width as needed */
+.sidebar {
+    width: 350px; /* Adjust width as needed */
     height: 100vh; /* Make sidebar full height of the viewport */
     background-color: #D7D7D7; /* Background color for the sidebar */
     color: white; /* Text color */
     display: flex; /* Use flexbox */
     flex-direction: column; /* Arrange items vertically */
-    position: fixed;
-    left: 0;
-    top: 0;
-
 }
 
-.inv-sidebar p{
+.sidebar p{
     color: black;
 }
 /* Logo */
-.inv-sidebar p img{
-    width: 50px;
-    height: 50px;
+.sidebar p img{
+    width: 60px;
+    height: 60px;
     border-radius: 40px;
     margin: 15px 0px 0px 30px;
 }
 
 /* Topic */
-.inv-sidebar p h1{
+.sidebar p h1{
     font-weight:250;
-    font-size: 25px;
+    font-size: 35px;
     margin-left: 115px;
     margin-top: -55px;
 
 }
 
 
-.inv-sidebar ul {
+.sidebar ul {
     list-style-type: none;
     padding: 0;
     margin: 25px 0px 0px 15px;
     
 }
 
-.inv-sidebar ul li {
-    padding: 5px;
+.sidebar ul li {
+    padding: 10px;
     line-height:1.7cm;
     cursor: pointer;
     color: black;
-    font-size: 17px;
+    font-size: 24px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
     font-weight: 600;
 }
 
-.inv-sidebar ul li a{
+.sidebar ul li a{
     text-decoration: none;
     color: inherit;
 }
 
-.inv-sidebar ul li:hover {
+.sidebar ul li:hover {
     background-color: #acacac; /* Change background color on hover */
-    width: 240px;
+    width: 300px;
     border-radius: 20px;
 }
 
@@ -65,26 +62,23 @@ ul li svg {
 }
 
 /* Button */
-.inv-navButton svg {
+.navButton svg {
     margin: 0px 25px 0px 0px;
 }
 
-.inv-navButton{
-    margin-left: 0px;
+.navButton{
+    margin-top: 50px;
+    margin-left: 15px;
     background-color: #8B0000;
     border-radius: 10px;
     color: white;
-    padding: 10px 58px 10px 30px;
-    font-size: 23px;
+    padding: 10px 80px 10px 30px;
+    font-size: 24px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: 600;
 }
 
-.inv-navButton a {
+.navButton a {
     text-decoration: none;
     color: inherit;
 }
-
-
-
-
-

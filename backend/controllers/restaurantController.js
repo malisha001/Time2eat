@@ -31,7 +31,7 @@ const getRestaurant = async(req , res) =>{
 const getRestaurantdetails = async(req , res) =>{
     const {id} = req.params
 
-    const restaurant = await Restaurant.findOne({_id:id})
+    const restaurant = await Restaurant.findOne({Restaurant_Id:id})
 
     if(!restaurant){
         return res.status(404).json({error : 'No such Restauran'})
@@ -142,7 +142,7 @@ const loginRestaurant = async (req, res) => {
         }
 
         const token = createToken(restaurant);
-        res.status(200).json({ Email_address, token, role: restaurant.role,resId:restaurant.Restaurant_Id });
+        res.status(200).json({ Email_address, token, role: restaurant.role,resId:restaurant.Restaurant_Id,resName:restaurant.Restaurant_name,oid:_id });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
