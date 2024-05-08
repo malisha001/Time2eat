@@ -42,6 +42,19 @@ const updateEmpPayrun = async (req, res) => {
 
     res.status(200).json(payrun);
 };
+//get all employee slalary data
+const getAllEmployeeSalaryData = async(req,res) => {
+
+    try {
+        const employeeSalaries = await EmpmonthlySal.find({})
+
+        res.status(200).json(employeeSalaries)
+
+    } catch (error) {
+        res.status(404).json({error: error.message})
+    }
+
+}
 //monthly salary process
 const monthlySalProcess = async(req,res) => {
     const currentDate = new Date();
@@ -135,5 +148,6 @@ module.exports = {
     getEmpPayrun,
     createEmpPayrun,
     updateEmpPayrun,
+    getAllEmployeeSalaryData,
     monthlySalProcess
 }

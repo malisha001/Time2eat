@@ -1,6 +1,10 @@
 
 import axios from 'axios';
 
+export const getAllByRestaurantId = async (restaurantId) => {
+  const { data } = await axios.get(`/api/foods/restaurant/${restaurantId}`);
+  return data;
+};
 
 export const getAll = async () => {
 

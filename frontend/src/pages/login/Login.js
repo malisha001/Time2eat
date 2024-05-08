@@ -23,9 +23,12 @@ const Login = () => {
     else if (loginrole === 'rider') {
         return <Navigate to="/riderdashborad" />
     }
-    // else if(loginrole === 'admin'){
-    //     return <Navigate to ="/admin"/>
-    // }
+    else if(loginrole === 'admin'){
+        return <Navigate to ="/restaurants"/>
+    }
+    else if(loginrole === 'restaurant'){
+        return <Navigate to ="/restaurentDashbord"/>
+    }
 
     return (
         <div>
@@ -68,7 +71,6 @@ const Login = () => {
             </Button>
 
             <p>Don't have an Account? <Link component={NavLink} to="/signup">Sign Up</Link> </p>
-
             {error && <div className={style.error}>{error}</div>}
         </form>
         </div>

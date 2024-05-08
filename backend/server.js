@@ -7,6 +7,8 @@ require('dotenv').config()
 
 //import routers
 const inventoryRoutes = require('./routers/inventory') 
+const usageRoutes = require('./routers/usageItem.js')
+
 // const advertisementRoutes = require('./routers/advertisements')
 const employeesal = require('./routers/employeeSalary')
 const restaurants = require('./routers/restaurants')
@@ -77,13 +79,14 @@ app.use('/api/user', userRoutes)
 //adverticment routers
 // app.use('/api/advertisements',advertisementRoutes)
 app.use('/api/inventory/', inventoryRoutes)
+app.use('/api/usage/', usageRoutes)
 
 //order system routers
 app.use('/api/foods', foodrouter)
 app.use('/api/onlineOrders', onlineOrdersRoutes)
 app.use('/api/orders', orderRoutes)
 app.use('/api/dineinorders',dineinorder)
-
+app.use('/api/carts', cartRoutes)
 
 
 // middleware to parse incoming JSON data

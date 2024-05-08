@@ -7,13 +7,40 @@ const getBookings = async (req, res) => {
     res.status(200).json(bookings)
 }
 
+// Function to get a single booking by MongoDB ObjectId
+const getBookingById = async (req, res) => {
+    const bookingId = req.params.id;
+    
+
+    try {
+        let booking;
+        if (mongoose.Types.ObjectId.isValid(bookingId)) {
+            // If bookingId is a valid ObjectId, fetch by _id
+            booking = await Booking.findById(bookingId);
+        } else {
+            console.log("hi res", bookingId)
+            // If bookingId is not a valid ObjectId, treat it as resid and query by resid
+            booking = await Booking.find({ resid: bookingId });
+        }
+
+        if (!booking) {
+            return res.status(404).json({ error: 'Booking not found' });
+        }
+
+        res.status(200).json(booking);
+    } catch (error) {
+        res.status(500).json({ error: 'Server Error' });
+    }
+};
+
+
 //get a single Bookings
 const getBooking = async (req, res) => {
-    const {id} = req.params
+    const {userId,restaurantId} = req.query;
 
-    const booking = await Booking.findById(id)
-
-
+    console.log("data",userId)
+    const booking = await Booking.find({resid:restaurantId,cusid:userId})
+    
     if (!booking) {
         return res.status(404).json({error: 'No such Booking'})
     }
@@ -76,6 +103,7 @@ const updateBooking = async (req, res) => {
 module.exports = {
     getBookings,
     getBooking,
+    getBookingById,
     createBooking,
     deleteBooking,
     updateBooking

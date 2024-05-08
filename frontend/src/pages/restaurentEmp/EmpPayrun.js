@@ -4,9 +4,11 @@ import { updateEmpPayrunData,getPayrunData,paySalary } from '../../services/api'
 import { Box, color, containerClasses, padding } from '@mui/system';
 import Payrunbtn from '../../component/Payrunbtn';
 import ResNavbar from '../../component/restauretNavbar/ResNavbar';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 
 function EmpPayrun() {
     const [payrunData, setPayrunData] = useState([]);
+    const navigate = useNavigate(); // Use useNavigate hook
 
     useEffect(() => {
         // Fetch employee payrun data when component mounts
@@ -27,7 +29,8 @@ function EmpPayrun() {
         try {
             await paySalary(); // Call the backend function to pay the salary
             console.log('Salary paid successfully.');
-            // You can also update the state or display a message indicating successful payment
+            // Navigate to another page upon successful payment
+            navigate('/success'); // Navigate to '/success' route
         } catch (error) {
             console.error('Error paying salary:', error);
             // Handle error

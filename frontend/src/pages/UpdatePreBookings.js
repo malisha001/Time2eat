@@ -28,15 +28,17 @@ const UpdateBookingPage = () => {
     const [telephoneno, setTelephoneNo] = useState('');
     const [nameError, setNameError] = useState(null);
     const [telError, setTelError] = useState(null);
-
+    const [resid, setResid] = useState(null);
+    const [tabledetails,settabledetails] = useState('')
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchBookingData = async () => {
             try {
                 const response = await axios.get(`/api/booking/${id}`);
-                const { name, date, time, couplequantity, groupquantity, telephoneno } = response.data;
+                const { name,resid, date, time, couplequantity, groupquantity, telephoneno } = response.data;
                 setDate(date);
+                setResid(resid);
                 setTime(time);
                 setCouplequantity(couplequantity);
                 setGroupquantity(groupquantity);
@@ -51,6 +53,26 @@ const UpdateBookingPage = () => {
         fetchBookingData();
     }, [id]);
 
+    useEffect(()=>{
+        //get tables from related restaurent
+        const fetchtabledata = async () => {
+            try {
+                const tabledata = await axios.get(`/api/restaurants/${resid}`);
+                settabledetails(tabledata.data)
+                console.log("tablee details",tabledetails)
+
+            } catch (error) {
+                console.error('Error fetching table data:', error);
+            }
+        }
+        fetchtabledata()
+        
+    },[resid]);
+
+
+    console.log("initial couple table", tabledetails.Couple_table)
+    console.log("initial group table", tabledetails.Group_table)
+    console.log("hi res",resid)
     useEffect(() => {
         if (selectedDateTime && selectedDateTime.date && selectedDateTime.time) {
             fetchBookings(selectedDateTime.date, selectedDateTime.time);
@@ -59,17 +81,21 @@ const UpdateBookingPage = () => {
 
     const fetchBookings = async (date, time) => {
         try {
-            const response = await axios.get(`/api/booking`, { params: { date, time } });
+            const response = await axios.get(`/api/booking/${resid}`, { params: { date, time } });
+            console.log("tablee", response)
             const filteredBookings = response.data.filter(booking => booking.date === date && booking.time === time);
             const coupleTablesBooked = filteredBookings.reduce((acc, booking) => acc + booking.couplequantity, 0);
             const groupTablesBooked = filteredBookings.reduce((acc, booking) => acc + booking.groupquantity, 0);
             
+            console.log("couplee", coupleTablesBooked)
+            console.log("groupee", groupTablesBooked)
+
             setTotalCoupleTablesBooked(coupleTablesBooked);
             setTotalGroupTablesBooked(groupTablesBooked);
 
             // Calculate available tables by subtracting total tables booked from maximum available tables
-            const availableCoupleTables = (10 - coupleTablesBooked) + couplequantity; // Max available couple tables minus tables already booked and those requested
-            const availableGroupTables = (15 - groupTablesBooked) + groupquantity; // Max available group tables minus tables already booked and those requested
+            const availableCoupleTables = (tabledetails.Couple_table - coupleTablesBooked) + couplequantity; // Max available couple tables minus tables already booked and those requested
+            const availableGroupTables = (tabledetails.Group_table - groupTablesBooked) + groupquantity; // Max available group tables minus tables already booked and those requested
             
             // Update the available tables state
             setAvailableTables({ couple: availableCoupleTables, group: availableGroupTables });
@@ -358,7 +384,7 @@ const UpdateBookingPage = () => {
               <Box className='availability-status-top'>
               Total</Box>
               <Box className='availability-status-bottom'>
-                 15</Box>
+              {tabledetails.Group_table}</Box>
               </Grid>
               <Grid item md={4}>            
               <Box className='availability-status-top'>Available </Box>
@@ -377,7 +403,7 @@ const UpdateBookingPage = () => {
               </Card>
               </Grid>
               <Grid item md={4}>            
-              <Box className='availability-status'>10</Box>
+              <Box className='availability-status'>{tabledetails.Couple_table}</Box>
               </Grid>
               <Grid item md={4}>            
               <Box className='availability-status'>{availableTables.couple}</Box>
