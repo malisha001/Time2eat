@@ -16,22 +16,23 @@ const ItemForm = () => {
     const navigate = useNavigate();
 
     const handleItemNameChange = (value) => {
-        if (!value.match(/\d/)) { // Check if the value contains letters
+        if (!/^[A-Za-z\s]*$/.test(value)) { // Check if the value contains only letters and spaces
+            setItemNameError('Item Name should only contain letters and spaces');
+        } else {
             setItemName(value);
             setItemNameError('');
-        } else {
-            setItemNameError('Item Name should only contain letters and spaces');
         }
     };
     
     const handleItemCategoryChange = (value) => {
-        if (!value.match(/\d/)) { // Check if the value contains letters
+        if (!/^[A-Za-z\s]*$/.test(value)) { // Check if the value contains only letters and spaces
+            setItemCategoryError('Item Category should only contain letters and spaces');
+        } else {
             setItemCategory(value);
             setItemCategoryError('');
-        } else {
-            setItemCategoryError('Item Category should only contain letters and spaces');
         }
     };
+    
     
 
     const handleSubmit = async (e) => {

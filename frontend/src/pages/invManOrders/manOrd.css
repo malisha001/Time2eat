@@ -119,3 +119,34 @@
 }
 
 
+.inv-generate-button{
+    background-color: #818181; /* Green */
+    border: none;
+    color: rgb(229, 225, 225);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 8px;
+    height: 35px;
+    width: 180px;
+  }
+  
+  .inv-generate-button:hover {
+    background-color: #849885; /* Darker Green */
+    color: black;
+  }
+  
+.button-inv-flx{
+    display: flex;
+}
+
+.inv-generate-button{
+    margin-left:690px ;
+    margin-top: 20px;
+}
+
+
+
