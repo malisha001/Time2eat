@@ -12,10 +12,9 @@ const Admin = () => {
             <p><img src="/Time2eat.jpeg" alt="logo" /><h1>TIME<strong>2eat</strong></h1></p>
 
             <ul>
-                <li><Link><FontAwesomeIcon icon={faHome} />Dashboard</Link></li>
-                <li><Link to ={"/restaurants"}><FontAwesomeIcon icon={faBars} />Restaurants</Link></li> 
-                <li><Link><FontAwesomeIcon icon={faList} />Manage Orders</Link></li>
-                <li><Link to ={"/inventory/addItems"}><FontAwesomeIcon icon={faBowlFood} />Add Food Item</Link></li>
+                <li><Link to ={"/restaurants"}><FontAwesomeIcon icon={faHome} />Restaurants</Link></li> 
+                <li><Link to={"/inventory/items/"}><FontAwesomeIcon icon={faNoteSticky} />Food Items</Link></li>
+                <li><Link to={"/feedback"}><FontAwesomeIcon icon={faComments} />Feedbacks</Link></li>
                 <button className="navButton"><Link><FontAwesomeIcon icon={faRightFromBracket}/>Logout</Link></button>
             </ul>
         </nav>

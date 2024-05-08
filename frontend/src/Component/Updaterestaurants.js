@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import Admin from "./Admin";
 import "./Updaterestaurants.css"
 
 const Updaterestaurants = () => {
@@ -59,7 +60,9 @@ const Updaterestaurants = () => {
     };
 
     return ( 
-        <div>
+        <div className="upd-container">
+         <Admin/>
+         <div className="updaterestaurants-container">
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Status:</label>
@@ -85,8 +88,9 @@ const Updaterestaurants = () => {
                     </div>
                 </div>
                 
-                <button type="submit">Update</button>
+                <button type="submit">Change Status</button>
             </form>
+        </div>
         </div>
     );
 };

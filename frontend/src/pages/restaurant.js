@@ -46,6 +46,7 @@ const Restaurant = () => {
     <div className="container">
       <Admin/>
     <div className="res">
+    <h1>Restaurants</h1>
       <div className="restaurant">
         
       <table border={1}>
