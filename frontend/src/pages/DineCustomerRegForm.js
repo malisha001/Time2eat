@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Button, Grid, Paper, Typography } from "@mui/material";
+import { Button, Grid, Paper, Typography, AppBar, Toolbar} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import axios from "axios";
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useNavigate } from "react-router-dom";
+import IconButton from '@mui/material/IconButton';
+import { Link } from 'react-router-dom';
 
 function DineCustomerRegForm() {
   // Using custom hooks for authentication context and navigation
@@ -111,6 +113,8 @@ function DineCustomerRegForm() {
     } else {
       setError("Please enter valid details");
     }
+
+    navigate("/dine-in-bookings")
   };
 
   // Function to clear form fields
@@ -126,13 +130,31 @@ function DineCustomerRegForm() {
     setTelError(null);
   };
 
-  // Function to handle navigation to pre-booking page
-  const handlePreBookingsClick = () => {
-    navigate("/pre-booking-dine-in-form");
-  };
-
   // Render form components
   return (
+    <div>
+      <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          Dine In Form
+        </Typography>
+        <Button color="inherit" component={Link} to="/dine-in-bookings">Dine In</Button>
+        <Button color="inherit" component={Link} to="/pre-booking-dine-in-form">Pre Bookings</Button>
+        <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+          aria-controls="menu-appbar"
+          aria-haspopup="true"
+          component={Link}
+          to="/menu"
+        >
+         
+        </IconButton>
+      </Toolbar>
+    </AppBar>
+    
     <form className="create" onSubmit={handleSubmit}>
       <h3>Add a New Booking</h3>
 
@@ -189,6 +211,8 @@ function DineCustomerRegForm() {
                 onChange={(e) => setDate(e.target.value)}
                 value={date}
                 sx={{ width: "100%" }}
+                // Set the minimum selectable date to today
+                inputProps={{ min: new Date().toISOString().split('T')[0] }}
               />
             </Grid>
 
@@ -248,8 +272,6 @@ function DineCustomerRegForm() {
 
 
           </Grid>
-          {/* Button to navigate to pre-booking page */}
-          <Button onClick={handlePreBookingsClick}>Pre Bookings</Button>
           {/* Button to submit the form */}
           <Button type="submit" contained sx={{ marginTop: '20px', backgroundColor: 'lightblue' }}>Add Booking</Button>
           {/* Display error message if any */}
@@ -257,6 +279,7 @@ function DineCustomerRegForm() {
         </Box>
       </Paper>
     </form>
+    </div>
   );
 }
 

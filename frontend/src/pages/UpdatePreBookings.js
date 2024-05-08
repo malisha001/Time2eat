@@ -187,10 +187,6 @@ const UpdateBookingPage = () => {
                           onChange={handleDate}
                           required/></li>
                       <li className='PreDate'>Time</li>
-                      {/* <li className='PreDateInput'><input type='time' id="time"
-                            value={time}
-                            onChange={handleTime}
-                            required/></li> */}
 
                         <li className='PreDateInput'>
                             <select
