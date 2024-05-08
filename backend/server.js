@@ -32,6 +32,7 @@ const payrun = require('./routers/empPayrun')
 const leaves = require('./routers/leaves')
 const dineinorder = require('./routers/dineinOrder.js')
 const { dbconnect } = require('./config/database.config.js');
+const onlinepayemnt = require('./routers/onlinePayment.js')
 dbconnect();
 
 
@@ -72,6 +73,7 @@ app.use('/api/emppayrun',payrun)
 app.use('/api/leaves',leaves)
 app.use('/api/employeesal',employeesal)
 app.use('/api/employeeleaves',employeeLeaveRoutes)
+app.use('/api/onlinepayemnt', onlinepayemnt )
 //delivery orders routers
 app.use('/api/deliveryorder',deliveries)
 // user routers
