@@ -68,6 +68,7 @@ import UpdateRestaurantProfile from './component/UpdateRestaurantProfile'
 import PrebookingDineInForm from './pages/prebookingdinein';
 
 import RestaurantDashboard from './pages/restaurentDashbord/RestaurenrDashbord';
+import ManageOrder from './pages/invManOrders/manageOrd';
 
 
 function App() {
@@ -141,7 +142,7 @@ function App() {
               <Route path="/inventory/update/:id" element={<UpdateUser />} />
               <Route path="/inventory/usage" element={<Usage />} /> 
               <Route path="/inventory/reOrderitem" element={<ReOrder/>} />
-              <Route path="/inventory/invMgOrd" element={<InvMangeOrder/>} />
+              <Route path="/inventory/invMgOrd" element={<ManageOrder/>} />
               <Route path="/inventory/onlineOrd/update/:id" element={<UpdateOnlineOrder/>} />
               <Route path="/inventory/dashboard" element={<Dashboard/>} />
            

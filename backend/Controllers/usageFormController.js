@@ -26,6 +26,8 @@ const getUsageItems = async (req, res) => {
 const updateUsageItem = async(req, res) => {
     const {id} = req.params 
 
+    console.log("id is",id);
+
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: 'No such an Usage Item'})
     }

@@ -42,7 +42,7 @@ const ReOrder = () => {
 
     const navigate = useNavigate() 
 
-    const handleReOrder = async (itemname,itemprice) => {
+    const handleReOrder = async (itemname,itemprice,itemDetails) => {
         try {
 
             console.log("test reorder");
@@ -51,6 +51,24 @@ const ReOrder = () => {
                 reOrderQuantity: reOrderQuantity, 
                 reOrderAmount: itemprice
             };
+
+            const usageItem = {
+
+                
+                remainingQuant: reOrderQuantity
+                
+                
+            }
+            const upresponse = await fetch(`/api/usage/${itemDetails._id}`, {
+                method: 'PATCH',
+                body: JSON.stringify(usageItem),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            
+
             const response = await fetch('/api/reorder/', {
                 method: 'POST',
                 body: JSON.stringify(reOrderItem),
@@ -114,7 +132,7 @@ const ReOrder = () => {
                                             <td>{totalPrice}</td>
                                             <td>
                                                 
-                                                <button onClick={() => handleReOrder(item.usageItemName,totalPrice)} className="inv-ReorderUpdateBtn">Re-Order</button>
+                                                <button onClick={() => handleReOrder(item.usageItemName,totalPrice,item)} className="inv-ReorderUpdateBtn">Re-Order</button>
                                             </td>
                                         </tr>
                                     );
