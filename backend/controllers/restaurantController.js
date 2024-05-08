@@ -31,7 +31,7 @@ const getRestaurant = async(req , res) =>{
 const getRestaurantdetails = async(req , res) =>{
     const {id} = req.params
 
-    const restaurant = await Restaurant.findOne({_id:id})
+    const restaurant = await Restaurant.findOne({Restaurant_Id:id})
 
     if(!restaurant){
         return res.status(404).json({error : 'No such Restauran'})

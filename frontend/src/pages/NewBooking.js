@@ -61,7 +61,7 @@ const NewBooking = () => {
         //get tables from related restaurent
         const fetchtabledata = async () => {
             try {
-                const tabledata = await axios.get(`/api/restaurants/${id}`);
+                const tabledata = await axios.get(`/api/restaurants/details/${id}`);
                 settabledetails(tabledata.data)
                 console.log("table details",tabledetails)
 
