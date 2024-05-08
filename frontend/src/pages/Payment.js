@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getOngoingOrder } from '../services/api';
 import {Card,Button,Typography,Box,Grid,TextField,CardActions} from '@mui/material';
+import Navbar from '../component/Navbar';
 
 function Payment() {
     const [ridDetails, setRiderDetails] = useState(null);
@@ -21,6 +22,7 @@ function Payment() {
     }, []);
     return (
         <div>
+        <Navbar/>
         <Box sx={{ backgroundColor: '#f0f0f0', padding: '20px' }}>
           <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} >
             <Grid item xs={7}>
@@ -28,6 +30,7 @@ function Payment() {
               </Box>
 
               <Box sx={{ marginLeft: '60px', marginRight: '60px', marginTop: '40px', marginBottom:'40px' }}>
+                <h4>rider Details:</h4>
                 <h2>Payment Details</h2>
                 <Grid container spacing={4}>
                   <Grid item xs={12}>

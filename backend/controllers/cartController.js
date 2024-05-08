@@ -1,4 +1,5 @@
 const Cart = require('../models/cartModel')
+const OnlineOrderModel = require('../models/onlineOrderModel')
 const mongoose = require('mongoose')
 
 //get spesific customer's orders with different restaurent (order id change for each restaurent)
@@ -39,10 +40,10 @@ const deleteCart = async (req, res) => {
     const {id} = req.params
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'No such cart'})
+        return res.status(404).json({error: 'invalide object id'})
     }
 
-    const cart = await Cart.findOneAndDelete({_id: id})
+    const cart = await OnlineOrderModel.findOneAndDelete({_id: id})
 
     if (!cart) {
         return res.status(404).json({error: 'No such cart'})
