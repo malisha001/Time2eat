@@ -63,7 +63,7 @@ const Navbar = () => {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                            News
+                            TIME2eat
                         </Typography>
                         {user && <Button color="inherit" onClick={handleClick}>Logout</Button>}
                         {!user && <Button color="inherit" component={Link} to='/login'>Login</Button>}
