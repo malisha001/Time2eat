@@ -130,11 +130,6 @@ function DineCustomerRegForm() {
     setTelError(null);
   };
 
-  // Function to handle navigation to pre-booking page
-  // const handlePreBookingsClick = () => {
-  //   ;
-  // };
-
   // Render form components
   return (
     <div>
@@ -216,7 +211,8 @@ function DineCustomerRegForm() {
                 onChange={(e) => setDate(e.target.value)}
                 value={date}
                 sx={{ width: "100%" }}
-                
+                // Set the minimum selectable date to today
+                inputProps={{ min: new Date().toISOString().split('T')[0] }}
               />
             </Grid>
 
