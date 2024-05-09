@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import './AddrestaurantsForm.css'
+import './AddrestaurantsForm.css';
 
 const AddrestaurantsForm = () => {
     const navigate = useNavigate();
@@ -71,16 +71,20 @@ const AddrestaurantsForm = () => {
         }
     };
 
+    const handleEmailChange = (value) => {
+        setEmail_address(value);
+        if (!validateEmail(value)) {
+            setEmailError('Please enter a valid email address.');
+        } else {
+            setEmailError('');
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!Restaurant_Id || !Restaurant_licensenumber || !Restaurant_name || !Restaurant_Managersname || !Email_address || !contact || !Password || !Confirm_paasword || !Address || !Couple_table || !Group_table) {
             setError('Please fill in all required fields.');
-            return;
-        }
-
-        if (!validateEmail(Email_address)) {
-            setEmailError('Please enter a valid email address.');
             return;
         }
 
@@ -203,11 +207,8 @@ const AddrestaurantsForm = () => {
 
             <label>Email Address :</label>
             <input
-                type="text"
-                onChange={(e) => {
-                    setEmailError('');
-                    setEmail_address(e.target.value);
-                }}
+                type="email" // Change the input type to "email"
+                onChange={(e) => handleEmailChange(e.target.value)} // Use handleEmailChange for immediate validation
                 value={Email_address}
             />
             {emailError && <div className="error">{emailError}</div>}

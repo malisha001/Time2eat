@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import logo from "../Assests/white.jpg"
 import './menu.css';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
@@ -44,6 +45,29 @@ const Menu = () => {
     if (!foodItems) return; 
 
     const doc = new jsPDF();
+    const logoWidth = 30;
+    const logoHeight = 30;
+    const businessNameX = 10 + logoWidth + 10;
+    
+  
+    // Add logo to the PDF document
+    doc.addImage(logo, 'jpg', 10, 5,logoWidth,logoHeight);
+    doc.setFontSize(16);
+    doc.text("Restaurant Reservation and Food Ordering System", businessNameX , 20);
+  
+    // Add horizontal line
+    doc.setLineWidth(0.5);
+    doc.line(10, 30, doc.internal.pageSize.getWidth() - 10, 30);
+  
+  
+    const reportTitle = 'Menu Table';
+    const titleX = 70;
+    
+    doc.setFontSize(14);
+    doc.text(reportTitle, titleX, 40); // Center the text horizontally
+  
+  
+  
     const tableColumn = ["Item Id", "Item Name", "Category", "Price(Rs)", "Cost(Rs)", "Profit(Rs)", "Average Preparetime(min)"];
     const tableRows = [];
 
@@ -62,7 +86,8 @@ const Menu = () => {
 
     doc.autoTable({
       head: [tableColumn],
-      body: tableRows
+      body: tableRows,
+      startY:50,
     });
 
     doc.save("food_items_report.pdf");
