@@ -140,6 +140,7 @@ function DineCustomerRegForm() {
         </Typography>
         <Button color="inherit" component={Link} to="/dine-in-bookings">Dine In</Button>
         <Button color="inherit" component={Link} to="/pre-booking-dine-in-form">Pre Bookings</Button>
+        <Button color="inherit" component={Link} to="/All-dine-in-booking-History">All Dine In Customer</Button>
         <IconButton
           size="large"
           edge="start"
