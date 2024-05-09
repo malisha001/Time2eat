@@ -161,7 +161,7 @@ const UpdateBookingPage = () => {
             console.error('Error updating booking:', error);
             setError('An error occurred while updating the booking.');
         }
-        navigate("/mybookings");
+        navigate(`/mybookings/${resid}`);
     }
         else{
             setError("Please enter valid details");
