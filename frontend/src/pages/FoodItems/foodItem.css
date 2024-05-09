@@ -71,7 +71,7 @@
     cursor: pointer;
 }
 
-.update-button {
+.invupdate-button {
     background-color: #105c22; 
     color: white; 
     border: none; 
@@ -85,7 +85,7 @@
     transition: background-color 0.3s; 
 }
 
-.update-button:hover {
+.invupdate-button:hover {
     background-color: #54c66c;
     cursor: pointer;
 }
@@ -104,14 +104,14 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-.home hr {
+.homeeee hr {
     border: none;
     height: 2px;
     background-color: #ccc;
     margin: -10px -157px 0px 0px ;
 }
 
-.home h4 {
+.homeeee h4 {
     font-size: 20px;
     color: #000000;
     font-weight: 400;

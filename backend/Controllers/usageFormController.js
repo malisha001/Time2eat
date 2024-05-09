@@ -4,11 +4,11 @@ const mongoose = require('mongoose')
 // create new usage item
 const createUsageItem = async (req, res) => {
 
-    const {  newQuantity, usageItemName, remainingQuant, Iquantity, Uprice } = req.body;
+    const {  newQuantity, usageItemName,reOrderQuan, remainingQuant, Iquantity, Uprice } = req.body;
 
     try{
  
-        const usageitem = await usageInventory.create({ usageItemName, newQuantity,remainingQuant, Iquantity, Uprice });
+        const usageitem = await usageInventory.create({ usageItemName, newQuantity,remainingQuant,reOrderQuan, Iquantity, Uprice });
         res.status(200).json(usageitem)
 
     }catch(error){
@@ -25,6 +25,8 @@ const getUsageItems = async (req, res) => {
 // update a single usage item
 const updateUsageItem = async(req, res) => {
     const {id} = req.params 
+
+    console.log("id is",id);
 
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: 'No such an Usage Item'})

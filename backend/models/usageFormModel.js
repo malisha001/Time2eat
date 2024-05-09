@@ -18,7 +18,10 @@ const usageSchema = new Schema({
         type:Number,
         required:true
     },
-
+    reOrderQuan:{
+        type:Number,
+        required:true
+    },
     Iquantity:{
         type:Number,
         required:true

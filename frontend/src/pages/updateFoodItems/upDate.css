@@ -71,3 +71,17 @@
     background-color: #515151;
     margin-bottom: 20px;
 }
+
+.upInventoryAddItemError{
+    font-weight: 400;
+    font-size: 18px;
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(0, 0, 0);
+    background-color: rgb(226, 121, 112);
+    padding: 10px 0px 10px 0px;
+    border-radius: 5px;
+    margin-top: 17px;
+    margin-bottom: 10px;
+    width: 60%;
+    margin-left: 150px;
+}
