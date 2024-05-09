@@ -26,7 +26,7 @@ const Navbar = () => {
                 console.log("reorder", json);
                 setRItems(json);
                 // Check if any item meets the condition
-                const hasItemsToReorder = json.some(item => item.remainingQuant < item.Iquantity);
+                const hasItemsToReorder = json.some(item => item.remainingQuant <= item.reOrderQuan);
                 setShowAlert(hasItemsToReorder);
             } catch (error) {
                 console.error('Error fetching reorder items:', error);

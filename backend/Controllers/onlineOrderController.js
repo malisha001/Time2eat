@@ -6,7 +6,7 @@ const getOnlineOrders = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const resOrder = await Onlineorder.find({ restaurantid: id });
+        const resOrder = await Onlineorder.findOne({ _id: id });
 
         if (!resOrder) {
             return res.status(404).json({ error: 'No online orders' });
@@ -59,10 +59,10 @@ const updateriderstatus = async(req,res) =>{
     const { id } = req.params;
 
     try {
-        const rider = await Onlineorder.findOneAndUpdate({orderid: id}, { ...req.body });
+        const rider = await Onlineorder.findOneAndUpdate({orderid: req.body.orderid}, { ...req.body });
 
         if (!rider) {
-            return res.status(404).json({ error: 'no order found' });
+            return res.status(404).json({ error: 'no order found by id' });
         }
         res.status(200).json(rider);
 

@@ -1,5 +1,5 @@
 .inv-sidebar {
-    width: 280px; /* Adjust width as needed */
+    width: 330px; /* Adjust width as needed */
     height: 100vh; /* Make sidebar full height of the viewport */
     background-color: #D7D7D7; /* Background color for the sidebar */
     color: white; /* Text color */
@@ -25,9 +25,9 @@
 /* Topic */
 .inv-sidebar p h1{
     font-weight:250;
-    font-size: 25px;
+    font-size: 30px;
     margin-left: 115px;
-    margin-top: -55px;
+    margin-top: -52px;
 
 }
 
@@ -41,21 +41,22 @@
 
 .inv-sidebar ul li {
     padding: 5px;
-    line-height:1.7cm;
+    line-height:2cm;
     cursor: pointer;
     color: black;
-    font-size: 17px;
+    font-size: 25px;
     font-weight: 600;
 }
 
 .inv-sidebar ul li a{
     text-decoration: none;
     color: inherit;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .inv-sidebar ul li:hover {
     background-color: #acacac; /* Change background color on hover */
-    width: 240px;
+    width: 300px;
     border-radius: 20px;
 }
 
@@ -70,13 +71,14 @@ ul li svg {
 }
 
 .inv-navButton{
-    margin-left: 0px;
+    margin-left: 13px;
     background-color: #8B0000;
     border-radius: 10px;
     color: white;
     padding: 10px 58px 10px 30px;
     font-size: 23px;
     font-weight: 600;
+    margin-top: 60px;
 }
 
 .inv-navButton a {
