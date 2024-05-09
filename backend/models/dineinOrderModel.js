@@ -6,20 +6,9 @@ const dineinorderSchema = new Schema({
 
     orderid:{},
 
-    resname:{
-        type: String,
-        required:true
-    },
-
     tableid:{
         type: String,
         required: true
-
-    },
-
-    restaurantid:{
-        type: String,
-       required: true
 
     },
 

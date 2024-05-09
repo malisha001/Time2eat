@@ -12,13 +12,32 @@ export default function CheckoutPage() {
     const { cart } = useCart();
     const { user } = useAuthContext();
     const navigate = useNavigate();
-    const [order, setOrder] = useState({});
+    const [order, setOrder] = useState({...cart });  //order has all the items of the cart(put a shallow copy of the cart inside the order)
+    
+   
+   /* const {                                           //create a form for getting the data from the user
+        signup,
+        formState: { errors},
+        handleSubmit,
+    } = useForm(); */
 
     useEffect(() => {
         setOrder({ ...cart });
     }, [cart]);
 
-    if (!user) {
+     const submit = async data => {
+      /* if (!order.addressLatLng) {                                                    //check if the user didn't select the address on the map
+            toast.warning('please select your location on the map');                  //if user didn't select location
+            return ;
+        } */
+
+
+       await createOrder({ ...order, fullname: data.fullname, address: data.address });  // user selected location
+        navigate ('/payment');
+     }; 
+     if (!user) {
+        // Handle the case where user is null
+        // For example, return a loading indicator or redirect to login page
         return <div>Loading...</div>;
     }
 
