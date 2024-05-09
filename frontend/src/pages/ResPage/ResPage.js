@@ -14,6 +14,7 @@ import Tags from '../../component/Tags/Tags.js';
 import NotFound from '../../component/NotFound/NotFound';
 import { useNavigate } from 'react-router-dom';
 import exampleImage from '../../Assests/example.jpg';
+import Navbar from '../../component/Navbar';
 
 const initialState = { foods: [], tags: [] };
 
@@ -59,6 +60,7 @@ export default function ResPage() {
 
     return (
         <>
+        <Navbar />
             <Card sx={{maxWidth: 'auto' }}>
       <CardActionArea>
         <CardMedia

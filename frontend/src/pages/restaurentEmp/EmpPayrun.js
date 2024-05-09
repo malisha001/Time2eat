@@ -3,6 +3,7 @@ import React, { useState,useEffect } from 'react';
 import { updateEmpPayrunData,getPayrunData,paySalary } from '../../services/api';
 import { Box, color, containerClasses, padding } from '@mui/system';
 import Payrunbtn from '../../component/Payrunbtn';
+import Resuppernav from '../../component/restauretNavbar/Resuppernav';
 import ResNavbar from '../../component/restauretNavbar/ResNavbar';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 
@@ -45,35 +46,39 @@ function EmpPayrun() {
 
     return (
         <div>
-            <h1>Employee Payrun</h1>
-            <div>
-                <Paper sx={{padding:'32px',bgcolor: '#F0F8FF', margin: '20px'}} >
-                    <h3>monthly paysheet</h3>
-                    <Divider />
-                    <Grid container spacing={3} sx={{ marginTop: '20px' }}>
-                        {payrunData.map((item) => (
-                            <Grid item md ={4} padding={2} key={item._id} >
-                                <Grid container>
-                                    <Grid item ={6}>
-                                        {item.category}
-                                        <Box bgcolor='#fff' p={2} >
-                                            {item.rate}
-                                        </Box>
-                                    </Grid>
-                                    <Grid item ={6} spacing={2}>
-                                        <br/>
-                                        <Payrunbtn id={item._id}/>
+            <ResNavbar/>
+            <div className="Inv-dashborad">
+                <Resuppernav/>
+                <h1>Employee Payrun</h1>
+                <div>
+                    <Paper sx={{padding:'32px',bgcolor: '#F0F8FF', margin: '20px'}} >
+                        <h3>monthly paysheet</h3>
+                        <Divider />
+                        <Grid container spacing={3} sx={{ marginTop: '20px' }}>
+                            {payrunData.map((item) => (
+                                <Grid item md ={4} padding={2} key={item._id} >
+                                    <Grid container>
+                                        <Grid item ={6}>
+                                            {item.category}
+                                            <Box bgcolor='#fff' p={2} >
+                                                {item.rate}
+                                            </Box>
+                                        </Grid>
+                                        <Grid item ={6} spacing={2}>
+                                            <br/>
+                                            <Payrunbtn id={item._id}/>
+                                        </Grid>
                                     </Grid>
                                 </Grid>
-                            </Grid>
-                        ))}         
-                    </Grid>
-                    {/* <h3>last update:</h3>
-                    <h3>Days to the next salary day:</h3> */}
-                </Paper>
-                <Button variant='contained' color='primary' onClick={handlesubmit}>
-                    pay salary
-                </Button>
+                            ))}         
+                        </Grid>
+                        {/* <h3>last update:</h3>
+                        <h3>Days to the next salary day:</h3> */}
+                    </Paper>
+                    <Button variant='contained' color='primary' onClick={handlesubmit}>
+                        pay salary
+                    </Button>
+                </div>
             </div>
         </div>
     );

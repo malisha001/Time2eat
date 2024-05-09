@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { Grid, Paper } from '@mui/material';
+import { Grid, Paper, Button } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import exampleImage from '../Assests/example.jpg';
@@ -19,17 +19,25 @@ import { useParams } from 'react-router-dom';
 import { useAuthContext } from '../hooks/useAuthContext';
 
 const MyBookings = () => {
+    // Get the URL parameter
     const { id } = useParams(); 
+    // Get user from authentication context
     const {user} = useAuthContext()
     console.log("userr",user)
+    // State to store bookings data
     const [bookings, setBookings] = useState(null);
 
     useEffect(() => {
         const fetchMyBookings = async () => {
             try {
+                // Extract user email
                 const userr = user.email
                 console.log("u",userr)
+
+                // Fetch bookings data for the current user and restaurant
                 const response = await axios.get(`/api/booking/books?userId=${userr}&restaurantId=${id}`);
+
+                // Extract data from response and update state
                 const data = response.data;
                 console.log("my bookinggg",response.data)
                 setBookings(data);
@@ -39,11 +47,16 @@ const MyBookings = () => {
         };
 
         fetchMyBookings();
-    }, []);
+    }, []); // Empty dependency array ensures useEffect runs only once on component mount
 
+
+    // Function to handle deleting a booking
     const handleDeleteBooking = async (bookingId) => {
         try {
+            // Send DELETE request to delete the booking
             await axios.delete(`/api/booking/${bookingId}`);
+
+            // Filter out the deleted booking from the state
             setBookings(bookings.filter(booking => booking._id !== bookingId));
         } catch (error) {
             console.error('Error deleting booking:', error);
@@ -56,7 +69,7 @@ const MyBookings = () => {
             <div className="bookings">
                 {bookings && bookings.map((booking) => (
                     <div className="booking-details" key={booking._id}>
-                        <Paper sx={{ width: '1100px', pt: '10px', mt: '100px', ml: '40px', mr: '40px', bgcolor: 'lightgrey' }}>
+                        <Paper sx={{ width: '1000px', pt: '10px', mt: '100px', ml: '40px', mr: '40px', bgcolor: 'lightgrey' }}>
                             <Grid container spacing={2}>
                                 <Grid sx={{ pr: '16px' }} item md={5}>
                                     <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -94,7 +107,7 @@ const MyBookings = () => {
                                         <Grid item md={6}>
 
                                             {/* Create a link to the dine-in form page with booking ID */}
-                                            <QRCode value={`http://localhost:3000/dine-in-form/${booking._id}`} />
+                                            <QRCode value={`http://localhost:3000/dine-in-form/${booking._id}`} style={{ marginLeft: '76px', marginTop: '58px' }}/>
 
 
                                         </Grid>
@@ -104,9 +117,9 @@ const MyBookings = () => {
                             </Grid>
 
                             <p>{booking.createAt}</p>
-                            <button className='mybookings-delete' onClick={() => handleDeleteBooking(booking._id)}>Delete</button>
+                            <Button variant="contained" className='mybookings-delete' onClick={() => handleDeleteBooking(booking._id)}>Delete</Button>
 
-                            <button className='mybookings-update'><Link to={`/update-pre-booking/${booking._id}`}>Update</Link></button>
+                            <Button variant="contained" sx={{bgcolor: 'red', ml:'750px'}} className='mybookings-update'><Link to={`/update-pre-booking/${booking._id}`}>Update</Link></Button>
                         </Paper>
 
                     </div>

@@ -1,165 +1,35 @@
-import { Box, CardActionArea, CardMedia, Card, Paper, Grid, CardContent, Typography, Button } from '@mui/material'
-import React from 'react'
-import { useParams } from 'react-router-dom';
-import exampleImage from '../Assests/example.jpg';
-import image1 from '../Assests/image1.jpg'
-import image2 from '../Assests/image2.jpg'
-import image3 from '../Assests/image3.jpg'
-import image4 from '../Assests/image4.jpg'
-import image5 from '../Assests/image5.jpg'
-import image6 from '../Assests/image6.jpg'
-import { useNavigate } from 'react-router-dom';
+// import * as React from 'react';
+// import AppBar from '@mui/material/AppBar';
+// import Toolbar from '@mui/material/Toolbar';
+// import Typography from '@mui/material/Typography';
+// import Button from '@mui/material/Button';
+// import IconButton from '@mui/material/IconButton';
+// import { Link } from 'react-router-dom';
 
-function Mybookingstyle() {
-    const { id } = useParams();
-    const navigate = useNavigate();
+// function ResponsiveAppBar() {
+//   return (
+//     <AppBar position="static">
+//       <Toolbar>
+//         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+//           Dine In Form
+//         </Typography>
+//         <Button color="inherit" component={Link} to="/dine-in-bookings">Dine In</Button>
+//         <Button color="inherit" component={Link} to="/pre-booking-dine-in-form">Pre Bookings</Button>
+//         <IconButton
+//           size="large"
+//           edge="start"
+//           color="inherit"
+//           aria-label="menu"
+//           aria-controls="menu-appbar"
+//           aria-haspopup="true"
+//           component={Link}
+//           to="/menu"
+//         >
+         
+//         </IconButton>
+//       </Toolbar>
+//     </AppBar>
+//   );
+// }
 
-    const submitButton = () => { 
-        // Navigate to the newBooking page with the restaurant ID in the URL
-        navigate(`/newbooking/${id}`);
-    }
-
-  return (
-    <div>
-        <Paper>
-       <Box>
-       <Card sx={{maxWidth: 'auto' }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="200"
-          image= {exampleImage}
-          alt="green iguana"
-        />
-        </CardActionArea>
-        </Card>
-        <Button
-                    variant="contained"
-                    onClick={submitButton}
-                    style={{ position: 'absolute', top: 220, right: 30 }}
-                >
-                    book table
-                </Button>
-       </Box>
-
-       <Paper  sx={{marginTop: '80px', marginLeft: '20px', marginRight: '20px'}}>
-       
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        
-            <Grid item xs={4}>
-            <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
-                    <CardMedia
-                    component="img"
-                    height="140"
-                    image={image1}
-                    alt="green iguana"
-                    />
-                    <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        Burger
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        Rs.1000
-                    </Typography>
-                    </CardContent>
-            </Card>
-            </Grid>
-            <Grid item xs={4}>
-            <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
-                    <CardMedia
-                    component="img"
-                    height="140"
-                    image={image2}
-                    alt="green iguana"
-                    />
-                    <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        Hot Dog
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        Rs.2000
-                    </Typography>
-                    </CardContent>
-            </Card>
-            </Grid>
-            <Grid item xs={4}>
-            <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
-                    <CardMedia
-                    component="img"
-                    height="140"
-                    image={image3}
-                    alt="green iguana"
-                    />
-                    <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        Mix Grill
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        Rs.3000
-                    </Typography>
-                    </CardContent>
-            </Card>
-            </Grid>
-            <Grid item xs={4}>
-            <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
-                    <CardMedia
-                    component="img"
-                    height="140"
-                    image={image4}
-                    alt="green iguana"
-                    />
-                    <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        Noodles
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        Rs.1500
-                    </Typography>
-                    </CardContent>
-            </Card>
-            </Grid>
-            <Grid item xs={4}>
-            <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
-                    <CardMedia
-                    component="img"
-                    height="140"
-                    image={image5}
-                    alt="green iguana"
-                    />
-                    <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        Prawn Rice
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        Rs.2500
-                    </Typography>
-                    </CardContent>
-            </Card>
-            </Grid>
-            <Grid item xs={4}>
-            <Card sx={{ maxWidth: 345, marginTop: '10px', marginLeft: '100px', marginBottom: '20px' }}>
-                    <CardMedia
-                    component="img"
-                    height="140"
-                    image={image6}
-                    alt="green iguana"
-                    />
-                    <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
-                        Chicken Soup
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        Rs.1500
-                    </Typography>
-                    </CardContent>
-            </Card>
-            </Grid>
-        </Grid>
-       </Paper>
-      
-        </Paper>
-    </div>
-  )
-}
-
-export default Mybookingstyle
+// export default ResponsiveAppBar;

@@ -5,7 +5,7 @@ const Newbookingsstyle = () => {
     return ( 
         <div>
             {/* <NewStyle /> */}
-            <MyBookingStyle />
+            {/* <MyBookingStyle /> */}
             {/* <Bookingformstyle /> */}
         </div>
      );

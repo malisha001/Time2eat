@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Paper, TextField, Button, Box } from "@mui/material";
+import { Grid, Paper, TextField, Button, Box,AppBar,Toolbar,Typography,IconButton } from "@mui/material";
+import { Link } from 'react-router-dom';
+
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
 const UpdateDineInBooking = () => {
-  const { id } = useParams();
+  const { id, resId } = useParams();
   const [selectedDateTime, setSelectedDateTime] = useState({ date: '', time: '' });
   const [couplequantity, setCouplequantity] = useState('');
   const [groupquantity, setGroupquantity] = useState('');
@@ -17,7 +19,9 @@ const UpdateDineInBooking = () => {
     const fetchBookingData = async () => {
       try {
         const response = await axios.get(`/api/realtimebooking/${id}`);
+        console.log("hi", response)
         const { name, date, time, couplequantity, groupquantity, telephoneno } = response.data;
+        
         setName(name);
         setSelectedDateTime({ date, time });
         setCouplequantity(couplequantity);
@@ -31,14 +35,21 @@ const UpdateDineInBooking = () => {
     fetchBookingData();
   }, [id]);
 
+  console.log(name !== null ? name : "Name is null");
+
+
   useEffect(() => {
     fetchAvailableTables();
   }, [couplequantity, groupquantity]);
 
   const fetchAvailableTables = async () => {
     try {
-      const response = await axios.get("/api/realtimebooking");
+      const response = await axios.get(`/api/realtimebooking/${resId}`);
       const bookings = response.data;
+
+      // Fetch restaurant data
+      const restaurantResponse = await axios.get(`/api/restaurants/${resId}`);
+      const restaurantData = restaurantResponse.data;
 
       const coupleTablesBooked = bookings.reduce(
         (acc, booking) => acc + booking.couplequantity,
@@ -49,8 +60,8 @@ const UpdateDineInBooking = () => {
         0
       );
 
-      const availableCoupleTables = (10 - coupleTablesBooked) + couplequantity; // Max available couple tables minus tables already booked and those requested
-      const availableGroupTables = (15 - groupTablesBooked) + groupquantity; // Max available group tables minus tables already booked and those requested
+      const availableCoupleTables = (restaurantData.Couple_table - coupleTablesBooked) + couplequantity; // Max available couple tables minus tables already booked and those requested
+      const availableGroupTables = (restaurantData.Group_table - groupTablesBooked) + groupquantity; // Max available group tables minus tables already booked and those requested
 
       setAvailableTables({ couple: availableCoupleTables, group: availableGroupTables });
     } catch (error) {
@@ -104,16 +115,44 @@ const UpdateDineInBooking = () => {
       setError('An error occurred while updating the booking.');
     }
 
-    navigate("/");
+    navigate("/dine-in-bookings");
   };
 
   return (
+    <div>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Link to={"/dine-in-form"} style={{ color: "white" }}>Dine In Form</Link>
+          </Typography>
+          <Button color="inherit" component={Link} to="/dine-in-bookings">
+            Dine In
+          </Button>
+          <Button
+            color="inherit"
+            component={Link}
+            to="/pre-booking-dine-in-form"
+          >
+            Pre Bookings
+          </Button>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            component={Link}
+            to="/menu"
+          ></IconButton>
+        </Toolbar>
+      </AppBar>
     <form className="update" onSubmit={handleSubmit}>
       <h3>Update Booking</h3>
 
       <Paper sx={{ bgcolor: "white" }}>
         <Box sx={{ marginLeft: "60px", marginRight: "60px", marginTop: "40px", marginBottom: "40px", padding: "20px" }}>
-          <h2>Payment Details</h2>
+          <h2>Dine In Details</h2>
           <Grid container spacing={4}>
             <Grid item xs={6}>
               <TextField
@@ -192,6 +231,7 @@ const UpdateDineInBooking = () => {
       </Button>
       {error && <div className="error">{error}</div>}
     </form>
+    </div>
   );
 };
 

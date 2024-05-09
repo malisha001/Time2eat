@@ -5,11 +5,13 @@ import classes from './cartPage.module.css';
 import Title from '../../component/Title/Title';
 import Price from '../../component/Price/Price';
 import NotFound from '../../component/NotFound/NotFound';
+import Navbar from '../../component/Navbar';
 
 export default function CartPage() {
    const {cart, removeFromCart,  changeQuantity } = useCart();
 return (
   <>
+  <Navbar />
   <Title title="Cart Page" margin="1.5rem 0 0 2.3rem" />,
 
   {cart.items.length === 0 ? (<NotFound message="Cart Page is empty!" />

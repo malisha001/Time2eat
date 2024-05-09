@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 import { Table, TableBody, TableHead, TableRow, TableCell, TableContainer, Paper, Button, TextField } from '@mui/material';
 import axios from "axios";
+import { useAuthContext } from '../hooks/useAuthContext';
+
 
 const AllCustomerDineInHistory = () => {
+    const { user } = useAuthContext();
+
     const [dineBookings, setDineBookings] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
 
+
+    console.log(user)
     useEffect(() => {
         const fetchDineInBookings = async () => {
             try {
-                const response = await axios.get('/api/customerhistoryroute');
+                const response = await axios.get(`/api/customerhistoryroute/${user.resId}`);
                 const data = response.data;
                 setDineBookings(data);
             } catch (error) {
@@ -18,7 +24,7 @@ const AllCustomerDineInHistory = () => {
         };
 
         fetchDineInBookings();
-    }, []);
+    }, [user]);
 
     const handleClick = async (deleteDineBookings) => {
         try {

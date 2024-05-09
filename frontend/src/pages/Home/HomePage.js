@@ -331,7 +331,7 @@ export default function TemporaryDrawer() {
                               <CardContent>
                                 <Typography gutterBottom variant="h5" component="div">
                                   <Box>{restuarent.Restaurant_name}</Box>
-                                  <Box sx={{marginLeft:"182px", marginTop:"-32px"}}>hi
+                                  <Box sx={{marginLeft:"182px", marginTop:"-32px"}}>
                                   {/* Pass restaurant ID to AvailabilityStatus */}
                                     <AvailabilityStatus restaurantId={restuarent.Restaurant_Id} />
                                   </Box>

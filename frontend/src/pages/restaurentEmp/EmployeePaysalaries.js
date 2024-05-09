@@ -33,8 +33,8 @@ function EmployeePaysalaries() {
       const slaryyear = salaryDate.getFullYear();
       const slarymonth = salaryDate.getMonth() + 1;
       return empsal.empId === filterCriteria.employeeId || 
-      slaryyear === filterCriteria.year || 
-      slarymonth === filterCriteria.month;
+      slaryyear === parseInt(filterCriteria.year) || 
+      slarymonth === parseInt(filterCriteria.month);
       
     } );
 
