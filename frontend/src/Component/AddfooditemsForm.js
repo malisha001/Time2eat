@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import './AddfooditemsForm.css'
 
 const AddfooditemsForm = () => {
     const navigate = useNavigate();
@@ -16,6 +17,7 @@ const AddfooditemsForm = () => {
     const [nameError, setNameError] = useState('');
     const [categoryError, setCategoryError] = useState('');
     const [idError, setIdError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     const validatePrice = (value) => {
         if (!value || isNaN(value)) {
@@ -112,6 +114,7 @@ const AddfooditemsForm = () => {
                 setCost('');
                 setAverage_preparetime('');
                 setError(null);
+                setSuccessMessage('Menu is added successfully!');
                 console.log('New food item added', json);
 
                 // Navigate to the desired page
@@ -123,8 +126,8 @@ const AddfooditemsForm = () => {
     };
 
     return (
-        <div className="container">
-            <form className="create" onSubmit={handleSubmit}>
+        <div className="food menu-container">
+            <form className="add menu-create" onSubmit={handleSubmit}>
                 <h2>Add Food Items</h2>
 
                 <label>Item ID:</label>
@@ -190,6 +193,7 @@ const AddfooditemsForm = () => {
                 <button type="submit" className="addfoodbutton">Add Food Item</button>
 
                 {error && <div className="error">{error}</div>}
+                {successMessage && <div className="success-message">{successMessage}</div>}
             </form>
         </div>
     );

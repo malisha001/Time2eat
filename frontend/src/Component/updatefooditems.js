@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import './updatefooditems.css'
 
 const UpdateFoodItems = () => {
     const { id } = useParams(); // Get the food item id from URL params
@@ -124,7 +125,7 @@ const UpdateFoodItems = () => {
     };
 
     return (
-        <div>
+        <div className="up-food-menu">
             <form onSubmit={handleSubmit}>
                 <h3>Update Food Item Details</h3>
                 <div>
