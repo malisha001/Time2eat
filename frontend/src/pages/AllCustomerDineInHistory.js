@@ -2,14 +2,70 @@ import { useEffect, useState } from "react";
 import { Table, TableBody, TableHead, TableRow, TableCell, TableContainer, Paper, Button, TextField } from '@mui/material';
 import axios from "axios";
 import { useAuthContext } from '../hooks/useAuthContext';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import logo from '../Assests/white.jpg';
+
 
 
 const AllCustomerDineInHistory = () => {
     const { user } = useAuthContext();
 
     const [dineBookings, setDineBookings] = useState(null);
-    const [searchTerm, setSearchTerm] = useState('');
+        const [searchTerm, setSearchTerm] = useState('');
 
+        const generatePDFReport = () => {
+            if (!dineBookings) return; // No data to generate report
+            const doc = new jsPDF();
+          
+            
+            const logoWidth = 30;
+            const logoHeight = 30;
+            const businessNameX = 10 + logoWidth + 10;
+            
+          
+            // Add logo to the PDF document
+            doc.addImage(logo, 'jpg', 10, 5,logoWidth,logoHeight);
+            doc.setFontSize(16);
+            doc.text("Restaurant Reservation and Food Ordering System", businessNameX , 20);
+          
+            // Add horizontal line
+            doc.setLineWidth(0.5);
+            doc.line(10, 30, doc.internal.pageSize.getWidth() - 10, 30);
+          
+            // Add "Dine-In Orders Daily Report" text
+            const reportTitle = 'All Dine In Customer';
+            const titleX = 70;
+            
+            doc.setFontSize(14);
+            doc.text(reportTitle, titleX, 40); // Center the text horizontally
+          
+          
+            const tableColumn = ["Customer Name", "Time ID", "Couple Quantity", "Group Quantity", "Telephone"];
+            const tableRows = [];
+             
+            dineBookings.forEach((dineBooking) => {
+              const rowData = [
+                dineBooking.name,
+                dineBooking.time,
+                dineBooking.date,
+                dineBooking.couplequantity,
+                dineBooking.groupquantity,
+                dineBooking.telephoneno,
+                new Date(dineBooking.createdAt).toLocaleString()
+              ];
+              tableRows.push(rowData);
+            });
+          
+            doc.autoTable({
+              head: [tableColumn],
+              body: tableRows,
+              startY: 50
+            });
+          
+            doc.save("dine_in_orders_report.pdf");
+          };
+          
 
     console.log(user)
     useEffect(() => {
@@ -82,6 +138,8 @@ const AllCustomerDineInHistory = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <button  onClick={generatePDFReport}>Generate PDF Report</button>
+
         </div>
     );
 }
