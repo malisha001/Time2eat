@@ -71,7 +71,7 @@ const updateInquiry = async(req , res) =>{
 
 module.exports = {
     getInquiry,
-    getInquirys,
+    getinquiries,
     addInquiry,
     updateInquiry,
     deleteInquiry

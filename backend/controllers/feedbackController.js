@@ -55,7 +55,7 @@ const deleteFeedback = async(req , res) =>{
 }
 
 
-//update restaurant
+//update feedback
 const updateFeedback = async(req , res) =>{
     const {id} = req.params
 

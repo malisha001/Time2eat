@@ -12,9 +12,9 @@ const AddfeedbackForm = () => {
     const validateForm = () => {
         const errors = {};
 
-        if (!feedback_Id.trim()) {
+        /*if (!feedback_Id.trim()) {
             errors.feedback_Id = "Feedback ID is required";
-        }
+        }*/
 
         if (!customer_name.trim()) {
             errors.customer_name = "Customer name is required";
@@ -60,7 +60,7 @@ const AddfeedbackForm = () => {
         const feedback = { feedback_Id, customer_name, contact_number, comment };
 
         try {
-            const response = await fetch('/api/feedback', {
+            const response = await fetch('/api/feedback/add', {
                 method: 'POST',
                 body: JSON.stringify(feedback),
                 headers: {
@@ -93,17 +93,6 @@ const AddfeedbackForm = () => {
             <form style={{ backgroundColor: "rgba(255, 255, 255, 0.9)", padding: "45px", borderRadius: "10px" }} onSubmit={handleSubmit}>
                 <h2>Add Feedback</h2>
 
-                <div style={{ marginBottom: "15px" }}>
-                    <label style={{ fontWeight: "bold" }}>Feedback ID :</label>
-                    <input
-                        type="text"
-                        name="feedback_Id"
-                        onChange={(e) => setFeedback_Id(e.target.value)}
-                        value={feedback_Id}
-                        style={{ width: "100%", padding: "8px", border: "1px solid #ccc", borderRadius: "4px", boxSizing: "border-box" }}
-                    />
-                    {errors.feedback_Id && <div style={{ color: "red" }}>{errors.feedback_Id}</div>}
-                </div>
 
                 <div style={{ marginBottom: "15px" }}>
                     <label style={{ fontWeight: "bold" }}>Customer Name :</label>
