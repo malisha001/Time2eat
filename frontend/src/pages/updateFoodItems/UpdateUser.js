@@ -12,9 +12,27 @@ function UpdateUser() {
     const [price, setPrice] = useState("");
     const [category, setCategory] = useState("");
     const [reorder, setReOrder] = useState("");
+    const [itemNameError, setItemNameError] = useState(null); 
+    const [itemCategoryError, setItemCategoryError] = useState(null); 
 
 
+    const handleItemNameChange = (value) => {
+        if (!/^[A-Za-z\s]*$/.test(value)) { // Check if the value contains only letters and spaces
+            setItemNameError('Item Name should only contain letters and spaces');
+        } else {
+            setName(value);
+            setItemNameError('');
+        }
+    };
 
+    const handleItemCategoryChange = (value) => {
+        if (!/^[A-Za-z\s]*$/.test(value)) { // Check if the value contains only letters and spaces
+            setItemCategoryError('Item Category should only contain letters and spaces');
+        } else {
+            setCategory(value);
+            setItemCategoryError('');
+        }
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -45,6 +63,12 @@ function UpdateUser() {
 
     const handleUpdate = async (e) => {
         e.preventDefault();
+
+        // Check if there are errors in item name or item category
+        if (itemNameError || itemCategoryError) {
+            return; // Exit the function if there are errors
+        }
+
         try {
             const response = await axios.patch(`/api/inventory/${id}`, {
                 itemId:itemid,
@@ -79,8 +103,10 @@ function UpdateUser() {
                 <input
                     type="text"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => handleItemNameChange(e.target.value)}
                 />
+     
+                {itemNameError && <div className="upInventoryAddItemError">{itemNameError}</div>} 
              
 
                 <label>Item Quantity :</label>
@@ -108,8 +134,10 @@ function UpdateUser() {
                 <input
                     type="text"
                     value={category}
-                    onChange={(e) => setCategory(e.target.value)}
+                    onChange={(e) => handleItemCategoryChange(e.target.value)}
                 />
+    
+                {itemCategoryError && <div className="upInventoryAddItemError">{itemCategoryError}</div>}
                 
 
                 <br />
