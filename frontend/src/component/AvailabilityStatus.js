@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {Typography} from '@mui/material';
+
 const AvailabilityStatus = ({ restaurantId }) => {
   const [availabilityPercentage, setAvailabilityPercentage] = useState(0);
   const [tabledetails,settabledetails] = useState('')
@@ -64,6 +66,9 @@ const AvailabilityStatus = ({ restaurantId }) => {
   return (
     <div className="home-page">
       <div style={circleStyle}></div>
+      <Typography variant="caption" display="block" gutterBottom>
+        {availabilityPercentage}
+      </Typography>
     </div>
   );
 };

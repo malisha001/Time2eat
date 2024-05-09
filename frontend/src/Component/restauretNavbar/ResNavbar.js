@@ -28,6 +28,7 @@ const ResNavbar = () => {
                 <li><Link to ={"/inventory/addItems"}><FontAwesomeIcon icon={faBowlFood} />employee</Link></li>
                 <li><Link to={"/fooditems"}><FontAwesomeIcon icon={faNoteSticky} />menu</Link></li>
                 <li><Link to={"/dine-in-form"}><FontAwesomeIcon icon={faComments} />resiption staff</Link></li>
+                <li><Link to={"/dinein"}><FontAwesomeIcon icon={faComments} />dine in</Link></li>
                 <button className="inv-navButton" onClick={logouthandle}><FontAwesomeIcon icon={faRightFromBracket}/>Logout</button>
             </ul>
         </nav>
