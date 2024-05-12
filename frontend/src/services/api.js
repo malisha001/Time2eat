@@ -218,9 +218,9 @@ export async function acceptOrder(order) {
 }
 
 //get cart details for customer
-export async function getCartData() {
+export async function getCartData(id) {
     try {
-        const response = await fetch('/api/carts');
+        const response = await fetch(`/api/carts/${id}`);
         const data = await response.json();
         return data;
     } catch (error) {

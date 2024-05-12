@@ -21,6 +21,7 @@ function Cart() {
     const [deleteorder, setdeleteorder] = useState('');
     var deleteee;
 
+
     //get radio button value
     const handleChange = (event) => {
         setRadioValue(event.target.value);
@@ -127,7 +128,8 @@ function Cart() {
     useEffect(() => {
         const fetchCartData = async () => {
             try {
-                const fetchCartData = await getCartData();
+                console.log('user:', user.email);
+                const fetchCartData = await getCartData(user.email);
                 console.log("fetch data:", fetchCartData)
                 // Group items by order ID
                 const ordersMap = new Map();
@@ -141,6 +143,7 @@ function Cart() {
                 // Convert map values to array
                 const uniqueOrdersData = Array.from(ordersMap.values());
                 setCartData(uniqueOrdersData);
+                console.log('cartData:', uniqueOrdersData);
 
             } catch (error) {
                 console.error('Error fetching cart data:', error);
@@ -149,7 +152,7 @@ function Cart() {
         
         fetchCartData();
 
-    }, []);
+    }, [user]);
 
     return (
         <div>
@@ -167,7 +170,7 @@ function Cart() {
                     <Paper key={order.orderid} sx={{ padding: '32px', bgcolor: '#F0F8FF', margin: '20px' }}>
                         <Grid container >
                             <Grid item ={6}>
-                                <h2>Restaurant name: {order.restaurantname}</h2>
+                                <h2>Restaurant name: {order.restaurantid}</h2>
                                 <h3>Order Id: {order.orderid}</h3>
                                 <h3>Items:</h3>
                                 <ul>

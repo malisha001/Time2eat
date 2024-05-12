@@ -7,18 +7,14 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import{ useState, useEffect } from 'react';
 import {getAllEmployeeData} from '../../services/api';
-import {getRestaurentLeaves,addRestaurentLeaves} from '../../services/restaurentsApi';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './EmpLeaves.css';
-import Resuppernav from '../../component/restauretNavbar/Resuppernav';
 import ResNavbar from '../../component/restauretNavbar/ResNavbar';
-import { useAuthContext } from '../../hooks/useAuthContext';
-import { toDate } from 'date-fns';
+import Resuppernav from '../../component/restauretNavbar/Resuppernav';
 
 function EmpLeaves() {
-    const {user} = useAuthContext();
-    const [users, setUsers] = useState('');
+    const[user,setUsers] = useState()
     const [openPopup, setOpenPopup] = useState(false);
     const[openPopupEdit, setOpenPopupEdit] = useState(false);
     const[openPopupfee, setOpenPopupfee] = useState(false);
@@ -54,54 +50,8 @@ function EmpLeaves() {
             }
           };
 
-        //fetch employee leaves
-        const fetchEmployeeLeaves = async () => {
-          try {
-            const leavesData = await getRestaurentLeaves();
-            setemployeeLeaves(leavesData);
-          } catch (error) {
-            console.error('Error fetching employee leaves:', error);
-            
-          }
-        }
-
-        //add empployee leaves
-        const addEmployeeLeaves = async () => {
-          try {
-            const newEmployeeLeaves = {
-              empId: formData.empId,
-              resId: users.resId,
-              leavetype: formData.leavetype,
-              empCatagory: formData.empCatagory,
-              fromDate: formData.fromDate
-            };
-
-            console.log('New employee salary data:', newEmployeeLeaves);
-            const response = await addRestaurentLeaves(newEmployeeLeaves);
-            console.log('New employee salary data:', response);
-            if (response.error) {
-              throw new Error(response.error);
-            }
-            setOpenPopup(false);
-          } catch (error) {
-            console.error('Error adding employee salary data:', error);
-            // alert(error)
-          }
-          setFormData({
-            empId: '',
-            resId: '',
-            leavetype: '',
-            fromDate: null, // Reset date picker value after succesfull response
-            toDate: null,
-            numofdate: ''
-          });
-          setOpenPopup(false);
-        }
-        addEmployeeLeaves()
-        fetchEmployeeLeaves();
-        fetchEmployeeIDs();
-
-    }, [user]);
+          fetchEmployeeIDs();
+    }, []);
     const handleSubmit = async () => {
         try {
 

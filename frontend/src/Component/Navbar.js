@@ -1,17 +1,20 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link,Navigate } from "react-router-dom";
 import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, Divider, ListItem, ListItemButton, ListItemIcon, ListItemText, Grid, Box,Paper, Card, CardActionArea, CardContent, CardMedia, CardActions } from '@mui/material';
 import { Menu as MenuIcon, Inbox as InboxIcon, Mail as MailIcon, Margin } from '@mui/icons-material';
 import { useAuthContext } from '../hooks/useAuthContext';
 import {useLogout} from '../hooks/useLogout'
 
 const Navbar = () => {
-    const {logout} = useLogout()
+    const {logout,logoutrole} = useLogout()
     const {user} = useAuthContext()
     const [open, setOpen] = React.useState(false);
     
     const handleClick = () =>{
         logout()
+    }
+    if(logoutrole === true){
+        return <Navigate to="/"/>
     }
 
     const toggleDrawer = (newOpen) => () => {

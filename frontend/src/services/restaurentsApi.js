@@ -23,20 +23,34 @@ export async function getRestaurentLeaves(id) {
     }
 }
 
-//add restaurent leaves
-export async function addRestaurentLeaves(data) {
+
+//function create employee salary
+export async function createEmployeeSalary(empSalaryData) {
     try {
-        const response = await fetch('/api/leaves/', {
+        const response = await fetch('/api/employeeleaves', {
+
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify(empSalaryData),
         });
-        const responseData = await response.json();
-        return responseData;
+        const data = await response.json();
+        return data;
     } catch (error) {
-        console.error('Error adding restaurent leaves:', error);
+        console.error('Error creating employee salary data:', error);
+        throw error;
+    }
+}
+
+//function to get all employee leaves
+export async function getAllEmployeeLeaves() {
+    try {
+        const response = await fetch('/api/employeeleaves');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching employee leaves data:', error);
         throw error;
     }
 }
