@@ -12,8 +12,8 @@ export default function CheckoutPage() {
     const { cart } = useCart();
     const { user } = useAuthContext();
     const navigate = useNavigate();
-    const [order, setOrder] = useState({...cart });  //order has all the items of the cart(put a shallow copy of the cart inside the order)
-    
+    const [order, setOrder] = useState(''); //order has all the items of the cart(put a shallow copy of the cart inside the order)
+    console.log("order",order)
    
    /* const {                                           //create a form for getting the data from the user
         signup,

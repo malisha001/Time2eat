@@ -126,6 +126,17 @@ export async function fetchEmployeeSalaries() {
     }
 
 }
+export async function getpaymentData(id) { 
+    try {
+        const response = await fetch(`/api/onlineOrders/payment/${id}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching employee leaves:', error);
+        throw error;
+    }
+
+}
 //delivery function
 //customer place order by selecting delivery option
 export async function placeorder(order) {
@@ -218,9 +229,9 @@ export async function acceptOrder(order) {
 }
 
 //get cart details for customer
-export async function getCartData() {
+export async function getCartData(id) {
     try {
-        const response = await fetch('/api/carts');
+        const response = await fetch(`/api/carts/${id}`);
         const data = await response.json();
         return data;
     } catch (error) {

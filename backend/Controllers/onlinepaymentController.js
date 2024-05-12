@@ -23,11 +23,11 @@ const getOnlinePayment = async (req, res) => {
 
 // create new booking
 const createOnlinePayment = async (req, res) => {
-    const {nameoncard, bank, branch, cardno, date, cvv} = req.body
+    const {nameoncard, bank, branch, cardno, date, cvv,dfee,pakprice,tpayment} = req.body
 
     // add doc to db
     try {
-        const onlinepayment = await OnlinePayment.create({nameoncard, bank, branch, cardno, date, cvv})
+        const onlinepayment = await OnlinePayment.create({nameoncard, bank, branch, cardno, date, cvv,dfee,pakprice,tpayment})
         res.status(200).json(onlinepayment)
     } catch (error) {
         res.status(400).json({error: error.message})

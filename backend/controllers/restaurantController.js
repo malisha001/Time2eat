@@ -9,7 +9,6 @@ const createToken = ( user ) => { // user is gonna logged in for 1 days
 
 }
 
-
 //get all restaurants
 const getRestaurants = async (req , res) =>{
     const restaurants = await Restaurant.find({}).sort({createAt: -1})

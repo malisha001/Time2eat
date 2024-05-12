@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { Card, Button, Typography, Box, Grid, TextField, CardActions } from '@mui/material';
 import Navbar from '../component/Navbar';
+import { useEffect } from 'react';
+import { useAuthContext } from '../hooks/useAuthContext';
+import { getpaymentData } from '../services/api';
 import axios from 'axios';
 
 function Payment() {
+  const { user } = useAuthContext();
   const [paymentData, setPaymentData] = useState({
     nameoncard: '',
     bank: '',
@@ -12,6 +16,8 @@ function Payment() {
     date: '',
     cvv: ''
   });
+  const [prices, setprices] = useState(false);
+  const dlfee = 100
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -22,13 +28,40 @@ function Payment() {
   };
 
   const handleSubmitPayment = async () => {
+    const data = {
+      cardname:paymentData.nameoncard,
+      bank: paymentData.bank,
+      cardno:paymentData.cardno,
+      date:paymentData.date,
+      cvv:paymentData.cvv,
+      pakprice:prices,
+      tpayment:prices+dlfee,
+      dfee:dlfee
+    }
+
     try {
-      await axios.post('/api/onlinepayemnt', paymentData);
+      console.log('Submitting payment:', data);
+      await axios.post('/api/onlinepayemnt', data);
       console.log('Payment submitted successfully');
     } catch (error) {
       console.error('Error submitting payment:', error);
     }
   };
+
+  useEffect(() => {
+    const findPaymentData = async () => {
+      try {
+        const response = await getpaymentData(user.email);
+        setprices(response.price);
+        console.log('Payment data changed:', response);
+      } catch (error) {
+        console.error('Error fetching payment data:', error);
+      }
+    }
+    
+
+    findPaymentData();
+  }, [user]);
 
   return (
     <div>
@@ -37,7 +70,6 @@ function Payment() {
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} >
           <Grid item xs={7}>
             <Box sx={{ marginLeft: '60px', marginRight: '60px', marginTop: '40px', marginBottom: '40px' }}>
-              <h4>Rider Details:</h4>
               <h2>Payment Details</h2>
               <Grid container spacing={4}>
                 <Grid item xs={12}>
@@ -113,8 +145,11 @@ function Payment() {
             <Box>
               <Card sx={{ width: '400px', padding: '20px', mt: '98px' }}>
                 <h4>Hello</h4>
+                <p>order price:{prices}</p>
+                <p>delivery charge: 100</p>
+                <p>total:{prices+dlfee}</p>
                 <CardActions>
-                  <Button onClick={handleSubmitPayment} sx={{ ml: '150px' }}>Pay Now</Button>
+                  <Button variant='contained' onClick={handleSubmitPayment} sx={{ ml: '150px' }}>Pay Now</Button>
                 </CardActions>
               </Card>
             </Box>

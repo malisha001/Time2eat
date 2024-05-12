@@ -4,29 +4,31 @@ const Schema = mongoose.Schema
 
 const onlinePaymentModel = new Schema({
     nameoncard: {
-        type: String,
-        required: true
-        
+        type: String,    
     },
     bank: {
         type: String,
-        required:true
     },
     branch: {
         type:String,
-        required: true
     },
     cardno: {
         type: String,
-        required: true
     },
     date: {
         type: String,
-        required: true
     },
     cvv: {
-        type: String,
-        required: true
+        type: Number,
+    },
+    dfee: {
+        type: Number,
+    },
+    pakprice: {
+        type: Number,
+    },
+    tpayment: {
+        type: Number,
     },
 }, { timestamps: true })
 

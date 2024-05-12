@@ -18,6 +18,11 @@ function Cart() {
     const [message, setMessage] = useState('');
     const [countdown, setCountdown] = useState(10);
     const [error, setError] = useState('');
+    const [deleteorder, setDeleteOrder] = useState('');
+    let continueTriggering = true;
+    let countdownId;
+    var deletess;
+
 
     //get radio button value
     const handleChange = (event) => {
@@ -34,7 +39,10 @@ function Cart() {
             console.log('find:', find);
             if (find.length > 0) {
                 setMessage('Rider Found! Order placed successfully');
+                clearInterval(countdownId); // Stop the countdown
                 navigate('/payment')
+                deletess = '';
+                continueTriggering = false; // Set flag to false when rider is found
             }
 
         } catch (error) {
@@ -43,12 +51,12 @@ function Cart() {
     }
 
     //confirm order
-    const handleClickConfirm = async (order, resname) => {
+    const handleClickConfirm = async (order, resname,price) => {
         handleDelivery(order);
         //if delivery is selected
 
         //start countdown
-        const countdownId = setInterval(() => {
+        countdownId = setInterval(() => {
             setCountdown(countdown => countdown - 1);
         }, 1000);
 
@@ -59,7 +67,7 @@ function Cart() {
                 setError('Enter valid Location');
                 return;
             }
-
+            console.log("fetch data:", order);
             const data = {
                 orderid: order,
                 cusName: user.email,
@@ -67,6 +75,7 @@ function Cart() {
                 restaurantname: resname,
                 deliveryOpt: radiovalue,
                 riderSelected: false,
+                price:price
             }
             console.log('Order confirmed:', data);
 
@@ -74,6 +83,8 @@ function Cart() {
             try {
                 const response = await placeorder(data);
                 console.log('data:', response._id);
+                setDeleteOrder(response._id)
+                deletess = response._id 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -83,7 +94,7 @@ function Cart() {
                 console.error('Error placing order:', error);
             }
 
-            // Trigger handleDelivery every 9 seconds
+            // Trigger handleDelivery every 3 seconds
             const intervalId = setInterval(() => {
                 handleDelivery(order); // Pass orderid or any other data you need
             }, 3000);
@@ -93,8 +104,9 @@ function Cart() {
                 clearInterval(intervalId);
                 clearInterval(countdownId); // Stop the countdown
                 setMessage('No rider available in your area!')
+                handleDelete();
                 setDataSent(false)
-            }, 10000); // 10 secs in milliseconds for now
+            }, 30000); // 30 secs in milliseconds for now
 
         }
         else {
@@ -103,6 +115,7 @@ function Cart() {
                 restaurantname: resname,
                 deliveryOpt: radiovalue,
                 riderSelected: false,
+                price:order.tprice
             }
             console.log('Order confirmed:', data);
 
@@ -117,11 +130,22 @@ function Cart() {
 
     }
 
+    //delete online order when rier not found
+    const handleDelete = async () => {
+        console.log('delete order:', deletess);
+        try {
+            const response = await deleteCartData(deletess);
+            console.log('data:', response);
+        } catch (error) {
+            console.error('Error deleting order:', error);
+        }
+    }
+
     useEffect(() => {
         const fetchCartData = async () => {
             try {
-                const fetchCartData = await getCartData();
-                console.log("fetch data:", fetchCartData)
+                const fetchCartData = await getCartData(user.email);
+                
                 // Group items by order ID
                 const ordersMap = new Map();
                 fetchCartData.forEach(item => {
@@ -142,7 +166,7 @@ function Cart() {
         
         fetchCartData();
 
-    }, []);
+    }, [user]);
 
     // Location input validation function
     const isValidLocation = (value) => {
@@ -167,8 +191,7 @@ function Cart() {
                     <Paper key={order.orderid} sx={{ padding: '32px', bgcolor: '#F0F8FF', margin: '20px' }}>
                         <Grid container >
                             <Grid item ={6}>
-                                <h2>Restaurant name: {order.restaurantname}</h2>
-                                <h3>Order Id: {order.orderid}</h3>
+                                <h2>Restaurant name: {order.restaurantid}</h2>
                                 <h3>Items:</h3>
                                 <ul>
                                     {order.items.map((foodname, index) => (
@@ -205,7 +228,7 @@ function Cart() {
                                         <FormControlLabel value="delivery" control={<Radio />} label="delivery" />
                                     </RadioGroup>
                                 </FormControl><br />
-                                <Button variant='contained' onClick={() => handleClickConfirm(order.orderid, order.restaurantname)} disabled={isDataSent}> confirm</Button>
+                                <Button variant='contained' onClick={() => handleClickConfirm(order.orderid, order.restaurantid,order.tprice)} disabled={isDataSent}> confirm</Button>
                             </Grid>
                             <Grid item ={6} >
                                 <h3>Price: {order.tprice}</h3>

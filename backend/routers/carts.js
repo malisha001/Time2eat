@@ -8,7 +8,7 @@ const {
 
 const router = express.Router()
 //get spesific customer's orders with different restaurent
-router.get('/', getCart)
+router.get('/:id', getCart)
 
 //insert new food item to cart
 router.post('/', createCart)

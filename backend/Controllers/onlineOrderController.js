@@ -36,7 +36,23 @@ const getriderdetails = async(req,res) =>{
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+//show order for the payment
+const getdetailsforpayment = async(req,res) =>{
+    const { id } = req.params;
 
+    try {
+        const orders = await Onlineorder.findOne({cusName: id});
+
+        if (!orders) {
+            return res.status(404).json({ error: 'No online orders' });
+        }
+        res.status(200).json(orders);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
 //show only delivery orders to riders
 const getdeliveryOrders = async(req,res) =>{
 
@@ -100,6 +116,7 @@ const deleteOnlineOrders = async (req, res) => {
 module.exports = {
     getriderdetails,
     getOnlineOrders,
+    getdetailsforpayment,
     getdeliveryOrders,
     updateriderstatus,
     addOnlineOrders,

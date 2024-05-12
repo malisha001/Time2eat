@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper,Button } from '@mui/material';
+import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper,Button, Divider } from '@mui/material';
 import { getDeliveryOrders,acceptOrder,showRider } from '../../services/api';
 import {useNavigate,Route,Routes} from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import Ridernav from '../../component/ridernav/Ridernav';
+import Resuppernav from '../../component/restauretNavbar/Resuppernav';
+
 //nested router
 import OngoingOrder from './OngoingOrder';
 
@@ -69,7 +71,11 @@ function RiderDashboard() {
 
     return (
         <div>
+            <Ridernav/>
+            <div className="Inv-dashborad">
             <h1>Rider Dashboard</h1>
+            <Divider style={{ marginBottom: '16px' }} />
+            
             <TableContainer component={Paper}>
                 <Table aria-label="simple table">
                     <TableHead>
@@ -102,6 +108,7 @@ function RiderDashboard() {
             <Routes>
                 <Route path="riderdashborad/ongoingorder" element={<OngoingOrder/>} />
             </Routes>
+            </div>
         </div>
     )
 }

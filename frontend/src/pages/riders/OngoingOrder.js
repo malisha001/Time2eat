@@ -1,6 +1,7 @@
 import React, { useEffect,useState } from 'react';
-import { TextField,Paper, Grid,Button,TableContainer,TableHead,Table,TableRow,TableCell,TableBody } from '@mui/material';
+import { TextField,Paper,Divider, Grid,Button,TableContainer,TableHead,Table,TableRow,TableCell,TableBody } from '@mui/material';
 import { getOngoingOrder } from '../../services/api';
+import Ridernav from '../../component/ridernav/Ridernav';
 
 function OngoingOrder() {
     const [ongoingOrderData, setOngoingOrderData] = useState([]);
@@ -19,16 +20,19 @@ function OngoingOrder() {
     }, []);
     return (
         <div>
+        <Ridernav/>
+        <div className="Inv-dashborad">
         <h1>Ongoing Order</h1>
+        <Divider style={{ marginBottom: '16px' }} />
         {ongoingOrderData.map((item) => (
             <Paper key={item._id} sx={{ padding: '32px', bgcolor: '#F0F8FF', margin: '20px' }}>
-                <p><h4>orderId:</h4> {item.orderId}</p>
-                <p><h4>customer name:</h4>{item.cusName}</p>
-                <p><h4>delivery address:</h4>{item.customerLocation}</p>
-                <p><h4>restaurent name:</h4>{item.restaurantname}</p>
-                <p><h4>restuarent location:</h4>{item.reslocation}</p>
-                <p><h4>order status:</h4></p>
-                <p><h4></h4>estimated time:</p>
+                <p>orderId: {item.orderId}</p>
+                <p>customer name:{item.cusName}</p>
+                <p>delivery address:{item.customerLocation}</p>
+                <p>restaurent name:{item.restaurantname}</p>
+                <p>restuarent location:{item.reslocation}</p>
+                <p>order status:</p>
+                <p>estimated time:</p>
                 <TextField id="outlined-basic" label="Enter estimated time" variant="outlined" /><br/>
                 <Button variant='contained'> update</Button>
             </Paper>
@@ -63,6 +67,7 @@ function OngoingOrder() {
             </Table>
             </TableContainer>
         </div>
+    </div>
     </div>
     );
 }
