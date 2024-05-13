@@ -2,22 +2,25 @@ import React, { useEffect,useState } from 'react';
 import { TextField,Paper,Divider, Grid,Button,TableContainer,TableHead,Table,TableRow,TableCell,TableBody } from '@mui/material';
 import { getOngoingOrder } from '../../services/api';
 import Ridernav from '../../component/ridernav/Ridernav';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 function OngoingOrder() {
     const [ongoingOrderData, setOngoingOrderData] = useState([]);
+    const { user } = useAuthContext(); //get user details
 
     useEffect(() => {  
         const fetchOngoingOrder = async () => {
             try {
-                const ongoingOrderData = await getOngoingOrder();
+                const ongoingOrderData = await getOngoingOrder(user.email);
                 setOngoingOrderData(ongoingOrderData)
+                console.log("orders",ongoingOrderData);
                 // Call your API function to fetch ongoing order data
             } catch (error) {
                 console.error('Error fetching ongoing order data:', error);
             }
         }
         fetchOngoingOrder();
-    }, []);
+    }, [user]);
     return (
         <div>
         <Ridernav/>

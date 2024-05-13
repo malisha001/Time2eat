@@ -29,7 +29,7 @@ const deliverySchema = new Schema({
     reslocation:{
         type:String
     },
-    totPrice:{
+    price:{
         type:Number,
         require: true
     },

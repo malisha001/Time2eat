@@ -90,11 +90,11 @@ const updateriderstatus = async(req,res) =>{
 
 //add online orders when customer confirm order
 const addOnlineOrders = async (req, res) => {
-    const {orderid,cusName,customerLocation,restaurantid,restaurantname, fooditem, reslocation , quantity,price, paymentState,deliveryOpt,riderSelected} = req.body
+    const {orderid,cusName,cusId,customerLocation,restaurantid,restaurantname, fooditem, reslocation , quantity,price, paymentState,deliveryOpt,riderSelected} = req.body
 
     //add doc to database
     try {
-        const onlineOrders = await Onlineorder.create({orderid,cusName,customerLocation,restaurantid,restaurantname, fooditem, reslocation , quantity,price, paymentState,deliveryOpt,riderSelected })
+        const onlineOrders = await Onlineorder.create({orderid,cusName,cusId,customerLocation,restaurantid,restaurantname, fooditem, reslocation , quantity,price, paymentState,deliveryOpt,riderSelected })
         res.status(200).json(onlineOrders)
     }catch (error){
         res.status(400).json({error: error.message})

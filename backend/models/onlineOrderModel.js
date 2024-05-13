@@ -9,6 +9,9 @@ const onlineOrdersSchema = new Schema({
     cusName:{
         type: String,
     },
+    cusId:{
+        type: String,
+    },
     customerLocation:{
         type: String,
     },

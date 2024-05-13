@@ -22,7 +22,7 @@ function RiderDashboard() {
             const orderres = await acceptOrder({
                 orderId: order.orderid,
                 riderId: user.email,
-                cusName: order.cusName,
+                cusName: order.cusId,
                 customerLocation: order.customerLocation,
                 restaurantname: order.restaurantname,
                 reslocation: order.reslocation,
@@ -60,6 +60,7 @@ function RiderDashboard() {
                     return orderDetails;
                 });
                 setUniqueOrders(uniqueOrdersData);
+                console.log("uni",uniqueOrdersData);
             } catch (error) {
                 console.error('Error fetching delivery orders:', error);
             }
@@ -67,7 +68,7 @@ function RiderDashboard() {
 
         fetchAllDeliveries();
 
-    }, []);
+    }, [user]);
 
     return (
         <div>
@@ -84,7 +85,6 @@ function RiderDashboard() {
                             <TableCell>Customer Name</TableCell>
                             <TableCell>Customer location</TableCell>
                             <TableCell>Restaurant Name</TableCell>
-                            <TableCell>Restaurant Location</TableCell>
                             <TableCell>total price</TableCell>
                             
                             <TableCell>Action</TableCell>
@@ -94,10 +94,9 @@ function RiderDashboard() {
                         {uniqueOrders.map((item) => (
                             <TableRow key={item._id}>
                                 <TableCell>{item.orderid}</TableCell>
-                                <TableCell>{item.cusName}</TableCell>
+                                <TableCell>{item.cusId}</TableCell>
                                 <TableCell>{item.customerLocation}</TableCell>
                                 <TableCell>{item.restaurantname}</TableCell>
-                                <TableCell>{item.reslocation}</TableCell>
                                 <TableCell>{item.price}</TableCell>
                                 <Button variant='contained' onClick={()=>handleOnclick(item)}>accept</Button>
                             </TableRow>

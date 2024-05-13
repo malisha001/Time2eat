@@ -198,9 +198,9 @@ export async function getDeliveryOrders() {
     }
 }
 //get ongoing order for rider
-export async function getOngoingOrder() {
+export async function getOngoingOrder(id) {
     try {
-        const response = await fetch('/api/deliveryorder');
+        const response = await fetch(`/api/deliveryorder/${id}`);
         const data = await response.json();
         return data;
     } catch (error) {

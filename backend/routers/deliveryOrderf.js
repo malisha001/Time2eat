@@ -7,7 +7,7 @@ const {
 } = require('../Controllers/deliveryOrderController')
 
 //get delivery orders
-router.get('/',getDeliveryOrders)
+router.get('/:id',getDeliveryOrders)
 
 //add delivery orders
 router.post('/',createDeliveryOrders)

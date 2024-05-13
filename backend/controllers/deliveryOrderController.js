@@ -3,17 +3,18 @@ const mongoose = require('mongoose')
 
 //get all orders
 const getDeliveryOrders = async(req,res) =>{
-    const deleveries = await Deliveryorder.find({})
+    const {id} = req.params
+    const deleveries = await Deliveryorder.find({riderId:id})
 
     res.status(200).json(deleveries)
 }
 
 //when rider accept order that order add this table
 const createDeliveryOrders = async(req,res) =>{
-    const{orderId,riderId,customerLocation,restaurantname,reslocation} = req.body
+    const{cusName,orderId,riderId,customerLocation,restaurantname,price} = req.body
 
     try {
-        const orderDetails = await Deliveryorder.create({orderId,riderId,customerLocation,restaurantname,reslocation})
+        const orderDetails = await Deliveryorder.create({cusName,orderId,riderId,customerLocation,restaurantname,price})
         res.status(201).json(orderDetails)
         console.log(orderDetails)
     } catch (error) {

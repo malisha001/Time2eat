@@ -71,6 +71,7 @@ function Cart() {
             const data = {
                 orderid: order,
                 cusName: user.email,
+                cusId: user.name,
                 customerLocation: location,
                 restaurantname: resname,
                 deliveryOpt: radiovalue,
@@ -113,6 +114,7 @@ function Cart() {
             const data = {
                 orderid: order,
                 restaurantname: resname,
+                cusId: user.name,
                 deliveryOpt: radiovalue,
                 riderSelected: false,
                 price:order.tprice
