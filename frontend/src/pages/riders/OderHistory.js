@@ -3,6 +3,9 @@ import { fetchcompleteorders } from '../../services/api';
 import { TextField, Paper, Divider, Grid, Button, TableContainer, TableHead, Table, TableRow, TableCell, TableBody } from '@mui/material';
 import Ridernav from '../../component/ridernav/Ridernav';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
+import logo from '../../Assests/white.jpg';
 
 function OrderHistory() {
     const { user } = useAuthContext();
@@ -27,6 +30,34 @@ function OrderHistory() {
         item.restaurantname.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+    // Function to generate PDF report
+    const generatePDF = () => {
+        const doc = new jsPDF();
+
+        // Add image/logo
+        doc.addImage(logo, 'JPEG', 10, 5, 30, 30);
+        doc.setFontSize(16)
+        doc.text('Restaurant Reservation and Food Ordering System', 50, 20); // Add a title to the PDF (optional	)
+
+        //add hirizontal line
+        doc.setLineWidth(0.5);
+        doc.line(10, 30, doc.internal.pageSize.getWidth() - 10, 30);
+
+        // Add title
+        doc.setFontSize(20);
+        doc.text('Order History Report', 70, 40);
+
+        // Add table
+        doc.autoTable({
+            head: [['Order ID', 'Restaurant Name', 'Customer Name', 'Order Price', 'Delivery Fee']],
+            body: filteredOrders.map(item => [item.orderId, item.restaurantname, item.cusName, `Rs.${item.price}`, 'Rs.100']),
+            startY: 50,
+        });
+
+        // Save the PDF
+        doc.save('order_history_report.pdf');
+    };
+
     return (
         <div>
             <Ridernav />
@@ -41,6 +72,7 @@ function OrderHistory() {
                     onChange={(e) => setSearchTerm(e.target.value)}
                     style={{ marginBottom: '16px' }}
                 />
+                <Button variant="contained" onClick={generatePDF}>Generate PDF</Button>
                 <TableContainer component={Paper}>
                     <Table aria-label="simple table">
                         <TableHead>
