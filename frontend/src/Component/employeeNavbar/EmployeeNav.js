@@ -6,11 +6,11 @@ const EmployeeNav = () => {
     return (
         <div style={{ margin: '0 500px 0 0' }}>
             <Grid container spacing={2}>
-                <Grid item xs={4}>
+                {/* <Grid item xs={4}>
                     <Box sx={{ backgroundColor: 'lightblue', padding: '10px',textAlign: 'center'}}>
                         <Link to="/employeeSal" style={{textDecoration: 'none', color: 'black'}}>staff member</Link>
                     </Box>
-                </Grid>
+                </Grid> */}
                 <Grid item xs={4}>
                     <Box sx={{ backgroundColor: 'lightblue', padding: '10px',textAlign: 'center' }}>
                         <Link to="/employeeSal" style={{textDecoration: 'none', color: 'black'}}>leaving</Link>
@@ -18,7 +18,7 @@ const EmployeeNav = () => {
                 </Grid>
                 <Grid item xs={4}>
                     <Box sx={{ backgroundColor: 'lightblue', padding: '10px' ,textAlign: 'center'}}>
-                        <Link to="/employeeSal" style={{textDecoration: 'none', color: 'black'}}>monthly salary</Link>
+                        <Link to="/employeepaysalaries" style={{textDecoration: 'none', color: 'black'}}>monthly salary</Link>
                     </Box>
                 </Grid>
             </Grid>

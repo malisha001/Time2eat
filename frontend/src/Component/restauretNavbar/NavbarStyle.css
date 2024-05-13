@@ -1,6 +1,6 @@
 .inv-sidebar {
     width: 280px; /* Adjust width as needed */
-    height: 100vh; /* Make sidebar full height of the viewport */
+    max-height: 100vh; /* Set maximum height to full height of the viewport */
     background-color: #D7D7D7; /* Background color for the sidebar */
     color: white; /* Text color */
     display: flex; /* Use flexbox */
@@ -8,8 +8,11 @@
     position: fixed;
     left: 0;
     top: 0;
-
+    overflow-y: auto; /* Make the sidebar vertically scrollable */
 }
+
+/* Remaining CSS remains the same */
+
 
 .inv-sidebar p{
     color: black;
