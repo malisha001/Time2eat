@@ -253,3 +253,50 @@ export async function deleteCartData(id) {
     }
 
 }
+//insert estimate time by rider
+export async function enterEstimateTime(id,estimatetime) {
+    try {
+        const response = await fetch(`/api/deliveryorder/rider/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(estimatetime),
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error adding employee salary data:', error);
+        throw error;
+    }
+}
+
+//mark order as complete
+export async function markOrderComplete(id) {
+    try {
+        const response = await fetch(`/api/deliveryorder/complete/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({orderstate:'complete'}),
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error marking order as complete:', error);
+        throw error;
+    }
+}
+
+//fetch completed orders
+export async function fetchcompleteorders(id){
+    try {
+        const response = await fetch(`/api/deliveryorder/completed/${id}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching order history:', error);
+        throw error;
+    }
+}

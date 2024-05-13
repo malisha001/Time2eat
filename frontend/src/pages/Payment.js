@@ -4,9 +4,11 @@ import Navbar from '../component/Navbar';
 import { useEffect } from 'react';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { getpaymentData } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Payment() {
+  const navigate = useNavigate();
   const { user } = useAuthContext();
   const [paymentData, setPaymentData] = useState({
     nameoncard: '',
@@ -43,6 +45,7 @@ function Payment() {
       console.log('Submitting payment:', data);
       await axios.post('/api/onlinepayemnt', data);
       console.log('Payment submitted successfully');
+      navigate('/orderonthway');
     } catch (error) {
       console.error('Error submitting payment:', error);
     }

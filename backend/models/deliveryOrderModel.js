@@ -46,8 +46,11 @@ const deliverySchema = new Schema({
     paymentState:{
         type:Boolean
     },
-    estimateTime:{
+    orderstate:{
         type:String
+    },
+    estimatetime:{
+        type:Number
     }
 })
 

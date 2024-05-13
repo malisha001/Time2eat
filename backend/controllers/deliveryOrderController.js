@@ -4,17 +4,17 @@ const mongoose = require('mongoose')
 //get all orders
 const getDeliveryOrders = async(req,res) =>{
     const {id} = req.params
-    const deleveries = await Deliveryorder.find({riderId:id})
+    const deleveries = await Deliveryorder.find({riderId:id,orderstate:'ongoing'})
 
     res.status(200).json(deleveries)
 }
 
 //when rider accept order that order add this table
 const createDeliveryOrders = async(req,res) =>{
-    const{cusName,orderId,riderId,customerLocation,restaurantname,price} = req.body
+    const{cusName,orderId,riderId,customerLocation,restaurantname,price,estimatetime,orderstate} = req.body
 
     try {
-        const orderDetails = await Deliveryorder.create({cusName,orderId,riderId,customerLocation,restaurantname,price})
+        const orderDetails = await Deliveryorder.create({cusName,orderId,riderId,customerLocation,restaurantname,price,estimatetime,orderstate})
         res.status(201).json(orderDetails)
         console.log(orderDetails)
     } catch (error) {
@@ -37,8 +37,52 @@ const assignRider = async(req , res) =>{
     }
     res.status(200).json(rider)
 }
+
+//update estimate time
+const updatetime = async(req , res) =>{
+    const { id } = req.params;
+
+    try {
+        const time = await Deliveryorder.findOneAndUpdate({orderId:id},{...req.body})
+        if (!time) {
+            return res.status(404).json({ error: 'no order found' });
+        }
+        res.status(200).json(time);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+//update order state
+const updateorder = async(req , res) =>{
+    const { id } = req.params;
+
+    try {
+        const time = await Deliveryorder.findOneAndUpdate({orderId:id},{...req.body})
+        if (!time) {
+            return res.status(404).json({ error: 'no order found' });
+        }
+        res.status(200).json(time);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+//get complete order history
+const getorderhistory = async(req,res) =>{
+    const {id} = req.params
+    const deleveries = await Deliveryorder.find({riderId:id,orderstate:'complete'})
+
+    res.status(200).json(deleveries)
+}
+
 module.exports = {
     getDeliveryOrders,
     createDeliveryOrders,
-    assignRider
+    updatetime,
+    assignRider,
+    updateorder,
+    getorderhistory
 }

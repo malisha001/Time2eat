@@ -41,6 +41,8 @@ import RiderDashboard from './pages/riders/RiderDashbord';
 import OngoingOrder from './pages/riders/OngoingOrder';
 import Cart from './pages/Cart';
 import Payment from './pages/Payment';
+import Orderonthaway from './pages/Orderontheway'
+import OrderHistory from './pages/riders/OderHistory';
 
 import BookingPayment from './pages/BookingPayment';
 import ResPage from './pages/ResPage/ResPage.js';
@@ -140,7 +142,9 @@ function App() {
             <Route path='/riderdashborad/ongoingorder' element={<OngoingOrder/>} />
             <Route path='/carts' element={<Cart/>} />
             <Route path='/payment' element={<Payment/>} />
-
+            <Route path='/orderonthway' element={<Orderonthaway/>} />
+            <Route path='/orderHistory' element={<OrderHistory/>} />
+            
      
               <Route path="/inventory/items" element={<Inventory />} />
               <Route path="/inventory/addItems" element={<ItemForm />} />

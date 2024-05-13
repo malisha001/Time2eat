@@ -13,6 +13,7 @@ function RiderDashboard() {
     const {user} = useAuthContext()
     const navigate = useNavigate()
     const [uniqueOrders, setUniqueOrders] = useState([]);
+    const time = 0
 
     console.log("rider",user)
 
@@ -26,7 +27,9 @@ function RiderDashboard() {
                 customerLocation: order.customerLocation,
                 restaurantname: order.restaurantname,
                 reslocation: order.reslocation,
-                price: order.price
+                price: order.price,
+                estimatetime:time,
+                orderstate: 'ongoing',
             });
 
             //delete order from rider dashbord
@@ -60,7 +63,7 @@ function RiderDashboard() {
                     return orderDetails;
                 });
                 setUniqueOrders(uniqueOrdersData);
-                console.log("uni",uniqueOrdersData);
+                console.log("uni",uniqueOrders);
             } catch (error) {
                 console.error('Error fetching delivery orders:', error);
             }
