@@ -57,7 +57,7 @@ const getdetailsforpayment = async(req,res) =>{
 const getdeliveryOrders = async(req,res) =>{
 
     try {
-        const deliveries = await Onlineorder.find({deliveryOpt: "delivery"});
+        const deliveries = await Onlineorder.find({deliveryOpt: "delivery",riderSelected:false});
 
         if (!deliveries) {
             return res.status(404).json({ error: 'Not yet delivery orders' });
