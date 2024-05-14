@@ -58,7 +58,7 @@ function Cart() {
         //start countdown
         countdownId = setInterval(() => {
             setCountdown(countdown => countdown - 1);
-        }, 1000);
+        }, 3000);
 
         //if delivery is selected
         if (radiovalue === 'delivery') {
