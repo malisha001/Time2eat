@@ -4,6 +4,7 @@ const EmpLeave = require('../models/empLeavesModel')
 const EmpmonthlySal = require('../models/empMonthlySalModel')
 const Leaves = require('../models/leavesModel')
 const mongoose = require('mongoose')
+const moment = require('moment');
 
 //get all employee payrun
 const getEmpPayrun = async(req,res) => {
@@ -52,6 +53,37 @@ const getAllEmployeeSalaryData = async(req,res) => {
 
     } catch (error) {
         res.status(404).json({error: error.message})
+    }
+
+}
+//get last update of salary payment
+const getLastUpdate = async (req, res) => {
+    try {
+        //get current month
+        const currentMonth = moment().startOf('month');
+        
+        //find all documents in the collection for currect month
+        // const documents = await EmpmonthlySal.find({
+        //     createdAt: {
+        //         $gte: currentMonth.toDate(),
+        //         $lte: moment(currentMonth).endOf('month').toDate()
+        //     }
+        // });
+
+        try {
+            //find last update date of the collection
+            const lastUpdateDate = await EmpmonthlySal.findOne().sort('-updatedAt').select('updatedAt');
+
+            res.status(200).json({
+                lastUpdateDate: lastUpdateDate ? lastUpdateDate.updatedAt : null
+            });
+        } catch (error) {
+            res.status(500).json({ error: 'payement salary not  show' });
+        }
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 
 }
@@ -121,33 +153,55 @@ const monthlySalProcess = async(req,res) => {
             console.log('count leaves of:',empId,':', leavecount)
             
             try {
-                const taxRate = tax/100*oneSalary
-                const ETFrate = ETF/100*oneSalary
-                if(leavecount > mleaves){
-                    const penaltyFee = (leavecount-penalty)*pFee
-                    console.log('penalty for:',empId)
+                const taxRate = (tax / 100.0) * oneSalary;
+                console.log('Tax Rate:', taxRate);
+            
+                const ETFrate = (ETF / 100.0) * oneSalary;
+                console.log('ETF Rate:', ETFrate);
+            
+                let penaltyFee = 0;
+                if (leavecount > mleaves) {
+                    penaltyFee = (leavecount - mleaves) * pFee;
+                    console.log('Penalty Fee:', penaltyFee);
                 }
-                const Fsalary = bonus+oneSalary-taxRate-ETFrate-penaltyFee;
+            
+                let Fsalary = bonus + oneSalary - taxRate - ETFrate - penaltyFee;
+                console.log('Fsalary:', Fsalary);
+            
+                if (isNaN(Fsalary)) {
+                    throw new Error('Fsalary calculation resulted in NaN');
+                }
+            
+                // Round Fsalary to two decimal places
+                Fsalary = parseFloat(Fsalary.toFixed(2));
+            
+                const empMonthlySal = await EmpmonthlySal.create({
+                    empId,
+                    resId: id,
+                    basicEmpSalary: oneSalary,
+                    bonus,
+                    taxRate,
+                    ETFrate,
+                    Fsalary
+                });
+                res.status(200).json({ message: 'Monthly salary processing completed successfully' });
 
-                const empmonthlySal = await EmpmonthlySal.create({empId,resId,basicEmpSalary,bonus,taxRate,ETFrate,Fsalary})
- 
             } catch (error) {
-                console.error('Error processing payruns:', error);
+                console.error('Error processing employee salary:', error);
             }
-        }
-        res.status(201).json(leaves)
-        
+            
+        }        
     }
     catch (error) {
         console.error('Error processing payruns:', error);
     }
 }
-// monthly payment salary show
 
 module.exports = {
     getEmpPayrun,
     createEmpPayrun,
     updateEmpPayrun,
     getAllEmployeeSalaryData,
-    monthlySalProcess
+    monthlySalProcess,
+    getLastUpdate
 }

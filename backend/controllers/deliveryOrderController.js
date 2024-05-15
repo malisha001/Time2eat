@@ -43,7 +43,12 @@ const updatetime = async(req , res) =>{
     const { id } = req.params;
 
     try {
-        const time = await Deliveryorder.findOneAndUpdate({orderId:id},{...req.body})
+
+        if(!mongoose.Types.ObjectId.isValid(id)){
+            return res.status(404).json({error : 'No such orders'})
+        }
+
+        const time = await Deliveryorder.findOneAndUpdate({_id:id},{...req.body})
         if (!time) {
             return res.status(404).json({ error: 'no order found' });
         }
@@ -59,7 +64,11 @@ const updateorder = async(req , res) =>{
     const { id } = req.params;
 
     try {
-        const time = await Deliveryorder.findOneAndUpdate({orderId:id},{...req.body})
+        if(!mongoose.Types.ObjectId.isValid(id)){
+            return res.status(404).json({error : 'No such Restaurant'})
+        }
+
+        const time = await Deliveryorder.findOneAndUpdate({_id:id},{...req.body})
         if (!time) {
             return res.status(404).json({ error: 'no order found' });
         }

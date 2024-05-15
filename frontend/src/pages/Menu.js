@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 //import Navbar from "../components/Navbar";
 import './menu.css';
+import ResNavbar from '../component/restauretNavbar/ResNavbar';
 
 const Menu = () => {
   const [foodItems, setFoodItems] = useState(null);
@@ -54,6 +55,9 @@ const Menu = () => {
   };
 
   return (
+    <div>
+    <ResNavbar/>
+    <div className="Inv-dashborad">
     <div className="container">
       {/* <Navbar />  */}
       <div className="fooditems">
@@ -126,6 +130,8 @@ const Menu = () => {
           </table>
         </div>
       </div>
+    </div>
+    </div>
     </div>
   );
 };

@@ -6,8 +6,10 @@ import { Table, TableBody, TableHead, TableRow, TableCell, TableContainer, Paper
 import { addEmployeeSalaryData, getAllEmployeeData, getAllEmployeeSalaryData, deleteEmployeeSalaryData } from '../../services/api';
 import Resuppernav from '../../component/restauretNavbar/Resuppernav';
 import ResNavbar from '../../component/restauretNavbar/ResNavbar';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 const EmployeeSal = () => {
+  const {user} = useAuthContext()
   const [openPopup, setOpenPopup] = useState(false);
   const [formData, setFormData] = useState({
     empId: '',
@@ -24,12 +26,12 @@ const EmployeeSal = () => {
   const [basicEmpSalaryError, setBasicEmpSalaryError] = useState(false);
   const [taxRateError, setTaxRateError] = useState(false);
   const [empCatagoryError, setEmpCatagoryError] = useState(false);
-  
+  console.log("idd",employeeIDs)
 
   useEffect(() => {
     const fetchEmployeeIDs = async () => {
       try {
-        const Empdata = await getAllEmployeeData();
+        const Empdata = await getAllEmployeeData(user.resId);
         const ids = Empdata.map(item => item.empId);
         setEmployeeIDs(ids);
       } catch (error) {
@@ -39,8 +41,9 @@ const EmployeeSal = () => {
 
     const fetchEmployeeSalaries = async () => {
       try {
-        const salaryData = await getAllEmployeeSalaryData();
+        const salaryData = await getAllEmployeeSalaryData(user.resId);
         setEmployeeSalaries(salaryData);
+        console.log("salaryData",salaryData)
       } catch (error) {
         console.error('Error fetching employee salaries:', error);
       }
@@ -48,7 +51,7 @@ const EmployeeSal = () => {
 
     fetchEmployeeSalaries();
     fetchEmployeeIDs();
-  }, []);
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -103,7 +106,14 @@ const EmployeeSal = () => {
 
   const handleSubmit = async () => {
     try {
-       await addEmployeeSalaryData(formData);
+        const data = {
+          empId: formData.empId,
+          resId: user.resId,
+          basicEmpSalary: formData.basicEmpSalary,
+          empCatagory: formData.empCatagory,
+        };
+       let res = await addEmployeeSalaryData(data);
+       console.log("emp data",data);
 
       // if (error) {
       //   throw new Error(error);
@@ -119,8 +129,6 @@ const EmployeeSal = () => {
       resId: '',
       basicEmpSalary: '',
       empCatagory: '',
-      bonusRate: '',
-      taxRate: ''
     });
     setOpenPopup(false);
   };
@@ -148,12 +156,13 @@ const EmployeeSal = () => {
             <Stack spacing={2} margin={2}>
               <TextField
                 select
-                name="empIdd"
+                name="empId"
                 value={formData.empId}
                 onChange={handleChange}
                 variant="outlined"
-                label="Employee IDdd"
+                label="Employee ID"
                 fullWidth
+                
               >
                 {employeeIDs.map((id) => (
                   <MenuItem key={id} value={id}>
@@ -161,7 +170,6 @@ const EmployeeSal = () => {
                   </MenuItem>
                 ))}
               </TextField>
-              <TextField name="resId" value={formData.resId} onChange={handleChange} variant="outlined" label="Restaurant ID" fullWidth required/>
               <TextField name="basicEmpSalary" value={formData.basicEmpSalary} onChange={handleChange} variant="outlined" label="Basic Salary" fullWidth error={basicEmpSalaryError} helperText={basicEmpSalaryError ? "Please enter a numeric value" : ""} required/>
               <TextField name="empCatagory" value={formData.empCatagory} onChange={handleChange} variant="outlined" label="Position" fullWidth error={empCatagoryError} helperText={empCatagoryError ? "Please enter only letters" : ""} required/>
             </Stack>

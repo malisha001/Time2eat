@@ -7,6 +7,7 @@ import { useAuthContext } from '../hooks/useAuthContext';
 import { useNavigate } from "react-router-dom";
 import IconButton from '@mui/material/IconButton';
 import { Link } from 'react-router-dom';
+import ResNavbar from '../component/restauretNavbar/ResNavbar';
 
 function DineCustomerRegForm() {
   // Using custom hooks for authentication context and navigation
@@ -133,6 +134,8 @@ function DineCustomerRegForm() {
   // Render form components
   return (
     <div>
+      <ResNavbar/>
+      <div className="Inv-dashborad">
       <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
@@ -280,6 +283,7 @@ function DineCustomerRegForm() {
         </Box>
       </Paper>
     </form>
+    </div>
     </div>
   );
 }

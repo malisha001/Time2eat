@@ -10,8 +10,11 @@ import {getAllEmployeeData} from '../../services/api';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './EmpLeaves.css';
+import ResNavbar from '../../component/restauretNavbar/ResNavbar';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 function EmpLeaves() {
+    const {user} = useAuthContext()
     const [openPopup, setOpenPopup] = useState(false);
     const[openPopupEdit, setOpenPopupEdit] = useState(false);
     const[openPopupfee, setOpenPopupfee] = useState(false);
@@ -19,12 +22,11 @@ function EmpLeaves() {
     const [employeeIDs, setEmployeeIDs] = useState([]);
     const [formData, setFormData] = useState({
         empId: '',
-        resId: '',
-        basicEmpSalary: '',
-        empCatagory: '',
-        bonusRate: '',
-        taxRate: '',
-        fromDate: null // New state for the date picker
+        leavetype: '',
+        fromDate: null, // New state for the date picker: '',
+        toDate: null,
+        numdate: '',
+        
       });
     //error msg
     const [basicEmpSalaryError, setBasicEmpSalaryError] = useState(false);
@@ -37,7 +39,7 @@ function EmpLeaves() {
         //fetch employee employee ids
         const fetchEmployeeIDs = async () => {
             try {
-              const Empdata = await getAllEmployeeData();
+              const Empdata = await getAllEmployeeData(user.resId);
               const ids = Empdata.map(item => item.empId);
               setEmployeeIDs(ids);
             } catch (error) {
@@ -46,7 +48,7 @@ function EmpLeaves() {
           };
 
           fetchEmployeeIDs();
-    }, []);
+    }, [user]);
     const handleSubmit = async () => {
         try {
 
@@ -62,12 +64,11 @@ function EmpLeaves() {
         }
         setFormData({
           empId: '',
-          resId: '',
-          basicEmpSalary: '',
-          empCatagory: '',
-          bonusRate: '',
-          taxRate: '',
-          fromDate: null // Reset date picker value after submission
+          leavetype: '',
+          fromDate: null,
+          toDate: null, // Reset date picker value after submission
+          numdate: '',
+          
         });
         setOpenPopup(false);
     };
@@ -84,6 +85,8 @@ function EmpLeaves() {
     }
     return (
         <div>
+            <ResNavbar/>
+            <div className="Inv-dashborad">
             <Grid container spacing={2} >
                 <Grid item xs={6}>
                     <h1>Employee Leaves</h1>
@@ -114,12 +117,13 @@ function EmpLeaves() {
                           </MenuItem>
                       ))}
                       </TextField>
-                        <TextField name="basicEmpSalary" value={formData.basicEmpSalary} onChange={handleChange} variant="outlined" label="leave type" fullWidth error={basicEmpSalaryError} helperText={basicEmpSalaryError ? "Please enter a numeric value" : ""}/>
+                        <TextField name="leavetype" value={formData.leavetype} onChange={handleChange} variant="outlined" label="leave type" fullWidth error={basicEmpSalaryError} helperText={basicEmpSalaryError ? "Please enter a numeric value" : ""}/>
                         <div className="datepicker-label">From</div>
                         <DatePicker
                           selected={selectedDate}
                           onChange={handleDateChange}
                           dateFormat="dd/MM/yyyy"
+                          value={formData.fromDate}
                           className="custom-datepicker"
                         />
                         <div className="datepicker-label">To</div>
@@ -128,8 +132,9 @@ function EmpLeaves() {
                           onChange={handleDateChange}
                           dateFormat="dd/MM/yyyy"
                           className="custom-datepicker"
+                          value={formData.toDate}
                         />
-                        <TextField name="basicEmpSalary" value={formData.basicEmpSalary} onChange={handleChange} variant="outlined" label="number of days" fullWidth error={basicEmpSalaryError} helperText={basicEmpSalaryError ? "Please enter a numeric value" : ""}/>
+                        <TextField name="numdate" value={formData.numdate} onChange={handleChange} variant="outlined" label="number of days" fullWidth error={basicEmpSalaryError} helperText={basicEmpSalaryError ? "Please enter a numeric value" : ""}/>
 
                     </Stack>
                   </DialogContent>
@@ -206,6 +211,7 @@ function EmpLeaves() {
           </TableBody>
         </Table>
       </TableContainer>
+        </div>
         </div>
     );
 }

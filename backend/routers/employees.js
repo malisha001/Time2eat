@@ -9,10 +9,7 @@ const {
 } = require('../Controllers/employeeController');
 
 // Get all employee details
-router.get('/', getAllEmployees);
-
-// Get single employee
-router.get('/:id', getEmployeeById);
+router.get('/:id', getAllEmployees);
 
 // Create a new employee
 router.post('/', createEmployee);

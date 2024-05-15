@@ -7,6 +7,7 @@ import OrderForm from '../../component/DineInForm/DineInForm';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import logo from '../../Assests/white.jpg';
+import ResNavbar from '../../component/restauretNavbar/ResNavbar';
 
 const DineIn = () => {
   const {orders,dispatch}= useDorderContext()
@@ -83,6 +84,9 @@ const generatePDFReport = () => {
 
     
     return (
+      <div>
+      <ResNavbar/>
+      <div className="Inv-dashborad">
      <div className={classes.topic}>
        <h2>Dine-In Orders</h2>
        
@@ -106,7 +110,8 @@ const generatePDFReport = () => {
         </div>
 
         </div>
-        
+        </div>
+        </div>
     )
 }
 

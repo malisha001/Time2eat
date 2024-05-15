@@ -6,14 +6,14 @@ const EmployeeNav = () => {
     return (
         <div style={{ margin: '0 500px 0 0' }}>
             <Grid container spacing={2}>
-                {/* <Grid item xs={4}>
+                <Grid item xs={4}>
                     <Box sx={{ backgroundColor: 'lightblue', padding: '10px',textAlign: 'center'}}>
-                        <Link to="/employeeSal" style={{textDecoration: 'none', color: 'black'}}>staff member</Link>
+                        <Link to="/addemployee" style={{textDecoration: 'none', color: 'black'}}>staff member</Link>
                     </Box>
-                </Grid> */}
+                </Grid>
                 <Grid item xs={4}>
                     <Box sx={{ backgroundColor: 'lightblue', padding: '10px',textAlign: 'center' }}>
-                        <Link to="/employeeSal" style={{textDecoration: 'none', color: 'black'}}>leaving</Link>
+                        <Link to="/empleaves" style={{textDecoration: 'none', color: 'black'}}>leaving</Link>
                     </Box>
                 </Grid>
                 <Grid item xs={4}>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Dialog, DialogTitle,DialogContent, Stack,TextField,DialogActions,MenuItem } from '@mui/material';
+import { Button, Dialog, DialogTitle, DialogContent, Stack, TextField, DialogActions, MenuItem } from '@mui/material';
 import { updatePayrunData } from '../services/api';
 
 function Payrunbtn({ id }) {
@@ -9,28 +9,35 @@ function Payrunbtn({ id }) {
     const [formData, setFormData] = useState({
         rate: '',
     });
+    const [error, setError] = useState('');
 
-    const handleSubmit = async() => {
-        
+    const handleSubmit = async () => {
         try {
-            await updatePayrunData(id,formData); // Call your API function to update payrun data
+            await updatePayrunData(id, formData); // Call your API function to update payrun data
             console.log("Updating payrun data for ID:", id, formData);
             setOpenPopup(false); // Close the dialog after successful submission
         } catch (error) {
             console.error('Error updating payrun data:', error);
         }
         // Here you can send formData to your backend API
-        console.log('Form submitted:',id, formData);
+        console.log('Form submitted:', id, formData);
         // Reset the form after submission
         setFormData({
             rate: '',
         });
     }
     const handleChange = (e) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
+        // Regular expression to allow only numbers
+        const regex = /^[0-9\b]+$/;
+        if (regex.test(e.target.value) || e.target.value === '') {
+            setFormData({
+                ...formData,
+                [e.target.name]: e.target.value
+            });
+            setError(''); // Clear error if the input is valid
+        } else {
+            setError('Please enter numbers only');
+        }
     }
 
     const handleUpdate = () => {
@@ -39,6 +46,7 @@ function Payrunbtn({ id }) {
 
     const handleClose = () => {
         setOpenPopup(false); // Close the dialog
+        setError(''); // Clear error when dialog is closed
     }
 
     return (
@@ -47,10 +55,19 @@ function Payrunbtn({ id }) {
                 Update
             </Button>
             <Dialog open={openPopup} onClose={handleClose} minWidth>
-                <DialogTitle>update payrun</DialogTitle>
+                <DialogTitle>Update Payrun</DialogTitle>
                 <DialogContent>
                     <Stack spacing={2} margin={2}>
-                        <TextField name="rate" value={formData.rate} onChange={handleChange} variant="outlined" label="rate" minWidth />
+                        <TextField
+                            name="rate"
+                            value={formData.rate}
+                            onChange={handleChange}
+                            variant="outlined"
+                            label="Rate"
+                            error={!!error}
+                            helperText={error}
+                            fullWidth
+                        />
                     </Stack>
                 </DialogContent>
                 <DialogActions>
