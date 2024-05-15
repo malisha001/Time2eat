@@ -10,6 +10,7 @@ import {getAllEmployeeData} from '../../services/api';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './EmpLeaves.css';
+import ResNavbar from '../../component/restauretNavbar/ResNavbar';
 
 function EmpLeaves() {
     const [openPopup, setOpenPopup] = useState(false);
@@ -84,6 +85,8 @@ function EmpLeaves() {
     }
     return (
         <div>
+            <ResNavbar/>
+            <div className="Inv-dashborad">
             <Grid container spacing={2} >
                 <Grid item xs={6}>
                     <h1>Employee Leaves</h1>
@@ -206,6 +209,7 @@ function EmpLeaves() {
           </TableBody>
         </Table>
       </TableContainer>
+        </div>
         </div>
     );
 }

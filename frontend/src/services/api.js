@@ -137,6 +137,17 @@ export async function getpaymentData(id) {
     }
 
 }
+//get last update of salary payment
+export async function getLastUpdate() {
+    try {
+        const response = await fetch('api/emppayrun/lastupdateee');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching last update:', error);
+        throw error;
+    }
+}
 //delivery function
 //customer place order by selecting delivery option
 export async function placeorder(order) {

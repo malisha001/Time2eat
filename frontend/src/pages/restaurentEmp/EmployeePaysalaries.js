@@ -11,6 +11,7 @@ import logo from '../../Assests/white.jpg';
 
 function EmployeePaysalaries() {
 
+  const [originalEmployeeSalaries, setOriginalEmployeeSalaries] = useState([]);
   const [employeeSalaries, setEmployeeSalaries] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
   const [employeeIDs, setEmployeeIDs] = useState([]);
@@ -29,24 +30,26 @@ function EmployeePaysalaries() {
   };
 
   const handleFilterApply = () => {
-    console.log('Filter Criteria:', employeeSalaries);
-
-    // Filter the employee salaries based on the selected criteria
-    const data = employeeSalaries.filter(empsal =>{
+    // Filter the original employee salaries based on the selected criteria
+    const data = originalEmployeeSalaries.filter(empsal =>{
       const salaryDate = new Date(empsal.createdAt);
       const slaryyear = salaryDate.getFullYear();
       const slarymonth = salaryDate.getMonth() + 1;
-      return empsal.empId === filterCriteria.employeeId || 
-      slaryyear === parseInt(filterCriteria.year) || 
-      slarymonth === parseInt(filterCriteria.month);
+  
+      // Check if all filter criteria match, or if they are empty (meaning not applied)
+      const matchEmpId = !filterCriteria.employeeId || empsal.empId === filterCriteria.employeeId;
+      const matchYear = !filterCriteria.year || slaryyear === parseInt(filterCriteria.year);
+      const matchMonth = !filterCriteria.month || slarymonth === parseInt(filterCriteria.month);
+  
+      return matchEmpId && matchYear && matchMonth;
     });
-
-    console.log('Filter Data:', filterCriteria.year);
+  
     // Update the state with the filtered data
     setEmployeeSalaries(data);
-
+  
     setAnchorEl(null); // Close the filter popup after applying
   };
+  
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -115,7 +118,8 @@ function EmployeePaysalaries() {
     const getAllEmployeeSalaryData = async () => {
       try {
         const salaryData = await fetchEmployeeSalaries();
-        setEmployeeSalaries(salaryData);
+        setOriginalEmployeeSalaries(salaryData); // Store original data
+        setEmployeeSalaries(salaryData); // Set both original and filtered data
         console.log(salaryData);
       } catch (error) {
         console.error('Error fetching employee salaries:', error);
@@ -246,4 +250,3 @@ function EmployeePaysalaries() {
 }
 
 export default EmployeePaysalaries;
-  

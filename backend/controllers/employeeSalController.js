@@ -67,8 +67,10 @@ const deleteEmployeeSal = async(req,res) =>{
     if(!employeesal){
         return res.status(404).json({error: 'no entries'})
     }
+    
     res.status(200).json(employeesal)
 }
+
 module.exports = {
     getEmployeesSal,
     getEmployeeSal,

@@ -36,6 +36,7 @@ import EmployeeSal from './pages/restaurentEmp/EmployeeSal';
 import EmpPayrun from './pages/restaurentEmp/EmpPayrun';
 import Empleaves from './pages/restaurentEmpLeaves/EmpLeaves';
 import EmployeePaysalaries from './pages/restaurentEmp/EmployeePaysalaries';
+import EmployeeAdd from './pages/restaurentEmp/EmployeeAdd';
 
 import RiderDashboard from './pages/riders/RiderDashbord';
 import OngoingOrder from './pages/riders/OngoingOrder';
@@ -144,6 +145,7 @@ function App() {
             <Route path='/payment' element={<Payment/>} />
             <Route path='/orderonthway' element={<Orderonthaway/>} />
             <Route path='/orderHistory' element={<OrderHistory/>} />
+            <Route path='/addemployee' element={<EmployeeAdd/>} />
             
      
               <Route path="/inventory/items" element={<Inventory />} />
@@ -166,7 +168,7 @@ function App() {
             <Route path='/restaurentDashbord' element={<RestaurantDashboard />} />
             <Route path="/addrestaurants" element = {<AddrestaurantsForm />} />
             <Route path="/update-restaurant/:id/" element = {<Updaterestaurants/>} />
-            <Route path="/restaurants/:id/" element = {<RestaurantProfile />} />
+            <Route path="/restaurantspro" element = {<RestaurantProfile />} />
             <Route path="/update-restaurantprofile/:id/" element = {<UpdateRestaurantProfile/>} />
             <Route path="/dinein" element = {<DineIn />} />
             <Route path="/checkout" element={<CheckoutPage />} /> 

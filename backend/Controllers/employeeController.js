@@ -27,12 +27,10 @@ const getEmployeeById = async (req, res) => {
 
 //insert emplopyee details
 const createEmployee = async (req, res) => {
-    const{empId,empName,position,basicSalary,bonus,ETFcollection,tax,netSalary} = req.body
-
-    
+    const{empId,empname,position,telnum} = req.body
 
     try {
-        const employee = await Employee.create({empId,empName,position,basicSalary,bonus,ETFcollection,tax,netSalary})
+        const employee = await Employee.create({empId,empname,position,telnum})
         res.status(201).json(employee);
     } catch (error) {
         res.status(400).json({ message: error.message });
@@ -61,13 +59,19 @@ const updateEmployee = async (req, res) => {
 //delete employee details
 const deleteEmployee = async (req, res) => {
 
+    const {id} = req.params
+
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(404).json({error: 'no such directory'})
+    }
+
     try {
-        const employee = await Employee.findById(req.params.id);
-        if (!employee) {
-            return res.status(404).json({ message: 'Employee not found' });
+        const employee = await Employee.findByIdAndDelete({_id: id});
+
+        if(!employee){
+            return res.status(404).json({error: 'no entries'})
         }
 
-        await employee.remove();
         res.json({ message: 'Employee deleted' });
     } catch (error) {
         res.status(500).json({ message: error.message });

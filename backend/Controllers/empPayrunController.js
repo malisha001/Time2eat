@@ -4,6 +4,7 @@ const EmpLeave = require('../models/empLeavesModel')
 const EmpmonthlySal = require('../models/empMonthlySalModel')
 const Leaves = require('../models/leavesModel')
 const mongoose = require('mongoose')
+const moment = require('moment');
 
 //get all employee payrun
 const getEmpPayrun = async(req,res) => {
@@ -52,6 +53,37 @@ const getAllEmployeeSalaryData = async(req,res) => {
 
     } catch (error) {
         res.status(404).json({error: error.message})
+    }
+
+}
+//get last update of salary payment
+const getLastUpdate = async (req, res) => {
+    try {
+        //get current month
+        const currentMonth = moment().startOf('month');
+        
+        //find all documents in the collection for currect month
+        // const documents = await EmpmonthlySal.find({
+        //     createdAt: {
+        //         $gte: currentMonth.toDate(),
+        //         $lte: moment(currentMonth).endOf('month').toDate()
+        //     }
+        // });
+
+        try {
+            //find last update date of the collection
+            const lastUpdateDate = await EmpmonthlySal.findOne().sort('-updatedAt').select('updatedAt');
+
+            res.status(200).json({
+                lastUpdateDate: lastUpdateDate ? lastUpdateDate.updatedAt : null
+            });
+        } catch (error) {
+            res.status(500).json({ error: 'payement salary not  show' });
+        }
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 
 }
@@ -134,20 +166,18 @@ const monthlySalProcess = async(req,res) => {
             } catch (error) {
                 console.error('Error processing payruns:', error);
             }
-        }
-        res.status(201).json(leaves)
-        
+        }        
     }
     catch (error) {
         console.error('Error processing payruns:', error);
     }
 }
-// monthly payment salary show
 
 module.exports = {
     getEmpPayrun,
     createEmpPayrun,
     updateEmpPayrun,
     getAllEmployeeSalaryData,
-    monthlySalProcess
+    monthlySalProcess,
+    getLastUpdate
 }

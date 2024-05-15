@@ -1,29 +1,30 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 const { 
     getEmpPayrun,
     createEmpPayrun,
     updateEmpPayrun,
     getAllEmployeeSalaryData,
-    monthlySalProcess
-} = require('../Controllers/empPayrunController')
-
-//get all employee slalary data
-router.get('/allempsalaries', getAllEmployeeSalaryData)
+    monthlySalProcess,
+    getLastUpdate
+} = require('../Controllers/empPayrunController');
 
 // Get all employee payrun
-router.get('/', getEmpPayrun)
+router.get('/', getEmpPayrun);
 
-//craete employee payrun
-router.post('/', createEmpPayrun)
-
-//create paysheet for monthlhy
-router.get('/:id', monthlySalProcess)
+// Create employee payrun
+router.post('/', createEmpPayrun);
 
 // Update employee salary
-router.patch('/:id', updateEmpPayrun)
+router.patch('/:id', updateEmpPayrun);
 
-// //get all employee slalary data
-// router.get('/allempsalaries', getAllEmployeeSalaryData)
+// Get all employee salary data
+router.get('/allempsalaries', getAllEmployeeSalaryData);
 
-module.exports = router
+// Get paysheet for a specific month
+router.get('/:id', monthlySalProcess);
+
+// Get last update
+router.get('/lastupdateee', getLastUpdate);
+
+module.exports = router;

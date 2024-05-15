@@ -5,33 +5,21 @@ const employeeSchema = new Schema(
     {
         empId: {
             type: String,
-            require: true
+            unique: true, // Make empId unique
+            required: true 
         },
-        empName: {
+        empname: {
             type: String,
-            require: true
+            required: true
         },
         position: {
             type: String,
-            require: true
+            required: true
         },
-        basicSalary: {
+        telnum: {
             type: Number,
-            require: true
+            required: true
         },
-        bonus: {
-            type: Number,
-            require: true
-        },
-        ETFcollection: {
-            type: Number,
-        },
-        tax: {
-            type: Number,
-        },
-        netSalary: {
-            type: Number,
-        }
     },{ timestamps: true }
 )
 
