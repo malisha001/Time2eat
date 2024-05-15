@@ -48,8 +48,7 @@ function OngoingOrder() {
             const time = await enterEstimateTime(orderId, {
                 estimatetime:estimatedTime,
             }); // Update estimated time
-            // Optionally, you can fetch updated ongoing order data here
-            // and update the state if needed
+            window.location.reload();
         } catch (error) {
             console.error('Error updating estimated time:', error);
         }
@@ -69,8 +68,8 @@ function OngoingOrder() {
                 <p>restaurent name:{item.restaurantname}</p>
                 <p>estimated time:{item.estimatetime}</p>
                 <TextField id="outlined-basic" label="Enter estimated time" variant="outlined" value={estimatedTime} onChange={handleEstimatedTimeChange}/><br/>
-                <Button variant='contained' onClick={() => handleUpdateClick(item.orderId)}> update</Button>
-                <Button variant='contained' onClick={() => handleCompleteOrder(item.orderId)}> complete order</Button>
+                <Button variant='contained' onClick={() => handleUpdateClick(item._id)}> update</Button>
+                <Button variant='contained' onClick={() => handleCompleteOrder(item._id)}> complete order</Button>
             </Paper>
         ))}
             <div>
