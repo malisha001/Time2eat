@@ -19,14 +19,12 @@ const employeeSalSchema = new Schema({
     },
     empCatagory: {
         type: String,
-        require: true
     },
     leavePanalty: {
         type: Number,
     },
     taxRate: {
         type: Number,
-        require: true
     },
     ETFrate: {
         type: Number,

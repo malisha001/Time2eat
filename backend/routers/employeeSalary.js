@@ -1,17 +1,16 @@
 const express = require('express')
 const router = express.Router()
 const {
-    getEmployeeSal,
     getEmployeesSal,
     createEmployeesSal,
     deleteEmployeeSal,
 } = require('../Controllers/employeeSalController')
 
 //get salary employee
-router.get('/',getEmployeesSal)
+router.get('/:id',getEmployeesSal)
 
 //get single employee details
-router.get('/:id',getEmployeeSal)
+// router.get('/:id',getEmployeeSal)
 
 //add salary for new users
 router.post('/',createEmployeesSal)

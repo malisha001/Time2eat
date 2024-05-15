@@ -8,9 +8,10 @@ import ResNavbar from '../../component/restauretNavbar/ResNavbar';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import logo from '../../Assests/white.jpg';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 function EmployeePaysalaries() {
-
+  const { user } = useAuthContext();
   const [originalEmployeeSalaries, setOriginalEmployeeSalaries] = useState([]);
   const [employeeSalaries, setEmployeeSalaries] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -20,7 +21,7 @@ function EmployeePaysalaries() {
     year: '',
     month: ''
   });
-
+  
   const handleFilterClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -107,7 +108,7 @@ function EmployeePaysalaries() {
   useEffect(() => {
     const fetchEmployeeIDs = async () => {
       try {
-        const Empdata = await getAllEmployeeData();
+        const Empdata = await getAllEmployeeData(user.resId);
         const ids = Empdata.map(item => item.empId);
         setEmployeeIDs(ids);
       } catch (error) {
@@ -117,7 +118,8 @@ function EmployeePaysalaries() {
 
     const getAllEmployeeSalaryData = async () => {
       try {
-        const salaryData = await fetchEmployeeSalaries();
+        console.log(user.resId);
+        const salaryData = await fetchEmployeeSalaries(user.resId);
         setOriginalEmployeeSalaries(salaryData); // Store original data
         setEmployeeSalaries(salaryData); // Set both original and filtered data
         console.log(salaryData);
@@ -128,7 +130,7 @@ function EmployeePaysalaries() {
 
     fetchEmployeeIDs();
     getAllEmployeeSalaryData();
-  }, []); // Add any dependencies as needed
+  }, [user]); // Add any dependencies as needed
 
   return (
     <div>

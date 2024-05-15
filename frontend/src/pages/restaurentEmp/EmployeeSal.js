@@ -31,7 +31,7 @@ const EmployeeSal = () => {
   useEffect(() => {
     const fetchEmployeeIDs = async () => {
       try {
-        const Empdata = await getAllEmployeeData();
+        const Empdata = await getAllEmployeeData(user.resId);
         const ids = Empdata.map(item => item.empId);
         setEmployeeIDs(ids);
       } catch (error) {
@@ -41,8 +41,9 @@ const EmployeeSal = () => {
 
     const fetchEmployeeSalaries = async () => {
       try {
-        const salaryData = await getAllEmployeeSalaryData();
+        const salaryData = await getAllEmployeeSalaryData(user.resId);
         setEmployeeSalaries(salaryData);
+        console.log("salaryData",salaryData)
       } catch (error) {
         console.error('Error fetching employee salaries:', error);
       }
@@ -50,7 +51,7 @@ const EmployeeSal = () => {
 
     fetchEmployeeSalaries();
     fetchEmployeeIDs();
-  }, []);
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -111,8 +112,8 @@ const EmployeeSal = () => {
           basicEmpSalary: formData.basicEmpSalary,
           empCatagory: formData.empCatagory,
         };
-        console.log("emp data",data);
-       await addEmployeeSalaryData(formData);
+       let res = await addEmployeeSalaryData(data);
+       console.log("emp data",data);
 
       // if (error) {
       //   throw new Error(error);

@@ -8,6 +8,10 @@ const employeeSchema = new Schema(
             unique: true, // Make empId unique
             required: true 
         },
+        resId: {
+            type: String,
+            required: true
+        },
         empname: {
             type: String,
             required: true

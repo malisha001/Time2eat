@@ -6,8 +6,10 @@ import Payrunbtn from '../../component/Payrunbtn';
 import Resuppernav from '../../component/restauretNavbar/Resuppernav';
 import ResNavbar from '../../component/restauretNavbar/ResNavbar';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 function EmpPayrun() {
+    const { user } = useAuthContext();
     const [lastUpdate, setLastUpdate] = useState('');
     const [currentDate, setCurrentDate] = useState(new Date());
     const [payrunData, setPayrunData] = useState([]);
@@ -46,7 +48,7 @@ function EmpPayrun() {
 
     const handlesubmit = async () => {
         try {
-            const pay = await paySalary(); // Call the backend function to pay the salary
+            const pay = await paySalary(user.resId); // Call the backend function to pay the salary
             console.log('Salary paid successfully.');
             // Navigate to another page upon successful payment
             navigate('/success'); // Navigate to '/success' route

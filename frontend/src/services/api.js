@@ -1,9 +1,9 @@
 import axios from 'axios';
 
 // Function to get all employee salary data
-export async function getAllEmployeeSalaryData() {
+export async function getAllEmployeeSalaryData(id) {
     try {
-        const response = await fetch('/api/employeesal');
+        const response = await fetch(`/api/employeesal/${id}`);
         const data = await response.json();
         return data;
     } catch (error) {
@@ -35,7 +35,9 @@ export async function addEmployeeSalaryData(employeeSalaryData) {
             },
             body: JSON.stringify(employeeSalaryData),
         });
+        console.log(response.data);
         const data = await response.json();
+        console.log(data);
         return data;
     } catch (error) {
         console.error('Error adding employee salary data:', error);
@@ -44,9 +46,9 @@ export async function addEmployeeSalaryData(employeeSalaryData) {
 }
 
 //get all employee details
-export async function getAllEmployeeData() {
+export async function getAllEmployeeData(id) {
     try {
-        const response = await fetch('/api/employees');
+        const response = await fetch(`/api/employees/${id}`);
         const data = await response.json();
         return data;
     } catch (error) {
@@ -103,9 +105,9 @@ export async function updatePayrunData(id,payrunData) {
     }
 }
 //function paysalary
-export async function paySalary() {
+export async function paySalary(id) {
     try {
-        const response = await fetch('/api/emppayrun/paysalary');
+        const response = await fetch(`/api/emppayrun/paysalary/${id}`);
         const data = await response.json();
         return data;
     } catch (error) {
@@ -114,9 +116,9 @@ export async function paySalary() {
     }
 }
 //get all employee salaries
-export async function fetchEmployeeSalaries() {
+export async function fetchEmployeeSalaries(id) {
     try {
-        const response = await fetch('/api/emppayrun/allempsalaries');
+        const response = await fetch(`/api/emppayrun/allempsalaries/${id}`);
         const data = await response.json();
         console.log(data);
         return data;
@@ -140,7 +142,7 @@ export async function getpaymentData(id) {
 //get last update of salary payment
 export async function getLastUpdate() {
     try {
-        const response = await fetch('api/emppayrun/lastupdateee');
+        const response = await fetch('api/emppayrun/lastupd');
         const data = await response.json();
         return data;
     } catch (error) {

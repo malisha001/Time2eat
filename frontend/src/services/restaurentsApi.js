@@ -31,9 +31,9 @@ export async function createmployee(employeedata){
 }
 
 //get employee datails
-export async function getemployeedetails(){
+export async function getemployeedetails(id){
     try {
-        const response = await fetch('/api/employees/');
+        const response = await fetch(`/api/employees/${id}`);
         const data = await response.json();
         return data;
     } catch (error) {

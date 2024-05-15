@@ -13,18 +13,18 @@ const {
 router.get('/', getEmpPayrun);
 
 // Create employee payrun
-router.post('/', createEmpPayrun);
+// router.post('/', createEmpPayrun);
 
 // Update employee salary
 router.patch('/:id', updateEmpPayrun);
 
-// Get all employee salary data
-router.get('/allempsalaries', getAllEmployeeSalaryData);
-
-// Get paysheet for a specific month
-router.get('/:id', monthlySalProcess);
-
 // Get last update
-router.get('/lastupdateee', getLastUpdate);
+router.get('/lastupd', getLastUpdate);
+
+// Get paysheet for a specific month and specific employee
+router.get('/paysalary/:id', monthlySalProcess);
+
+// Get all employee salary data
+router.get('/allempsalaries/:id', getAllEmployeeSalaryData);
 
 module.exports = router;

@@ -153,19 +153,43 @@ const monthlySalProcess = async(req,res) => {
             console.log('count leaves of:',empId,':', leavecount)
             
             try {
-                const taxRate = tax/100*oneSalary
-                const ETFrate = ETF/100*oneSalary
-                if(leavecount > mleaves){
-                    const penaltyFee = (leavecount-penalty)*pFee
-                    console.log('penalty for:',empId)
+                const taxRate = (tax / 100.0) * oneSalary;
+                console.log('Tax Rate:', taxRate);
+            
+                const ETFrate = (ETF / 100.0) * oneSalary;
+                console.log('ETF Rate:', ETFrate);
+            
+                let penaltyFee = 0;
+                if (leavecount > mleaves) {
+                    penaltyFee = (leavecount - mleaves) * pFee;
+                    console.log('Penalty Fee:', penaltyFee);
                 }
-                const Fsalary = bonus+oneSalary-taxRate-ETFrate-penaltyFee;
+            
+                let Fsalary = bonus + oneSalary - taxRate - ETFrate - penaltyFee;
+                console.log('Fsalary:', Fsalary);
+            
+                if (isNaN(Fsalary)) {
+                    throw new Error('Fsalary calculation resulted in NaN');
+                }
+            
+                // Round Fsalary to two decimal places
+                Fsalary = parseFloat(Fsalary.toFixed(2));
+            
+                const empMonthlySal = await EmpmonthlySal.create({
+                    empId,
+                    resId: id,
+                    basicEmpSalary: oneSalary,
+                    bonus,
+                    taxRate,
+                    ETFrate,
+                    Fsalary
+                });
+                res.status(200).json({ message: 'Monthly salary processing completed successfully' });
 
-                const empmonthlySal = await EmpmonthlySal.create({empId,resId,basicEmpSalary,bonus,taxRate,ETFrate,Fsalary})
- 
             } catch (error) {
-                console.error('Error processing payruns:', error);
+                console.error('Error processing employee salary:', error);
             }
+            
         }        
     }
     catch (error) {
