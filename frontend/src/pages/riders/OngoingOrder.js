@@ -62,18 +62,18 @@ function OngoingOrder() {
         <Divider style={{ marginBottom: '16px' }} />
         {ongoingOrderData.map((item) => (
             <Paper key={item._id} sx={{ padding: '32px', bgcolor: '#fffff0', margin: '20px' }}>
-                <p>OrderId: <strong> {item.orderId} </strong> </p>
-                <p>Customer name: <strong> {item.cusName} </strong> </p>
+                <p>OrderId : <strong> {item.orderId} </strong> </p>
+                <p>Customer Name: <strong> {item.cusName} </strong>  </p>
                 <p>Delivery address: <strong>{item.customerLocation} </strong> </p>
                 <p>Restaurent name: <strong> {item.restaurantname} </strong> </p>
                 <p>Estimated time: <strong>{item.estimatetime} </strong> </p>
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
-                <TextField id="outlined-basic" label="Enter estimated time" variant="outlined" value={estimatedTime} onChange={handleEstimatedTimeChange} style={{ marginRight: '10px' }}/><br/>
-                <div>
-                <Button variant='contained' onClick={() => handleUpdateClick(item._id)} style={{ marginRight: '10px' }}> Update Time</Button>
-                <Button variant='contained' onClick={() => handleCompleteOrder(item._id)} > Complete Order</Button>
-                </div>
-                </div>
+                        <TextField id="outlined-basic" label="Enter estimated time" variant="outlined" value={estimatedTime} onChange={handleEstimatedTimeChange} style={{ marginRight: '10px' }}/>
+                        <Button variant='contained' onClick={() => handleUpdateClick(item._id)} style={{ marginRight: '10px', backgroundColor: '#fcf29f', color: '#000000' }}> Update Time</Button>
+                    </div>
+                    <div style={{ marginTop: '80px' }}>
+                        <Button variant='contained' onClick={() => handleCompleteOrder(item._id)} style={{ backgroundColor: '#3d782f' }}> Complete Order</Button>
+                    </div>
             </Paper>
         ))}
             

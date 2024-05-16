@@ -81,7 +81,7 @@ function OrderHistory() {
                             </Grid>
 
                             <Grid item xs={3} >
-                                 <Button variant="contained"  onClick={generatePDF} style={{ backgroundColor: '#8B0000' }}>Generate PDF</Button>
+                                 <Button variant="contained"  onClick={generatePDF} style={{ backgroundColor: '#F8983C' }}>Generate PDF</Button>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -100,7 +100,7 @@ function OrderHistory() {
                         </TableHead>
                         <TableBody>
                             {filteredOrders.map((item) => (
-                                <TableRow key={item._id}>
+                                <TableRow key={item._id} style={{ backgroundColor: '#fff5f0' }}>
                                     <TableCell>{item.orderId}</TableCell>
                                     <TableCell>{item.restaurantname}</TableCell>
                                     <TableCell>{item.cusName}</TableCell>
