@@ -3,8 +3,19 @@ import './Ridernav.css'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faHome, faUser, faList, faBowlFood, faNoteSticky, faComments, faRightFromBracket} from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
+import {useLogout} from '../../hooks/useLogout'
+import { useNavigate } from "react-router-dom";
+
 
 function Ridernav() {
+    const navigate = useNavigate()
+    const {logout} = useLogout()
+
+    const logouthandle = () => {
+        logout()
+        navigate('/')
+    }
+
     return (
         <nav className="sidebar">
 
@@ -14,7 +25,7 @@ function Ridernav() {
                 <li><Link to ={"/riderdashborad/"}><FontAwesomeIcon icon={faHome} />Dashboard</Link></li>
                 <li><Link to ={"/riderdashborad/ongoingorder"}><FontAwesomeIcon icon={faList} />ongoing order</Link></li>
                 <li><Link to ={"/orderHistory"}><FontAwesomeIcon icon={faBowlFood} />order history</Link></li>
-                <button className="navButton"><Link><FontAwesomeIcon icon={faRightFromBracket}/>Logout</Link></button>
+                <button className="navButton" onClick={logouthandle}><FontAwesomeIcon icon={faRightFromBracket}/>Logout</button>
             </ul>
         </nav>
     );

@@ -28,13 +28,26 @@ function EmployeeAdd() {
     });
 
     const deletebutton = async (id) => {
-        console.log('id', id);
-        try {
-            await deleteEmployeeData(id);
-        } catch (error) {
-            console.error('Error deleting employee salary data:', error);
+        // Display confirmation dialog
+        const confirmed = window.confirm('Are you sure you want to delete this employee?');
+        
+        // Check if the user confirmed
+        if (confirmed) {
+            console.log('id', id); // Log the ID before deletion
+            try {
+                await deleteEmployeeData(id);
+                console.log('Employee data deleted successfully.');
+                // You can perform any additional actions after successful deletion here
+            } catch (error) {
+                console.error('Error deleting employee data:', error);
+                // Handle error
+            }
+        } else {
+            // User cancelled the action, do nothing
+            console.log('Deletion cancelled by user.');
         }
     };
+    
 
     const handleOpenDialog = () => {
         setOpenDialog(true);
@@ -65,11 +78,16 @@ function EmployeeAdd() {
     const handlechange = (e) => {
         const { name, value } = e.target;
         let error = '';
-        if (name === 'empId' || name === 'empname' || name === 'position') {
+        if (name === 'empId') {
             if (!value.match(/^[a-zA-Z0-9\s]+$/)) {
                 error = 'Only alphanumeric characters are allowed.';
             }
-        } else if (name === 'telnum') {
+        }else if(name === 'empname' || name === 'position'){
+            if (!value.match(/^[a-zA-Z\s]+$/)) {
+                error = 'Only letters are allowed.';
+            }
+        }
+         else if (name === 'telnum') {
             if (!value.match(/^\d+$/)) {
                 error = 'Only numbers are allowed.';
             }

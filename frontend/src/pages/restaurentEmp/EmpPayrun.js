@@ -47,15 +47,24 @@ function EmpPayrun() {
     },[])
 
     const handlesubmit = async () => {
+            // Display confirmation dialog
+    const confirmed = window.confirm('Are you sure you want to pay the salary?');
+    
+    // Check if the user confirmed
+    if (confirmed) {
         try {
             const pay = await paySalary(user.resId); // Call the backend function to pay the salary
             console.log('Salary paid successfully.');
             // Navigate to another page upon successful payment
-            navigate('/success'); // Navigate to '/success' route
+            navigate('/employeepaysalaries'); // Navigate to '/success' route
         } catch (error) {
             console.error('Error paying salary:', error);
             // Handle error
         }
+    } else {
+        // User cancelled the action, do nothing
+        console.log('Salary payment cancelled by user.');
+    }
     };
 
     const [value, setValue] = useState('');

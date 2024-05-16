@@ -7,6 +7,7 @@ import { addEmployeeSalaryData, getAllEmployeeData, getAllEmployeeSalaryData, de
 import Resuppernav from '../../component/restauretNavbar/Resuppernav';
 import ResNavbar from '../../component/restauretNavbar/ResNavbar';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import toast, { Toaster } from 'react-hot-toast';
 
 const EmployeeSal = () => {
   const {user} = useAuthContext()
@@ -51,7 +52,7 @@ const EmployeeSal = () => {
 
     fetchEmployeeSalaries();
     fetchEmployeeIDs();
-  }, [user]);
+  }, [user,formData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -97,12 +98,24 @@ const EmployeeSal = () => {
   };
 
   const deletebutton = async (id) => {
-    try {
-      await deleteEmployeeSalaryData(id);
-    } catch (error) {
-      console.error('Error deleting employee salary data:', error);
+    // Display confirmation dialog
+    const confirmed = window.confirm('Are you sure you want to delete this employee salary data?');
+    
+    // Check if the user confirmed
+    if (confirmed) {
+        try {
+            await deleteEmployeeSalaryData(id);
+            console.log('Employee salary data deleted successfully.');
+            // You can perform any additional actions after successful deletion here
+        } catch (error) {
+            console.error('Error deleting employee salary data:', error);
+            // Handle error
+        }
+    } else {
+        // User cancelled the action, do nothing
+        console.log('Deletion cancelled by user.');
     }
-  };
+};
 
   const handleSubmit = async () => {
     try {
@@ -113,7 +126,8 @@ const EmployeeSal = () => {
           empCatagory: formData.empCatagory,
         };
        let res = await addEmployeeSalaryData(data);
-       console.log("emp data",data);
+       console.log("emp data",res);
+       
 
       // if (error) {
       //   throw new Error(error);
@@ -121,6 +135,8 @@ const EmployeeSal = () => {
 
       setOpenPopup(false);
     } catch (error) {
+      toast.error("sfsfbsb");
+      
       console.error('Error adding employee salary data:', error);
       // alert(error)
     }
@@ -135,6 +151,7 @@ const EmployeeSal = () => {
 
   return (
     <div>
+      <div><Toaster/></div>
       <ResNavbar/>
       <div className="Inv-dashborad">
       <Resuppernav/>
@@ -185,7 +202,6 @@ const EmployeeSal = () => {
             <TableHead>
               <TableRow sx={{bgcolor: 'lightblue'}}>
                 <TableCell>Employee ID</TableCell>
-                <TableCell>Restaurant ID</TableCell>
                 <TableCell>Basic Salary</TableCell>
                 <TableCell>Position</TableCell>
                 {/* <TableCell>Bonus Rate</TableCell>
@@ -197,12 +213,11 @@ const EmployeeSal = () => {
               {employeeSalaries.map((salaryData) => (
                 <TableRow key={salaryData.id}>
                   <TableCell>{salaryData.empId}</TableCell>
-                  <TableCell>{salaryData.resId}</TableCell>
                   <TableCell>{salaryData.basicEmpSalary}</TableCell>
                   <TableCell>{salaryData.empCatagory}</TableCell>
                   {/* <TableCell>{salaryData.bonusRate}</TableCell>
                   <TableCell>{salaryData.taxRate}</TableCell> */}
-                  <TableCell><Button onClick={() => deletebutton(salaryData._id)} variant='contained'>Delete</Button></TableCell>
+                  <TableCell><Button style={{ backgroundColor: 'red', color: 'white' }} onClick={() => deletebutton(salaryData._id)} variant='contained'>Delete</Button></TableCell>
                 </TableRow>
               ))}
             </TableBody>

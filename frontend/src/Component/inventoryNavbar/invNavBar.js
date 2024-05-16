@@ -43,7 +43,7 @@ const Navbar = () => {
             <p><img src="/Time2eat.jpeg" alt="logo" /><h1>TIME<strong>2eat</strong></h1></p>
 
             <ul>
-                <li><Link to={"/inventory/dashboard"}><FontAwesomeIcon icon={faHome} />Dashboard</Link></li>
+                <li><Link to={"/restaurentDashbord"}><FontAwesomeIcon icon={faHome} />Dashboard</Link></li>
                 <li><Link to ={"/inventory/reOrderitem"}><FontAwesomeIcon icon={faBars} />Re-order Details{showAlert && <FontAwesomeIcon icon={faCircle} style={{color:'#9b2121'}} /> }</Link></li> 
                 <li><Link to={"/inventory/invMgOrd"}><FontAwesomeIcon icon={faList} />Manage Orders</Link></li>
                 <li><Link to ={"/inventory/addItems"}><FontAwesomeIcon icon={faBowlFood} />Add Food Item</Link></li>

@@ -11,7 +11,7 @@ function RestaurantNavbar() {
         <div>
             <div className="dash-Upper">
                 <div className="da-head1">
-                    <h1><FontAwesomeIcon icon={faHouseFire} />welcome {user&&user.resName}</h1>{/* Restaurent Name */}
+                    <h2><FontAwesomeIcon icon={faHouseFire} />welcome {user&&user.resName}</h2>{/* Restaurent Name */}
                 </div>
                 <div className="da-head2">
                     <h1><FontAwesomeIcon icon={faUser} />{user&&user.Email_address}</h1>{/* Manager Name */}

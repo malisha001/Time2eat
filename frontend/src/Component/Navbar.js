@@ -4,14 +4,17 @@ import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, Divider,
 import { Menu as MenuIcon, Inbox as InboxIcon, Mail as MailIcon, Margin } from '@mui/icons-material';
 import { useAuthContext } from '../hooks/useAuthContext';
 import {useLogout} from '../hooks/useLogout'
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+    const navigate = useNavigate()
     const {logout} = useLogout()
     const {user} = useAuthContext()
     const [open, setOpen] = React.useState(false);
     
     const handleClick = () =>{
         logout()
+        navigate('/')
     }
 
     const toggleDrawer = (newOpen) => () => {

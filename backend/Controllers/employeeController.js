@@ -15,21 +15,26 @@ const getAllEmployees = async (req, res) => {
 
 //insert emplopyee details
 const createEmployee = async (req, res) => {
-    const{empId,resId,empname,position,telnum} = req.body
+    const { empId, resId, empname, position, telnum } = req.body;
 
     try {
         // Validate required fields
-        if (!empId || !resId || !empname || !telnum ) {
+        if (!empId || !position || !empname || !telnum) {
             return res.status(400).json({ message: 'All fields are required' });
-            // throw new Error('All fields are required');
         }
+
         // Validation patterns
         const alphanumericPattern = /^[a-zA-Z0-9]+$/;
         const numericPattern = /^[0-9]+$/;
+        const letterPattern = /^[a-zA-Z]+$/;
 
         // Validate empId, resId, and empname
-        if (!alphanumericPattern.test(empId) || !alphanumericPattern.test(resId) || !alphanumericPattern.test(empname)) {
-            return res.status(400).json({ message: 'empId, resId, and empname should contain only letters and numbers' });
+        if (!alphanumericPattern.test(empId)) {
+            return res.status(400).json({ message: 'empId should contain only letters and numbers' });
+        }
+
+        if (!letterPattern.test(position) || !letterPattern.test(empname)) {
+            return res.status(400).json({ message: 'resId and empname should contain only letters' });
         }
 
         // Validate telnum
@@ -37,10 +42,10 @@ const createEmployee = async (req, res) => {
             return res.status(400).json({ message: 'telnum should contain only numbers' });
         }
 
-        const employee = await Employee.create({empId,resId,empname,position,telnum})
-        res.status(201).json(employee);
+        const employee = await Employee.create({ empId, resId, empname, position, telnum });
+        return res.status(201).json(employee);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+        return res.status(400).json({ message: error.message });
     }
 };
 
