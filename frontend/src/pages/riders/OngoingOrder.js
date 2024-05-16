@@ -58,10 +58,10 @@ function OngoingOrder() {
         <div>
         <Ridernav/>
         <div className="Inv-dashborad">
-        <h1>Ongoing Order</h1>
+        <h1>My Ongoing Orders</h1>
         <Divider style={{ marginBottom: '16px' }} />
         {ongoingOrderData.map((item) => (
-            <Paper key={item._id} sx={{ padding: '32px', bgcolor: '#F0F8FF', margin: '20px' }}>
+            <Paper key={item._id} sx={{ padding: '32px', bgcolor: '#fffff0', margin: '20px' }}>
                 <p>OrderId: <strong> {item.orderId} </strong> </p>
                 <p>Customer name: <strong> {item.cusName} </strong> </p>
                 <p>Delivery address: <strong>{item.customerLocation} </strong> </p>
@@ -70,18 +70,10 @@ function OngoingOrder() {
                 <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
                 <TextField id="outlined-basic" label="Enter estimated time" variant="outlined" value={estimatedTime} onChange={handleEstimatedTimeChange} style={{ marginRight: '10px' }}/><br/>
                 <div>
-                <Button variant='contained' onClick={() => handleUpdateClick(item.orderId)} style={{ marginRight: '10px' }}> Update Time</Button>
-                <Button variant='contained' onClick={() => handleCompleteOrder(item.orderId)} > Complete Order</Button>
+                <Button variant='contained' onClick={() => handleUpdateClick(item._id)} style={{ marginRight: '10px' }}> Update Time</Button>
+                <Button variant='contained' onClick={() => handleCompleteOrder(item._id)} > Complete Order</Button>
                 </div>
                 </div>
-                <p>orderId: {item.orderId}</p>
-                <p>customer name:{item.cusName}</p>
-                <p>delivery address:{item.customerLocation}</p>
-                <p>restaurent name:{item.restaurantname}</p>
-                <p>estimated time:{item.estimatetime}</p>
-                <TextField id="outlined-basic" label="Enter estimated time" variant="outlined" value={estimatedTime} onChange={handleEstimatedTimeChange}/><br/>
-                <Button variant='contained' onClick={() => handleUpdateClick(item._id)}> update</Button>
-                <Button variant='contained' onClick={() => handleCompleteOrder(item._id)}> complete order</Button>
             </Paper>
         ))}
             

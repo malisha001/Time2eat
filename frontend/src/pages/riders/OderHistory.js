@@ -65,14 +65,28 @@ function OrderHistory() {
                 <h1>Order History</h1>
                 <Divider style={{ marginBottom: '16px' }} />
                 {/* Search Input */}
-                <TextField
-                    label="Search Restaurant"
-                    variant="outlined"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    style={{ marginBottom: '16px' }}
-                />
-                <Button variant="contained" onClick={generatePDF}>Generate PDF</Button>
+
+                <Grid container spacing={2}>
+                    <Grid item xs={9}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={9}>
+                            <TextField
+                                label="Search Restaurant"
+                                variant="outlined"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                style={{ marginBottom: '16px' }}
+                                fullWidth
+                            />
+                            </Grid>
+
+                            <Grid item xs={3} >
+                                 <Button variant="contained"  onClick={generatePDF} style={{ backgroundColor: '#8B0000' }}>Generate PDF</Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                
                 <TableContainer component={Paper}>
                     <Table aria-label="simple table">
                         <TableHead>

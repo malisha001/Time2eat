@@ -50,7 +50,7 @@ const Navbar = () => {
     return ( 
 
         <div>
-            <AppBar position="static">
+            <AppBar position="static" sx={{ backgroundColor: '#8B0000' }}>
                     <Toolbar>
                         <IconButton
                             size="large"

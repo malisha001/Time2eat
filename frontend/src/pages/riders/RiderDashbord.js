@@ -88,7 +88,7 @@ function RiderDashboard() {
                             <TableCell>Customer Name</TableCell>
                             <TableCell>Customer location</TableCell>
                             <TableCell>Restaurant Name</TableCell>
-                            <TableCell>total price</TableCell>
+                            <TableCell>Total price</TableCell>
                             
                             <TableCell>Action</TableCell>
                         </TableRow>
