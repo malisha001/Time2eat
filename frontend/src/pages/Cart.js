@@ -16,7 +16,7 @@ function Cart() {
     const [cartData, setCartData] = useState([]);
     const [isDataSent, setDataSent] = useState(false);
     const [message, setMessage] = useState('');
-    const [countdown, setCountdown] = useState(10);
+    const [countdown, setCountdown] = useState(30);
     const [error, setError] = useState('');
     const [deleteorder, setDeleteOrder] = useState('');
     let continueTriggering = true;
@@ -54,11 +54,10 @@ function Cart() {
     const handleClickConfirm = async (order, resname,price) => {
         handleDelivery(order);
         //if delivery is selected
-
         //start countdown
         countdownId = setInterval(() => {
             setCountdown(countdown => countdown - 1);
-        }, 3000);
+        }, 1000);
 
         //if delivery is selected
         if (radiovalue === 'delivery') {
@@ -100,7 +99,7 @@ function Cart() {
                 handleDelivery(order); // Pass orderid or any other data you need
             }, 3000);
 
-            // Stop triggering after 2 minutes
+            // Stop triggering after 30 secs
             setTimeout(() => {
                 clearInterval(intervalId);
                 clearInterval(countdownId); // Stop the countdown
@@ -172,8 +171,8 @@ function Cart() {
 
     // Location input validation function
     const isValidLocation = (value) => {
-        // allow only letters, numbers, and /
-        const regex = /^[a-zA-Z0-9/]+$/;
+        // allow only letters, numbers, and ,
+        const regex = /^[a-zA-Z0-9/, ]+$/;
         return regex.test(value);
     };
 
@@ -181,42 +180,27 @@ function Cart() {
         <div>
             <Navbar />
             <h1>My order</h1>
-            {radiovalue === 'delivery' && (
-                <div>
-                    <p>{message}</p>
-                    <p>Wait {countdown} seconds to find a rider!</p>
-                </div>
-            )}
+            
             
             <div>
                 {cartData.map((order) => (
                     <Paper key={order.orderid} sx={{ padding: '32px', bgcolor: '#F0F8FF', margin: '20px' }}>
                         <Grid container >
                             <Grid item ={6}>
-                                <h2>Restaurant name: {order.restaurantid}</h2>
-                                <h3>Items:</h3>
+                                <h2 style={{ fontFamily: 'Arial, sans-serif' }} >Restaurant name: {order.restaurantid}</h2>
+                                <h3 style={{ fontFamily: 'Arial, sans-serif' }}>Items:</h3>
                                 <ul>
                                     {order.items.map((foodname, index) => (
                                         <li key={index}>{foodname}</li>
                                     ))}
                                 </ul>
-                                <TextField
-                                    name="resId"
-                                    variant="outlined"
-                                    label="Location"
-                                    value={location}
-                                    onChange={(e) => {
-                                        setLocation(e.target.value);
-                                        if (!isValidLocation(e.target.value)) {
-                                            setError('Enter valid Location');
-                                        } else {
-                                            setError('');
-                                        }
-                                    }}
-                                    error={Boolean(error)}
-                                    helperText={error}
-                                    style={{ display: radiovalue === 'delivery' ? 'block' : 'none' }}
-                                /><br />
+
+                                <Grid item xs={12} sm={6} >
+                                <h3>Price: {order.tprice}</h3>
+                                </Grid>
+
+                                <hr style={{ margin: '20px 0' }} />
+                                
                                 <FormControl variant="outlined">
                                     <FormLabel id="demo-radio-buttons-group-label">Options</FormLabel>
                                     <RadioGroup
@@ -226,15 +210,40 @@ function Cart() {
                                         value={radiovalue}
                                         onChange={handleChange}
                                     >
-                                        <FormControlLabel value="pickup" control={<Radio />} label="pickup" />
-                                        <FormControlLabel value="delivery" control={<Radio />} label="delivery" />
+                                        <FormControlLabel value="Pickup" control={<Radio />} label="Pickup" />
+                                        <FormControlLabel value="delivery" control={<Radio />} label="Delivery" />
                                     </RadioGroup>
                                 </FormControl><br />
-                                <Button variant='contained' onClick={() => handleClickConfirm(order.orderid, order.restaurantid,order.tprice)} disabled={isDataSent}> confirm</Button>
+
+                                <TextField
+                                    name="resId"
+                                    variant="outlined"
+                                    label="Enter Your City"
+                                    value={location}
+                                    onChange={(e) => {
+                                        setLocation(e.target.value);
+                                        if (!isValidLocation(e.target.value)) {
+                                            setError('Enter valid Location.');
+                                        } else {
+                                            setError('');
+                                        }
+                                    }}
+                                    error={Boolean(error)}
+                                    helperText={error}
+                                    fullWidth
+                                    style={{ display: radiovalue === 'delivery' ? 'block' : 'none' }}
+                                /><br />
+                               
+                                {radiovalue === 'delivery' && (
+                                <div>
+                                    <p>{message}</p>
+                                    <p>Give us {countdown} seconds to find your deivery hero!</p>
+                                </div>
+                            )}
+
+                                <Button variant='contained' onClick={() => handleClickConfirm(order.orderid, order.restaurantid,order.tprice)} disabled={isDataSent} style={{ backgroundColor: '#F8983C', color: '#ffffff', marginTop: '20px' }}> confirm</Button>
                             </Grid>
-                            <Grid item ={6} >
-                                <h3>Price: {order.tprice}</h3>
-                            </Grid>
+                            
                         </Grid>
                     </Paper>
                 ))}

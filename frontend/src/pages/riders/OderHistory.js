@@ -65,14 +65,28 @@ function OrderHistory() {
                 <h1>Order History</h1>
                 <Divider style={{ marginBottom: '16px' }} />
                 {/* Search Input */}
-                <TextField
-                    label="Search Restaurant"
-                    variant="outlined"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    style={{ marginBottom: '16px' }}
-                />
-                <Button variant="contained" onClick={generatePDF}>Generate PDF</Button>
+
+                <Grid container spacing={2}>
+                    <Grid item xs={9}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={9}>
+                            <TextField
+                                label="Search Restaurant"
+                                variant="outlined"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                style={{ marginBottom: '16px' }}
+                                fullWidth
+                            />
+                            </Grid>
+
+                            <Grid item xs={3} >
+                                 <Button variant="contained"  onClick={generatePDF} style={{ backgroundColor: '#F8983C' }}>Generate PDF</Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                
                 <TableContainer component={Paper}>
                     <Table aria-label="simple table">
                         <TableHead>
@@ -86,7 +100,7 @@ function OrderHistory() {
                         </TableHead>
                         <TableBody>
                             {filteredOrders.map((item) => (
-                                <TableRow key={item._id}>
+                                <TableRow key={item._id} style={{ backgroundColor: '#fff5f0' }}>
                                     <TableCell>{item.orderId}</TableCell>
                                     <TableCell>{item.restaurantname}</TableCell>
                                     <TableCell>{item.cusName}</TableCell>

@@ -58,50 +58,25 @@ function OngoingOrder() {
         <div>
         <Ridernav/>
         <div className="Inv-dashborad">
-        <h1>Ongoing Order</h1>
+        <h1>My Ongoing Orders</h1>
         <Divider style={{ marginBottom: '16px' }} />
         {ongoingOrderData.map((item) => (
-            <Paper key={item._id} sx={{ padding: '32px', bgcolor: '#F0F8FF', margin: '20px' }}>
-                <p>orderId: {item.orderId}</p>
-                <p>customer name:{item.cusName}</p>
-                <p>delivery address:{item.customerLocation}</p>
-                <p>restaurent name:{item.restaurantname}</p>
-                <p>estimated time:{item.estimatetime}</p>
-                <TextField id="outlined-basic" label="Enter estimated time" variant="outlined" value={estimatedTime} onChange={handleEstimatedTimeChange}/><br/>
-                <Button variant='contained' onClick={() => handleUpdateClick(item._id)}> update</Button>
-                <Button variant='contained' onClick={() => handleCompleteOrder(item._id)}> complete order</Button>
+            <Paper key={item._id} sx={{ padding: '32px', bgcolor: '#fffff0', margin: '20px' }}>
+                <p>OrderId : <strong> {item.orderId} </strong> </p>
+                <p>Customer Name: <strong> {item.cusName} </strong>  </p>
+                <p>Delivery address: <strong>{item.customerLocation} </strong> </p>
+                <p>Restaurent name: <strong> {item.restaurantname} </strong> </p>
+                <p>Estimated time: <strong>{item.estimatetime} </strong> </p>
+                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+                        <TextField id="outlined-basic" label="Enter estimated time" variant="outlined" value={estimatedTime} onChange={handleEstimatedTimeChange} style={{ marginRight: '10px' }}/>
+                        <Button variant='contained' onClick={() => handleUpdateClick(item._id)} style={{ marginRight: '10px', backgroundColor: '#fcf29f', color: '#000000' }}> Update Time</Button>
+                    </div>
+                    <div style={{ marginTop: '80px' }}>
+                        <Button variant='contained' onClick={() => handleCompleteOrder(item._id)} style={{ backgroundColor: '#3d782f' }}> Complete Order</Button>
+                    </div>
             </Paper>
         ))}
-            <div>
-            <TableContainer component={Paper}>
-            <Table  aria-label="simple table">
-                <TableHead>
-                <TableRow>
-                    <TableCell>Employee ID</TableCell>
-                    <TableCell>Restaurant ID</TableCell>
-                    <TableCell>Basic Salary</TableCell>
-                    <TableCell>Position</TableCell>
-                    <TableCell>Bonus Rate</TableCell>
-                    <TableCell>Tax Rate</TableCell>
-                    <TableCell>action</TableCell>
-                </TableRow>
-                </TableHead>
-                <TableBody>
-                
-                    <TableRow >
-                    <TableCell>xxxx</TableCell>
-                    <TableCell>xxxx</TableCell>
-                    <TableCell>xxxxx</TableCell>
-                    <TableCell>xxxxx</TableCell>
-                    <TableCell>xxxxxx</TableCell>
-                    <TableCell>xxxx</TableCell>
-                    <TableCell>delete</TableCell>
-                    </TableRow>
-                
-                </TableBody>
-            </Table>
-            </TableContainer>
-        </div>
+            
     </div>
     </div>
     );

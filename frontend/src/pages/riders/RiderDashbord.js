@@ -88,20 +88,22 @@ function RiderDashboard() {
                             <TableCell>Customer Name</TableCell>
                             <TableCell>Customer location</TableCell>
                             <TableCell>Restaurant Name</TableCell>
-                            <TableCell>total price</TableCell>
+                            <TableCell>Total price</TableCell>
                             
                             <TableCell>Action</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {uniqueOrders.map((item) => (
-                            <TableRow key={item._id}>
+                            <TableRow key={item._id} style={{ backgroundColor: '#fff0f0' }}>
                                 <TableCell>{item.orderid}</TableCell>
                                 <TableCell>{item.cusId}</TableCell>
                                 <TableCell>{item.customerLocation}</TableCell>
                                 <TableCell>{item.restaurantname}</TableCell>
                                 <TableCell>{item.price}</TableCell>
-                                <Button variant='contained' onClick={()=>handleOnclick(item)}>accept</Button>
+                                <TableCell style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                 <Button variant='contained' onClick={()=>handleOnclick(item)} style={{ backgroundColor: '#C02942' }}>accept</Button>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
